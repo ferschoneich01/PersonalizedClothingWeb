@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/bulma.min.css">
+    <link rel="stylesheet" href="/static/material-design-iconic-font.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Personalized Clothing</title>
+</head>
+
+<body>
+    <!-- Barra de navegación -->
+    <header>
+        <nav class="navbar-top">
+            <ul class="navbar-top-ul">
+                <li class="navbar-top-item">
+                    <a href="/logout" class="navbar-top-links">Cerrar sesion</a>
+                </li>
+                <li class="navbar-top-item">
+                    <a href="#" class="navbar-top-links">Comprar</a>
+                </li>
+                
+                <li  class="navbar-top-item">
+                    <a href="#" style="height: 30px;"class="navbar-top-links">
+                        <img style="margin-top:5px; width: 18px;" src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/round-account-button-with-user-inside_icon-icons.com_72596_xizpvn.png"/>   
+                        {{username}}
+                        <!-- <i class="zmdi zmdi-chevron-down"></i> -->
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="navbar">
+            <header class="nabvar-mobile is-size-5-mobile">
+                <a class="navbar-mobile-link has-text-white" href="#">Personalized Clothing</a>
+            </header>
+            <nav class="nav-menu" id="mySidenav">
+                <form class="form-group " action="#">
+                    <div class="form-group-container">
+                        <span class="form-group-icon"><i class="zmdi zmdi-search"></i></span>
+                        <input type="text" class="form-group-input" placeholder="Buscar...">
+                    </div>
+                </form>
+
+                <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-black" style="width:50%; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));">Personalized Clothing</a>
+                <ul class="nav-menu-ul">
+                    <li class="nav-menu-item" id="men" >
+                        <a  style="color:black;"class="nav-menu-link link-submenu" href="#">Hombre <i
+                                class="zmdi zmdi-chevron-down"></i></a>
+                        <div class="container-sub-menu">
+                            <ul class="sub-menu-ul">
+                                <li class="nav-menu-item ">
+                                    <a class="nav-menu-link" href="#">
+                                        <strong>Frio</strong>
+                                        <i class="zmdi zmdi-chevron-down "></i>
+                                    </a>
+                                    <ul class="sub-menu-ul">
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Sudaderas</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Sueters</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="sub-menu-ul">
+                                <li class="nav-menu-item ">
+                                    <a class="nav-menu-link" href="#">
+                                        <strong>Casual</strong>
+                                        <i class="zmdi zmdi-chevron-down "></i>
+                                    </a>
+                                    <ul class="sub-menu-ul">
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Camisetas</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            
+                            <div class="ads is-hidden-touch">
+                                <h1 class="ads-h1">Ofertas de Navidad</h1>
+                                <h2 class="ads-h2">Desde el 50% de descuento</h2>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-menu-item" id="women">
+                        <a  style="color:black;" href="#" class="nav-menu-link link-submenu">Mujer <i class="zmdi zmdi-chevron-down"></i> </a>
+                        <div class="container-sub-menu"> 
+
+                            <ul class="sub-menu-ul">
+                                <li class="nav-menu-item ">
+                                    <a class="nav-menu-link" href="#">
+                                        <strong>Frio</strong>
+                                        <i class="zmdi zmdi-chevron-down "></i>
+                                    </a>
+                                    <ul class="sub-menu-ul">
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Sudaderas</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Sueters</a>
+                                        </li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Crops</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="sub-menu-ul">
+                                <li class="nav-menu-item ">
+                                    <a class="nav-menu-link" href="#">
+                                        <strong>Casual</strong>
+                                        <i class="zmdi zmdi-chevron-down "></i>
+                                    </a>
+                                    <ul class="sub-menu-ul">
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Camisetas</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Crop tops</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <div class="ads is-hidden-touch">
+                                <h1 class="ads-h1">Ofertas de Navidad</h1>
+                                <h2 class="ads-h2">Desde el 50% de descuento</h2>
+                            </div>
+                        </div> 
+                    </li>
+                    <li class="nav-menu-item"><a style="color:black;" href="#" class="nav-menu-link">
+                        <img style="margin-top:1px; width: 18px;" src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/paintbrush_83820_rycmmh.png"/>   
+                        Personalizar</a></li>
+                    <li class="navbar-top-item">
+                        <a href="#" style="color:black;"class="navbar-top-links">
+                            <i style="margin-top: 18px;" class="zmdi zmdi-shopping-cart"></i> Carrito
+                            <!-- <i class="zmdi zmdi-chevron-down"></i> -->
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </nav>
+    </header>
+    <!-- Banner -->
+    <div class="banner banner-cover">
+        <div class="banner-container ">
+            <h1  style="margin-top: 260px;" class="title-cover"><img style="width: 500px; height: auto; position:relative; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));" src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639109294/1639108673441_hkcexm.png"></h1>
+            <a class="btn btn-default">Comprar colección para Hombres</a>
+        </div>
+    </div>
+
+    <!-- Barra de navegacion secundaria -->
+    <div class="container">
+        <nav class="nav">
+            <a class="nav-item active has-text-weight-semibold" href="#">Popular</a>
+            <a class="nav-item has-text-weight-semibold" href="#">Novedades</a>
+            <a class="nav-item has-text-weight-semibold" href="#">Más vendidos</a>
+            <a class="nav-item has-text-weight-semibold" href="#">Ofertas</a>
+            <a class="nav-item has-text-weight-semibold" href="#">Muy pronto</a>
+        </nav>
+    </div>
+    <!-- Sección de fotografías -->
+    <div class="container">
+        <div class="columns is-multiline">
+            <div class="column is-full-mobile">
+                <div class="columns is-centered is-mobile is-multiline">
+                    <!-- 1 Sección de fotografías -->
+                    <div class="column is-half column-full">
+                        <div class="card">
+                            <span class="price">C$580</span>
+                            <img src="/static/img/item-1.png" alt="">
+                            <div class="card-info">
+                                <h4 class="has-text-black has-text-centered has-text-weight-bold"> Sudadera Jocker joaquin Phoenix $580</h4>
+                                <p class="has-text-centered">Sudadera casual suave y comoda.
+                                    100%
+                                    cotton.</p>
+                                <div class="card-buttons">
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-shopping-cart"></i></a>
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-favorite-outline"></i></a>
+                                    <a href="producto.html" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-eye"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column column-full is-half">
+                        <div class="card">
+                            <span class="price">C$270</span>
+                            <img src="/static/img/item-2.png" alt="">
+                            <div class="card-info">
+                                <h4 class="has-text-black has-text-centered has-text-weight-bold">Camiseta de Dama Anime C$270</h4>
+                                <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                    100%
+                                    cotton.</p>
+                                <div class="card-buttons">
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-shopping-cart"></i></a>
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-favorite-outline"></i></a>
+                                    <a href="producto.html" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-eye"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="column is-full">
+                        <div class="card">
+                            <span style="color:black" class="price">C$580</span>
+                            
+                                <img src="/static/img/item-3.png" alt="">
+                            <div class="card-info">
+                                <h4 class="has-text-black has-text-centered has-text-weight-bold"> Sudadera Rcik and Morty $580 </h4>
+                                <p class="has-text-centered">Classic casual hoodie for women on the move.
+                                    100%
+                                    cotton.</p>
+                                <div class="card-buttons">
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-shopping-cart"></i></a>
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-favorite-outline"></i></a>
+                                    <a href="producto.html" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-eye"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Segunda sección de fotografías -->
+            <div class="column is-half is-full-mobile">
+                <div class="columns is-mobile is-multiline">
+                    <div class="column is-full">
+                        <div class="card">
+                            <span style="color:black"class="price"><strike>C$300</strike> C$240</span>
+                                <img src="/static/img/item-4.png" alt="">
+                            <div class="card-info">
+                                <h4 class="has-text-black has-text-centered has-text-weight-bold"> Camiseta de Naruto Shippuden C$240 </h4>
+                                <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                    100%
+                                    cotton.</p>
+                                <div class="card-buttons">
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-shopping-cart"></i></a>
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-favorite-outline"></i></a>
+                                    <a href="producto.html" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-eye"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column column-full is-half">
+                        <div class="card">
+                            <span class="price">C$270</span>
+                            <img src="/static/img/item-5.png" alt="">
+                            <div class="card-info">
+                                <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                    Casual TEE C$270 </h4>
+                                <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                    100%
+                                    cotton.</p>
+                                <div class="card-buttons">
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-shopping-cart"></i></a>
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-favorite-outline"></i></a>
+                                    <a href="producto.html" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-eye"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column column-full is-half">
+                        <div class="card">
+                            <span style="color:black" class="price">C$240</span>
+                            <img src="/static/img/item-6.png" alt="">
+                            <div class="card-info">
+                                <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                    Casual TEE $34.79 </h4>
+                                <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                    100%
+                                    cotton.</p>
+                                <div class="card-buttons">
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-shopping-cart"></i></a>
+                                    <a href="#" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-favorite-outline"></i></a>
+                                    <a href="producto.html" class="btn btn--mini-rounded"><i
+                                            class="zmdi zmdi-eye"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container container-full">
+    <div class="columns is-centered is-multiline">
+        <div class="column is-full">
+            <div class="separator"></div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop column-half">
+            <div class="card card-second">
+                <img class="card-second-image" src="/static/img/lookbook-men.png" alt="">
+                <div class="card-second-body --text-right">
+                    <h1 class="has-text-right is-size-4 has-text-weight-semibold-bold">Catálogo para Hombres</h1>
+                    <p class="has-text-right">Lorem ipsum dolor sit amet consectetur 
+                    </p>
+                    <div>
+                        <a href="#" class="btn btn-default is-size-7">Ver ahora</a>
+                    </div>
+                    </p>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop column-half">
+            <div class="card card-second">
+                <img class="card-second-image" src="/static/img/lookbook-women.png" alt="">
+                <div class="card-second-body --text-right">
+                    <h1 class="has-text-right is-size-4 has-text-weight-semibold-bold">Catálogo para Mujer</h1>
+                    <p class="has-text-right">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Voluptatum labore quae reiciendis, corrupti debitis dicta
+                    </p>
+                    <div>
+                        <a href="#" class="btn btn-default is-size-7">Ver ahora</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="column is-half-tablet is-one-third-desktop">
+            <div class="card card-second">
+                <img class="card-second-image" src="/static/img/lookbook-you.png" alt="">
+                <div class="card-second-body --text-right">
+                    <h1 class="has-text-right is-size-4 has-text-weight-semibold-bold">Catálogo para Niños</h1>
+                    <p class="has-text-right">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Voluptatum labore quae reiciendis, corrupti debitis dicta
+                    </p>
+                    <div>
+                        <a href="#" class="btn btn-default is-size-7">Ver ahora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+        <div class="container">
+            <div class="columns is-multiline">
+                <div class="column">
+                    <ul class="footer-ul">
+                        <li class="footer-item">
+                            <h3 class="has-text-weight-bold">Información</h3>
+                        </li>
+                        <li class="footer-item"><a class="footer-link" href="#">La marca</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Local stores</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Servicios </a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Mapa del sitio</a></li>
+                    </ul>
+                </div>
+
+                <div class="column">
+                    <ul class="footer-ul">
+                        <li class="footer-item">
+                            <h3 class="has-text-weight-bold">Porqué comprar</h3>
+                        </li>
+                        <li class="footer-item"><a class="footer-link" href="#">Envios y retornos</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Envios seguros</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Testimonios </a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Award waining</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Etival trading</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul class="footer-ul">
+                        <li class="footer-item">
+                            <h3 class="has-text-weight-bold">Tu cuenta</h3>
+                        </li>
+                        <li class="footer-item"><a class="footer-link" href="#">Iniciar sesión</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Registro</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Ver carrito </a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Ver catálogo</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Track an order</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <ul class="footer-ul">
+                        <li class="footer-item">
+                            <h3 class="has-text-weight-bold">Catalogo</h3>
+                        </li>
+                        <li class="footer-item"><a class="footer-link" href="#">Catálogo para hombres</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Catálogo para mujeres</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Ver tu Catalogo </a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Borrar tu catalogo</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+
+                    <ul class="footer-ul">
+                        <li class="footer-item">
+                            <h3 class="has-text-weight-bold">Datos de contacto</h3>
+                        </li>
+                        <li class="footer-item"><a class="footer-link" href="#">Head</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Catálogo para mujeres</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Ver tu Catalogo </a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
+                        <li class="footer-item"><a class="footer-link" href="#">Borrar tu catalogo</a></li>
+                    </ul>
+                </div>
+                <div class="column is-full">
+                    <div class="footer-socials">
+                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-facebook"></i></a>
+                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-twitter"></i></a>
+                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-instagram"></i></a>
+                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar-top">
+            <div class="container">
+                <a class="footer-bar-top-links" href="#">2021 Personalized Clothing</a>
+            </div>
+        </div>
+    </footer>
+    <script src="/static/js/index.js"></script>
+
+
+</body>
+
+</html>

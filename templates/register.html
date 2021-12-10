@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register | Personalized Clothing</title>
+
+    <link rel="stylesheet" href="/static/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <script>
+                alert("{{ message }}");
+            </script>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}
+
+        <form action="/register" method="POST">
+            <div class="row">
+                <div class="col">
+                    <div style="margin-top: 20px; margin-left: 50px;" class="form-box animated fadeInUp">
+                        <h2 style="color: black; font-family: 'Dancing Script', cursive;" class="form-title">Registro
+                            Usuario</h2>
+                        <input name="username" type="text" placeholder="Nombre de usuario" autofocus>
+                        <input name="password" type="password" placeholder="Contraseña">
+                        <input name="email" type="text" placeholder="Correo">
+                        <input name="cedula" type="text" placeholder="cedula">
+                        <input name="name" type="text" placeholder="Nombre">
+                        <input name="lastname" type="text" placeholder="Apellido">
+                        
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="margin-top: 20px; margin-left: 50px;" class="form-box animated fadeInUp">
+                        <input name="birthday" type="date" placeholder="Fecha de Nacimiento">
+                        <input name="phone" type="text" placeholder="Celular">
+                        <input name="city" type="text" placeholder="Departamento">
+                        <input name="postalcode" type="text" placeholder="Codigo postal">
+                        <label style="color:rgb(0, 0, 0);" for="">Sexo:</label>
+                        <select name="select">
+                            <option value="M">M</option>
+                            <option value="F" selected>F</option>
+                        </select>
+
+                        <button type="submit">
+                            Registrarme
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

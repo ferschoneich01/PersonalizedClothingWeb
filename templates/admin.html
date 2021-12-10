@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1591566067/h73wqoazbdbe7nod0ghu.jpg">
+
+
+</head>
+
+<body style="background-color:#f6f1de">
+<!-- Inicio del navbar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top rounded-bottom" style="background-color: #0a868e;">
+
+		<button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler bg-light" data-target="#navbar" data-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+		<div class="collapse navbar-collapse" id="navbar">
+		  <ul class="navbar-nav mr-auto">
+		    <li class="nav-item">
+		      <a class="nav-link h5 text-light" href="/">Inicio</a>
+		    </li>
+		  <ul class="navbar-nav ml-auto">
+		    <li class="nav-item">
+	        <a class="nav-link h5 text-light" href="/">Editar Perfil</a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link h5 text-light" href="/logout">Cerrar Sesión</a>
+	      </li>
+		  </ul>
+
+	</nav>
+
+		                                          <!-- Fin del navbar -->
+                                          		    <br><br><br><br>
+
+    <!-- CONTAINER CLASS TO CENTER THE CARD ELEMENT -->
+    <div class="container">
+
+        <div class="row">
+
+          <div class="col-sm-8">
+            <div class="card">
+              <span class="border-0 rounded">
+               <h5 class="card-header text-center text-light" style="background-color:#0a868e">Imagen de producto</h5>
+
+               <div class="card-body">
+
+                <div class="form-group">
+                    <center><img class="img-thumbnail" id="img-preview"></center>
+                    <input type="file" class="form-control-file" id="img-uploader">
+                    <progress id="img-upload-bar" value="0" max="100" style="width: 100%"></progress>
+                  </div>
+
+              </div>
+              </span>
+            </div>
+          </div>
+
+        <!-- Formulario para subir datos de las pulseras a publicar -->
+          <div class="col-sm-4">
+            <div class="card">
+            <span class="border-0 rounded">
+             <h5 class="card-header text-center text-light" style="background-color:#0a868e">Información del Producto</h5>
+              <div class="card-body">
+                  <form method="POST">
+                      <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                      </div>
+
+                      <label for="precio">Precio:</label>
+                      <div class="input-group mb-3">
+
+                       <div class="input-group-prepend">
+                        <span class="input-group-text">C$</span>
+                       </div>
+
+                       <input type="text" class="form-control" id="precio" name="precio" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect1">Categoría:</label>
+                        <select class="form-control" name="category" id="category">
+                          <option>Camisas</option>
+                          <option>Hoodies</option>
+                          <option>Crop Tops</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea class="form-control" name= "descripcion"  id="descripcion" rows="3" required></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="foto">URL Foto:</label>
+                        <input type="text" class="form-control" id="foto" name="foto"  value="" required>
+                      </div>
+                      <center> <button type="submit" class="btn btn-muted text-light" style="background-color:#0a868e">Publicar</button></center>
+                    </form>
+              </div>
+              </span>
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+
+    <!-- Scripts -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="/static/admin.js"></script>
+
+</body>
+</html>
