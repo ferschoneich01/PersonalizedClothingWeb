@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Personalized Clothing</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/bulma.min.css">
+  <link rel="stylesheet" href="/static/material-design-iconic-font.css">
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://res.cloudinary.com/dzlbg8ni6/image/upload/c_scale,h_4000,w_4000/v1639171464/1639107585224_uikadn.png">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body style="background-color:#f6f1de">
+  <!-- Barra de navegación -->
+  <header>
+    <nav class="navbar-top">
+      <ul class="navbar-top-ul">
+        <li class="navbar-top-item">
+          <a href="/logout" class="navbar-top-links">Cerrar sesion</a>
+        </li>
+        <li class="navbar-top-item">
+          <a href="/items" class="navbar-top-links">Comprar</a>
+        </li>
+
+        <li class="navbar-top-item">
+          <a href="/settings" style="height: 30px;" class="navbar-top-links">
+            <img style="margin-top:5px; width: 18px;"
+              src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/round-account-button-with-user-inside_icon-icons.com_72596_xizpvn.png" />
+            {{username}}
+            <!-- <i class="zmdi zmdi-chevron-down"></i> -->
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="navbar">
+      <header class="nabvar-mobile is-size-5-mobile">
+        <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi zmdi-menu"></i></a>
+        <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-black">Personalized
+          Clothing</a>
+        <a class="navbar-mobile-link has-text-white" href="#"><i class="zmdi zmdi-shopping-cart"></i> Vacio</a>
+      </header>
+      <nav class="nav-menu --nav-dark-light" id="mySidenav">
+
+        <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 50%;"
+          href="/">Personalized
+          Clothing</a>
+
+        <li class="nav-menu-item"><a style="color:black;" href="/adminOrders" class="nav-menu-link">
+            Ordenes</a></li>
+
+        <li class="nav-menu-item"><a style="color:black;" href="/adminAddItem" class="nav-menu-link">
+            publicar</a></li>
+
+        <li class="nav-menu-item"><a style="color:black;" href="#" class="nav-menu-link">
+            usuarios</a></li>
+          
+        {% if session.role_user == 1 %}
+        <li class="nav-menu-item"><a style="color:black;" href="#" class="nav-menu-link">
+            <img style="margin-top:1px; width: 25px;"
+              src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639441128/admin_user_icon_188317_ix052g.png" />
+            Admin</a></li>
+        {% endif %}
+        </ul>
+      </nav>
+    </nav>
+  </header>
+
+  {% block body %}
+  {% endblock %}
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="/static/admin.js"></script>
+  <script src="/static/js/index.js"></script>
+</body>
+
+</html>

@@ -44,15 +44,15 @@ def login():
         
         user = db.execute("SELECT * FROM users WHERE username = '"+str(username)+"'").fetchall()
         
-        # Ensure username exists and password is correct
+        # Ensure username exists and password is correct 
         if len(user) != 1 or not check_password_hash(user[0]["password"], password):
             flash('Contraseña Incorrecta')
             return redirect("/login")
 
         # Remember which user has logged in
-        session["id_user"] = user[0]["id_user"]
+        session["id_user"] = user[0]["id_users"]
         session["username"] = username
-
+        session["role_user"] = user[0]["id_rol"] 
         return redirect('/')
     else:    
         return render_template("login.html")
@@ -125,7 +125,7 @@ def register():
         # Query selection id person
         user = db.execute("SELECT * FROM person WHERE cedula = '"+cedula+"'").fetchall()
         # Query database for users
-        db.execute("INSERT INTO users (username,password,email,id_person) VALUES ('"+str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+")")
+        db.execute("INSERT INTO users (username,password,email,id_person,id_rol) VALUES ('"+str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+",2)")
         db.commit()
         # Redirect user to home page
         return redirect("/login")
@@ -138,13 +138,69 @@ def logout():
     session.clear()
     return redirect('/')
 
-@app.route("/admin", methods=["GET","POST"])
-@login_required
-def admin():
-    return render_template('admin.html')
 
-@app.route("/products", methods=["GET","POST"])
+@app.route("/adminOrders", methods=["GET","POST"])
 @login_required
-def products():
-    return render_template('products.html')
+def adminOrders():
+    return render_template('adminOrders.html',username=session["username"])
 
+@app.route("/adminAddItem", methods=["GET","POST"])
+@login_required
+def adminAddItem():
+    return render_template('adminAddItems.html',username=session["username"])
+
+@app.route("/items", methods=["GET","POST"])
+@login_required
+def items():
+    if request.method == "GET":
+        #obtenemos todos los items de la base de datos
+        items = db.execute("SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification").fetchall()
+        #lista de items
+        listItems = []
+        #indice
+        i = 0
+        
+        for item in items:
+            #agregarmos items a la lista
+            listItems.append([items[i]["name"],items[i]["description"],items[i]["image"],items[i]["price"],items[i]["clasification"]])
+            #incremento en 1 del indice    
+            i += 1    
+        
+        return render_template('products.html',username=session["username"],items=listItems)
+    else:
+        return render_template('products.html',username=session["username"])
+
+@app.route("/items/<item>", methods=["GET","POST"])
+@login_required
+def items_selected(item):
+    if request.method == "POST":
+        #obtenemos todos los items de la base de datos
+        items = db.execute("SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification INNER JOIN itemsdetail ON  itemsdetail.id_item = i.id_item WHERE i.id_item = "+item+"").fetchall()
+        #lista de items
+        listItems = []
+        #indice
+        i = 0
+        
+        for item in items:
+            #agregarmos items a la lista
+            listItems.append(items[i]["name"],items[i]["description"],items[i]["image"],items[i]["price"],items[i]["clasification"],items[i]["color"],items[i]["size"])
+            #incremento en 1 del indice    
+            i += 1    
+        
+        return render_template('products.html',username=session["username"],items=listItems)
+    else:
+        return render_template('products.html',username=session["username"])
+
+
+@app.route("/addItem")
+@login_required
+def addItem():
+    if request.method == "POST":
+        name = request.form.get("name")
+        price = request.form.get("price")
+        category = request.form.get("category")
+        description = request.form.get("description")
+        urlphoto = request.form.get("urlphoto")
+
+        s
+        return redirect('/items')
