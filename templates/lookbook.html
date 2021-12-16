@@ -1,0 +1,51 @@
+{% extends 'layout.html'%}
+{% block body %}
+<!-- Banner -->
+<div class="banner banner-second">
+    <div class="banner-container ">
+        <h1 style="margin-top: 110px;" class="title-cover"><img
+                style="width: 320px; height: auto; position:relative; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));"
+                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639170003/1639108673441_sxs4vh.png"></h1>
+    </div>
+</div>
+
+<div class="container">
+    <nav class="nav">
+        <a class="nav-item --active" href="#">Lo último <img
+                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639545577/fire_115156_ryotrt.png" alt=""
+                style="width:15px;"></a>
+        <a class="nav-item" href="#">Más Gustado <img
+                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639545813/heart-icon_34407_mepwx0.png" alt=""
+                style="width:18px;"></a>
+        <a class="nav-item" href="#">Más vendidos <img
+                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639545891/artboard_123065_eclu5y.png" alt=""
+                style="width:18px;"></a>
+        <a class="nav-item" href="#">Ofertas <img
+                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639546091/label_114874_cdthdf.png" alt=""
+                style="width:20px;"></a>
+    </nav>
+</div>
+<div class="container">
+    <div class="wrapper">
+        {% for item in items %}
+        <div  class="is-mobile is-multiline" style="width: 100%; height: auto;"> 
+            <div class="column is-half-mobile is-one-quarter-desktop" style="width: 100%; height: 100%;">
+                <div class="card" style="width: 100%; height: 100%;">
+                    <span class="price" style="color: black;"> <sup>C$</sup>{{item.3}}</span>
+                    <img src="{{item.2}}" alt="">
+                    <div class="card-simple-options">
+                        <a href="" class="btn btn--mini-rounded">
+                            <i class="zmdi zmdi-favorite"></i>
+                        </a>
+                        <a href="/items/{{item.5}}" class="btn btn--mini-rounded">
+                            <i class="zmdi zmdi-eye"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

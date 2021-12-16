@@ -13,30 +13,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    
+
 </head>
 
 <body>
     <div class="container" style="margin-top: 5px;">
         {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div style="margin-top:5px; min-width: 400px; max-width: 1000px;">
-        <ul class=flashes>
-            {% for message in messages %}
-            <div class="alert alert-danger d-flex align-items-center" role="alert">
-                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
-                    <use xlink:href="#exclamation-triangle-fill" />
-                </svg>
-                <div>
-                    {{message}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {% if messages %}
+        <div style="margin-top:5px; min-width: 400px; max-width: 1000px;">
+            <ul class=flashes>
+                {% for message in messages %}
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+                        <use xlink:href="#exclamation-triangle-fill" />
+                    </svg>
+                    <div>
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-    {% endwith %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
     </div>
     <form action="/login" method="POST" class="form-box animated fadeInUp">
         <h1 style="color: black; font-family: 'Dancing Script', cursive;" class="form-title">Inciar Sesion</h1>

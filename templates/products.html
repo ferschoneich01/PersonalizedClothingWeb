@@ -12,7 +12,6 @@
 
     {% for item in items %}
     <div class="container">
-        
         <div class="columns">
             <div class="column is-two-fifths-desktop">
                 <div class="slider" id="slider">
@@ -22,8 +21,7 @@
                 </div>
             </div>
             <div class="column">
-                
-                <h3 class="is-size-4">{{item.0}}</h3>
+                <h3 class="is-size-4" style="margin:0;">{{item.0}}</h3>
                 <div class="course-rating-container">
                     <div class="rating-stars" style="--rating: 86%">
                     </div>
@@ -64,136 +62,12 @@
                             <label for="quality">Cantidad</label>
                             <input class="form-control-field" type="number">
                         </div>
-                        <div class="column is-full is-marginless">
+                        <div class="column is-full is-marginless" style="padding-top: 0px;">
                             <button class="btn btn-default btn-outline"><i class="zmdi zmdi-shopping-cart"></i>
                                 Agregar al carrito</button>
                         </div>
                     </div>
-
-                </form>
-                
-            </div>
-
-        </div>
-        
-    </div>
-    <div class="container">
-
-        <div class="columns is-tablet">
-            <div class="column">
-                <div class="tabs-container">
-                    <ul class="tabs" id="tabs">
-                        <li class="tabs-item active-tab">Descripción</li>
-                        <li class="tabs-item">Video</li>
-                        <li class="tabs-item">Tamaños</li>
-                        <li class="tabs-item">Envío y reembolso</li>
-                        <li class="tabs-item">Comentarios</li>
-                    </ul>
-                    <div class="tabs-panels">
-                        <div class="tab-panel active-panel">
-                            <div class="container">
-                                <div class="columns">
-                                    <div class="column">
-                                        <h2 class="is-size-4">Descripción</h2>
-                                        <p>{{item.1}}</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="tab-panel">
-                            <div class="container">
-                                <div class="columns">
-                                    <div class="column is-half">
-
-                                        <div class="video-container">
-                                            <iframe src="https://www.youtube.com/embed/MDgZLV6gqV0" frameborder="0"
-                                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen></iframe>
-                                        </div>
-                                    </div>
-                                    <div class="colulmn is-half">
-
-                                        <h2 class="is-size-4">Video</h2>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis,
-                                            natus.
-                                            Doloribus
-                                            neque
-                                            tempore
-                                            qui saepe voluptate. eserunt nihil doloribus facilis quos eos, tempore
-                                            magni
-                                            iure magnam
-                                            impedit
-                                            reiciendis eligendi dignissimos.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-panel">
-                            <h2 class="is-size-4">Tamaños</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, natus. Doloribus
-                                neque
-                                tempore
-                                qui saepe voluptate. eserunt nihil doloribus facilis quos eos, tempore magni iure
-                                magnam
-                                impedit
-                                reiciendis eligendi dignissimos.</p>
-                        </div>
-                        <div class="tab-panel">
-                            <h2 class="is-size-4">Envios y reembolsos</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, natus. Doloribus
-                                neque
-                                tempore
-                                qui saepe voluptate. eserunt nihil doloribus facilis quos eos, tempore magni iure
-                                magnam
-                                impedit
-                                reiciendis eligendi dignissimos.</p>
-                        </div>
-                        <div class="tab-panel">
-                            <h2 class="is-size-4">Comentarios</h2>
-                            <div class="container">
-                                <div class="columns is-multiline">
-                                    <div class="column is-full">
-                                        <div class="comment-container">
-                                            <img class="avatar" src="/static/img/user-men.jpg" alt="">
-                                            <div class="comment">
-                                                <div class="course-rating-container">
-                                                    <div class="rating-stars" style="--rating: 100%">
-                                                    </div>
-                                                    <h3 class="is-size-5">lorem</h3>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam
-                                                    nobis sed eveniet architecto iusto ex laborum, veniam facere.
-                                                    Dolore ea repellendus possimus obcaecati, suscipit amet aut
-                                                    quisquam
-                                                    praesentium? Ea, enim!</p>
-                                                <span class="text">7 de marzo 2019</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="column is-full">
-                                        <div class="comment-container">
-                                            <img class="avatar" src="/static/img/user-men.jpg" alt="">
-                                            <div class="comment">
-                                                <div class="course-rating-container">
-                                                    <div class="rating-stars" style="--rating: 100%">
-                                                    </div>
-                                                    <h3 class="is-size-5">lorem</h3>
-                                                </div>
-                                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam
-                                                    nobis sed eveniet architecto iusto ex laborum, veniam facere.
-                                                    Dolore ea repellendus possimus obcaecati, suscipit amet aut
-                                                    quisquam
-                                                    praesentium? Ea, enim!</p>
-                                                <span class="text">7 de marzo 2019</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </form>  
             </div>
         </div>
     </div>

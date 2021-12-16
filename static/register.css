@@ -28,7 +28,7 @@ body {
 }
 
 .form-title {
-    color: #fff;
+    color: rgb(0, 0, 0);
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -43,7 +43,7 @@ body {
     padding: 14px 10px;
     width: 200px;
     outline: none;
-    color: white;
+    color: rgb(0, 0, 0);
     border-radius: 24px;
     transition: 0.25s;
 }
