@@ -1,15 +1,17 @@
 {% extends 'adminlayout.html'%}
 {% block body %}
 <div class="container" style="margin-top: 100px;">
+    <h5>Usuario:{{user_order}}</h5>
     <table class="table">
         <!-- On rows -->
         <thead>
             <tr>
-                <td class="table-primary">User</td>
-                <td class="table-primary">Metodo de pago</td>
-                <td class="table-primary">SubTotal</td>
-                <td class="table-primary">Costo Envio</td>
-                <td class="table-primary">Total</td>
+                <td class="table-primary">#</td>
+                <td class="table-primary">item</td>
+                <td class="table-primary">precio</td>
+                <td class="table-primary">Talla</td>
+                <td class="table-primary">Color</td>
+                <td class="table-primary">Foto</td>              
             </tr>
         </thead>
         <tbody>
@@ -18,14 +20,12 @@
                 <td class="table-primary">{{order.0}}</td>
                 <td class="table-primary">{{order.1}}</td>
                 <td class="table-primary">C${{order.2}}</td>
-                <td class="table-primary">C${{order.3}}</td>
-                <td class="table-primary">C${{order.4}}</td>
-                <td class="table-primary"><a href="/viewOder/{{order.0}}" class="btn btn-primary">Ver</a></td>
+                <td class="table-primary">{{order.3}}</td>
+                <td class="table-primary"><a href="{{order.4}}" class="btn btn-dark">Ver Foto</a></td>
             </tr>
             {% endfor %}
         </tbody>
 
     </table>
 </div>
-
 {% endblock %}

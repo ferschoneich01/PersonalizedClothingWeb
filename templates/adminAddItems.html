@@ -34,7 +34,10 @@
                         <div class="form-group">
                             <center><img class="img-thumbnail" id="img-preview"></center>
                             <input type="file" class="form-control-file" id="img-uploader">
-                            <progress id="img-upload-bar" value="0" max="100" style="width: 100%"></progress>
+                            <div id="img-upload-bar" class="spinner-border text-info" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <!--progress id="img-upload-bar" value="0" max="100" style="width: 100%"-->
                         </div>
 
                     </div>
@@ -103,5 +106,6 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/static/js/photo.js"></script>
 {% endblock %}

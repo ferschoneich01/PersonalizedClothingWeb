@@ -963,7 +963,7 @@ footer {
 }
 
 .footer-socials {
-    background: var(--primary);
+    background: black;
     width: 100%;
     display: flex;
     justify-content: space-around;

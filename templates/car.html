@@ -1,0 +1,36 @@
+{% extends 'adminlayout.html'%}
+{% block body %}
+<div class="container" style="margin-top: 100px;">
+    <h5>Usuario:{{user_order}}</h5>
+    <table class="table">
+        <!-- On rows -->
+        <thead>
+            <tr>
+                <td class="table-primary">#</td>
+                <td class="table-primary">item</td>
+                <td class="table-primary">precio</td>
+                <td class="table-primary">Talla</td>
+                <td class="table-primary">Color</td>
+                <td class="table-primary">Sub Total</td>
+                <td class="table-primary">Foto</td>              
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td class="table-primary">{{order.0}}</td>
+                <td class="table-primary">{{order.1}}</td>
+                <td class="table-primary">C${{order.2}}</td>
+                <td class="table-primary">{{order.3}}</td>
+                <td class="table-primary">C${{order.4}}</td>
+                <td class="table-primary"><a href="{{order.5}}" class="btn btn-dark">Ver Foto</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <h5>Sub Total: {{subtotal}}</h5>
+    <h5>CostoEnvio: {{costoenvio}}</h5>
+    <h5>Total: {{subtotal}}</h5>
+</div>
+{% endblock %}

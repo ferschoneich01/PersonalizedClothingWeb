@@ -23,9 +23,11 @@ db = scoped_session(sessionmaker(bind=engine))
 
 
 @app.route("/")
-@login_required
 def index():
-    return render_template("index.html", username=session["username"])
+    if 'username' in session:
+        return render_template("index.html", username=session["username"])
+    else:
+        return render_template("index.html", username='null')
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -119,19 +121,27 @@ def register():
         postalcode = request.form.get("postalcode")
         sex = request.form.get("select")
 
-        # Query database for person
-        db.execute("INSERT INTO person (cedula,name,lastname,birthday,phone,country,city,postalcode,sex) VALUES ('"+str(cedula)+"','"+str(name) +
-                   "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(postalcode)+"','"+str(sex)+"')")
-        db.commit()
-        # Query selection id person
         user = db.execute(
-            "SELECT * FROM person WHERE cedula = '"+cedula+"'").fetchall()
-        # Query database for users
-        db.execute("INSERT INTO users (username,password,email,id_person,id_rol) VALUES ('" +
-                   str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+",2)")
-        db.commit()
-        # Redirect user to home page
-        return redirect("/login")
+            "SELECT * FROM users u INNER JOIN person p ON u.id_person = p.id_person WHERE p.cedula = '"+cedula+"' or u.username = '"+username+"'").fetchall()
+
+        if user != None:
+            flash("El usuario ingresado ya existe.")
+            return redirect("/register")
+        else:
+            # Query database for person
+            db.execute("INSERT INTO person (cedula,name,lastname,birthday,phone,country,city,postalcode,sex) VALUES ('"+str(cedula)+"','"+str(name) +
+                    "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(postalcode)+"','"+str(sex)+"')")
+            db.commit()
+            # Query selection id person
+            user = db.execute(
+                "SELECT * FROM person WHERE cedula = '"+cedula+"'").fetchall()
+            # Query database for users
+            db.execute("INSERT INTO users (username,password,email,id_person,id_rol) VALUES ('" +
+                    str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+",2)")
+            db.commit()
+            # Redirect user to home page
+            return redirect("/login")
+        
     else:
         return render_template('register.html')
 
@@ -146,10 +156,44 @@ def logout():
 @app.route("/adminOrders", methods=["GET", "POST"])
 @login_required
 def adminOrders():
-    if session["role_user"] == 1:
-        return render_template('adminOrders.html', username=session["username"])
+    if request.method == "POST":
+        if session["role_user"] == 1:
+            ordenes = []
+            orders = db.execute(
+                "SELECT u.username,pm.method,sum(i.price * id.quantity),sh.cost,sum(i.price * id.quantity)*sh.cost FROM shipping sh INNER JOIN orders o ON sh.id_order = o.id_order INNER JOIN itemsdetail id ON o.id_order = o.id_order INNER JOIN paymentmethod pm ON  pm.id_paymentmethod = o.id_paymentmethod INNER JOIN items i ON i.id_item = id.id_item INNER JOIN users u ON u.id_users = o.id_user WHERE status = 'earring ' GROUP BY u.username,pm.method,sh.cost").fetchall()
+            i = 0
+            for o in orders:
+                ordenes.append([orders[i][0],orders[i][1],orders[i][2],orders[i][3],orders[i][4]])
+                i += 1
+
+            return render_template('adminOrders.html', username=session["username"],orders=ordenes)
+        else:
+            return redirect("/")
     else:
-        return redirect("/")
+        if session["role_user"] == 1:
+            return render_template('adminOrders.html', username=session["username"])
+        else:
+            return redirect("/")
+    
+@app.route("/viewOrders/<id>", methods=["GET", "POST"])
+@login_required
+def viewOrders(id):
+    if request.method == "POST":
+        if session["role_user"] == 1:
+            ordenes = []
+            orders = db.execute("Select i.id_item,i.price,id.size,id.color,i.image FROM items i INNER JOIN itemsdetail id ON id.id_item = i.id_item INNER JOIN orders o ON o.id_order = id.id_order  WHERE o.id_order = "+str(id)+"").fetchall()
+            user = db.execute("Select * FROM users u INNER JOIN orders o ON o.id_user = u.id_user WHERE o.id_order = "+str(id)+"").fetchall()
+            i = 0
+            for o in orders:
+                ordenes.append([orders[i][0],orders[i][1],orders[i][2],orders[i][3],orders[i][4]])
+                i += 1
+            return render_template("viewOrder.html",orders=ordenes,user_order=user[0]["username"])
+        else:
+            return redirect("/")    
+    
+
+
+
 
 
 @app.route("/adminAddItem", methods=["GET", "POST"])
@@ -162,9 +206,9 @@ def adminAddItem():
 
 
 @app.route("/items", methods=["GET", "POST"])
-@login_required
 def items():
-    if request.method == "GET":
+
+    if 'username' in session:
         # obtenemos todos los items de la base de datos
         items = db.execute(
             "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification").fetchall()
@@ -176,48 +220,176 @@ def items():
         for item in items:
             # agregarmos items a la lista
             listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                             items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
+                            items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
             # incremento en 1 del indice
             i += 1
 
-        return render_template('lookbook.html', username=session["username"], items=listItems)
+            return render_template('lookbook.html', username=session["username"], items=listItems)
     else:
-        return render_template('lookbook.html', username=session["username"])
+        # obtenemos todos los items de la base de datos
+        items = db.execute(
+            "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification").fetchall()
+        # lista de items
+        listItems = []
+        # indice
+        i = 0
+
+        for item in items:
+            # agregarmos items a la lista
+            listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                            items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
+            # incremento en 1 del indice
+            i += 1
+        return render_template('lookbook.html', items=listItems,username='null')
 
 
-@app.route("/items/<item>", methods=["GET", "POST"])
-@login_required
-def items_selected(item):
-    # obtenemos todos los items de la base de datos
-    items = db.execute(
-        "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(item)+"").fetchall()
-    # lista de items
-    listItems = []
-    listItems.append([items[0]["name"], items[0]["description"], items[0]
-                     ["image"], items[0]["price"], items[0]["clasification"]])
-    return render_template('products.html', username=session["username"], items=listItems)
 
+@app.route("/items/<item>")
+@app.route("/items/category/<clasification>")
+@app.route("/items/clasification/<category>")
+@app.route("/items/<clasification>/<category>")
+def items_selected(item=None,clasification=None,category=None):
 
-@app.route("/items/category/<clasification>", methods=["GET", "POST"])
-@login_required
-def items_category(clasification):
+    if 'username' in session:
+        if item == None and clasification != None and category == None:
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_clasification = "+str(clasification)+"").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
 
-    # obtenemos todos los items de la base de datos
-    items = db.execute(
-        "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_clasification = "+str(clasification)+"").fetchall()
-    # lista de items
-    listItems = []
-    # indice
-    i = 0
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
 
-    for item in items:
-        # agregarmos items a la lista
-        listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                         items[i]["price"], items[i]["clasification"]])
-        # incremento en 1 del indice
-        i += 1
+            return render_template('products.html', username=session["username"], items=listItems)
+        elif item != None and clasification == None and category == None:
 
-    return render_template('products.html', username=session["username"], items=listItems)
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(item)+"").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
+            # lista de items
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
+
+            return render_template('products.html', username=session["username"], items=listItems)
+        elif item == None and clasification == None and category != None:
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification  WHERE i.id_category = "+str(category)+"").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
+            # lista de items
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
+
+            return render_template('products.html', username=session["username"], items=listItems)
+        elif item == None and clasification != None and category != None:
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i WHERE i.id_category = "+str(category)+" and i.id_clasification = "+str(clasification)+";").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
+            # lista de items
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
+
+            return render_template('products.html', username=session["username"], items=listItems)
+    else:
+        if item == None and clasification != None and category == None:
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_clasification = "+str(clasification)+"").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
+
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
+
+            return render_template('products.html', username='null', items=listItems)
+        elif item != None and clasification == None and category == None:
+
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(item)+"").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
+            # lista de items
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
+
+            return render_template('products.html', username='null', items=listItems)
+        elif item == None and clasification == None and category != None:
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification  WHERE i.id_category = "+str(category)+"").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
+            # lista de items
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
+
+            return render_template('products.html', username='null', items=listItems)
+        elif item == None and clasification != None and category != None:
+            # obtenemos todos los items de la base de datos
+            items = db.execute(
+                "SELECT * FROM items i WHERE i.id_category = "+str(category)+" and i.id_clasification = "+str(clasification)+";").fetchall()
+            # lista de items
+            listItems = []
+            # indice
+            i = 0
+            # lista de items
+            for item in items:
+                # agregarmos items a la lista
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
+                                items[i]["price"]])
+                # incremento en 1 del indice
+                i += 1
+
+            return render_template('products.html', username='null', items=listItems)
 
 
 @app.route("/addItem", methods=["POST", "GET"])
@@ -255,3 +427,5 @@ def addItem():
             db.commit()
 
             return redirect('/items')
+
+   

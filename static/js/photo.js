@@ -8,7 +8,7 @@
 
 
     imageUploader.addEventListener('change', async (e) => {
-
+        $('#img-upload-bar').show();
         //console.log(e);
         const file = e.target.files[0];
         const formData = new FormData();
@@ -23,15 +23,25 @@
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
+                
                 onUploadProgress (e) {
                     let progress = Math.round((e.loaded * 100.0) / e.total);
                     console.log(progress);
-                    imageUploadbar.setAttribute('value', progress);
+                    //imageUploadbar.show();
+                    //imageUploadbar.setAttribute('value', progress);
                 }
+
             }
         );
         console.log(res);
         imagePreview.src = res.data.secure_url;
+        $('#img-upload-bar').hide();
         console.log(res.data.secure_url);
         document.getElementById("photo").value = res.data.secure_url;
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        $('#img-upload-bar').hide();
+        
+    });    
+    
