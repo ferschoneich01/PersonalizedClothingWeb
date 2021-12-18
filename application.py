@@ -158,24 +158,20 @@ def logout():
 @app.route("/adminOrders", methods=["GET", "POST"])
 @login_required
 def adminOrders():
-    if request.method == "POST":
-        if session["role_user"] == 1:
-            ordenes = []
-            orders = db.execute(
-                "SELECT u.username,pm.method,sum(i.price * id.quantity),sh.cost,sum(i.price * id.quantity)*sh.cost FROM shipping sh INNER JOIN orders o ON sh.id_order = o.id_order INNER JOIN itemsdetail id ON o.id_order = o.id_order INNER JOIN paymentmethod pm ON  pm.id_paymentmethod = o.id_paymentmethod INNER JOIN items i ON i.id_item = id.id_item INNER JOIN users u ON u.id_users = o.id_user WHERE status = 'earring ' GROUP BY u.username,pm.method,sh.cost").fetchall()
-            i = 0
-            for o in orders:
-                ordenes.append([orders[i][0],orders[i][1],orders[i][2],orders[i][3],orders[i][4]])
-                i += 1
+    
+    if session["role_user"] == 1:
+        ordenes = []
+        orders = db.execute(
+            "SELECT u.username,pm.method,sum(i.price * id.quantity),sh.cost,sum(i.price * id.quantity)+sh.cost FROM shipping sh INNER JOIN orders o ON sh.id_order = o.id_order INNER JOIN itemsdetail id ON o.id_order = o.id_order INNER JOIN paymentmethod pm ON  pm.id_paymentmethod = o.id_paymentmethod INNER JOIN items i ON i.id_item = id.id_item INNER JOIN users u ON u.id_users = o.id_user WHERE status = 'Pendiente' GROUP BY u.username,pm.method,sh.cost").fetchall()
+        i = 0
+        for o in orders:
+            ordenes.append([orders[i][0],orders[i][1],orders[i][2],orders[i][3],orders[i][4]])
+            i += 1
 
-            return render_template('adminOrders.html', username=session["username"],orders=ordenes)
-        else:
-            return redirect("/")
+        return render_template('adminOrders.html', username=session["username"],orders=ordenes)
     else:
-        if session["role_user"] == 1:
-            return render_template('adminOrders.html', username=session["username"])
-        else:
-            return redirect("/")
+        return redirect("/")
+    
     
 @app.route("/viewOrders/<id>", methods=["GET", "POST"])
 @login_required
@@ -450,7 +446,7 @@ def car():
         Msg="No hay articulos agregados aun."
         return render_template("Mensajes.html",Msg=Msg)
     else:
-        shippingcost = 0.0                   
+        shippingcost = 70                   
         # lista de items en el
         total = 0.0
         subtotal = 0.0
@@ -459,7 +455,14 @@ def car():
             subtotal += carListItems[i][1] * carListItems[i][2]
             i += 1     
         total = subtotal + shippingcost
-        return render_template('car.html',username=session["username"],items=carListItems,total=total,subtotal=subtotal,shippingcost=shippingcost)
+        Direcciones = []
+        Addres = db.execute(
+            "SELECT * FROM addres_person WHERE id_person = "+str(session["id_user"])+"").fetchall()
+        j=0
+        for a in Addres:
+            Direcciones.append([Addres[j]["addres"],Addres[j]["city"]])
+            j+=1
+        return render_template('car.html',username=session["username"],items=carListItems,total=total,subtotal=subtotal,shippingcost=shippingcost,direcciones=Direcciones)
 
 
 @app.route("/deleteToCar/<id>", methods=["POST", "GET"])
@@ -468,16 +471,18 @@ def deleteToCar(id):
     carListItems.pop(int(id)-1)
     return redirect("/car")
         
-@app.route("/addAddres", methods=["POST"])
+@app.route("/addAddres", methods=["POST","GET"])
 @login_required
 def addAddres():
     departamento = request.form.get("city")
-    direccion = request.form.get("direccion1")+request.form.get("direccion2")
+    d1 = request.form.get("addres")
+    d2 = request.form.get("addres2")
+    direccion = d1+d2+""
 
     db.execute("INSERT INTO addres_person(addres,id_person,city) VALUES ('"+str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
     db.commit()
-    response = {'departamento':departamento, 'direccion':direccion}
-    return json.dumps(response)
+    
+    return redirect("/car")
 
 @app.route("/buys")
 @login_required
