@@ -1,5 +1,6 @@
 {% extends 'layout.html'%}
 {% block body %}
+<script src="https://www.paypal.com/sdk/js?client-id=AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF&currency=USD"></script>
 <div class="container" style="margin-top: 100px;">
     <table class="table">
         <!-- On rows -->
@@ -10,8 +11,8 @@
                 <td class="table-primary">Cantidad</td>
                 <td class="table-primary">Talla</td>
                 <td class="table-primary">Color</td>
-                <td class="table-primary">Foto</td>   
-                <td class="table-primary">Eliminar</td>              
+                <td class="table-primary">Foto</td>
+                <td class="table-primary">Eliminar</td>
             </tr>
         </thead>
         <tbody>
@@ -22,15 +23,120 @@
                 <td class="table-primary">{{item.2}}</td>
                 <td class="table-primary">{{item.3}}</td>
                 <td class="table-primary">{{item.4}}</td>
-                <td class="table-primary"><a href="{{item.5}}" class="btn btn-dark" style="background-color: black; color: blanchedalmond; font-size: 14px;">Ver Foto</a></td>
-                <td class="table-primary"><a href="#" class="btn btn-danger" style="background-color: rgb(187, 21, 21); color: blanchedalmond; font-size: 14px;">Eliminar</a></td>
+                <td class="table-primary"><a href="{{item.5}}" class="btn btn-dark"
+                        style="background-color: black; color: blanchedalmond; font-size: 14px;">Ver Foto</a></td>
+                <td class="table-primary"><a href="/deleteToCar/{{item.6}}" class="btn btn-danger"
+                        style="background-color: rgb(187, 21, 21); color: blanchedalmond; font-size: 14px;">Eliminar</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
 
     </table>
-    <h5>Sub Total: {{subtotal}}</h5>
-    <h5>CostoEnvio:</h5>
-    <h5>Total: {{total}}</h5>
+    <br>
+    <h1>Datos de envio:</h1>
+    <form action="/addAddres" name="form-addres" id="form-addres">
+        <label for="city">Departamento:</label>
+        <select name="city" class="form-control-field" style="width: 70%;" id="city">
+            <option value="Managua">Managua</option>
+            <option value="Masaya">Masaya</option>
+            <option value="Matagalpa">Matagalpa</option>
+            <option value="Madriz">Madriz</option>
+            <option value="Nueva Segovia">Nueva Segovia</option>
+            <option value="Rio San Juan">Rio San Juan</option>
+            <option value="Rivas">Rivas</option>
+            <option value="Esteli">Esteli</option>
+            <option value="Granada">Granada</option>
+            <option value="Jinotega">Jinotega</option>
+            <option value="Leon">Leon</option>
+            <option value="Chontales">Chontales</option>
+            <option value="Carazo">Chinandega</option>
+            <option value="Boaco">Boaco</option>
+            <option value="Atlantico Norte">Atlantico Norte</option>
+            <option value="Atlantico Sur">Atlantico Sur</option>
+        </select>
+        
+        <label for="addres">Direccion 1:</label>
+        <input name="addres" id="addres" style="width: 70%;" class="form-control-field" type="text" placeholder="direccion">
+        <label for="addres">Direccion 2:</label>
+        <input name="addres2" id="addres2" style="width: 70%;" class="form-control-field" type="text" placeholder="#casa, barrio, comunidad">
+        <button class="btn" style="background-color: green;" type="submit">Guardar punto de entrega</button>
+    </form>
+    <h1>Direcciones Guardadas:</h1>
+    <table class="table">
+        <!-- On rows -->
+        <thead>
+            <tr>
+                <td class="table-primary">Departamento</td>
+                <td class="table-primary">Direccion</td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for direccion in direcciones %}
+            <tr>
+                <td class="table-primary">{{direccion.0}}</td>
+                <td class="table-primary">C${{direccion.1}}</td>
+              
+                <td class="table-primary">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="{{direccion.2}}">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Seleccionar
+                    </label>
+                  </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    <br>
+    <h1>Metodo de pago:</h1>
+
+    <h5>Sub Total: C${{subtotal}}</h5>
+    <h5 class="cost">Costo de Envio: C${{shippingcost}}</h5>
+    <h5>Total a pagar: C${{total}}</h5>
+
+    <div id="paypal-button-container"></div>
+    <script>paypal.Buttons({
+
+        createOrder: function (data, actions) {
+
+            // This function sets up the details of the transaction, including the amount and line item details.
+
+            return actions.order.create({
+
+                purchase_units: [{
+
+                    amount: {
+
+                        value: '{{total}}'
+
+                    }
+
+                }]
+
+            });
+
+        },
+
+        onApprove: function (data, actions) {
+
+            // This function captures the funds from the transaction.
+
+            return actions.order.capture().then(function (details) {
+
+                // This function shows a transaction success message to your buyer.
+                window.location.href = "/succesBuy";
+                alert('Transaction completed by ' + details.payer.name.given_name);
+
+            });
+
+        }
+
+    }).render('#paypal-button-container');</script>
 </div>
+
+
 {% endblock %}

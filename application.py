@@ -1,11 +1,11 @@
-from flask import Flask, render_template, url_for, request, flash, redirect, session
+from flask import Flask, render_template, url_for, request, flash, redirect, sessions
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from funciones import *
 from werkzeug.security import check_password_hash, generate_password_hash
-
+import json
 
 app = Flask(__name__)
 
@@ -438,7 +438,7 @@ def addToCar(id):
         quantity = request.form.get("quantity")
         size = request.form.get("size")
         color = request.form.get("color")
-        carListItems.append([items[0]["name"],float(items[0]["price"]),float(quantity),size,color,items[0]["image"]])
+        carListItems.append([items[0]["name"],float(items[0]["price"]),float(quantity),size,color,items[0]["image"],len(carListItems)])
 
         return redirect("/items/"+id)
 
@@ -447,17 +447,65 @@ def addToCar(id):
 def car():
     
     if len(carListItems) == 0:
-        Msg = 'No hay articulos agregados aun.'
+        Msg="No hay articulos agregados aun."
         return render_template("Mensajes.html",Msg=Msg)
     else:
-        print(carListItems)
+        shippingcost = 0.0                   
         # lista de items en el
         total = 0.0
+        subtotal = 0.0
         i=0
         for car in carListItems:
-            total += carListItems[i][1] * carListItems[i][2]
+            subtotal += carListItems[i][1] * carListItems[i][2]
             i += 1     
+        total = subtotal + shippingcost
+        return render_template('car.html',username=session["username"],items=carListItems,total=total,subtotal=subtotal,shippingcost=shippingcost)
 
-        return render_template('car.html',username=session["username"],items=carListItems,total=total,subtotal=total)
-    
+
+@app.route("/deleteToCar/<id>", methods=["POST", "GET"])
+@login_required
+def deleteToCar(id):
+    carListItems.pop(int(id)-1)
+    return redirect("/car")
         
+@app.route("/addAddres", methods=["POST"])
+@login_required
+def addAddres():
+    departamento = request.form.get("city")
+    direccion = request.form.get("direccion1")+request.form.get("direccion2")
+
+    db.execute("INSERT INTO addres_person(addres,id_person,city) VALUES ('"+str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
+    db.commit()
+    response = {'departamento':departamento, 'direccion':direccion}
+    return json.dumps(response)
+
+@app.route("/buys")
+@login_required
+def buys():
+    buysList = []
+    buys = db.execute(
+            "SELECT o.id_order,ap.addres,sh.cost,sh.date_shipping,o.status FROM orders o INNER JOIN shipping sh ON sh.id_order = o.id_order INNER JOIN addres_person ap ON ap.id_addres = sh.id_addrespersona WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
+    i = 0
+    j = 0
+    subtotal = 0
+    itemsBuys = db.execute(
+            "SELECT i.id_item,(i.price * id.quantity) FROM itemsdetail id INNER JOIN orders o ON o.id_order = id.id_order INNER JOIN items i ON i.id_item = id.id_item WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
+    for b in buys:
+        for l in itemsBuys:
+            subtotal += itemsBuys[j][1]
+            j+=1
+        total = float(subtotal)+float(buys[i][2])
+        buysList.append([buys[i][0],buys[i][1],subtotal,buys[i][2],total,buys[i][3],buys[i][4]])
+        i+=1
+        j = 0
+        subtotal = 0
+
+    return render_template("buys.html",buys=buysList)
+
+@app.route("/personalizar")
+@login_required
+def personalizar():
+    return render_template("personalizar.html")
+
+
+

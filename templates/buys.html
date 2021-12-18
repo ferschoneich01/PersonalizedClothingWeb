@@ -1,0 +1,33 @@
+{% extends 'layout.html'%}
+{% block buyList %}
+<table class="table">
+    <!-- On rows -->
+    <thead>
+        <tr>
+            <td class="table-primary">#</td>
+            <td class="table-primary">Direccion</td>
+            <td class="table-primary">Subtotal</td>
+            <td class="table-primary">Costo envio</td>
+            <td class="table-primary">Total</td>
+            <td class="table-primary">Fecha de orden</td>
+            <td class="table-primary">Tiempo de entrega</td>
+            <td class="table-primary">Estado</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for buy in buys %}
+        <tr>
+            <td class="table-primary">{{buy.0}}</td>
+            <td class="table-primary">{{buy.1}}</td>
+            <td class="table-primary">C${{buy.2}}</td>
+            <td class="table-primary">C${{buy.3}}</td>
+            <td class="table-primary">C${{buy.4}}</td>
+            <td class="table-primary">{{buy.5}}</td>
+            <td class="table-primary">2 a 3 dias</td>
+            <td class="table-primary">{{buy.6}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
