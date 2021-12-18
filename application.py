@@ -151,6 +151,7 @@ def register():
 @login_required
 def logout():
     session.clear()
+    carListItems.clear()
     return redirect('/')
 
 
@@ -425,7 +426,7 @@ def addItem():
 
             return redirect('/items')
 
-#PAGOS Y AÑADIR AL CARRITO
+#AÑADIR AL CARRITO
 @app.route("/addToCar/<id>", methods=["POST", "GET"])
 @login_required
 def addToCar(id):
@@ -436,7 +437,8 @@ def addToCar(id):
         
         quantity = request.form.get("quantity")
         size = request.form.get("size")
-        carListItems.append([items[0]["name"],float(items[0]["price"]),float(quantity),size,items[0]["image"]])
+        color = request.form.get("color")
+        carListItems.append([items[0]["name"],float(items[0]["price"]),float(quantity),size,color,items[0]["image"]])
 
         return redirect("/items/"+id)
 
@@ -445,15 +447,17 @@ def addToCar(id):
 def car():
     
     if len(carListItems) == 0:
-        return "no hay articulos añadidos"
+        Msg = 'No hay articulos agregados aun.'
+        return render_template("Mensajes.html",Msg=Msg)
     else:
-        # obtenemos todos los items de la base de datos
+        print(carListItems)
+        # lista de items en el
         total = 0.0
         i=0
         for car in carListItems:
             total += carListItems[i][1] * carListItems[i][2]
             i += 1     
 
-        return render_template('car.html', user_order=session[0]["username"], items=carListItems,total=total,subtotal=total)
+        return render_template('car.html',username=session["username"],items=carListItems,total=total,subtotal=total)
     
         
