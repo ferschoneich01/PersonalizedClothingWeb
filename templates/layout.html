@@ -66,7 +66,8 @@
                     </div>
                 </form>
 
-                <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 50%;" href="/">Personalized
+                <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 50%;"
+                    href="/">Personalized
                     Clothing</a>
                 <ul class="nav-menu-ul">
                     <li class="nav-menu-item" id="men">
@@ -80,7 +81,8 @@
                                         <i class="zmdi zmdi-chevron-down "></i>
                                     </a>
                                     <ul class="sub-menu-ul">
-                                        <li class="nav-menu-item"><a class="nav-menu-link" href="/items/2/1">Sudaderas</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link"
+                                                href="/items/2/1">Sudaderas</a></li>
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="/items/3/1">Sueters</a>
                                         </li>
                                     </ul>
@@ -94,7 +96,8 @@
                                     </a>
                                     <ul class="sub-menu-ul">
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a></li>
-                                        <li class="nav-menu-item"><a class="nav-menu-link" href="/items/1/1">Camisetas</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link"
+                                                href="/items/1/1">Camisetas</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -117,7 +120,8 @@
                                         <i class="zmdi zmdi-chevron-down "></i>
                                     </a>
                                     <ul class="sub-menu-ul">
-                                        <li class="nav-menu-item"><a class="nav-menu-link" href="/items/2/2">Sudaderas</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link"
+                                                href="/items/2/2">Sudaderas</a></li>
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="/items/3/2">Sueters</a>
                                         </li>
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="/items/4/2">Crops</a>
@@ -133,8 +137,10 @@
                                     </a>
                                     <ul class="sub-menu-ul">
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a></li>
-                                        <li class="nav-menu-item"><a class="nav-menu-link" href="/items/1/2">Camisetas</a></li>
-                                        <li class="nav-menu-item"><a class="nav-menu-link" href="/items/4/2">Crop tops</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link"
+                                                href="/items/1/2">Camisetas</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="/items/4/2">Crop
+                                                tops</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -149,16 +155,16 @@
                                 src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/paintbrush_83820_rycmmh.png" />
                             Personalizar</a></li>
                     <li class="navbar-top-item">
-                        <a href="#" style="color:black;" class="navbar-top-links">
+                        <a href="/car" style="color:black;" class="navbar-top-links">
                             <i style="margin-top: 18px;" class="zmdi zmdi-shopping-cart"></i> Carrito
                             <!-- <i class="zmdi zmdi-chevron-down"></i> -->
                         </a>
                     </li>
                     {% if session.role_user == 1 %}
                     <li class="nav-menu-item"><a style="color:black;" href="/adminOrders" class="nav-menu-link">
-                        <img style="margin-top:1px; width: 25px;"
-                            src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639441128/admin_user_icon_188317_ix052g.png" />
-                        Admin</a></li>
+                            <img style="margin-top:1px; width: 25px;"
+                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639441128/admin_user_icon_188317_ix052g.png" />
+                            Admin</a></li>
                     {% endif %}
                 </ul>
             </nav>
@@ -167,8 +173,7 @@
 
     {% block body %}
     {% endblock %}
-    
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/static/js/index.js"></script>
 </body>
 

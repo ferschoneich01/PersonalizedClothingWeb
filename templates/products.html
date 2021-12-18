@@ -1,159 +1,160 @@
-
 {% extends 'layout.html'%}
-{% block body %}   
-   <!-- Banner -->
-    <div class="banner banner-second">
-        <div class="banner-container ">
-            <h1 style="margin-top: 110px;" class="title-cover"><img
-                    style="width: 320px; height: auto; position:relative; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));"
-                    src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639170003/1639108673441_sxs4vh.png"></h1>
+{% block body %}
+<!-- Banner -->
+<div class="banner banner-second">
+    <div class="banner-container ">
+        <h1 style="margin-top: 110px;" class="title-cover"><img
+                style="width: 320px; height: auto; position:relative; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));"
+                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639170003/1639108673441_sxs4vh.png"></h1>
+    </div>
+</div>
+
+{% for item in items %}
+<div class="container">
+    <div class="columns">
+        <div class="column is-two-fifths-desktop">
+            <div class="slider" id="slider">
+                <div class="slider-img-container">
+                    <img src="{{item.2}}" alt="camiseta" class="active slider-item">
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h3 class="is-size-4" style="margin:0;">{{item.0}}</h3>
+            <div class="course-rating-container">
+                <div class="rating-stars" style="--rating: 86%">
+                </div>
+            </div>
+            <p class=""> 3 comentarios | Compartir: <a class="icon-socials" href="#"><i
+                        class="zmdi zmdi-facebook"></i></a>
+                <a class="icon-socials" href="#"><i class="zmdi zmdi-twitter"></i></a>
+                <a class="icon-socials" href="#"><i class="zmdi zmdi-instagram"></i></a>
+                <a class="icon-socials" href="#"><i class="zmdi zmdi-pinterest"></i></a>
+                <a class="icon-socials" href="#"><i class="zmdi zmdi-email"></i></a>
+            </p>
+            <h2 class="price is-size-4"><sup>C$</sup>{{item.3}}</h2>
+            <p class="has-text-grey"> <strong>Disponibilidad:</strong> En stock</p>
+            <p class="text-default">{{item.1}}</p>
+            <form action="/addToCar/{{item.4}}" method="POST" class="form-control">
+                <div class="columns is-multiline">
+                    <div class="column is-one-third">
+                        <label for="color">Color</label>
+                        <select class="form-control-field" id="color">
+                            <option value="Blanco">Blanco</option>
+                            <option value="Negro">Negro</option>
+                            <option value="Gris">Gris</option>
+                        </select>
+
+                    </div>
+                    <div class="column is-one-third">
+
+                        <label for="size">Tamaño</label>
+                        <select name="size" class="form-control-field" id="size">
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+                    <div class="column is-one-third">
+                        <label for="quality">Cantidad</label>
+                        <input name="quantity" class="form-control-field" type="number">
+                    </div>
+                    <div class="column is-full is-marginless" style="padding-top: 0px;">
+                        <button onclick="mensaje()" class="btn btn-default btn-outline" type="submit"><i
+                                class="zmdi zmdi-shopping-cart"></i>
+                            Agregar al carrito</button>
+                    </div>
+
+                </div>
+            </form>
         </div>
     </div>
+</div>
+{% endfor %}
 
-    {% for item in items %}
+<!-- footer -->
+<footer class="footer">
     <div class="container">
-        <div class="columns">
-            <div class="column is-two-fifths-desktop">
-                <div class="slider" id="slider">
-                    <div class="slider-img-container">
-                        <img src="{{item.2}}" alt="camiseta" class="active slider-item">
-                    </div>
-                </div>
+        <div class="columns is-multiline">
+            <div class="column">
+                <ul class="footer-ul">
+                    <li class="footer-item">
+                        <h3 class="has-text-weight-bold">Información</h3>
+                    </li>
+                    <li class="footer-item"><a class="footer-link" href="#">La marca</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Local stores</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Servicios </a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Mapa del sitio</a></li>
+                </ul>
+            </div>
+
+            <div class="column">
+                <ul class="footer-ul">
+                    <li class="footer-item">
+                        <h3 class="has-text-weight-bold">Porqué comprar</h3>
+                    </li>
+                    <li class="footer-item"><a class="footer-link" href="#">Envios y retornos</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Envios seguros</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Testimonios </a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Award waining</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Etival trading</a></li>
+                </ul>
             </div>
             <div class="column">
-                <h3 class="is-size-4" style="margin:0;">{{item.0}}</h3>
-                <div class="course-rating-container">
-                    <div class="rating-stars" style="--rating: 86%">
-                    </div>
+                <ul class="footer-ul">
+                    <li class="footer-item">
+                        <h3 class="has-text-weight-bold">Tu cuenta</h3>
+                    </li>
+                    <li class="footer-item"><a class="footer-link" href="#">Iniciar sesión</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Registro</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Ver carrito </a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Ver catálogo</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Track an order</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <ul class="footer-ul">
+                    <li class="footer-item">
+                        <h3 class="has-text-weight-bold">Catalogo</h3>
+                    </li>
+                    <li class="footer-item"><a class="footer-link" href="#">Catálogo para hombres</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Catálogo para mujeres</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Ver tu Catalogo </a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Borrar tu catalogo</a></li>
+                </ul>
+            </div>
+            <div class="column">
+
+                <ul class="footer-ul">
+                    <li class="footer-item">
+                        <h3 class="has-text-weight-bold">Datos de contacto</h3>
+                    </li>
+                    <li class="footer-item"><a class="footer-link" href="#">Head</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Catálogo para mujeres</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Ver tu Catalogo </a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
+                    <li class="footer-item"><a class="footer-link" href="#">Borrar tu catalogo</a></li>
+                </ul>
+            </div>
+            <div class="column is-full">
+                <div class="footer-socials">
+                    <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-facebook"></i></a>
+                    <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-twitter"></i></a>
+                    <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-instagram"></i></a>
+                    <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-pinterest"></i></a>
                 </div>
-                <p class=""> 3 comentarios | Compartir: <a class="icon-socials" href="#"><i
-                            class="zmdi zmdi-facebook"></i></a>
-                    <a class="icon-socials" href="#"><i class="zmdi zmdi-twitter"></i></a>
-                    <a class="icon-socials" href="#"><i class="zmdi zmdi-instagram"></i></a>
-                    <a class="icon-socials" href="#"><i class="zmdi zmdi-pinterest"></i></a>
-                    <a class="icon-socials" href="#"><i class="zmdi zmdi-email"></i></a>
-                </p>
-                <h2 class="price is-size-4"><sup>C$</sup>{{item.3}}</h2>
-                <p class="has-text-grey"> <strong>Disponibilidad:</strong> En stock</p>
-                <p class="text-default">{{item.1}}</p>
-                <form action="#" class="form-control">
-                    <div class="columns is-multiline">
-                        <div class="column is-one-third">
-                            <label for="color">Color</label>
-                            <select class="form-control-field" id="color">
-                                <option value="#">Blanco</option>
-                                <option value="#">Negro</option>
-                                <option value="#">Gris</option>
-                            </select>
-
-                        </div>
-                        <div class="column is-one-third">
-
-                            <label for="size">Tamaño</label>
-                            <select class="form-control-field" id="size">
-                                <option value="#">XS</option>
-                                <option value="#">S</option>
-                                <option value="#">M</option>
-                                <option value="#">L</option>
-                                <option value="#">XL</option>
-                            </select>
-                        </div>
-                        <div class="column is-one-third">
-                            <label for="quality">Cantidad</label>
-                            <input class="form-control-field" type="number">
-                        </div>
-                        <div class="column is-full is-marginless" style="padding-top: 0px;">
-                            <button class="btn btn-default btn-outline"><i class="zmdi zmdi-shopping-cart"></i>
-                                Agregar al carrito</button>
-                        </div>
-                    </div>
-                </form>  
             </div>
         </div>
     </div>
-    {% endfor %}
 
-    <!-- footer -->
-    <footer class="footer">
+    <div class="footer-bar-top">
         <div class="container">
-            <div class="columns is-multiline">
-                <div class="column">
-                    <ul class="footer-ul">
-                        <li class="footer-item">
-                            <h3 class="has-text-weight-bold">Información</h3>
-                        </li>
-                        <li class="footer-item"><a class="footer-link" href="#">La marca</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Local stores</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Servicios </a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Mapa del sitio</a></li>
-                    </ul>
-                </div>
-
-                <div class="column">
-                    <ul class="footer-ul">
-                        <li class="footer-item">
-                            <h3 class="has-text-weight-bold">Porqué comprar</h3>
-                        </li>
-                        <li class="footer-item"><a class="footer-link" href="#">Envios y retornos</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Envios seguros</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Testimonios </a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Award waining</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Etival trading</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <ul class="footer-ul">
-                        <li class="footer-item">
-                            <h3 class="has-text-weight-bold">Tu cuenta</h3>
-                        </li>
-                        <li class="footer-item"><a class="footer-link" href="#">Iniciar sesión</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Registro</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Ver carrito </a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Ver catálogo</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Track an order</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <ul class="footer-ul">
-                        <li class="footer-item">
-                            <h3 class="has-text-weight-bold">Catalogo</h3>
-                        </li>
-                        <li class="footer-item"><a class="footer-link" href="#">Catálogo para hombres</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Catálogo para mujeres</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Ver tu Catalogo </a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Borrar tu catalogo</a></li>
-                    </ul>
-                </div>
-                <div class="column">
-
-                    <ul class="footer-ul">
-                        <li class="footer-item">
-                            <h3 class="has-text-weight-bold">Datos de contacto</h3>
-                        </li>
-                        <li class="footer-item"><a class="footer-link" href="#">Head</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Catálogo para mujeres</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Ver tu Catalogo </a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Privacidad y cookies</a></li>
-                        <li class="footer-item"><a class="footer-link" href="#">Borrar tu catalogo</a></li>
-                    </ul>
-                </div>
-                <div class="column is-full">
-                    <div class="footer-socials">
-                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-facebook"></i></a>
-                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-twitter"></i></a>
-                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-instagram"></i></a>
-                        <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
+            <a class="footer-bar-top-links" href="#">2019 Avenue Fashion</a>
         </div>
-
-        <div class="footer-bar-top">
-            <div class="container">
-                <a class="footer-bar-top-links" href="#">2019 Avenue Fashion</a>
-            </div>
-        </div>
-    </footer>
+    </div>
+</footer>
 {% endblock %}

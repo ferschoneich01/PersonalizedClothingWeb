@@ -6,6 +6,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from funciones import *
 from werkzeug.security import check_password_hash, generate_password_hash
 
+
 app = Flask(__name__)
 
 # Check for environment variable
@@ -20,7 +21,7 @@ Session(app)
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-
+carListItems = []
 
 @app.route("/")
 def index():
@@ -190,10 +191,6 @@ def viewOrders(id):
             return render_template("viewOrder.html",orders=ordenes,user_order=user[0]["username"])
         else:
             return redirect("/")    
-    
-
-
-
 
 
 @app.route("/adminAddItem", methods=["GET", "POST"])
@@ -263,7 +260,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                                items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -279,9 +276,9 @@ def items_selected(item=None,clasification=None,category=None):
             i = 0
             # lista de items
             for item in items:
+                #price = round(float(items[i]["price"])/35.25,2)
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -298,7 +295,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                                items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -315,7 +312,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                                items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -333,7 +330,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                                items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -351,7 +348,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                                items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -368,7 +365,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                                items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -385,7 +382,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"]])
+                                items[i]["price"],items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -428,4 +425,35 @@ def addItem():
 
             return redirect('/items')
 
-   
+#PAGOS Y AÑADIR AL CARRITO
+@app.route("/addToCar/<id>", methods=["POST", "GET"])
+@login_required
+def addToCar(id):
+    if request.method == "POST":
+        items = db.execute(
+            "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(id)+"").fetchall()
+        # lista de items
+        
+        quantity = request.form.get("quantity")
+        size = request.form.get("size")
+        carListItems.append([items[0]["name"],float(items[0]["price"]),float(quantity),size,items[0]["image"]])
+
+        return redirect("/items/"+id)
+
+@app.route("/car", methods=["POST", "GET"])
+@login_required
+def car():
+    
+    if len(carListItems) == 0:
+        return "no hay articulos añadidos"
+    else:
+        # obtenemos todos los items de la base de datos
+        total = 0.0
+        i=0
+        for car in carListItems:
+            total += carListItems[i][1] * carListItems[i][2]
+            i += 1     
+
+        return render_template('car.html', user_order=session[0]["username"], items=carListItems,total=total,subtotal=total)
+    
+        

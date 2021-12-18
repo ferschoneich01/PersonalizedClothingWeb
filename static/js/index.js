@@ -84,4 +84,13 @@ document.getElementById('tabs').addEventListener('click', e => {
 
 })
 
+function mensaje(){
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Articulo añadido al carrito',
+        showConfirmButton: false,
+        timer: 1500
+    })
+}
 
