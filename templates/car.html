@@ -35,7 +35,7 @@
     </table>
     <br>
     <h1>Datos de envio:</h1>
-    <form action="/addAddres" name="form-addres" id="form-addres">
+    <form action="/addAddres" method="post" name="form-addres" id="form-addres">
         <label for="city">Departamento:</label>
         <select name="city" class="form-control-field" style="width: 70%;" id="city">
             <option value="Managua">Managua</option>
@@ -75,8 +75,8 @@
         <tbody>
             {% for direccion in direcciones %}
             <tr>
+                <td class="table-primary">{{direccion.1}}</td>
                 <td class="table-primary">{{direccion.0}}</td>
-                <td class="table-primary">C${{direccion.1}}</td>
               
                 <td class="table-primary">
                     <div class="form-check">
@@ -99,7 +99,8 @@
     <h5>Total a pagar: C${{total}}</h5>
 
     <div id="paypal-button-container"></div>
-    <script>paypal.Buttons({
+    <script>
+    paypal.Buttons({
 
         createOrder: function (data, actions) {
 
@@ -135,7 +136,8 @@
 
         }
 
-    }).render('#paypal-button-container');</script>
+    }).render('#paypal-button-container');
+    </script>
 </div>
 
 
