@@ -513,4 +513,6 @@ def personalizar():
     return render_template("personalizar.html")
 
 
+if __name__ == "__main__":
+    app.run(debug=True)
 
