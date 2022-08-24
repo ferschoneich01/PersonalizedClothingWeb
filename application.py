@@ -23,6 +23,7 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 carListItems = []
 
+
 @app.route("/")
 def index():
     if 'username' in session:
@@ -55,9 +56,9 @@ def login():
             return redirect("/login")
 
         # Remember which user has logged in
-        session["id_user"] = user[0]["id_users"]
+        session["id_user"] = user[0]["id_user"]
         session["username"] = username
-        session["role_user"] = user[0]["id_rol"]
+        session["role_user"] = user[0]["role"]
         return redirect('/')
     else:
         return render_template("login.html")
@@ -105,10 +106,6 @@ def register():
             flash("Ingrese un departamento")
             return redirect("/register")
 
-        elif not request.form.get("postalcode"):
-            flash("Ingrese su codigopostal")
-            return redirect("/register")
-
         # datos persona
         username = request.form.get("username")
         password = generate_password_hash(request.form.get("password"))
@@ -119,30 +116,33 @@ def register():
         birthday = request.form.get("birthday")
         phone = request.form.get("phone")
         city = request.form.get("city")
-        postalcode = request.form.get("postalcode")
         sex = request.form.get("select")
 
-        user = db.execute(
-            "SELECT * FROM users u INNER JOIN person p ON u.id_person = p.id_person WHERE p.cedula = '"+cedula+"' or u.username = '"+username+"'").fetchall()
+        user = db.execute("SELECT COUNT(*) FROM USERS").fetchall()
+        if int(user[0][0]) > 0:
+            user = db.execute(
+                "SELECT * FROM users u INNER JOIN person p ON u.id_person = p.id_person WHERE p.cedula = '"+cedula+"' or u.username = '"+username+"'").fetchall()
+        else:
+            user = None
 
         if user != None:
             flash("El usuario ingresado ya existe.")
             return redirect("/register")
         else:
             # Query database for person
-            db.execute("INSERT INTO person (cedula,name,lastname,birthday,phone,country,city,postalcode,sex) VALUES ('"+str(cedula)+"','"+str(name) +
-                    "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(postalcode)+"','"+str(sex)+"')")
+            db.execute("INSERT INTO person (cedula,name,lastname,birthday,phone,country,city,sex) VALUES ('"+str(cedula)+"','"+str(name) +
+                       "','"+str(lastname)+"','"+str(birthday)+"','"+str(phone)+"','Nicaragua','"+str(city)+"','"+str(sex)+"')")
             db.commit()
             # Query selection id person
             user = db.execute(
                 "SELECT * FROM person WHERE cedula = '"+cedula+"'").fetchall()
             # Query database for users
-            db.execute("INSERT INTO users (username,password,email,id_person,id_rol) VALUES ('" +
-                    str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+",2)")
+            db.execute("INSERT INTO users (username,password,email,person,role) VALUES ('" +
+                       str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+",2)")
             db.commit()
             # Redirect user to home page
             return redirect("/login")
-        
+
     else:
         return render_template('register.html')
 
@@ -158,36 +158,40 @@ def logout():
 @app.route("/adminOrders", methods=["GET", "POST"])
 @login_required
 def adminOrders():
-    
+
     if session["role_user"] == 1:
         ordenes = []
-        orders = db.execute(
-            "SELECT u.username,pm.method,sum(i.price * id.quantity),sh.cost,sum(i.price * id.quantity)+sh.cost FROM shipping sh INNER JOIN orders o ON sh.id_order = o.id_order INNER JOIN itemsdetail id ON o.id_order = o.id_order INNER JOIN paymentmethod pm ON  pm.id_paymentmethod = o.id_paymentmethod INNER JOIN items i ON i.id_item = id.id_item INNER JOIN users u ON u.id_users = o.id_user WHERE status = 'Pendiente' GROUP BY u.username,pm.method,sh.cost").fetchall()
-        i = 0
-        for o in orders:
-            ordenes.append([orders[i][0],orders[i][1],orders[i][2],orders[i][3],orders[i][4]])
-            i += 1
+        # orders = db.execute(
+        # "SELECT u.username,pm.method,sum(i.price * id.quantity),sh.cost,sum(i.price * id.quantity)+sh.cost FROM shipping sh INNER JOIN orders o ON sh.id_order = o.id_order INNER JOIN itemsdetail id ON o.id_order = o.id_order INNER JOIN paymentmethod pm ON  pm.id_paymentmethod = o.id_paymentmethod INNER JOIN items i ON i.id_item = id.id_item INNER JOIN users u ON u.id_users = o.id_user WHERE status = 'Pendiente' GROUP BY u.username,pm.method,sh.cost").fetchall()
+        #i = 0
+        # for o in orders:
+        # ordenes.append([orders[i][0], orders[i][1], orders[i]
+        # [2], orders[i][3], orders[i][4]])
+        #i += 1
 
-        return render_template('adminOrders.html', username=session["username"],orders=ordenes)
+        return render_template('adminOrders.html', username=session["username"], orders=ordenes)
     else:
         return redirect("/")
-    
-    
+
+
 @app.route("/viewOrders/<id>", methods=["GET", "POST"])
 @login_required
 def viewOrders(id):
     if request.method == "POST":
         if session["role_user"] == 1:
             ordenes = []
-            orders = db.execute("Select i.id_item,i.price,id.size,id.color,i.image FROM items i INNER JOIN itemsdetail id ON id.id_item = i.id_item INNER JOIN orders o ON o.id_order = id.id_order  WHERE o.id_order = "+str(id)+"").fetchall()
-            user = db.execute("Select * FROM users u INNER JOIN orders o ON o.id_user = u.id_user WHERE o.id_order = "+str(id)+"").fetchall()
+            orders = db.execute(
+                "Select i.id_item,i.price,id.size,id.color,i.image FROM items i INNER JOIN itemsdetail id ON id.id_item = i.id_item INNER JOIN orders o ON o.id_order = id.id_order  WHERE o.id_order = "+str(id)+"").fetchall()
+            user = db.execute(
+                "Select * FROM users u INNER JOIN orders o ON o.id_user = u.id_user WHERE o.id_order = "+str(id)+"").fetchall()
             i = 0
             for o in orders:
-                ordenes.append([orders[i][0],orders[i][1],orders[i][2],orders[i][3],orders[i][4]])
+                ordenes.append([orders[i][0], orders[i][1],
+                               orders[i][2], orders[i][3], orders[i][4]])
                 i += 1
-            return render_template("viewOrder.html",orders=ordenes,user_order=user[0]["username"])
+            return render_template("viewOrder.html", orders=ordenes, user_order=user[0]["username"])
         else:
-            return redirect("/")    
+            return redirect("/")
 
 
 @app.route("/adminAddItem", methods=["GET", "POST"])
@@ -214,7 +218,7 @@ def items():
         for item in items:
             # agregarmos items a la lista
             listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                            items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
+                              items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
             # incremento en 1 del indice
             i += 1
 
@@ -231,18 +235,17 @@ def items():
         for item in items:
             # agregarmos items a la lista
             listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                            items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
+                              items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
             # incremento en 1 del indice
             i += 1
-        return render_template('lookbook.html', items=listItems,username='null')
-
+        return render_template('lookbook.html', items=listItems, username='null')
 
 
 @app.route("/items/<item>")
 @app.route("/items/category/<clasification>")
 @app.route("/items/clasification/<category>")
 @app.route("/items/<clasification>/<category>")
-def items_selected(item=None,clasification=None,category=None):
+def items_selected(item=None, clasification=None, category=None):
 
     if 'username' in session:
         if item == None and clasification != None and category == None:
@@ -257,7 +260,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"],items[i]["id_item"]])
+                                  items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -275,7 +278,8 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 #price = round(float(items[i]["price"])/35.25,2)
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],items[i]["price"],items[i]["id_item"]])
+                listItems.append([items[i]["name"], items[i]["description"],
+                                 items[i]["image"], items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -292,7 +296,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"],items[i]["id_item"]])
+                                  items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -309,7 +313,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"],items[i]["id_item"]])
+                                  items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -327,7 +331,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"],items[i]["id_item"]])
+                                  items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -345,7 +349,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"],items[i]["id_item"]])
+                                  items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -362,7 +366,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"],items[i]["id_item"]])
+                                  items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -379,7 +383,7 @@ def items_selected(item=None,clasification=None,category=None):
             for item in items:
                 # agregarmos items a la lista
                 listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                items[i]["price"],items[i]["id_item"]])
+                                  items[i]["price"], items[i]["id_item"]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -422,7 +426,9 @@ def addItem():
 
             return redirect('/items')
 
-#AÑADIR AL CARRITO
+# AÑADIR AL CARRITO
+
+
 @app.route("/addToCar/<id>", methods=["POST", "GET"])
 @login_required
 def addToCar(id):
@@ -430,39 +436,41 @@ def addToCar(id):
         items = db.execute(
             "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(id)+"").fetchall()
         # lista de items
-        
+
         quantity = request.form.get("quantity")
         size = request.form.get("size")
         color = request.form.get("color")
-        carListItems.append([items[0]["name"],float(items[0]["price"]),float(quantity),size,color,items[0]["image"],len(carListItems)])
+        carListItems.append([items[0]["name"], float(items[0]["price"]), float(
+            quantity), size, color, items[0]["image"], len(carListItems)])
 
         return redirect("/items/"+id)
+
 
 @app.route("/car", methods=["POST", "GET"])
 @login_required
 def car():
-    
+
     if len(carListItems) == 0:
-        Msg="No hay articulos agregados aun."
-        return render_template("Mensajes.html",Msg=Msg)
+        Msg = "No hay articulos agregados aun."
+        return render_template("Mensajes.html", Msg=Msg)
     else:
-        shippingcost = 70                   
+        shippingcost = 70
         # lista de items en el
         total = 0.0
         subtotal = 0.0
-        i=0
+        i = 0
         for car in carListItems:
             subtotal += carListItems[i][1] * carListItems[i][2]
-            i += 1     
+            i += 1
         total = subtotal + shippingcost
         Direcciones = []
         Addres = db.execute(
             "SELECT * FROM addres_person WHERE id_person = "+str(session["id_user"])+"").fetchall()
-        j=0
+        j = 0
         for a in Addres:
-            Direcciones.append([Addres[j]["addres"],Addres[j]["city"]])
-            j+=1
-        return render_template('car.html',username=session["username"],items=carListItems,total=total,subtotal=subtotal,shippingcost=shippingcost,direcciones=Direcciones)
+            Direcciones.append([Addres[j]["addres"], Addres[j]["city"]])
+            j += 1
+        return render_template('car.html', username=session["username"], items=carListItems, total=total, subtotal=subtotal, shippingcost=shippingcost, direcciones=Direcciones)
 
 
 @app.route("/deleteToCar/<id>", methods=["POST", "GET"])
@@ -470,8 +478,9 @@ def car():
 def deleteToCar(id):
     carListItems.pop(int(id)-1)
     return redirect("/car")
-        
-@app.route("/addAddres", methods=["POST","GET"])
+
+
+@app.route("/addAddres", methods=["POST", "GET"])
 @login_required
 def addAddres():
     departamento = request.form.get("city")
@@ -479,33 +488,37 @@ def addAddres():
     d2 = request.form.get("addres2")
     direccion = d1+d2+""
 
-    db.execute("INSERT INTO addres_person(addres,id_person,city) VALUES ('"+str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
+    db.execute("INSERT INTO addres_person(addres,id_person,city) VALUES ('" +
+               str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
     db.commit()
-    
+
     return redirect("/car")
+
 
 @app.route("/buys")
 @login_required
 def buys():
     buysList = []
     buys = db.execute(
-            "SELECT o.id_order,ap.addres,sh.cost,sh.date_shipping,o.status FROM orders o INNER JOIN shipping sh ON sh.id_order = o.id_order INNER JOIN addres_person ap ON ap.id_addres = sh.id_addrespersona WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
+        "SELECT o.id_order,ap.addres,sh.cost,sh.date_shipping,o.status FROM orders o INNER JOIN shipping sh ON sh.id_order = o.id_order INNER JOIN addres_person ap ON ap.id_addres = sh.id_addrespersona WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
     i = 0
     j = 0
     subtotal = 0
     itemsBuys = db.execute(
-            "SELECT i.id_item,(i.price * id.quantity) FROM itemsdetail id INNER JOIN orders o ON o.id_order = id.id_order INNER JOIN items i ON i.id_item = id.id_item WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
+        "SELECT i.id_item,(i.price * id.quantity) FROM itemsdetail id INNER JOIN orders o ON o.id_order = id.id_order INNER JOIN items i ON i.id_item = id.id_item WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
     for b in buys:
         for l in itemsBuys:
             subtotal += itemsBuys[j][1]
-            j+=1
+            j += 1
         total = float(subtotal)+float(buys[i][2])
-        buysList.append([buys[i][0],buys[i][1],subtotal,buys[i][2],total,buys[i][3],buys[i][4]])
-        i+=1
+        buysList.append([buys[i][0], buys[i][1], subtotal,
+                        buys[i][2], total, buys[i][3], buys[i][4]])
+        i += 1
         j = 0
         subtotal = 0
 
-    return render_template("buys.html",buys=buysList)
+    return render_template("buys.html", buys=buysList)
+
 
 @app.route("/personalizar")
 @login_required
@@ -515,4 +528,3 @@ def personalizar():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
