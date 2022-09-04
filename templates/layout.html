@@ -20,18 +20,17 @@
         <nav class="navbar-top">
             <ul class="navbar-top-ul">
                 <li class="navbar-top-item">
-                    <a href="/logout" class="navbar-top-links">SALIR</a>
+                    <a href="/logout" class="navbar-top-links">Salir</a>
                 </li>
                 <li class="navbar-top-item">
-                    <a href="/items" class="navbar-top-links">COMPRAR</a>
+                    <a href="/items" class="navbar-top-links">¡Comprar Ahora!</a>
                 </li>
 
                 <li class="navbar-top-item">
-                    <a href="/settings" style="height: 30px;" class="navbar-top-links">
-                        <img class="navbar-top-links" style="width: 20px;"
+                    <img  class="navbar-top-links" style="width: 20px; transform:translateY(5px);"
                             src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/round-account-button-with-user-inside_icon-icons.com_72596_xizpvn.png" />
+                    <a href="/settings" class="navbar-top-links">
                         {{username}}
-                        <!-- <i class="zmdi zmdi-chevron-down"></i> -->
                     </a>
                 </li>
             </ul>
@@ -53,12 +52,12 @@
         {% endif %}
         <nav class="navbar">
             <header class="nabvar-mobile is-size-5-mobile">
-                <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi zmdi-menu"></i></a>
+                <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi-menu"></i></a>
                 <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-black">Personalized
                     Clothing</a>
-                <a class="navbar-mobile-link has-text-white" href="#"><i class="zmdi zmdi-shopping-cart"></i> Vacio</a>
+                <a class="navbar-mobile-link has-text-white" href="#"><i id="menu-btn" class="zmdi zmdi-shopping-cart" ></i> Vacio</a>
             </header>
-            <nav class="nav-menu --nav-dark-light" id="mySidenav">
+            <nav class="nav-menu" id="mySidenav">
                 <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 40%;"
                     href="/">Personalized
                     Clothing</a>
@@ -148,9 +147,8 @@
                                 src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/paintbrush_83820_rycmmh.png" />
                             Personalizar</a></li>
                     <li class="navbar-top-item">
-                        <a href="/car" style="color:black;" class="navbar-top-links">
-                            <i style="margin-top: 18px;" class="zmdi zmdi-shopping-cart"></i> Carrito
-                            <!-- <i class="zmdi zmdi-chevron-down"></i> -->
+                        <a href="/car" style="color:black;" class="nav-menu-link">
+                            <i style="margin: 6px;" class="zmdi zmdi-shopping-cart"></i>Carrito
                         </a>
                     </li>
                     <li class="navbar-top-item">

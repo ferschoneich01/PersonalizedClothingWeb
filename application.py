@@ -118,14 +118,10 @@ def register():
         city = request.form.get("city")
         sex = request.form.get("select")
 
-        user = db.execute("SELECT COUNT(*) FROM USERS").fetchall()
-        if int(user[0][0]) > 0:
-            user = db.execute(
-                "SELECT * FROM users u INNER JOIN person p ON u.id_person = p.id_person WHERE p.cedula = '"+cedula+"' or u.username = '"+username+"'").fetchall()
-        else:
-            user = None
+        user = db.execute(
+            "SELECT * FROM users u INNER JOIN person p ON u.person = p.id_person WHERE p.cedula = '"+cedula+"' or u.username = '"+username+"'").fetchall()
 
-        if user != None:
+        if len(user) > 0:
             flash("El usuario ingresado ya existe.")
             return redirect("/register")
         else:
@@ -161,13 +157,16 @@ def adminOrders():
 
     if session["role_user"] == 1:
         ordenes = []
-        # orders = db.execute(
-        # "SELECT u.username,pm.method,sum(i.price * id.quantity),sh.cost,sum(i.price * id.quantity)+sh.cost FROM shipping sh INNER JOIN orders o ON sh.id_order = o.id_order INNER JOIN itemsdetail id ON o.id_order = o.id_order INNER JOIN paymentmethod pm ON  pm.id_paymentmethod = o.id_paymentmethod INNER JOIN items i ON i.id_item = id.id_item INNER JOIN users u ON u.id_users = o.id_user WHERE status = 'Pendiente' GROUP BY u.username,pm.method,sh.cost").fetchall()
-        #i = 0
-        # for o in orders:
-        # ordenes.append([orders[i][0], orders[i][1], orders[i]
-        # [2], orders[i][3], orders[i][4]])
-        #i += 1
+        orders = db.execute(
+                "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
+
+        i = 0
+        for o in orders:
+            ordenes.append([orders[i][0], orders[i][1],
+                           orders[i][2], orders[i][3], orders[i][4],
+                           orders[i][5],orders[i][6],orders[i][7],
+                           orders[i][8], orders[i][9], orders[i][10],(i+1)])
+            i += 1
 
         return render_template('adminOrders.html', username=session["username"], orders=ordenes)
     else:
@@ -181,15 +180,16 @@ def viewOrders(id):
         if session["role_user"] == 1:
             ordenes = []
             orders = db.execute(
-                "Select i.id_item,i.price,id.size,id.color,i.image FROM items i INNER JOIN itemsdetail id ON id.id_item = i.id_item INNER JOIN orders o ON o.id_order = id.id_order  WHERE o.id_order = "+str(id)+"").fetchall()
-            user = db.execute(
-                "Select * FROM users u INNER JOIN orders o ON o.id_user = u.id_user WHERE o.id_order = "+str(id)+"").fetchall()
+                "Select i.id_item,u.username,i.name,od.color,od.size,i.image,i.price,sh.cost,(i.price+sh.cost),s.status FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address").fetchall()
+
             i = 0
             for o in orders:
                 ordenes.append([orders[i][0], orders[i][1],
-                               orders[i][2], orders[i][3], orders[i][4]])
+                               orders[i][2], orders[i][3], orders[i][4],
+                               orders[i][5],orders[i][6],orders[i][7],
+                               orders[i][8], orders[i][9]])
                 i += 1
-            return render_template("viewOrder.html", orders=ordenes, user_order=user[0]["username"])
+            return render_template("viewOrder.html", orders=ordenes)
         else:
             return redirect("/")
 
@@ -205,11 +205,10 @@ def adminAddItem():
 
 @app.route("/items", methods=["GET", "POST"])
 def items():
-
     if 'username' in session:
         # obtenemos todos los items de la base de datos
         items = db.execute(
-            "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification").fetchall()
+            "SELECT * FROM items i").fetchall()
         # lista de items
         listItems = []
         # indice
@@ -221,12 +220,11 @@ def items():
                               items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
             # incremento en 1 del indice
             i += 1
-
-            return render_template('lookbook.html', username=session["username"], items=listItems)
+        return render_template('lookbook.html', username=session["username"], items=listItems)
     else:
         # obtenemos todos los items de la base de datos
         items = db.execute(
-            "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification").fetchall()
+            "SELECT * FROM items i").fetchall()
         # lista de items
         listItems = []
         # indice
@@ -251,7 +249,7 @@ def items_selected(item=None, clasification=None, category=None):
         if item == None and clasification != None and category == None:
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_clasification = "+str(clasification)+"").fetchall()
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.clasification = "+str(clasification)+"").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -269,7 +267,7 @@ def items_selected(item=None, clasification=None, category=None):
 
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(item)+"").fetchall()
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(item)+"").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -287,7 +285,7 @@ def items_selected(item=None, clasification=None, category=None):
         elif item == None and clasification == None and category != None:
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification  WHERE i.id_category = "+str(category)+"").fetchall()
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification  WHERE i.category = "+str(category)+"").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -304,7 +302,7 @@ def items_selected(item=None, clasification=None, category=None):
         elif item == None and clasification != None and category != None:
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i WHERE i.id_category = "+str(category)+" and i.id_clasification = "+str(clasification)+";").fetchall()
+                "SELECT * FROM items i WHERE i.category = "+str(category)+" and i.clasification = "+str(clasification)+";").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -322,7 +320,7 @@ def items_selected(item=None, clasification=None, category=None):
         if item == None and clasification != None and category == None:
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_clasification = "+str(clasification)+"").fetchall()
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.clasification = "+str(clasification)+"").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -340,7 +338,7 @@ def items_selected(item=None, clasification=None, category=None):
 
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(item)+"").fetchall()
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(item)+"").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -357,7 +355,7 @@ def items_selected(item=None, clasification=None, category=None):
         elif item == None and clasification == None and category != None:
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification  WHERE i.id_category = "+str(category)+"").fetchall()
+                "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification  WHERE i.category = "+str(category)+"").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -374,7 +372,7 @@ def items_selected(item=None, clasification=None, category=None):
         elif item == None and clasification != None and category != None:
             # obtenemos todos los items de la base de datos
             items = db.execute(
-                "SELECT * FROM items i WHERE i.id_category = "+str(category)+" and i.id_clasification = "+str(clasification)+";").fetchall()
+                "SELECT * FROM items i WHERE i.category = "+str(category)+" and i.clasification = "+str(clasification)+";").fetchall()
             # lista de items
             listItems = []
             # indice
@@ -420,7 +418,7 @@ def addItem():
             id_clasification = request.form.get("clasification")
 
             # Query database for items
-            db.execute("INSERT INTO items (name,description,image,price,id_clasification,id_category) VALUES ('"+str(name) +
+            db.execute("INSERT INTO items (name,description,image,price,clasification,category) VALUES ('"+str(name) +
                        "','"+str(description)+"','"+str(urlphoto)+"',"+str(price)+","+str(id_clasification)+","+str(id_category)+")")
             db.commit()
 

@@ -393,7 +393,7 @@ footer {
 }
 
 .nabvar-mobile {
-    background: var(--dark);
+    background: transparent;
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -1186,7 +1186,7 @@ footer {
         height: auto;
         width: 100%;
     }
-      
+
 }
 
 .rating-stars {
@@ -1298,4 +1298,3 @@ footer {
     height: auto;
     width: 100%;
 }
-  

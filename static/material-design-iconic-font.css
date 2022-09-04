@@ -8,6 +8,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
 .zmdi {
   display: inline-block;
   font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
@@ -16,6 +17,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.zmdi-menu{
+  display: inline-block;
+  font: normal normal normal 14px/1 'Material-Design-Iconic-Font';
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color:black;
+  font-size:30px;
+  margin-left:10px;
+
+}
+
+
 .zmdi-hc-lg {
   font-size: 1.33333333em;
   line-height: 0.75em;

@@ -5,23 +5,42 @@
         <!-- On rows -->
         <thead>
             <tr>
-                <td class="table-primary">User</td>
+                <td class="table-primary">#</td>
+                <td class="table-primary">Cliente</td>
+                <td class="table-primary">Item</td>
+                <td class="table-primary">Color</td>
+                <td class="table-primary">Talla</td>
                 <td class="table-primary">Metodo de pago</td>
                 <td class="table-primary">SubTotal</td>
                 <td class="table-primary">Costo Envio</td>
                 <td class="table-primary">Total</td>
-                <td class="table-primary">Order detalle</td>
+                <td class="table-primary">Estado</td>
             </tr>
         </thead>
         <tbody>
             {% for order in orders %}
             <tr>
-                <td class="table-primary">{{order.0}}</td>
+                <td class="table-primary">{{order.11}}</td>
                 <td class="table-primary">{{order.1}}</td>
-                <td class="table-primary">C${{order.2}}</td>
-                <td class="table-primary">C${{order.3}}</td>
-                <td class="table-primary">C${{order.4}}</td>
-                <td class="table-primary"><a href="/viewOder/{{order.0}}" class="btn btn-dark" style="background-color:black; width: 100px; font-size: 12px;">Ver</a></td>
+                <td class="table-primary">{{order.2}}</td>
+                <td class="table-primary">{{order.3}}</td>
+                <td class="table-primary">{{order.4}}</td>
+                <td class="table-primary">{{order.5}}</td>
+                <td class="table-primary">C${{order.6}}</td>
+                <td class="table-primary">C${{order.7}}</td>
+                <td class="table-primary">C${{order.8}}</td>
+                <td class="table-primary">{{order.9}}</td>
+                <td class="table-primary"><a href="{{order.10}}" class="btn btn-dark" style="background-color:black; width: 80px; font-size: 10px;">Ver</a></td>
+                <td class="table-primary"><a href="/deleteOrder/{{order.0}}" class="btn btn-dark" style="background-color:black; width: 80px; font-size: 10px; color:red;">Cancelar</a></td>
+                {% if order.9 == "En Proceso" %}
+                    <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark" style="background-color:black; width: 80px; font-size: 10px; color:green;">Terminado</a></td>
+                {% elif order.9 == "No enviado" %}
+                    <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark" style="background-color:black; width: 80px; font-size: 10px; color:green;">Enviado</a></td>
+                {% elif order.9 == "Enviado" %}
+                    <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark" style="background-color:black; width: 80px; font-size: 10px; color:green;">Entregado</a></td>
+                {% elif order.9 == "Terminado" %}
+                    <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark" style="background-color:black; width: 80px; font-size: 10px; color:green;">Enviado</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
