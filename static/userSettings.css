@@ -1,4 +1,4 @@
-html {
+.seccion-perfil-usuario  {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
@@ -6,7 +6,7 @@ html {
 }
 
 
-* {
+.seccion-perfil-usuario  {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
@@ -14,7 +14,8 @@ html {
     box-sizing: border-box;
 }
 
-body {
+.seccion-perfil-usuario {
+    margin-top: 100px;
     color: #404040;
     font-family: "Arial", Segoe UI, Tahoma, sans-serifl, Helvetica Neue, Helvetica;
 }
