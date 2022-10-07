@@ -32,6 +32,12 @@ def index():
         return render_template("index.html", username='null')
 
 
+@app.route("/userSettings")
+@login_required
+def userSettings():
+    return render_template("userSettings.html", username=session["username"])
+
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
@@ -158,14 +164,14 @@ def adminOrders():
     if session["role_user"] == 1:
         ordenes = []
         orders = db.execute(
-                "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
+            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
 
         i = 0
         for o in orders:
             ordenes.append([orders[i][0], orders[i][1],
                            orders[i][2], orders[i][3], orders[i][4],
-                           orders[i][5],orders[i][6],orders[i][7],
-                           orders[i][8], orders[i][9], orders[i][10],(i+1)])
+                           orders[i][5], orders[i][6], orders[i][7],
+                           orders[i][8], orders[i][9], orders[i][10], (i+1)])
             i += 1
 
         return render_template('adminOrders.html', username=session["username"], orders=ordenes)
@@ -186,7 +192,7 @@ def viewOrders(id):
             for o in orders:
                 ordenes.append([orders[i][0], orders[i][1],
                                orders[i][2], orders[i][3], orders[i][4],
-                               orders[i][5],orders[i][6],orders[i][7],
+                               orders[i][5], orders[i][6], orders[i][7],
                                orders[i][8], orders[i][9]])
                 i += 1
             return render_template("viewOrder.html", orders=ordenes)
