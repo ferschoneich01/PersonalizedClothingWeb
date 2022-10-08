@@ -454,8 +454,8 @@ def addToCar(id):
 def car():
 
     if len(carListItems) == 0:
-        Msg = "No hay articulos agregados aun."
-        return render_template("Mensajes.html", Msg=Msg)
+        Msg = "Agrega un articulo al carrito de compras."
+        return render_template("Mensajes.html", Msg=Msg, username=session["username"])
     else:
         shippingcost = 70
         # lista de items en el
@@ -471,7 +471,7 @@ def car():
             "SELECT * FROM addres_persons WHERE person = "+str(session["id_user"])+"").fetchall()
         j = 0
         for a in Addres:
-            Direcciones.append([Addres[j]["addres"], Addres[j]["city"]])
+            Direcciones.append([Addres[j]["address"], Addres[j]["city"]])
             j += 1
         return render_template('car.html', username=session["username"], items=carListItems, total=total, subtotal=subtotal, shippingcost=shippingcost, direcciones=Direcciones)
 
@@ -491,7 +491,7 @@ def addAddres():
     d2 = request.form.get("addres2")
     direccion = d1+d2+""
 
-    db.execute("INSERT INTO addres_person(addres,id_person,city) VALUES ('" +
+    db.execute("INSERT INTO addres_persons(address,person,city) VALUES ('" +
                str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
     db.commit()
 
@@ -502,25 +502,22 @@ def addAddres():
 @login_required
 def buys():
     buysList = []
-    buys = db.execute(
-        "SELECT o.id_order,ap.addres,sh.cost,sh.date_shipping,o.status FROM orders o INNER JOIN shipping sh ON sh.id_order = o.id_order INNER JOIN addres_person ap ON ap.id_addres = sh.id_addrespersona WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
-    i = 0
-    j = 0
-    subtotal = 0
-    itemsBuys = db.execute(
-        "SELECT i.id_item,(i.price * id.quantity) FROM itemsdetail id INNER JOIN orders o ON o.id_order = id.id_order INNER JOIN items i ON i.id_item = id.id_item WHERE o.id_user = "+str(session["id_user"])+"").fetchall()
-    for b in buys:
-        for l in itemsBuys:
-            subtotal += itemsBuys[j][1]
-            j += 1
-        total = float(subtotal)+float(buys[i][2])
-        buysList.append([buys[i][0], buys[i][1], subtotal,
-                        buys[i][2], total, buys[i][3], buys[i][4]])
-        i += 1
-        j = 0
-        subtotal = 0
+    orders = db.execute(
+        "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image,ap.address,o.orderdate FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod WHERE u.username = '"+str(session["username"])+"'").fetchall()
 
-    return render_template("buys.html", buys=buysList)
+    i = 0
+    for o in orders:
+        buysList.append([orders[i][0], orders[i][1],
+                         orders[i][2], orders[i][3], orders[i][4],
+                         orders[i][5], orders[i][6], orders[i][7],
+                         orders[i][8], orders[i][9], orders[i][10], orders[i][11], (i+1), orders[i][12]])
+        i += 1
+    if i < 1:
+        Msg = "¡Hola! "+session["username"] + \
+            " aún no haz comprado un articulo :D"
+        return render_template("Mensajes.html", Msg=Msg, username=session["username"])
+    else:
+        return render_template("buys.html", buys=buysList, username=session["username"])
 
 
 @app.route("/personalizar")

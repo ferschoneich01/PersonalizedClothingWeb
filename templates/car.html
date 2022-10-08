@@ -100,6 +100,7 @@
 
     <div id="paypal-button-container"></div>
     <script>
+    let total = parseFloat('{{total}}') / 36;
     paypal.Buttons({
 
         createOrder: function (data, actions) {
@@ -112,8 +113,7 @@
 
                     amount: {
 
-                        value: '{{total}}'
-
+                        value: Math.round(total, -2)+""
                     }
 
                 }]

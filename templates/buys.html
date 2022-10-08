@@ -1,33 +1,40 @@
 {% extends 'layout.html'%}
-{% block buyList %}
-<table class="table">
-    <!-- On rows -->
-    <thead>
-        <tr>
-            <td class="table-primary">#</td>
-            <td class="table-primary">Direccion</td>
-            <td class="table-primary">Subtotal</td>
-            <td class="table-primary">Costo envio</td>
-            <td class="table-primary">Total</td>
-            <td class="table-primary">Fecha de orden</td>
-            <td class="table-primary">Tiempo de entrega</td>
-            <td class="table-primary">Estado</td>
-        </tr>
-    </thead>
-    <tbody>
-        {% for buy in buys %}
-        <tr>
-            <td class="table-primary">{{buy.0}}</td>
-            <td class="table-primary">{{buy.1}}</td>
-            <td class="table-primary">C${{buy.2}}</td>
-            <td class="table-primary">C${{buy.3}}</td>
-            <td class="table-primary">C${{buy.4}}</td>
-            <td class="table-primary">{{buy.5}}</td>
-            <td class="table-primary">2 a 3 dias</td>
-            <td class="table-primary">{{buy.6}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-
-</table>
+{% block body %}
+<section class="container container-buys" style="margin-top: 140px;">
+    <table class="table">
+        <!-- On rows -->
+        <thead>
+            <tr>
+                <td class="table-primary">#</td>
+                <td class="table-primary">Direccion</td>
+                <td class="table-primary">Subtotal</td>
+                <td class="table-primary">Costo envio</td>
+                <td class="table-primary">Total</td>
+                <td class="table-primary">Fecha de orden</td>
+                <td class="table-primary">Tiempo de entrega</td>
+                <td class="table-primary">Estado</td>
+                <td class="table-primary">Producto</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for buy in buys %}
+            <tr>
+                <td class="table-primary">{{buy.12}}</td>
+                <td class="table-primary">{{buy.11}}</td>
+                <td class="table-primary">C${{buy.6}}</td>
+                <td class="table-primary">C${{buy.7}}</td>
+                <td class="table-primary">C${{buy.8}}</td>
+                <td class="table-primary">{{buy.13}}</td>
+                <td class="table-primary">2 a 3 dias</td>
+                <td class="table-primary">{{buy.9}}</td>
+                <td class="table-primary">
+                    <a href="{{buy.10}}">
+                    <img src="{{buy.10}}" alt="foto" style="width: 50px; border:1px solid rgb(63, 62, 62) ;">
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
 {% endblock %}
