@@ -263,8 +263,8 @@ def items_selected(item=None, clasification=None, category=None):
 
             for item in items:
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                  items[i]["price"], items[i]["id_item"]])
+                listItems.append([items[i][1], items[i][2],
+                                 items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -280,10 +280,9 @@ def items_selected(item=None, clasification=None, category=None):
             i = 0
             # lista de items
             for item in items:
-                #price = round(float(items[i]["price"])/35.25,2)
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"],
-                                 items[i]["image"], items[i]["price"], items[i]["id_item"]])
+                listItems.append([items[i][1], items[i][2],
+                                 items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -299,8 +298,8 @@ def items_selected(item=None, clasification=None, category=None):
             # lista de items
             for item in items:
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                  items[i]["price"], items[i]["id_item"]])
+                listItems.append([items[i][1], items[i][2],
+                                 items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -316,8 +315,8 @@ def items_selected(item=None, clasification=None, category=None):
             # lista de items
             for item in items:
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                  items[i]["price"], items[i]["id_item"]])
+                listItems.append([items[i][1], items[i][2],
+                                 items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -334,8 +333,8 @@ def items_selected(item=None, clasification=None, category=None):
 
             for item in items:
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                  items[i]["price"], items[i]["id_item"]])
+                listItems.append([items[i][1], items[i][2],
+                                 items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -352,8 +351,8 @@ def items_selected(item=None, clasification=None, category=None):
             # lista de items
             for item in items:
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                  items[i]["price"], items[i]["id_item"]])
+                listItems.append(
+                    [items[i][1], items[i][2], items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -369,8 +368,8 @@ def items_selected(item=None, clasification=None, category=None):
             # lista de items
             for item in items:
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                  items[i]["price"], items[i]["id_item"]])
+                listItems.append([items[i][1], items[i][2],
+                                 items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -386,8 +385,8 @@ def items_selected(item=None, clasification=None, category=None):
             # lista de items
             for item in items:
                 # agregarmos items a la lista
-                listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                                  items[i]["price"], items[i]["id_item"]])
+                listItems.append([items[i][1], items[i][2],
+                                 items[i][3], items[i][4], items[i][0]])
                 # incremento en 1 del indice
                 i += 1
 
@@ -438,7 +437,7 @@ def addItem():
 def addToCar(id):
     if request.method == "POST":
         items = db.execute(
-            "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.id_clasification WHERE i.id_item = "+str(id)+"").fetchall()
+            "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(id)+"").fetchall()
         # lista de items
 
         quantity = request.form.get("quantity")
@@ -469,7 +468,7 @@ def car():
         total = subtotal + shippingcost
         Direcciones = []
         Addres = db.execute(
-            "SELECT * FROM addres_person WHERE id_person = "+str(session["id_user"])+"").fetchall()
+            "SELECT * FROM addres_persons WHERE person = "+str(session["id_user"])+"").fetchall()
         j = 0
         for a in Addres:
             Direcciones.append([Addres[j]["addres"], Addres[j]["city"]])
