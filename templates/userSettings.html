@@ -2,6 +2,7 @@
 {% block body %}
 <link rel="stylesheet" href="/static/bootstrap.css">
 <link rel="stylesheet" href="/static/userSettings.css">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <!--USER SETTINGS-->
 
 <section class="seccion-perfil-usuario">
@@ -26,20 +27,24 @@
         </div>
         <div class="perfil-usuario-footer">
             <ul class="lista-datos">
-                <li><i class="icono fas fa-user"></i> Nombre de Usuario:</li>
-                <li><i class="icono fas fa-mail-bulk"></i> Correo:</li>
-                <li><i class="icono fas fa-user"></i> Nombres:</li>
-                <li><i class="icono fas fa-building"></i> Apellidos:</li>
+                <li><input name="username" class="form-control-field" type="text" placeholder="Username"></li>
+                <li><input name="password" class="form-control-field" type="password" placeholder="Contraseña"></li>
+                <li><input name="name" class="form-control-field" type="text" placeholder="Nombre(s)"></li>
+                <li><input name="lastname" class="form-control-field" type="text" placeholder="Apellido(s) "></li>
+                <li><input name="cedula" class="form-control-field" type="text" placeholder="Cédula"></li>
             </ul>
             <ul class="lista-datos">
-                <li><i class="icono fas fa-phone-alt"></i> Celular:</li>
-                <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento:</li>
-                <li><i class="icono fas fa-map-signs"></i> Departamento:</li>
-                <li><i class="icono fas fa-mailbox"></i> Codigo Postal:</li>
+                <li><input name="email" class="form-control-field" type="text" placeholder="Correo@example.com"></li>
+                <li><input name="birthday" class="form-control-field" type="date" placeholder="Fecha Nacimiento"></li>
+                <li><input name="phone" class="form-control-field" type="text" placeholder="Celular"></li>
+                <li><input name="city" class="form-control-field" type="text" placeholder="Ciudad"></li>
+                <li><input name="postalcode" class="form-control-field" type="text" placeholder="Codigo postal"></li>
                 
             </ul>
             <ul>
-                <a href="">Editar Perfil</a>
+                <button type="button" class="btn btn-link">Editar Perfil</button>
+                <button type="button" class="btn btn-primary">Primary</button>
+                <button type="button" class="btn btn-secondary">Secondary</button>
 
             </ul>
         </div>
