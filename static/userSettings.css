@@ -60,12 +60,22 @@
     padding: 12px 25px;
     background-color: rgba(0, 0, 0, .5);
     color: #fff;
-    cursor: pointer;
+    
 }
 
 .seccion-perfil-usuario .perfil-usuario-portada .boton-portada i {
     margin-right: 1rem;
 }
+
+.seccion-perfil-usuario .perfil-usuario-portada
+ .boton-portada .input-file{
+    display: none;
+ }
+
+ .seccion-perfil-usuario .perfil-usuario-portada
+ .boton-portada label{
+    cursor: pointer;
+ }
 
 .seccion-perfil-usuario .perfil-usuario-avatar {
     display: flex;
@@ -81,6 +91,13 @@
     bottom: -40px;
     left: calc(50% - 90px);
     z-index: 1;
+}
+
+.seccion-perfil-usuario .perfil-usuario-avatar .input-file {
+    display: none;
+}
+.seccion-perfil-usuario .perfil-usuario-avatar label {
+    cursor: pointer;
 }
 
 .seccion-perfil-usuario .perfil-usuario-avatar img {

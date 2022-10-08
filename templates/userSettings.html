@@ -11,11 +11,16 @@
             <div class="perfil-usuario-avatar">
                 <img src="https://avatars.githubusercontent.com/u/57198318?s=400&u=616707c38c2a975cc1c0eb24d74241dbc2b76c3c&v=4" alt="img-avatar">
                 <button type="button" class="boton-avatar">
-                    <i class="far fa-image"></i>
+                    <input class="input-file" type="file" id="file" name="file">
+                    <label for="file"> <i class="far fa-image"></i></label>
+                    
                 </button>
             </div>
             <button type="button" class="boton-portada">
-                <i class="far fa-image"></i> Cambiar fondo
+                
+                <input class="input-file" type="file" id="file" name="file">
+                <label for="file"> <i class="far fa-image"></i> Cambiar fondo</label>
+
             </button>
         </div>
     </div>
@@ -27,18 +32,18 @@
         </div>
         <div class="perfil-usuario-footer">
             <ul class="lista-datos">
-                <li><input name="username" class="form-control-field" type="text" placeholder="Username"></li>
-                <li><input name="password" class="form-control-field" type="password" placeholder="Contraseña"></li>
-                <li><input name="name" class="form-control-field" type="text" placeholder="Nombre(s)"></li>
-                <li><input name="lastname" class="form-control-field" type="text" placeholder="Apellido(s) "></li>
-                <li><input name="cedula" class="form-control-field" type="text" placeholder="Cédula"></li>
+                <li><input name="username" required class="form-control-field" type="text" placeholder="Username"></li>
+                <li><input name="password" required class="form-control-field" type="password" placeholder="Contraseña"></li>
+                <li><input name="name" required  class="form-control-field" type="text" placeholder="Nombre(s)"></li>
+                <li><input name="lastname" required class="form-control-field" type="text" placeholder="Apellido(s) "></li>
+                <li><input name="cedula" required class="form-control-field" type="text" placeholder="Cédula"></li>
             </ul>
             <ul class="lista-datos">
-                <li><input name="email" class="form-control-field" type="text" placeholder="Correo@example.com"></li>
-                <li><input name="birthday" class="form-control-field" type="date" placeholder="Fecha Nacimiento"></li>
-                <li><input name="phone" class="form-control-field" type="text" placeholder="Celular"></li>
-                <li><input name="city" class="form-control-field" type="text" placeholder="Ciudad"></li>
-                <li><input name="postalcode" class="form-control-field" type="text" placeholder="Codigo postal"></li>
+                <li><input name="email" required class="form-control-field" type="text" placeholder="Correo@example.com"></li>
+                <li><input name="birthday" required class="form-control-field" type="date" placeholder="Fecha Nacimiento"></li>
+                <li><input name="phone" required class="form-control-field" type="text" placeholder="Celular"></li>
+                <li><input name="city" required class="form-control-field" type="text" placeholder="Ciudad"></li>
+                <li><input name="postalcode" required class="form-control-field" type="text" placeholder="Codigo postal"></li>
                 
             </ul>
             <ul>
