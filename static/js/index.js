@@ -18,7 +18,7 @@ window.addEventListener('scroll', function () {
         nav.classList.remove('nav-fixed')
     }
 })
- // script del menu responsive effecto accordeon
+// script del menu responsive effecto accordeon
 var submenu = document.getElementsByClassName('link-submenu')
 
 for (var i = 0; i < submenu.length; i++) {
@@ -84,13 +84,22 @@ document.getElementById('tabs').addEventListener('click', e => {
 
 })
 
-function mensaje(){
+function mensaje() {
     Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Articulo añadido al carrito',
-        showConfirmButton: false,
-        timer: 1500
+        title: '¿Desea agregar este articulo al carrito?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Si',
+        denyButtonText: `No`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire('Articulo añadido al carrito', '', 'success')
+            document.getElementById('addToCarForm').submit();
+        } else if (result.isDenied) {
+            Swal.fire('Articulo no agregado', '', 'info')
+        }
     })
-}
 
+
+}
