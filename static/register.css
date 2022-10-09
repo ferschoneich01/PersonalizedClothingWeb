@@ -6,7 +6,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: BlinkMacSystemFont;
     background-image:url(https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639122857/banner-large_sd5xqg.jpg);
     height: 100%;
     background-size:     cover;                    
@@ -70,4 +70,5 @@ body {
 
 .form-box button[type="submit"]:hover {
     background: none;
+    color: black;
 }
