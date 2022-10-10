@@ -60,6 +60,8 @@ def login():
         if len(user) != 1 or not check_password_hash(user[0]["password"], password):
             flash('Contraseña Incorrecta')
             return redirect("/login")
+        print(check_password_hash(
+            "pbkdf2:sha256:260000$udF08su9Zdd3N71t$59ff49ed46323567459dc28a93dbbbf729cd2126109a0a733c7cf13ec8a32906"))
 
         # Remember which user has logged in
         session["id_user"] = user[0]["id_user"]
@@ -483,11 +485,12 @@ def addAddres():
     d1 = request.form.get("addres")
     d2 = request.form.get("addres2")
     direccion = d1+" "+d2+""
-
-    db.execute("INSERT INTO addres_persons(address,person,city) VALUES ('" +
-               str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
-    db.commit()
-
+    if len(departamento) > 0 and len(d1) > 0 and len(d2) > 0:
+        db.execute("INSERT INTO addres_persons(address,person,city) VALUES ('" +
+                   str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
+        db.commit()
+    else:
+        flash("Rellena todos los campos.")
     return redirect("/car")
 
 
