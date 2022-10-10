@@ -73,7 +73,7 @@ function previus() {
 let tabs = Array.prototype.slice.apply(document.querySelectorAll('.tabs-item'))
 let panels = Array.prototype.slice.apply(document.querySelectorAll('.tab-panel'))
 
-document.getElementById('tabs').addEventListener('click', e => {
+/*document.getElementById('tabs').addEventListener('click', e => {
     if (e.target.classList.contains('tabs-item')) {
         let i = tabs.indexOf(e.target)
         tabs.map(tab => tab.classList.remove('active-tab'))
@@ -82,7 +82,7 @@ document.getElementById('tabs').addEventListener('click', e => {
         panels[i].classList.add('active-panel')
     }
 
-})
+})*/
 
 function mensaje() {
     Swal.fire({

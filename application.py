@@ -142,7 +142,9 @@ def register():
             db.execute("INSERT INTO users (username,password,email,person,role) VALUES ('" +
                        str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+",2)")
             db.commit()
-            # Redirect user to home page
+
+            flash('¡Cuenta creada exitosamente!')
+            # Redirect user to login page
             return redirect("/login")
 
     else:
@@ -164,7 +166,7 @@ def adminOrders():
     if session["role_user"] == 1:
         ordenes = []
         orders = db.execute(
-            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
+            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
 
         i = 0
         for o in orders:
@@ -186,7 +188,7 @@ def viewOrders(id):
         if session["role_user"] == 1:
             ordenes = []
             orders = db.execute(
-                "Select i.id_item,u.username,i.name,od.color,od.size,i.image,i.price,sh.cost,(i.price+sh.cost),s.status FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address").fetchall()
+                "Select i.id_item,u.username,i.name,od.color,od.size,i.image,i.price,sh.cost,(i.price+sh.cost),s.id_status FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address").fetchall()
 
             i = 0
             for o in orders:
@@ -437,14 +439,14 @@ def addItem():
 def addToCar(id):
     if request.method == "POST":
         items = db.execute(
-            "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(id)+"").fetchall()
+            "SELECT i.name,i.price,i.image FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(id)+"").fetchall()
         # lista de items
 
         quantity = request.form.get("quantity")
         size = request.form.get("size")
         color = request.form.get("color")
-        carListItems.append([items[0]["name"], float(items[0]["price"]), float(
-            quantity), size, color, items[0]["image"], len(carListItems)])
+        carListItems.append([items[0][0], float(items[0][1]), float(
+            quantity), size, color, items[0][2], len(carListItems), id])
 
         return redirect("/items/"+id)
 
@@ -452,28 +454,19 @@ def addToCar(id):
 @app.route("/car", methods=["POST", "GET"])
 @login_required
 def car():
-
     if len(carListItems) == 0:
         Msg = "Agrega un articulo al carrito de compras."
         return render_template("Mensajes.html", Msg=Msg, username=session["username"])
     else:
-        shippingcost = 70
-        # lista de items en el
-        total = 0.0
-        subtotal = 0.0
-        i = 0
-        for car in carListItems:
-            subtotal += carListItems[i][1] * carListItems[i][2]
-            i += 1
-        total = subtotal + shippingcost
         Direcciones = []
         Addres = db.execute(
             "SELECT * FROM addres_persons WHERE person = "+str(session["id_user"])+"").fetchall()
         j = 0
         for a in Addres:
-            Direcciones.append([Addres[j]["address"], Addres[j]["city"]])
+            Direcciones.append(
+                [Addres[j]["address"], Addres[j]["city"], Addres[j]["id_address_person"]])
             j += 1
-        return render_template('car.html', username=session["username"], items=carListItems, total=total, subtotal=subtotal, shippingcost=shippingcost, direcciones=Direcciones)
+        return render_template('car.html', username=session["username"], items=carListItems, direcciones=Direcciones)
 
 
 @app.route("/deleteToCar/<id>", methods=["POST", "GET"])
@@ -489,7 +482,7 @@ def addAddres():
     departamento = request.form.get("city")
     d1 = request.form.get("addres")
     d2 = request.form.get("addres2")
-    direccion = d1+d2+""
+    direccion = d1+" "+d2+""
 
     db.execute("INSERT INTO addres_persons(address,person,city) VALUES ('" +
                str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
@@ -503,7 +496,7 @@ def addAddres():
 def buys():
     buysList = []
     orders = db.execute(
-        "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image,ap.address,o.orderdate FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.order INNER JOIN status s on s.id_status = o.status INNER JOIN users u on u.id_user = o.user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod WHERE u.username = '"+str(session["username"])+"'").fetchall()
+        "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image,ap.address,o.orderdate FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.id_order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod WHERE u.username = '"+str(session["username"])+"'").fetchall()
 
     i = 0
     for o in orders:
@@ -523,7 +516,64 @@ def buys():
 @app.route("/personalizar")
 @login_required
 def personalizar():
-    return render_template("personalizar.html")
+    return render_template("personalizar.html", username=session["username"])
+
+
+@app.route("/paymenthMethod/<dir>")
+@login_required
+def paymenthMethod(dir):
+    shippingcost = 70
+    # lista de items en el
+    total = 0.0
+    subtotal = 0.0
+    i = 0
+    for car in carListItems:
+        subtotal += carListItems[i][1] * carListItems[i][2]
+        i += 1
+        total = subtotal + shippingcost
+    Addres = db.execute(
+        "SELECT * FROM addres_persons WHERE id_address_person = "+str(dir)+"").fetchall()
+
+    j = 0
+    for a in Addres:
+        Direccion = Addres[j]["address"]
+        Departamento = Addres[j]["city"]
+        j += 1
+
+    return render_template("payMethod.html", username=session["username"], total=total, subtotal=subtotal, shippingcost=shippingcost, dir=Direccion, dep=Departamento)
+
+
+@app.route("/successPay/<det>/<address>")
+@login_required
+def successPay(det, address):
+
+    # crear una nueva orden
+    db.execute("INSERT INTO orders(orderdate,paymentmethod,id_user,id_status) VALUES (current_timestamp,1," +
+               str(session["id_user"])+",1)")
+    db.commit()
+
+    # obtener el id de la orden que acabamos de insertar
+    id_order = db.execute(
+        "select id_order from orders o where id_user = "+str(session["id_user"])+" order by orderdate desc limit 1 ").fetchall()
+    print(id_order[0][0])
+    # insertar cada uno de los items comprados
+    for i in carListItems:
+        db.execute("INSERT INTO orderdetails(color,size,item,quantity,id_order) VALUES ('" +
+                   str(i[4])+"','"+str(i[3])+"',"+str(i[7])+","+str(int(i[2]))+","+str(int(id_order[0][0]))+")")
+        db.commit()
+    # obtener el id de la dirección a enviar el producto
+    id_address = db.execute(
+        "select id_address_person from addres_persons where address = '"+str(address)+"'limit 1").fetchall()
+    print(id_address[0][0])
+    # insertamos un nuevo registro de envio
+    db.execute("INSERT INTO shipping(shipdate,cost,id_order,address) VALUES (current_date,70.00," +
+               str(id_order[0][0])+","+str(id_address[0][0])+")")
+    db.commit()
+
+    # Limpieza del carrito
+    carListItems.clear()
+
+    return render_template("successPay.html", username=session["username"], det=det)
 
 
 if __name__ == "__main__":

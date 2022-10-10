@@ -5,7 +5,6 @@ body, html {
 body {
     margin: 0;
     padding: 0;
-    
     background-image:url(https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639122857/banner-large_sd5xqg.jpg);
     height: 100%;
     background-size:     cover;                    

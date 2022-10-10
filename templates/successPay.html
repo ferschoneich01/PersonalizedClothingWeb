@@ -1,0 +1,17 @@
+{% extends 'layout.html'%}
+{% block body %}
+
+<div class="container" style="margin-top: 120px;">
+    <h1>¡Felicidades <span style="color:#00c8c8 ;">{{username}}</span> tu orden ha sido realizada!</h1>
+    <h2>
+        Tu orden la estaras recibiendo de 2 a 3 días habiles
+        en la dirección descrita durante la realización de la compra.
+    </h2>
+    <h4>Transaction completed by {{det}}</h4>
+    <a class="btn btn-dark" style="background-color: black; color:white; border:0;" href="/buys">Ver Mis Pedidos</a>
+    <a class="btn btn-dark" style="background-color: #00c8c8; color:white; border:0;" href="/">Ir al
+        Inicio</a>
+
+</div>
+
+{% endblock %}

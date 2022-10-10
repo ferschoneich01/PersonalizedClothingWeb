@@ -1,0 +1,57 @@
+{% extends 'layout.html'%}
+{% block body %}
+<script
+    src="https://www.paypal.com/sdk/js?client-id=AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF&currency=USD"></script>
+<div class="container" style="margin-top: 100px;">
+    <h1>Direccion de envio:</h1>
+    <h3>Departamento: <span>{{dep}}</span></h3>
+    <h3>Dirección: <span>{{dir}}</span></h3>
+    <h1>Metodo de pago:</h1>
+
+    <h5>Sub Total: C${{subtotal}}</h5>
+    <h5 class="cost">Costo de Envio: C${{shippingcost}}</h5>
+    <h5>Total a pagar: C${{total}}</h5>
+
+    <div id="paypal-button-container"></div>
+    <script>
+        let total = parseFloat('{{total}}') / 36;
+        paypal.Buttons({
+
+            createOrder: function (data, actions) {
+
+                // This function sets up the details of the transaction, including the amount and line item details.
+
+                return actions.order.create({
+
+                    purchase_units: [{
+
+                        amount: {
+
+                            value: Math.round(total, -2) + ""
+                        }
+
+                    }]
+
+                });
+
+            },
+
+            onApprove: function (data, actions) {
+
+                // This function captures the funds from the transaction.
+
+                return actions.order.capture().then(function (details) {
+
+                    // This function shows a transaction success message to your buyer.
+                    window.location.href = "/successPay/" + details.payer.name.given_name + "/{{dir}}";
+                    //alert('Transaction completed by ' + details.payer.name.given_name);
+
+                });
+
+            }
+
+        }).render('#paypal-button-container');
+    </script>
+</div>
+
+{% endblock %}
