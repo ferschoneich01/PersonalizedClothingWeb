@@ -12,7 +12,7 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap");
+@import url("/static/fonts/Material-Design-Iconic-Font.ttf");
 :root {
   --bs-blue: #007bff;
   --bs-indigo: #6610f2;
@@ -60,9 +60,11 @@
   --bs-font-sans-serif: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --bs-body-font-family: font-family: 'Material-Design-Iconic-Font' !important;
+  --bs-body-src: url('/static/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0') format('woff2'), url('/static/fonts/Material-Design-Iconic-Font.woff?v=2.2.0') format('woff'), url('/static/fonts/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype');
   --bs-body-font-size: 1rem;
-  --bs-body-font-weight: 400;
+  --bs-body-font-style: normal;
+  --bs-body-font-weight: normal;
   --bs-body-line-height: 1.5;
   --bs-body-color: #55595c;
   --bs-body-bg: #fff;
