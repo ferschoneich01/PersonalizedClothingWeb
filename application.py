@@ -60,8 +60,6 @@ def login():
         if len(user) != 1 or not check_password_hash(user[0]["password"], password):
             flash('Contraseña Incorrecta')
             return redirect("/login")
-        print(check_password_hash(
-            "pbkdf2:sha256:260000$udF08su9Zdd3N71t$59ff49ed46323567459dc28a93dbbbf729cd2126109a0a733c7cf13ec8a32906"))
 
         # Remember which user has logged in
         session["id_user"] = user[0]["id_user"]
@@ -168,7 +166,7 @@ def adminOrders():
     if session["role_user"] == 1:
         ordenes = []
         orders = db.execute(
-            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
+            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.id_order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
 
         i = 0
         for o in orders:
