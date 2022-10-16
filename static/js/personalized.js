@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+    let statusPrend = 1;
     //marco de img
     const imagen = document.getElementById("img-preview");
 
@@ -59,6 +59,27 @@ document.addEventListener('DOMContentLoaded', () => {
         rotated = !rotated;
     });
 
+    $("#Sweater").on('click', function () {
+        document.getElementById("Sweater").parentNode.style.cssText = "padding: 3px 10px; border: #B8B8B8 5px dashed; border-top-left-radius: 20px; border-bottom-right-radius: 20px;";
+        statusPrend = 1;
+        document.getElementById("Hoodie").parentNode.style.cssText = "border:0";
+        document.getElementById("Shirt").parentNode.style.cssText = "border:0";
+    });
+
+    $("#Hoodie").on('click', function () {
+        document.getElementById("Hoodie").parentNode.style.cssText = "padding: 3px 10px; border: #B8B8B8 5px dashed; border-top-left-radius: 20px; border-bottom-right-radius: 20px;";
+        statusPrend = 2;
+        document.getElementById("Sweater").parentNode.style.cssText = "border:0";
+        document.getElementById("Shirt").parentNode.style.cssText = "border:0";
+    });
+
+    $("#Shirt").on('click', function () {
+        document.getElementById("Shirt").parentNode.style.cssText = "padding: 3px 10px; border: #B8B8B8 5px dashed; border-top-left-radius: 20px; border-bottom-right-radius: 20px;";
+        statusPrend = 3;
+        document.getElementById("Sweater").parentNode.style.cssText = "border:0";
+        document.getElementById("Hoodie").parentNode.style.cssText = "border:0";
+
+    });
 });
 
 function getImg(name, posicion) {
