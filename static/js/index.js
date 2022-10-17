@@ -87,10 +87,9 @@ let panels = Array.prototype.slice.apply(document.querySelectorAll('.tab-panel')
 function mensaje() {
     Swal.fire({
         title: '¿Desea agregar este articulo al carrito?',
-        showDenyButton: true,
+        showDenyButton: false,
         showCancelButton: true,
-        confirmButtonText: 'Si',
-        denyButtonText: `No`,
+        confirmButtonText: 'Si'
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
