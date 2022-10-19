@@ -394,7 +394,7 @@ footer {
 }
 
 .nabvar-mobile {
-    background: transparent;
+    background: whitesmoke;
     display: flex;
     justify-content: space-between;
     padding: 10px;
