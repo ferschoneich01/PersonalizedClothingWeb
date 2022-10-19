@@ -460,14 +460,13 @@ def car():
     else:
         Direcciones = []
         Addres = db.execute(
-            "SELECT * FROM addres_persons WHERE person = "+str(session["id_user"])+"").fetchall()
+            "SELECT * FROM addres_persons ap inner join person p on p.id_person = ap.person inner join users u on u.person = p.id_person where u.id_user = "+str(session["id_user"])+"").fetchall()
         j = 0
         for a in Addres:
             Direcciones.append(
                 [Addres[j]["address"], Addres[j]["city"], Addres[j]["id_address_person"]])
             j += 1
         return render_template('car.html', username=session["username"], items=carListItems, direcciones=Direcciones)
-
 
 @app.route("/deleteToCar/<id>", methods=["POST", "GET"])
 @login_required
@@ -483,9 +482,12 @@ def addAddres():
     d1 = request.form.get("addres")
     d2 = request.form.get("addres2")
     direccion = d1+" "+d2+""
+    person = db.execute(
+            "SELECT u.person FROM users u inner join person p on u.person = p.id_person where id_user = "+str(session["id_user"])+"").fetchall()
+
     if len(departamento) > 0 and len(d1) > 0 and len(d2) > 0:
         db.execute("INSERT INTO addres_persons(address,person,city) VALUES ('" +
-                   str(direccion)+"',"+str(session["id_user"])+",'"+str(departamento)+"')")
+                   str(direccion)+"',"+str(person[0][0])+",'"+str(departamento)+"')")
         db.commit()
     else:
         flash("Rellena todos los campos.")
