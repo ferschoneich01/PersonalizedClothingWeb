@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    //inicializacion de valores
     let statusPrend = 1;
+    let statusColor = 1;
+    //selccion inicial de prenda
+    document.getElementById("Sweater").parentNode.style.cssText = "padding: 3px 10px; border: #B8B8B8 5px dashed; border-top-left-radius: 20px; border-bottom-right-radius: 20px;";
+    //seleccion inicial de color
+    document.getElementById("Black").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
+
     //marco de img
     const imagen = document.getElementById("img-preview");
 
@@ -78,6 +85,56 @@ document.addEventListener('DOMContentLoaded', () => {
         statusPrend = 3;
         document.getElementById("Sweater").parentNode.style.cssText = "border:0";
         document.getElementById("Hoodie").parentNode.style.cssText = "border:0";
+
+    });
+
+    $("#Black").on('click', function () {
+        document.getElementById("Black").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
+        statusColor = 1;
+        document.getElementById("White").parentNode.style.cssText = "border:0";
+        document.getElementById("Blue").parentNode.style.cssText = "border:0";
+        document.getElementById("Gray").parentNode.style.cssText = "border:0";
+        document.getElementById("Pink").parentNode.style.cssText = "border:0";
+
+    });
+
+    $("#White").on('click', function () {
+        document.getElementById("White").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
+        statusColor = 2;
+        document.getElementById("Black").parentNode.style.cssText = "border:0";
+        document.getElementById("Blue").parentNode.style.cssText = "border:0";
+        document.getElementById("Gray").parentNode.style.cssText = "border:0";
+        document.getElementById("Pink").parentNode.style.cssText = "border:0";
+
+    });
+
+    $("#Blue").on('click', function () {
+        document.getElementById("Blue").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
+        statusColor = 3;
+        document.getElementById("White").parentNode.style.cssText = "border:0";
+        document.getElementById("Black").parentNode.style.cssText = "border:0";
+        document.getElementById("Gray").parentNode.style.cssText = "border:0";
+        document.getElementById("Pink").parentNode.style.cssText = "border:0";
+
+    });
+
+    $("#Gray").on('click', function () {
+        document.getElementById("Gray").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
+        statusColor = 4;
+        document.getElementById("White").parentNode.style.cssText = "border:0";
+        document.getElementById("Blue").parentNode.style.cssText = "border:0";
+        document.getElementById("Black").parentNode.style.cssText = "border:0";
+        document.getElementById("Pink").parentNode.style.cssText = "border:0";
+
+    });
+
+    $("#Pink").on('click', function () {
+        document.getElementById("Pink").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
+        statusColor = 5;
+        document.getElementById("White").parentNode.style.cssText = "border:0";
+        document.getElementById("Blue").parentNode.style.cssText = "border:0";
+        document.getElementById("Gray").parentNode.style.cssText = "border:0";
+        document.getElementById("Black").parentNode.style.cssText = "border:0";
 
     });
 });

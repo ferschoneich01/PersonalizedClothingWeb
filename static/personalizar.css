@@ -33,6 +33,10 @@
     margin:5px;
 }
 
+.color-item:hover img{
+    opacity: 0.5;
+}
+
 #Hoodie{
     width: 800;
     height: auto;
