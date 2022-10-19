@@ -394,7 +394,7 @@ footer {
 }
 
 .nabvar-mobile {
-    background: whitesmoke;
+    background: transparent;
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -405,7 +405,7 @@ footer {
 }
 
 .nabvar-mobile-link {
-    color: #ffffff !important;
+    color: #000000 !important;
     text-decoration: none;
 }
 
@@ -419,7 +419,7 @@ footer {
     bottom: 0;
     z-index: 100;
     border: var(--border-dark-light);
-    background: #ffffff !important;
+    background: #ffffff;
     transition: 0.5s;
     transform: translateX(-100%);
 }
