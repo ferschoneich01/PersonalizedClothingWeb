@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("/static/fonts/Material-Design-Iconic-Font.ttf");
+@import url("Material-Design-Iconic-Font");
 :root {
   --bs-blue: #007bff;
   --bs-indigo: #6610f2;

@@ -419,7 +419,7 @@ footer {
     bottom: 0;
     z-index: 100;
     border: var(--border-dark-light);
-    background: #ffffff;
+    background: #ffffff !important;
     transition: 0.5s;
     transform: translateX(-100%);
 }
