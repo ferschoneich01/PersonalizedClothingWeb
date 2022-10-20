@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //inicializacion de valores
     let statusPrend = 1;
     let statusColor = 1;
+    let statusOrientation = 1;
     //selccion inicial de prenda
     document.getElementById("Sweater").parentNode.style.cssText = "padding: 3px 10px; border: #B8B8B8 5px dashed; border-top-left-radius: 20px; border-bottom-right-radius: 20px;";
     //seleccion inicial de color
@@ -12,23 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Cambiar a tamaño carta vertical
     $("#btn-lettersize-v").on('click', function () {
-        imagen.style.width = "16%";
-        imagen.style.height = "20%";
-        imagen.style.marginLeft = "43%";
-        imagen.style.marginTop = "40%";
-        $("#size-selected").val("carta-v");
+        imagen.style.cssText = "width:16%; height:20%; margin-left:41%; margin-top:43%;"
+        $("#size-selected").val("lettersize-v");
 
     });
 
     //Cambiar tamaño carta a horizontal
     $("#btn-lettersize-h").on('click', function () {
-        /*imagen.style.width = "20%";
-        imagen.style.height = "14%";
-        imagen.style.marginLeft = "41%";
-        imagen.style.marginTop = "43%";*/
-        document.getElementById("img-preview").style.transform = "rotate(90deg)";
-        $("#size-selected").val("carta-h");
-        //https://www.delftstack.com/es/howto/javascript/javascript-rotate-images/
+        imagen.style.cssText = "width:20%; height:16%; margin-left:41%; margin-top:43%;"
+
+
+        $("#size-selected").val("lettersize-v");
     });
 
     //Cambiar a tamaño carta vertical

@@ -3,7 +3,7 @@
  *  License - http://zavoloklom.github.io/material-design-iconic-font/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 @font-face {
-  font-family: 'Material-Design-Iconic-Font';
+  font-family: 'Material-Design-Iconic-Font' !important;
   src:url('/static/fonts/Material-Design-Iconic-Font.eot');
     src:url('/static/fonts/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype'),
     url('/static/fonts/Material-Design-Iconic-Font.svg') format('svg'),

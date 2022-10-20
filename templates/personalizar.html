@@ -1,8 +1,7 @@
 {% extends 'layout.html' %}
 {% block body %}
 <link rel="stylesheet" href="/static/bootstrap.css">
-<link rel="stylesheet" href="/static/personalizar.css">
-<link rel="stylesheet" href="/static/material-design-iconic-font.css">
+<link rel="stylesheet" href="{{url_for('static', filename='personalizar.css')}}">
 
 <div class="container">
     <div style="margin-top: 100px;" class="row">
@@ -154,6 +153,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/static/js/uploadDesing.js"></script>
 <script src="/static/js/personalized.js"></script>
