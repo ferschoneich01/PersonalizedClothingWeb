@@ -4,9 +4,14 @@
  */
 @font-face {
   font-family: 'Material-Design-Iconic-Font';
-  src: url('../fonts/Material-Design-Iconic-Font.woff2?v=2.2.0') format('woff2'), url('../fonts/Material-Design-Iconic-Font.woff?v=2.2.0') format('woff'), url('../fonts/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+  src:url('/static/fonts/Material-Design-Iconic-Font.eot');
+    src:url('/static/fonts/Material-Design-Iconic-Font.ttf?v=2.2.0') format('truetype'),
+    url('/static/fonts/Material-Design-Iconic-Font.svg') format('svg'),
+    url('/static/fonts/Material-Design-Iconic-Font.woff?v=2.2.0') format('woff'),
+    url('/static/fonts/Material-Design-Iconic-Font.woff2?v=2.2.0') format('woff2'),
+    url('/static/fonts/Material-Design-Iconic-Font.eot') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 .zmdi {
   display: inline-block;

@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/bulma.min.css">
-    <link rel="stylesheet" href="/static/material-design-iconic-font.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='bulma.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='material-design-iconic-font.css')}}">
     <link rel="shortcut icon" type="image/x-icon"
         href="https://res.cloudinary.com/dzlbg8ni6/image/upload/c_scale,h_4000,w_4000/v1639171464/1639107585224_uikadn.png">
     <title>Personalized Clothing</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
 
 </head>
@@ -54,7 +54,7 @@
         {% endif %}
         <nav class="navbar">
             <header class="nabvar-mobile is-size-5-mobile">
-                <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi-menu"></i></a>
+                <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi zmdi-menu"></i></a>
                 <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-black">Personalized
                     Clothing</a>
                 <a class="navbar-mobile-link has-text-white" href="#"><i id="menu-btn"
@@ -252,8 +252,13 @@
             <div class="column is-full">
                 <div class="footer-socials">
                     <a class="footer-solcials-link" href="https://www.facebook.com/PersonalizedCloth1ng"
+<<<<<<< HEAD
                         target="_blank"><i class="zmdi zmdi-facebook"><img src="/static/img/facebook.svg" alt=""></i></a>
                     <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-whatsapp"></i></a>
+=======
+                        target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                    <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-twitter"></i></a>
+>>>>>>> 00cf73922f51ea5e3c45acb0b11d41b8a1f25a49
                     <a class="footer-solcials-link" href="https://www.instagram.com/personalizedclothing_/"
                         target="_blank"><i class="zmdi zmdi-instagram"></i></a>
                     <a class="footer-solcials-link" href="#"><i class="zmdi zmdi-pinterest"></i></a>
