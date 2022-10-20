@@ -155,8 +155,8 @@ input,
 optgroup,
 select,
 textarea {
-    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    /* 1 */
+    font-family: inherit;
+    
     font-size: 100%;
     /* 1 */
     line-height: 1.15;
