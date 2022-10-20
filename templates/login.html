@@ -38,21 +38,18 @@
     </div>
     <form action="/login" method="POST" class="form-box animated fadeInUp">
 
-        <h1 style="color: black; font-family: BlinkMacSystemFont;" class="form-title">Inicia Sesión</h1>
+        <a class="back-button" href="/"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="black" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+        </svg></a>
+        <img src="/static/img/img-login.png" alt="" height="150px" width="150px">
+        <h1 style="color: black;" class="form-title">Inicia Sesión</h1>
         <input name="username" type="username" class="form-control" id="exampleFormControlInput1" placeholder="Usuario">
         <input name="password" type="password" class="form-control" id="formGroupExampleInput" placeholder="Contraseña">
-
-<<<<<<< HEAD
-        <a class="register-link" style="color:rgb(5, 5, 5); text-decoration: none;" href="#"> ¿Has olvidado tu contraseña?</a>
+        <b><a class="pass-link" style="color:rgb(5, 5, 5); text-decoration: none;" href="#"> ¿Has olvidado tu contraseña?</a></b>
+        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
         
-=======
-        <a class="register-link" style="color:rgb(5, 5, 5); text-decoration: none;" href="/register"> ¿Has olvidado tu
-            contraseña?</a>
 
->>>>>>> 88655818c1166a5053e0a5879782cf0782b65cec
-        <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
-
-        <a style="color:rgb(5, 5, 5); text-decoration: none;" href="/register"> ¿Aun no tienes una cuenta?</a>
+        <label class="register-link" for="">¿Aún no tienes una cuenta?</label><b><a class="register-link" style="color:rgb(5, 5, 5); text-decoration: none;" href="/register">Regístrate</a></b>
     </form>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

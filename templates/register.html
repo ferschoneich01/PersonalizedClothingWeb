@@ -47,7 +47,10 @@
                 <!--PARTE 1 REGISTRO-->
                 <div class="col">
                     <div style="margin-top: 20px; margin-left: auto;" class="form-box animated fadeInUp">
-                        <h2 style="color: black; font-family: BlinkMacSystemFont;" class="form-title">Crear Cuenta</h2>
+                        <a class="back-button" href="/"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="black" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                        </svg></a>
+                        <h2 style="color: black;" class="form-title">Crear Cuenta</h2>
                         <input name="username" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Usuario">
                         <input name="password" required type="password" class="form-control" id="exampleFormControlInput1" placeholder="Contraseña">
                         <input name="email" required type="email" class="form-control input-email" id="exampleFormControlInput1" placeholder="Correo">
@@ -62,14 +65,14 @@
                     <div style="margin-top: 20px; margin-right: auto; padding-top: 78px;" class="form-box animated fadeInUp">
                         
                         <input name="birthday" required  type="date" class="form-control fecha-nac" id="exampleFormControlInput1" placeholder="Fecha de Nacimiento">
-                        <input name="phone" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Telefono">
+                        <input name="phone" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Teléfono">
                         <input name="city" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Departamento">
-                        <input name="postalcode" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Codigo Postal">
+                        <input name="postalcode" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Código Postal">
                         <select class="form-select combo-elije-sexo" aria-label="Default select example">
                             <option value="F">F</option>
                             <option value="M">M</option>
                         </select>
-                        <button style="font-family: BlinkMacSystemFont;" type="submit" class="btn btn-primary">Registrarme</button>
+                        <button  type="submit" class="btn btn-primary">Crear Cuenta</button>
                         <label for="">¿Tienes Cuenta?</label><b><a style="color:rgb(5, 5, 5); text-decoration: none;" href="/login">Iniciar Sesión</a></b>
                         
                     </div>
