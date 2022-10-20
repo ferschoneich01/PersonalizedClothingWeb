@@ -12,7 +12,7 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@import url('/fonts/Material-Design-Iconic-Font.ttf?v=2.2.0');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 :root {
   --bs-blue: #007bff;
   --bs-indigo: #6610f2;

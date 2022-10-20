@@ -46,3 +46,20 @@
     width: 800;
     height: auto;
 }
+
+/*Rotacion de imagen*/
+#img_container.rotate90 {
+    width: 100px;
+    height: 820px
+}
+
+#img-preview {
+    transform-origin: top left;
+    -webkit-transform-origin: top left;
+}
+
+#img_container.rotate90 #img-preview {
+    transform: rotate(90deg) translateY(-100%);
+    -webkit-transform: rotate(90deg) translateY(-100%);
+}
+  
