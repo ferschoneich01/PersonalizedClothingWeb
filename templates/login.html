@@ -39,12 +39,15 @@
         {% endwith %}
     </div>
     <form action="/login" method="POST" class="form-box animated fadeInUp">
-        <h1 style="color: black; font-family: BlinkMacSystemFont;" class="form-title">Inciar Sesion</h1>
-        <input name="username" type="text" placeholder="usuario" autofocus>
-        <input name="password" type="password" placeholder="contraseña">
-        <button type="submit">
-            Iniciar Sesion
-        </button>
+
+        <h1 style="color: black; font-family: BlinkMacSystemFont;" class="form-title">Inicia Sesión</h1>
+        <input name="username" type="username" class="form-control" id="exampleFormControlInput1" placeholder="Usuario">
+        <input name="password" type="password" class="form-control" id="formGroupExampleInput" placeholder="Contraseña">
+
+        <a class="register-link" style="color:rgb(5, 5, 5); text-decoration: none;" href="/register"> ¿Has olvidado tu contraseña?</a>
+        
+        <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+
         <a style="color:rgb(5, 5, 5); text-decoration: none;" href="/register"> ¿Aun no tienes una cuenta?</a>
     </form>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
