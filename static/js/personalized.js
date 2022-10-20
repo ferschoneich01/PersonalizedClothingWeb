@@ -22,6 +22,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Cambiar tamaño carta a horizontal
     $("#btn-lettersize-h").on('click', function () {
+        /*imagen.style.width = "20%";
+        imagen.style.height = "14%";
+        imagen.style.marginLeft = "41%";
+        imagen.style.marginTop = "43%";*/
+        document.getElementById("img-preview").style.transform = "rotate(90deg)";
+        $("#size-selected").val("carta-h");
+        //https://www.delftstack.com/es/howto/javascript/javascript-rotate-images/
+    });
+
+    //Cambiar a tamaño carta vertical
+    $("#btn-backsize-v").on('click', function () {
+        imagen.style.width = "16%";
+        imagen.style.height = "20%";
+        imagen.style.marginLeft = "43%";
+        imagen.style.marginTop = "40%";
+        $("#size-selected").val("carta-v");
+
+    });
+
+    //Cambiar tamaño carta a horizontal
+    $("#btn-backsize-h").on('click', function () {
         imagen.style.width = "20%";
         imagen.style.height = "14%";
         imagen.style.marginLeft = "41%";
@@ -71,6 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
         statusPrend = 1;
         document.getElementById("Hoodie").parentNode.style.cssText = "border:0";
         document.getElementById("Shirt").parentNode.style.cssText = "border:0";
+        document.getElementById("Black").src = "/static/img/sweater-black-front.jpg";
+        document.getElementById("White").src = "/static/img/sweater-white-front.jpg";
+        document.getElementById("Pink").src = "/static/img/sweater-pink-front.jpg";
+        document.getElementById("Gray").src = "/static/img/sweater-gray-front.jpg";
+        document.getElementById("Pink").style.cssText = "filter: brightness(1);";
+        document.getElementById("Gray").style.cssText = "filter: brightness(1);";
+        document.getElementById("product-photo").src = "/static/img/sweater-black-front.jpg";
+
+        document.getElementById("img-preview").style.cssText = "width:16%; height: 20%; position: absolute; border-bottom:0; margin-left:43%; margin-top: 40%;";
     });
 
     $("#Hoodie").on('click', function () {
@@ -78,6 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
         statusPrend = 2;
         document.getElementById("Sweater").parentNode.style.cssText = "border:0";
         document.getElementById("Shirt").parentNode.style.cssText = "border:0";
+        document.getElementById("Black").src = "/static/img/hoodie-black-front.jpg";
+        document.getElementById("White").src = "/static/img/hoodie-white-front.jpg";
+        document.getElementById("Pink").src = "/static/img/hoodie-pink-front.jpg";
+        document.getElementById("Gray").src = "/static/img/hoodie-gray-front.jpg";
+        document.getElementById("Pink").style.cssText = "filter: brightness(1);";
+        document.getElementById("Gray").style.cssText = "filter: brightness(1);";
+        document.getElementById("product-photo").src = "/static/img/hoodie-black-front.jpg";
+
     });
 
     $("#Shirt").on('click', function () {
@@ -85,14 +123,20 @@ document.addEventListener('DOMContentLoaded', () => {
         statusPrend = 3;
         document.getElementById("Sweater").parentNode.style.cssText = "border:0";
         document.getElementById("Hoodie").parentNode.style.cssText = "border:0";
-
+        document.getElementById("Black").src = "/static/img/shirt-black-front.jpg";
+        document.getElementById("White").src = "/static/img/shirt-white-front.jpg";
+        document.getElementById("Pink").src = "/static/img/shirt-pink-front.jpg";
+        document.getElementById("Gray").src = "/static/img/shirt-gray-front.jpg";
+        document.getElementById("Pink").style.cssText = "filter: brightness(0.5);";
+        document.getElementById("Gray").style.cssText = "filter: brightness(0.5);";
+        document.getElementById("product-photo").src = "/static/img/shirt-black-front.jpg";
+        document.getElementById("img-preview").style.cssText = "width: 26%; height: 32%; position: absolute; border-bottom: 0px; margin-left: 37%; margin-top: 35%;";
     });
 
     $("#Black").on('click', function () {
         document.getElementById("Black").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 1;
         document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Gray").parentNode.style.cssText = "border:0";
         document.getElementById("Pink").parentNode.style.cssText = "border:0";
 
@@ -102,27 +146,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("White").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 2;
         document.getElementById("Black").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Gray").parentNode.style.cssText = "border:0";
         document.getElementById("Pink").parentNode.style.cssText = "border:0";
 
     });
 
-    $("#Blue").on('click', function () {
-        document.getElementById("Blue").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
-        statusColor = 3;
-        document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Black").parentNode.style.cssText = "border:0";
-        document.getElementById("Gray").parentNode.style.cssText = "border:0";
-        document.getElementById("Pink").parentNode.style.cssText = "border:0";
-
-    });
 
     $("#Gray").on('click', function () {
         document.getElementById("Gray").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 4;
         document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Black").parentNode.style.cssText = "border:0";
         document.getElementById("Pink").parentNode.style.cssText = "border:0";
 
@@ -132,11 +165,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("Pink").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 5;
         document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Gray").parentNode.style.cssText = "border:0";
         document.getElementById("Black").parentNode.style.cssText = "border:0";
 
+
     });
+
+
+
+
 });
 
 function getImg(name, posicion) {
