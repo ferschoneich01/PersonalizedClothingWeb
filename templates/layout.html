@@ -54,11 +54,29 @@
         {% endif %}
         <nav class="navbar">
             <header class="nabvar-mobile is-size-5-mobile">
-                <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi zmdi-menu"></i></a>
-                <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-black">Personalized
+                <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi zmdi-menu"
+                        style="color:black;"></i></a>
+                <a class="is-uppercase has-text-weight-bold has-text-black" href="/"
+                    style="margin-left: 0; text-align: center; margin-right: 0%;">Personalized
                     Clothing</a>
-                <a class="navbar-mobile-link has-text-white" href="#"><i id="menu-btn"
-                        class="zmdi zmdi-shopping-cart"></i> Vacio</a>
+                {% if username != 'null' %}
+                <a class="navbar-mobile-link has-text-black"
+                    style="margin-left: 0; text-align: center; margin-right: 0%;" href="/userSettings"><i id="menu-btn"
+                        class="zmdi zmdi-account"></i>
+                    {{username}}</a>
+                <a class="navbar-mobile-link has-text-black"
+                    style="margin-left: 0; text-align: center; margin-right: 51%;" href="/logout">
+                    <svg style="width:20px;height:20px; margin-top: 2px;" viewBox="0 0 24 24">
+                        <path fill="black"
+                            d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z" />
+                    </svg>
+                    <span style="margin-bottom: 2px;">Salir</span></a>
+                {% else %}
+                <a class="navbar-mobile-link has-text-black"
+                    style="margin-left: 0; text-align: center; margin-right: 55%;" href="/login"><i id="menu-btn"
+                        class="zmdi zmdi-account"></i>
+                    Login</a>
+                {% endif %}
             </header>
             <nav class="nav-menu" id="mySidenav">
                 <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 40%;"

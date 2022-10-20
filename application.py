@@ -166,7 +166,7 @@ def adminOrders():
     if session["role_user"] == 1:
         ordenes = []
         orders = db.execute(
-            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.id_order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod").fetchall()
+            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.id_order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod WHERE s.status = 'En proceso'").fetchall()
 
         i = 0
         for o in orders:
@@ -180,6 +180,30 @@ def adminOrders():
     else:
         return redirect("/")
 
+@app.route("/adminSells", methods=["GET", "POST"])
+@login_required
+def adminSells():
+
+    if session["role_user"] == 1:
+        ordenes = []
+        orders = db.execute(
+            "Select i.id_item,u.username,i.name,od.color,od.size,p.method,i.price,sh.cost,(i.price+sh.cost),s.status,i.image FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.id_order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod WHERE s.status = 'Entregado'").fetchall()
+        themostrepeat = db.execute(
+            "Select i.id_item,i.name FROM items i INNER JOIN orderdetails od ON od.item = i.id_item INNER JOIN orders o ON o.id_order = od.id_order INNER JOIN status s on s.id_status = o.id_status INNER JOIN users u on u.id_user = o.id_user INNER JOIN shipping sh on sh.id_order = o.id_order INNER JOIN addres_persons ap on ap.id_address_person = sh.address INNER JOIN paymentmethohds p on  p.id_paymentmethod = o.paymentmethod WHERE s.status = 'Entregado' group by i.id_item,i.name order by i.id_item desc limit 1").fetchall()
+
+        TotalRecaudado = 0
+        i = 0
+        for o in orders:
+            ordenes.append([orders[i][0], orders[i][1],
+                           orders[i][2], orders[i][3], orders[i][4],
+                           orders[i][5], orders[i][6], orders[i][7],
+                           orders[i][8], orders[i][9], orders[i][10], (i+1)])
+            TotalRecaudado +=  float(orders[i][8])              
+            i += 1
+        TotalRecaudado = "{:,}".format(TotalRecaudado).replace(',','~').replace('.',',').replace('~','.')
+        return render_template('adminSells.html', username=session["username"], orders=ordenes, Tot=TotalRecaudado, themost=themostrepeat[0][1])
+    else:
+        return redirect("/")
 
 @app.route("/viewOrders/<id>", methods=["GET", "POST"])
 @login_required

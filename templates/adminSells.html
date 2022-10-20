@@ -1,58 +1,55 @@
 {% extends 'adminlayout.html'%}
 {% block body %}
+<link rel="stylesheet" href="/static/adminOrders.css">
+
 <div class="container" style="margin-top: 100px;">
-    <table class="table">
-        <!-- On rows -->
-        <thead>
-            <tr>
-                <td class="table-primary">#</td>
-                <td class="table-primary">Cliente</td>
-                <td class="table-primary">Item</td>
-                <td class="table-primary">Color</td>
-                <td class="table-primary">Talla</td>
-                <td class="table-primary">Metodo de pago</td>
-                <td class="table-primary">SubTotal</td>
-                <td class="table-primary">Costo Envio</td>
-                <td class="table-primary">Total</td>
-                <td class="table-primary">Estado</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order in orders %}
-            <tr>
-                <td class="table-primary">{{order.11}}</td>
-                <td class="table-primary">{{order.1}}</td>
-                <td class="table-primary">{{order.2}}</td>
-                <td class="table-primary">{{order.3}}</td>
-                <td class="table-primary">{{order.4}}</td>
-                <td class="table-primary">{{order.5}}</td>
-                <td class="table-primary">C${{order.6}}</td>
-                <td class="table-primary">C${{order.7}}</td>
-                <td class="table-primary">C${{order.8}}</td>
-                <td class="table-primary">{{order.9}}</td>
-                <td class="table-primary"><a href="{{order.10}}" class="btn btn-dark"
-                        style="background-color:black; width: 80px; font-size: 10px;">Ver</a></td>
-                <td class="table-primary"><a href="/deleteOrder/{{order.0}}" class="btn btn-dark"
-                        style="background-color:black; width: 80px; font-size: 10px; color:red;">Cancelar</a></td>
-                {% if order.9 == "En Proceso" %}
-                <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark"
-                        style="background-color:black; width: 80px; font-size: 10px; color:green;">Terminado</a></td>
-                {% elif order.9 == "No enviado" %}
-                <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark"
-                        style="background-color:black; width: 80px; font-size: 10px; color:green;">Enviado</a></td>
-                {% elif order.9 == "Enviado" %}
-                <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark"
-                        style="background-color:black; width: 80px; font-size: 10px; color:green;">Entregado</a></td>
-                {% elif order.9 == "Terminado" %}
-                <td class="table-primary"><a href="/statusOrder/{{order.0}}" class="btn btn-dark"
-                        style="background-color:black; width: 80px; font-size: 10px; color:green;">Enviado</a></td>
-                {% endif %}
+    <h1>Ventas Totales</h1>
+    <div class="container-table">
+        <table class="table">
+            <!-- On rows -->
+            <thead>
+                <tr>
+                    <td class="table-primary">#</td>
+                    <td class="table-primary">Cliente</td>
+                    <td class="table-primary">Item</td>
+                    <td class="table-primary">Color</td>
+                    <td class="table-primary">Talla</td>
+                    <td class="table-primary">Metodo de pago</td>
+                    <td class="table-primary">SubTotal</td>
+                    <td class="table-primary">Costo Envio</td>
+                    <td class="table-primary">Total</td>
+                    <td class="table-primary">Estado</td>
+                    <td class="table-primary">Producto</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td class="table-primary">{{order.11}}</td>
+                    <td class="table-primary">{{order.1}}</td>
+                    <td class="table-primary">{{order.2}}</td>
+                    <td class="table-primary">{{order.3}}</td>
+                    <td class="table-primary">{{order.4}}</td>
+                    <td class="table-primary">{{order.5}}</td>
+                    <td class="table-primary">C${{order.6}}</td>
+                    <td class="table-primary">C${{order.7}}</td>
+                    <td class="table-primary">C${{order.8}}</td>
+                    <td class="table-primary">{{order.9}}</td>
+                    <td class="table-primary">
+                        <a href="{{order.10}}">
+                            <img src="{{order.10}}" alt="foto" style="width: 50px; border:1px solid rgb(63, 62, 62) ;">
+                        </a>
+                    </td>
 
-            </tr>
-            {% endfor %}
-        </tbody>
+                </tr>
+                {% endfor %}
+            </tbody>
 
-    </table>
+        </table>
+    </div>
+    <hr>
+    <h1 style="color: black; font-size:30px;">Producto más vendido: {{themost}}</h1>
+    <h1 style="color: black; font-size:30px;">Total Recaudado C$: <span style="color:green;">{{Tot}}</span></h1>
 </div>
 
 {% endblock %}
