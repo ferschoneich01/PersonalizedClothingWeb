@@ -22,11 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Cambiar tamaño carta a horizontal
     $("#btn-lettersize-h").on('click', function () {
-        imagen.style.width = "20%";
+        /*imagen.style.width = "20%";
         imagen.style.height = "14%";
         imagen.style.marginLeft = "41%";
-        imagen.style.marginTop = "43%";
+        imagen.style.marginTop = "43%";*/
+        document.getElementById("img-preview").style.transform = "rotate(90deg)";
         $("#size-selected").val("carta-h");
+        //https://www.delftstack.com/es/howto/javascript/javascript-rotate-images/
     });
 
     //Cambiar a tamaño carta vertical
@@ -90,6 +92,15 @@ document.addEventListener('DOMContentLoaded', () => {
         statusPrend = 1;
         document.getElementById("Hoodie").parentNode.style.cssText = "border:0";
         document.getElementById("Shirt").parentNode.style.cssText = "border:0";
+        document.getElementById("Black").src = "/static/img/sweater-black-front.jpg";
+        document.getElementById("White").src = "/static/img/sweater-white-front.jpg";
+        document.getElementById("Pink").src = "/static/img/sweater-pink-front.jpg";
+        document.getElementById("Gray").src = "/static/img/sweater-gray-front.jpg";
+        document.getElementById("Pink").style.cssText = "filter: brightness(1);";
+        document.getElementById("Gray").style.cssText = "filter: brightness(1);";
+        document.getElementById("product-photo").src = "/static/img/sweater-black-front.jpg";
+
+        document.getElementById("img-preview").style.cssText = "width:16%; height: 20%; position: absolute; border-bottom:0; margin-left:43%; margin-top: 40%;";
     });
 
     $("#Hoodie").on('click', function () {
@@ -97,6 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
         statusPrend = 2;
         document.getElementById("Sweater").parentNode.style.cssText = "border:0";
         document.getElementById("Shirt").parentNode.style.cssText = "border:0";
+        document.getElementById("Black").src = "/static/img/hoodie-black-front.jpg";
+        document.getElementById("White").src = "/static/img/hoodie-white-front.jpg";
+        document.getElementById("Pink").src = "/static/img/hoodie-pink-front.jpg";
+        document.getElementById("Gray").src = "/static/img/hoodie-gray-front.jpg";
+        document.getElementById("Pink").style.cssText = "filter: brightness(1);";
+        document.getElementById("Gray").style.cssText = "filter: brightness(1);";
+        document.getElementById("product-photo").src = "/static/img/hoodie-black-front.jpg";
+
     });
 
     $("#Shirt").on('click', function () {
@@ -111,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("Pink").style.cssText = "filter: brightness(0.5);";
         document.getElementById("Gray").style.cssText = "filter: brightness(0.5);";
         document.getElementById("product-photo").src = "/static/img/shirt-black-front.jpg";
+        document.getElementById("img-preview").style.cssText = "width: 26%; height: 32%; position: absolute; border-bottom: 0px; margin-left: 37%; margin-top: 35%;";
     });
 
     $("#Black").on('click', function () {
