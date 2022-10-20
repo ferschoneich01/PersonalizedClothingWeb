@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     background-image:url(https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639122857/banner-large_sd5xqg.jpg);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     height: 100%;
     background-size:     cover;                    
     background-repeat:   no-repeat;
@@ -15,17 +16,18 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* No Scrollbar */
-    overflow: hidden;
+    
+    
 }
 
 .form-box {
     width: 350px;
-    height: 500px;
-    padding: 40px;
+    height: 520px;
+    padding: 10px;
     background: #ffffff;
     text-align: center;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+    margin-bottom: auto;
+    
 }
 
 .form-title {
@@ -43,16 +45,24 @@ body {
     width: 250px;
     height: 40px;
     outline: none;
-    color: rgb(2, 2, 2);
+    color: #AAAAAA;
     transition: 0.25s;
+    align-content: center;
 }
 
 .form-box input[type="text"]:focus, .form-box input[type="password"]:focus {
     border-color: #ffffff;
+    color: black;
+}
+
+.form-box .back-button{
+    display: flex;
+    
 }
 
 .form-box button[type="submit"] {
     text-align: center;
+    display: block;
     background: black;
     text-align: center;
     height: 54px;
@@ -63,9 +73,14 @@ body {
     cursor: pointer;
 }
 
-.form-box .register-link{
+.form-box .pass-link{
     margin-left: 40px;
     font-size: 0.8rem;
+}
+
+.form-box .register-link{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
 }
 
 .form-box button[type="submit"]:hover {
