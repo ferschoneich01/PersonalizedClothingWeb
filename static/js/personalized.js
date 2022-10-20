@@ -29,6 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
         $("#size-selected").val("carta-h");
     });
 
+    //Cambiar a tamaño carta vertical
+    $("#btn-backsize-v").on('click', function () {
+        imagen.style.width = "16%";
+        imagen.style.height = "20%";
+        imagen.style.marginLeft = "43%";
+        imagen.style.marginTop = "40%";
+        $("#size-selected").val("carta-v");
+
+    });
+
+    //Cambiar tamaño carta a horizontal
+    $("#btn-backsize-h").on('click', function () {
+        imagen.style.width = "20%";
+        imagen.style.height = "14%";
+        imagen.style.marginLeft = "41%";
+        imagen.style.marginTop = "43%";
+        $("#size-selected").val("carta-h");
+    });
+
     var rotated = false;
     //Cambiar a manga derecha
     $("#btn-manga-d").on('click', function () {
@@ -85,14 +104,19 @@ document.addEventListener('DOMContentLoaded', () => {
         statusPrend = 3;
         document.getElementById("Sweater").parentNode.style.cssText = "border:0";
         document.getElementById("Hoodie").parentNode.style.cssText = "border:0";
-
+        document.getElementById("Black").src = "/static/img/shirt-black-front.jpg";
+        document.getElementById("White").src = "/static/img/shirt-white-front.jpg";
+        document.getElementById("Pink").src = "/static/img/shirt-pink-front.jpg";
+        document.getElementById("Gray").src = "/static/img/shirt-gray-front.jpg";
+        document.getElementById("Pink").style.cssText = "filter: brightness(0.5);";
+        document.getElementById("Gray").style.cssText = "filter: brightness(0.5);";
+        document.getElementById("product-photo").src = "/static/img/shirt-black-front.jpg";
     });
 
     $("#Black").on('click', function () {
         document.getElementById("Black").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 1;
         document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Gray").parentNode.style.cssText = "border:0";
         document.getElementById("Pink").parentNode.style.cssText = "border:0";
 
@@ -102,27 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("White").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 2;
         document.getElementById("Black").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Gray").parentNode.style.cssText = "border:0";
         document.getElementById("Pink").parentNode.style.cssText = "border:0";
 
     });
 
-    $("#Blue").on('click', function () {
-        document.getElementById("Blue").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
-        statusColor = 3;
-        document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Black").parentNode.style.cssText = "border:0";
-        document.getElementById("Gray").parentNode.style.cssText = "border:0";
-        document.getElementById("Pink").parentNode.style.cssText = "border:0";
-
-    });
 
     $("#Gray").on('click', function () {
         document.getElementById("Gray").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 4;
         document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Black").parentNode.style.cssText = "border:0";
         document.getElementById("Pink").parentNode.style.cssText = "border:0";
 
@@ -132,11 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("Pink").parentNode.style.cssText = "padding: 1px 5px; border: #B8B8B8 2px dashed; border-top-left-radius: 5px; border-bottom-right-radius: 5px;";
         statusColor = 5;
         document.getElementById("White").parentNode.style.cssText = "border:0";
-        document.getElementById("Blue").parentNode.style.cssText = "border:0";
         document.getElementById("Gray").parentNode.style.cssText = "border:0";
         document.getElementById("Black").parentNode.style.cssText = "border:0";
 
+
     });
+
+
+
+
 });
 
 function getImg(name, posicion) {
