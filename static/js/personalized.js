@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Cambiar a tamaño carta vertical
     $("#btn-lettersize-v").on('click', function () {
-        imagen.style.cssText = "width:16%; height:20%; margin-left:41%; margin-top:43%;"
+        imagen.style.cssText = "width:16%; height: 20%; position: absolute; border-bottom:0; margin-left:43%; margin-top: 40%;"
         $("#size-selected").val("lettersize-v");
 
     });
 
     //Cambiar tamaño carta a horizontal
     $("#btn-lettersize-h").on('click', function () {
-        imagen.style.cssText = "width:20%; height:16%; margin-left:41%; margin-top:43%;"
+        imagen.style.cssText = "width:22%; height: 16%; position: absolute; border-bottom:0; margin-left:40%; margin-top: 40%;"
 
 
         $("#size-selected").val("lettersize-v");
