@@ -451,6 +451,39 @@ def addToCar(id):
         return redirect("/items/"+id)
 
 
+@app.route("/addToCar/personalized/<json>", methods=["POST", "GET"])
+@login_required
+def addToCarPersonalized(json):
+    if request.method == "POST":
+        prenda = ""
+        color = ""
+        orientacion = ""
+        cont = 0
+        for i in json:
+            if i == "-":
+                cont += 1
+            else:
+                if cont == 0:
+                    prenda += i
+                elif cont == 1:
+                    color += i
+                elif cont == 2:
+                    orientacion += i
+
+        print(prenda+color+orientacion)
+        """items = db.execute(
+            "SELECT i.name,i.price,i.image FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(id)+"").fetchall()
+        #lista de items"""
+
+        quantity = request.form.get("quantity")
+        size = request.form.get("size")
+
+        """carListItems.append([items[0][0], float(items[0][1]), float(
+            quantity), size, color, items[0][2], len(carListItems), id])"""
+
+        return redirect("/car")
+
+
 @app.route("/car", methods=["POST", "GET"])
 @login_required
 def car():
@@ -468,6 +501,7 @@ def car():
             j += 1
         return render_template('car.html', username=session["username"], items=carListItems, direcciones=Direcciones)
 
+
 @app.route("/deleteToCar/<id>", methods=["POST", "GET"])
 @login_required
 def deleteToCar(id):
@@ -483,7 +517,7 @@ def addAddres():
     d2 = request.form.get("addres2")
     direccion = d1+" "+d2+""
     person = db.execute(
-            "SELECT u.person FROM users u inner join person p on u.person = p.id_person where id_user = "+str(session["id_user"])+"").fetchall()
+        "SELECT u.person FROM users u inner join person p on u.person = p.id_person where id_user = "+str(session["id_user"])+"").fetchall()
 
     if len(departamento) > 0 and len(d1) > 0 and len(d2) > 0:
         db.execute("INSERT INTO addres_persons(address,person,city) VALUES ('" +
