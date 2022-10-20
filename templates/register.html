@@ -46,34 +46,32 @@
             <div class="row">
                 <!--PARTE 1 REGISTRO-->
                 <div class="col">
-                    <div style="margin-top: 20px; margin-left: 50px;" class="form-box animated fadeInUp">
-                        <h2 style="color: black; font-family: BlinkMacSystemFont;" class="form-title">Registro
-                            Usuario</h2>
-                        <input name="username" required type="text" placeholder="Nombre de usuario" autofocus>
-                        <input name="password" required  type="password" placeholder="Contraseña">
-                        <input name="email" required  type="text" placeholder="Correo">
-                        <input name="cedula" required  type="text" placeholder="cedula">
-                        <input name="name" required  type="text" placeholder="Nombre">
+                    <div style="margin-top: 20px; margin-left: auto;" class="form-box animated fadeInUp">
+                        <h2 style="color: black; font-family: BlinkMacSystemFont;" class="form-title">Crear Cuenta</h2>
+                        <input name="username" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Usuario">
+                        <input name="password" required type="password" class="form-control" id="exampleFormControlInput1" placeholder="Contraseña">
+                        <input name="email" required type="email" class="form-control input-email" id="exampleFormControlInput1" placeholder="Correo">
+                        <input name="cedula" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Cédula">
+                        <input name="name" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nombre">
+                        <input name="lastname" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Apellido">
                     </div>
                 </div>
 
                 <!--PARTE 2 REGISTRO-->
                 <div class="col">
-                    <div style="margin-top: 20px; margin-left: 50px;" class="form-box animated fadeInUp">
-                        <input name="lastname" required  type="text" placeholder="Apellido">
-                        <input name="birthday" required  type="date" placeholder="Fecha de Nacimiento">
-                        <input name="phone" required  type="text" placeholder="Celular">
-                        <input name="city" required  type="text" placeholder="Departamento">
-                        <input name="postalcode" required  type="text" placeholder="Codigo postal">
-                        <label style="color:rgb(0, 0, 0);" for="">Sexo:</label>
-                        <select name="select">
+                    <div style="margin-top: 20px; margin-right: auto; padding-top: 78px;" class="form-box animated fadeInUp">
+                        
+                        <input name="birthday" required  type="date" class="form-control fecha-nac" id="exampleFormControlInput1" placeholder="Fecha de Nacimiento">
+                        <input name="phone" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Telefono">
+                        <input name="city" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Departamento">
+                        <input name="postalcode" required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Codigo Postal">
+                        <select class="form-select combo-elije-sexo" aria-label="Default select example">
+                            <option value="F">F</option>
                             <option value="M">M</option>
-                            <option value="F" selected>F</option>
                         </select>
-
-                        <button style="font-family: BlinkMacSystemFont;" type="submit">
-                            Registrarme
-                        </button>
+                        <button style="font-family: BlinkMacSystemFont;" type="submit" class="btn btn-primary">Registrarme</button>
+                        <label for="">¿Tienes Cuenta?</label><b><a style="color:rgb(5, 5, 5); text-decoration: none;" href="/login">Iniciar Sesión</a></b>
+                        
                     </div>
                 </div>
             </div>

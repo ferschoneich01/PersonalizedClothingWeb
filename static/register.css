@@ -21,54 +21,56 @@ body {
 }
 
 .form-box {
-    width: 400px;
+    width: 350px;
+    height: 510px;
     padding: 40px;
-    background: #e7e7e7;
+    background: #ffffff;
     text-align: center;
 }
 
 .form-title {
     color: rgb(0, 0, 0);
-    text-transform: uppercase;
     font-weight: 500;
 }
 
-.form-box input[type="text"], .form-box input[type="password"], .form-box button[type="submit"] {
+.form-box input[type="text"], .form-box input[type="password"], .form-box button[type="submit"], .form-box button[name="email"],
+.form-box .input-email, .form-box .combo-elije-sexo, .form-box .fecha-nac{
     border: 0;
     background: none;
     display: block;
     margin: 20px auto;
-    text-align: center;
-    border: 2px solid #3742fa;
+    border: 1px solid #AAAAAA;
     padding: 14px 10px;
-    width: 200px;
+    width: 250px;
+    height: 40px;
     outline: none;
-    color: rgb(0, 0, 0);
-    border-radius: 24px;
+    color: #AAAAAA;
     transition: 0.25s;
+    border-radius: 0px;
+    align-content: center;
 }
 
-.form-box input[type="text"]:focus, .form-box input[type="password"]:focus {
-    width: 280px;
-    border-color: #ffffff;
+.form-box input[type="text"]:focus, .form-box input[type="password"]:focus,
+.form-box .input-email:focus, .form-box .combo-elije-sexo:focus, .form-box .fecha-nac:focus{
+    border-color: white;
+    color: black;
+    
 }
 
 .form-box button[type="submit"] {
     border: 0;
-    background: #5352ed;
+    background: black;
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #3742fa;
     padding: 14px 40px;
     outline: none;
     color: white;
-    border-radius: 24px;
     transition: 0.25s;
     cursor: pointer;
+    height: 48px;
 }
 
 .form-box button[type="submit"]:hover {
-    background: none;
-    color: black;
+    opacity: 70%;
 }
