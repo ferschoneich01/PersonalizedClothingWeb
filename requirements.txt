@@ -35,3 +35,6 @@ sqlparse
 urllib3                           
 virtualenv                        
 Werkzeug     
+pandas
+numpy
+scikit-learn 

@@ -10,10 +10,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
-
+import matplotlib.pyplot as plt
+from openpyxl.workbook import Workbook
 # codigo para obtener datos de la base de datos
-"""
 # Set up database
+"""
 engine = create_engine(
     "postgresql://kohzfmcjsdiofe:0759fd1ec18c076fe9ccbb697567d68e722ee9ddcab6ef35e97c031f5dc3b757@ec2-34-231-42-166.compute-1.amazonaws.com:5432/d9idrg58i1672b")
 db = scoped_session(sessionmaker(bind=engine))
@@ -31,13 +32,13 @@ for o in orders:
 
     ordenes.append([orders[i][0], orders[i][1],
                     orders[i][2], orders[i][3], orders[i][4]])
+    fecha = str(orders[i][4])                
     print(str(orders[i][0])+',"'+str(orders[i][1])+'","'+str(orders[i][2]) +
-          '","'+str(orders[i][3])+'",'+str(orders[i][4]))
+          '","'+str(orders[i][3])+'",'+str(fecha[:4]))
     i += 1
-
 # Pasamos los datos a un archivo de excel
-##data = pd.DataFrame(ordenes)
-# data.to_excel('dataset.xlsx')
+data = pd.DataFrame(ordenes)
+data.to_excel('data.xlsx')
 """
 
 df_test = pd.read_csv('test_products.csv', header=0)
@@ -45,25 +46,31 @@ df_train = pd.read_csv('train_products.csv', header=0)
 
 # Vericamos cantidad de datos que hay en el dataset
 print('Cantidad de datos: ')
+print('========================================')
 print(df_train.shape)
 print(df_train.shape)
 print(df_test.shape)
 print(df_test.shape)
 # Verificamos los tipos de datos contenidos en el dataset
 print('Tipos de datos: ')
+print('========================================')
 print(df_train.info)
 print(df_train.info)
 print(df_test.info)
 print(df_test.info)
 # verificamos los datos faltantes de los dataset
 print('Datos faltantes: ')
+print('========================================')
 print(pd.isnull(df_train).sum())
 print(pd.isnull(df_test).sum())
 print('')
 # verificamos estadisticas del dataset
 print('Estadisticas del dataset: ')
+print('========================================')
 print(df_train.describe())
 print(df_test.describe())
+
+print('========================================')
 
 # Cambiamos los datos de color a número
 df_train['color'].replace(['Negro', 'Blanco', 'Rosado', 'Gris', 'Azul'], [
@@ -75,27 +82,38 @@ df_train['talla'].replace(['XS', 'S', 'M', 'L', 'XL'], [
                           0, 1, 2, 3, 4], inplace=True)
 df_test['talla'].replace(['XS', 'S', 'M', 'L', 'XL'], [
     0, 1, 2, 3, 4], inplace=True)
+
+# Creo varios grupos de acuerdo a rangos de fechas
+# Rangos: 2019, 2020, 2021, 2022
+"""
+bins = [2019, 2020, 2021, 2022]
+names = ['1', '2', '3', '4']
+
+df_train['fecha'] = pd.cut(df_train['fecha'], bins, labels = names)
+df_test['fecha'] = pd.cut(df_test['fecha'], bins, labels = names)
+"""
 # Eliminamos las columnas que no son necesarias para el analisis
-df_train = df_train.drop(['id', 'producto', 'fecha'], axis=1)
-df_test = df_test.drop(['producto', 'fecha'], axis=1)
+df_train = df_train.drop(['id', 'producto'], axis=1)
+df_test = df_test.drop(['id', 'producto'], axis=1)
 # Eliminamos columnas con datos perdidos
 df_train.dropna(axis=0, how='any', inplace=True)
 df_test.dropna(axis=0, how='any', inplace=True)
 # Verificamos datos
 print(pd.isnull(df_train).sum())
+print(pd.isnull(df_test).sum())
 print(df_train.shape)
 print(df_train.head)
-print(pd.isnull(df_test).sum())
 print(df_test.shape)
 print(df_test.head)
+
 
 # MACHINE LEARNING
 # Ahora en esta parte comenzamos a impleamentar los algoritmos
 # de Maniche Learning como: Algoritmo de Regresion Logística, Vectores de soporte, Vecinos más cercanos.
 
 # Separamos las columnas con la información de las prendas
-X = np.array(df_train.drop(['color']), 1)
-Y = np.array(df_train['color'])
+X = np.array(df_train.drop(['fecha'], 1))
+Y = np.array(df_train['fecha'])
 
 # Separamos los datos de 'train' en entrenamiento y prueba para probar los algoritmos
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
@@ -116,7 +134,14 @@ print(svc.score(X_train, Y_train))
 
 # K neighbors vecinos más cercanos
 knn = KNeighborsClassifier(n_neighbors=3)
-knn.fot(X_train, Y_train)
+knn.fit(X_train, Y_train)
 Y_pred = knn.predict(X_test)
 print('Precisión Vecinos más Cercanos: ')
 print(knn.score(X_train, Y_train))
+
+# grafica de comportamiento
+"""plt.plot(X,Y)
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('comportamiento por años')
+plt.show()"""
