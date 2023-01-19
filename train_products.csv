@@ -1,245 +1,247 @@
-id,producto,color,talla,fecha
-3,Sueter NASA C$580,Negro,XS,2019
-3,Sueter NASA C$580,Negro,XS,2019
-1,Camiseta de Naruto C$240,Negro,M,2019
-1,Camiseta de Naruto C$240,Negro,M,2019
-4,Camiseta de Stitch C$240,Negro,XS,2022
-4,Camiseta de Stitch C$240,Negro,S,2021
-2,Sueter BTS persons C$580 ,Negro,XS,2021
-2,Sueter BTS persons C$580 ,Blanco,XL,2021
-3,Sueter NASA C$580,Negro,M,2021
-2,Sueter BTS persons C$580 ,Negro,M,2020
-3,Sueter NASA C$580,Gris,S,2020
-2,Sueter BTS persons C$580 ,Negro,S,2021
-5,Sueter Juegos del Calamar C$580,Rosado,S,2020
-6,CropTop Planeta C$270,Blanco,XL,2022
-8,Camiseta Anime C$270,Rosado,XS,2020
-5,Sueter Juegos del Calamar C$580,Gris,XL,2022
-3,Sueter NASA C$580,Rosado,S,2021
-7,Sueter de Rick and Morty C$580,Blanco,S,2020
-5,Sueter Juegos del Calamar C$580,Negro,M,2020
-1,Camiseta de Naruto C$240,Negro,S,2022
-5,Sueter Juegos del Calamar C$580,Negro,S,2021
-7,Sueter de Rick and Morty C$580,Azul,XL,2021
-2,Sueter BTS persons C$580 ,Blanco,L,2021
-6,CropTop Planeta C$270,Negro,XL,2021
-6,CropTop Planeta C$270,Blanco,L,2021
-3,Sueter NASA C$580,Negro,S,2021
-4,Camiseta de Stitch C$240,Blanco,S,2021
-2,Sueter BTS persons C$580 ,Blanco,L,2022
-3,Sueter NASA C$580,Negro,M,2020
-6,CropTop Planeta C$270,Rosado,XS,2020
-3,Sueter NASA C$580,Azul,L,2022
-1,Camiseta de Naruto C$240,Rosado,M,2022
-2,Sueter BTS persons C$580 ,Rosado,XL,2022
-3,Sueter NASA C$580,Blanco,M,2020
-5,Sueter Juegos del Calamar C$580,Rosado,M,2020
-6,CropTop Planeta C$270,Azul,M,2020
-1,Camiseta de Naruto C$240,Negro,XS,2021
-1,Camiseta de Naruto C$240,Azul,XL,2020
-6,CropTop Planeta C$270,Negro,L,2020
-2,Sueter BTS persons C$580 ,Negro,S,2022
-7,Sueter de Rick and Morty C$580,Rosado,M,2022
-8,Camiseta Anime C$270,Negro,L,2022
-5,Sueter Juegos del Calamar C$580,Blanco,S,2020
-5,Sueter Juegos del Calamar C$580,Negro,M,2022
-2,Sueter BTS persons C$580 ,Gris,M,2022
-7,Sueter de Rick and Morty C$580,Blanco,S,2021
-5,Sueter Juegos del Calamar C$580,Rosado,XS,2020
-7,Sueter de Rick and Morty C$580,Rosado,XL,2020
-2,Sueter BTS persons C$580 ,Blanco,M,2020
-6,CropTop Planeta C$270,Blanco,M,2022
-7,Sueter de Rick and Morty C$580,Rosado,S,2021
-8,Camiseta Anime C$270,Azul,S,2020
-5,Sueter Juegos del Calamar C$580,Negro,M,2022
-4,Camiseta de Stitch C$240,Rosado,S,2021
-2,Sueter BTS persons C$580 ,Rosado,S,2020
-6,CropTop Planeta C$270,Negro,M,2021
-6,CropTop Planeta C$270,Negro,S,2022
-3,Sueter NASA C$580,Blanco,S,2020
-5,Sueter Juegos del Calamar C$580,Negro,L,2020
-8,Camiseta Anime C$270,Rosado,XL,2022
-8,Camiseta Anime C$270,Negro,S,2020
-4,Camiseta de Stitch C$240,Rosado,S,2021
-7,Sueter de Rick and Morty C$580,Blanco,XL,2021
-5,Sueter Juegos del Calamar C$580,Negro,S,2020
-6,CropTop Planeta C$270,Negro,M,2022
-7,Sueter de Rick and Morty C$580,Negro,M,2021
-3,Sueter NASA C$580,Blanco,XS,2021
-4,Camiseta de Stitch C$240,Blanco,XL,2022
-2,Sueter BTS persons C$580 ,Negro,M,2020
-8,Camiseta Anime C$270,Rosado,XS,2022
-4,Camiseta de Stitch C$240,Negro,XL,2021
-8,Camiseta Anime C$270,Rosado,S,2022
-1,Camiseta de Naruto C$240,Negro,S,2020
-2,Sueter BTS persons C$580 ,Negro,S,2021
-7,Sueter de Rick and Morty C$580,Azul,S,2020
-3,Sueter NASA C$580,Negro,L,2021
-7,Sueter de Rick and Morty C$580,Blanco,XL,2021
-2,Sueter BTS persons C$580 ,Blanco,M,2020
-4,Camiseta de Stitch C$240,Blanco,L,2022
-1,Camiseta de Naruto C$240,Blanco,XS,2021
-6,CropTop Planeta C$270,Negro,XS,2022
-3,Sueter NASA C$580,Negro,L,2021
-2,Sueter BTS persons C$580 ,Rosado,M,2022
-4,Camiseta de Stitch C$240,Negro,S,2022
-8,Camiseta Anime C$270,Negro,L,2021
-6,CropTop Planeta C$270,Blanco,XS,2021
-5,Sueter Juegos del Calamar C$580,Negro,M,2021
-3,Sueter NASA C$580,Negro,S,2021
-6,CropTop Planeta C$270,Negro,XS,2021
-2,Sueter BTS persons C$580 ,Negro,M,2021
-4,Camiseta de Stitch C$240,Blanco,S,2021
-1,Camiseta de Naruto C$240,Azul,M,2021
-7,Sueter de Rick and Morty C$580,Azul,L,2022
-8,Camiseta Anime C$270,Blanco,XS,2021
-2,Sueter BTS persons C$580 ,Gris,M,2022
-6,CropTop Planeta C$270,Negro,M,2020
-1,Camiseta de Naruto C$240,Rosado,S,2021
-7,Sueter de Rick and Morty C$580,Negro,L,2020
-2,Sueter BTS persons C$580 ,Blanco,XL,2022
-8,Camiseta Anime C$270,Blanco,S,2021
-1,Camiseta de Naruto C$240,Blanco,S,2020
-3,Sueter NASA C$580,Gris,XS,2021
-5,Sueter Juegos del Calamar C$580,Blanco,L,2020
-5,Sueter Juegos del Calamar C$580,Negro,XL,2020
-3,Sueter NASA C$580,Negro,L,2020
-5,Sueter Juegos del Calamar C$580,Negro,S,2020
-8,Camiseta Anime C$270,Blanco,M,2021
-1,Camiseta de Naruto C$240,Blanco,XL,2020
-8,Camiseta Anime C$270,Negro,M,2021
-6,CropTop Planeta C$270,Gris,M,2020
-4,Camiseta de Stitch C$240,Rosado,M,2021
-5,Sueter Juegos del Calamar C$580,Negro,L,2022
-2,Sueter BTS persons C$580 ,Blanco,S,2020
-5,Sueter Juegos del Calamar C$580,Negro,XS,2022
-1,Camiseta de Naruto C$240,Negro,XL,2021
-4,Camiseta de Stitch C$240,Blanco,M,2021
-8,Camiseta Anime C$270,Rosado,M,2020
-4,Camiseta de Stitch C$240,Negro,S,2020
-2,Sueter BTS persons C$580 ,Negro,L,2021
-8,Camiseta Anime C$270,Blanco,M,2021
-3,Sueter NASA C$580,Negro,S,2020
-5,Sueter Juegos del Calamar C$580,Gris,M,2022
-2,Sueter BTS persons C$580 ,Azul,L,2021
-7,Sueter de Rick and Morty C$580,Rosado,XL,2020
-1,Camiseta de Naruto C$240,Negro,S,2020
-3,Sueter NASA C$580,Negro,S,2022
-7,Sueter de Rick and Morty C$580,Negro,XS,2020
-1,Camiseta de Naruto C$240,Azul,XL,2021
-7,Sueter de Rick and Morty C$580,Rosado,S,2022
-8,Camiseta Anime C$270,Gris,XS,2021
-1,Camiseta de Naruto C$240,Rosado,M,2021
-4,Camiseta de Stitch C$240,Blanco,M,2020
-5,Sueter Juegos del Calamar C$580,Negro,S,2020
-8,Camiseta Anime C$270,Negro,L,2022
-6,CropTop Planeta C$270,Negro,S,2020
-7,Sueter de Rick and Morty C$580,Negro,S,2022
-8,Camiseta Anime C$270,Blanco,M,2022
-7,Sueter de Rick and Morty C$580,Rosado,S,2021
-2,Sueter BTS persons C$580 ,Blanco,M,2021
-2,Sueter BTS persons C$580 ,Azul,XL,2022
-1,Camiseta de Naruto C$240,Negro,M,2020
-7,Sueter de Rick and Morty C$580,Negro,XS,2021
-4,Camiseta de Stitch C$240,Rosado,M,2020
-8,Camiseta Anime C$270,Blanco,L,2022
-6,CropTop Planeta C$270,Rosado,XL,2020
-5,Sueter Juegos del Calamar C$580,Blanco,XS,2021
-2,Sueter BTS persons C$580 ,Negro,M,2021
-4,Camiseta de Stitch C$240,Gris,S,2021
-1,Camiseta de Naruto C$240,Negro,XL,2022
-7,Sueter de Rick and Morty C$580,Negro,M,2021
-2,Sueter BTS persons C$580 ,Gris,XS,2022
-8,Camiseta Anime C$270,Negro,M,2021
-8,Camiseta Anime C$270,Negro,L,2022
-1,Camiseta de Naruto C$240,Negro,XS,2021
-2,Sueter BTS persons C$580 ,Negro,M,2021
-4,Camiseta de Stitch C$240,Gris,L,2021
-8,Camiseta Anime C$270,Negro,XS,2021
-4,Camiseta de Stitch C$240,Negro,XL,2021
-4,Camiseta de Stitch C$240,Azul,L,2021
-2,Sueter BTS persons C$580 ,Blanco,M,2020
-7,Sueter de Rick and Morty C$580,Rosado,L,2020
-7,Sueter de Rick and Morty C$580,Negro,S,2020
-8,Camiseta Anime C$270,Azul,XS,2021
-2,Sueter BTS persons C$580 ,Negro,M,2021
-1,Camiseta de Naruto C$240,Negro,S,2020
-8,Camiseta Anime C$270,Negro,XS,2021
-8,Camiseta Anime C$270,Negro,L,2020
-1,Camiseta de Naruto C$240,Negro,M,2020
-4,Camiseta de Stitch C$240,Azul,L,2022
-6,CropTop Planeta C$270,Rosado,S,2021
-5,Sueter Juegos del Calamar C$580,Blanco,S,2020
-7,Sueter de Rick and Morty C$580,Blanco,XL,2021
-6,CropTop Planeta C$270,Rosado,M,2020
-1,Camiseta de Naruto C$240,Rosado,M,2021
-1,Camiseta de Naruto C$240,Gris,L,2022
-6,CropTop Planeta C$270,Azul,M,2021
-4,Camiseta de Stitch C$240,Negro,S,2022
-3,Sueter NASA C$580,Negro,S,2021
-7,Sueter de Rick and Morty C$580,Gris,L,2021
-7,Sueter de Rick and Morty C$580,Azul,M,2020
-2,Sueter BTS persons C$580 ,Blanco,M,2020
-3,Sueter NASA C$580,Rosado,M,2020
-2,Sueter BTS persons C$580 ,Blanco,XS,2020
-6,CropTop Planeta C$270,Azul,XL,2022
-6,CropTop Planeta C$270,Gris,S,2022
-7,Sueter de Rick and Morty C$580,Blanco,M,2021
-7,Sueter de Rick and Morty C$580,Negro,S,2021
-7,Sueter de Rick and Morty C$580,Blanco,S,2022
-3,Sueter NASA C$580,Gris,S,2022
-2,Sueter BTS persons C$580 ,Blanco,M,2021
-3,Sueter NASA C$580,Negro,L,2022
-4,Camiseta de Stitch C$240,Blanco,XL,2020
-3,Sueter NASA C$580,Rosado,M,2022
-5,Sueter Juegos del Calamar C$580,Blanco,S,2021
-8,Camiseta Anime C$270,Azul,S,2022
-2,Sueter BTS persons C$580 ,Azul,XL,2020
-7,Sueter de Rick and Morty C$580,Negro,XL,2022
-3,Sueter NASA C$580,Azul,S,2021
-3,Sueter NASA C$580,Rosado,M,2022
-2,Sueter BTS persons C$580 ,Rosado,M,2020
-3,Sueter NASA C$580,Rosado,M,2021
-5,Sueter Juegos del Calamar C$580,Blanco,S,2022
-5,Sueter Juegos del Calamar C$580,Negro,M,2020
-2,Sueter BTS persons C$580 ,Gris,XS,2020
-2,Sueter BTS persons C$580 ,Rosado,S,2022
-3,Sueter NASA C$580,Blanco,S,2022
-3,Sueter NASA C$580,Rosado,S,2021
-6,CropTop Planeta C$270,Negro,XS,2020
-6,CropTop Planeta C$270,Negro,M,2020
-5,Sueter Juegos del Calamar C$580,Negro,M,2020
-1,Camiseta de Naruto C$240,Negro,S,2020
-3,Sueter NASA C$580,Blanco,S,2022
-7,Sueter de Rick and Morty C$580,Negro,M,2021
-6,CropTop Planeta C$270,Azul,XS,2020
-3,Sueter NASA C$580,Blanco,M,2020
-1,Camiseta de Naruto C$240,Negro,M,2022
-8,Camiseta Anime C$270,Negro,M,2022
-6,CropTop Planeta C$270,Negro,XS,2022
-4,Camiseta de Stitch C$240,Gris,S,2021
-7,Sueter de Rick and Morty C$580,Negro,L,2021
-6,CropTop Planeta C$270,Rosado,XL,2021
-2,Sueter BTS persons C$580 ,Negro,S,2022
-6,CropTop Planeta C$270,Negro,S,2021
-5,Sueter Juegos del Calamar C$580,Azul,M,2022
-1,Camiseta de Naruto C$240,Rosado,M,2022
-4,Camiseta de Stitch C$240,Blanco,M,2020
-7,Sueter de Rick and Morty C$580,Blanco,XS,2020
-2,Sueter BTS persons C$580 ,Negro,M,2022
-6,CropTop Planeta C$270,Azul,M,2020
-1,Camiseta de Naruto C$240,Negro,S,2022
-4,Camiseta de Stitch C$240,Azul,XL,2022
-2,Sueter BTS persons C$580 ,Negro,L,2022
-7,Sueter de Rick and Morty C$580,Negro,M,2021
-4,Camiseta de Stitch C$240,Gris,XS,2020
-2,Sueter BTS persons C$580 ,Negro,S,2022
-2,Sueter BTS persons C$580 ,Azul,S,2020
-6,CropTop Planeta C$270,Negro,XL,2020
-7,Sueter de Rick and Morty C$580,Blanco,M,2020
-5,Sueter Juegos del Calamar C$580,Gris,S,2021
-3,Sueter NASA C$580,Blanco,S,2020
-6,CropTop Planeta C$270,Negro,S,2022
-4,Camiseta de Stitch C$240,Negro,S,2020
-8,Camiseta Anime C$270,Negro,XS,2020
-1,Camiseta de Naruto C$240,Rosado,S,2021
+id,producto,color,talla,anio,mes
+4,Camiseta de Stitch C$240,Negro,L,2022,5
+5,Sueter Juegos del Calamar C$580,Negro,M,2022,8
+2,Sueter BTS persons C$580 ,Blanco,L,2022,10
+1,Camiseta de Naruto C$240,Gris,XL,2021,9
+7,Sueter de Rick and Morty C$580,Rosado,L,2020,3
+1,Camiseta de Naruto C$240,Rosado,M,2021,6
+3,Sueter NASA C$580,Negro,L,2022,4
+5,Sueter Juegos del Calamar C$580,Gris,XS,2021,4
+8,Camiseta Anime C$270,Blanco,XS,2020,7
+8,Camiseta Anime C$270,Negro,M,2022,6
+8,Camiseta Anime C$270,Rosado,S,2022,7
+2,Sueter BTS persons C$580 ,Azul,XS,2021,8
+4,Camiseta de Stitch C$240,Negro,M,2020,8
+7,Sueter de Rick and Morty C$580,Negro,S,2020,2
+4,Camiseta de Stitch C$240,Negro,XS,2022,10
+4,Camiseta de Stitch C$240,Rosado,L,2020,4
+4,Camiseta de Stitch C$240,Gris,S,2021,8
+1,Camiseta de Naruto C$240,Azul,XL,2021,1
+5,Sueter Juegos del Calamar C$580,Blanco,L,2021,11
+2,Sueter BTS persons C$580 ,Rosado,M,2021,3
+3,Sueter NASA C$580,Negro,L,2021,5
+5,Sueter Juegos del Calamar C$580,Blanco,S,2020,8
+4,Camiseta de Stitch C$240,Negro,XS,2021,1
+8,Camiseta Anime C$270,Azul,S,2022,9
+1,Camiseta de Naruto C$240,Blanco,M,2021,4
+8,Camiseta Anime C$270,Negro,S,2022,9
+1,Camiseta de Naruto C$240,Gris,M,2020,9
+6,CropTop Planeta C$270,Negro,XS,2021,1
+6,CropTop Planeta C$270,Rosado,L,2021,11
+5,Sueter Juegos del Calamar C$580,Blanco,M,2020,5
+2,Sueter BTS persons C$580 ,Negro,S,2020,2
+7,Sueter de Rick and Morty C$580,Negro,XS,2021,8
+5,Sueter Juegos del Calamar C$580,Azul,M,2021,4
+1,Camiseta de Naruto C$240,Blanco,L,2022,5
+2,Sueter BTS persons C$580 ,Rosado,L,2021,1
+4,Camiseta de Stitch C$240,Azul,S,2021,10
+4,Camiseta de Stitch C$240,Blanco,L,2022,10
+8,Camiseta Anime C$270,Negro,XS,2021,10
+2,Sueter BTS persons C$580 ,Blanco,XS,2022,3
+3,Sueter NASA C$580,Negro,L,2020,3
+2,Sueter BTS persons C$580 ,Rosado,L,2021,8
+7,Sueter de Rick and Morty C$580,Gris,XL,2021,8
+7,Sueter de Rick and Morty C$580,Rosado,L,2020,8
+3,Sueter NASA C$580,Negro,S,2022,10
+2,Sueter BTS persons C$580 ,Negro,XL,2020,7
+3,Sueter NASA C$580,Azul,XL,2021,4
+4,Camiseta de Stitch C$240,Rosado,L,2022,7
+8,Camiseta Anime C$270,Negro,M,2020,2
+2,Sueter BTS persons C$580 ,Negro,M,2020,4
+1,Camiseta de Naruto C$240,Blanco,XL,2022,2
+3,Sueter NASA C$580,Blanco,L,2022,7
+8,Camiseta Anime C$270,Negro,XS,2022,9
+7,Sueter de Rick and Morty C$580,Negro,XS,2021,3
+8,Camiseta Anime C$270,Negro,M,2021,9
+7,Sueter de Rick and Morty C$580,Gris,XS,2021,3
+7,Sueter de Rick and Morty C$580,Azul,M,2021,12
+3,Sueter NASA C$580,Blanco,XL,2021,5
+3,Sueter NASA C$580,Azul,S,2022,6
+5,Sueter Juegos del Calamar C$580,Rosado,XL,2022,7
+4,Camiseta de Stitch C$240,Gris,XS,2021,12
+7,Sueter de Rick and Morty C$580,Negro,XL,2022,2
+6,CropTop Planeta C$270,Gris,M,2022,4
+8,Camiseta Anime C$270,Negro,XL,2021,4
+2,Sueter BTS persons C$580 ,Negro,M,2021,3
+6,CropTop Planeta C$270,Negro,XS,2021,8
+8,Camiseta Anime C$270,Blanco,M,2021,4
+8,Camiseta Anime C$270,Negro,S,2022,5
+8,Camiseta Anime C$270,Blanco,S,2020,1
+5,Sueter Juegos del Calamar C$580,Azul,XS,2021,7
+8,Camiseta Anime C$270,Rosado,XS,2020,10
+6,CropTop Planeta C$270,Negro,M,2021,10
+3,Sueter NASA C$580,Negro,M,2022,7
+5,Sueter Juegos del Calamar C$580,Negro,L,2021,2
+6,CropTop Planeta C$270,Negro,M,2022,9
+3,Sueter NASA C$580,Blanco,L,2021,9
+6,CropTop Planeta C$270,Negro,XS,2021,2
+3,Sueter NASA C$580,Negro,XS,2022,8
+8,Camiseta Anime C$270,Negro,L,2020,6
+4,Camiseta de Stitch C$240,Blanco,XS,2022,3
+6,CropTop Planeta C$270,Negro,XS,2021,3
+1,Camiseta de Naruto C$240,Rosado,M,2020,12
+4,Camiseta de Stitch C$240,Negro,S,2020,12
+6,CropTop Planeta C$270,Negro,XS,2021,5
+8,Camiseta Anime C$270,Negro,S,2022,6
+8,Camiseta Anime C$270,Negro,M,2020,9
+2,Sueter BTS persons C$580 ,Rosado,XL,2022,10
+8,Camiseta Anime C$270,Gris,M,2020,3
+1,Camiseta de Naruto C$240,Rosado,XS,2020,9
+3,Sueter NASA C$580,Negro,S,2020,1
+5,Sueter Juegos del Calamar C$580,Azul,S,2022,3
+7,Sueter de Rick and Morty C$580,Negro,XL,2022,3
+5,Sueter Juegos del Calamar C$580,Azul,L,2020,2
+4,Camiseta de Stitch C$240,Blanco,S,2022,1
+6,CropTop Planeta C$270,Negro,XS,2020,11
+5,Sueter Juegos del Calamar C$580,Gris,L,2022,9
+6,CropTop Planeta C$270,Negro,XL,2020,1
+4,Camiseta de Stitch C$240,Blanco,XL,2020,5
+5,Sueter Juegos del Calamar C$580,Negro,S,2022,7
+6,CropTop Planeta C$270,Blanco,L,2022,6
+3,Sueter NASA C$580,Negro,XL,2021,2
+7,Sueter de Rick and Morty C$580,Negro,S,2021,8
+6,CropTop Planeta C$270,Negro,M,2021,7
+6,CropTop Planeta C$270,Negro,S,2020,2
+8,Camiseta Anime C$270,Negro,XS,2020,9
+6,CropTop Planeta C$270,Azul,M,2022,8
+4,Camiseta de Stitch C$240,Negro,L,2021,5
+2,Sueter BTS persons C$580 ,Negro,XS,2021,1
+8,Camiseta Anime C$270,Blanco,S,2021,4
+8,Camiseta Anime C$270,Rosado,L,2021,1
+8,Camiseta Anime C$270,Negro,XL,2021,9
+3,Sueter NASA C$580,Blanco,S,2021,7
+4,Camiseta de Stitch C$240,Negro,XL,2021,1
+8,Camiseta Anime C$270,Gris,XS,2021,8
+7,Sueter de Rick and Morty C$580,Gris,XS,2021,8
+4,Camiseta de Stitch C$240,Blanco,XS,2021,3
+3,Sueter NASA C$580,Negro,S,2021,4
+1,Camiseta de Naruto C$240,Blanco,XL,2020,11
+5,Sueter Juegos del Calamar C$580,Gris,S,2021,10
+7,Sueter de Rick and Morty C$580,Negro,XL,2021,7
+8,Camiseta Anime C$270,Negro,M,2020,7
+8,Camiseta Anime C$270,Gris,M,2020,2
+2,Sueter BTS persons C$580 ,Negro,M,2020,10
+5,Sueter Juegos del Calamar C$580,Negro,S,2021,3
+6,CropTop Planeta C$270,Blanco,L,2022,3
+7,Sueter de Rick and Morty C$580,Gris,S,2021,7
+3,Sueter NASA C$580,Negro,L,2020,12
+2,Sueter BTS persons C$580 ,Gris,M,2021,6
+1,Camiseta de Naruto C$240,Negro,M,2020,7
+6,CropTop Planeta C$270,Azul,L,2022,4
+8,Camiseta Anime C$270,Blanco,M,2020,7
+7,Sueter de Rick and Morty C$580,Gris,M,2022,5
+8,Camiseta Anime C$270,Negro,L,2020,2
+7,Sueter de Rick and Morty C$580,Negro,S,2022,2
+5,Sueter Juegos del Calamar C$580,Blanco,XL,2022,5
+1,Camiseta de Naruto C$240,Negro,XS,2021,3
+7,Sueter de Rick and Morty C$580,Negro,M,2020,3
+6,CropTop Planeta C$270,Blanco,XS,2022,9
+3,Sueter NASA C$580,Negro,M,2021,8
+2,Sueter BTS persons C$580 ,Azul,XL,2020,8
+5,Sueter Juegos del Calamar C$580,Negro,XS,2021,11
+4,Camiseta de Stitch C$240,Gris,L,2021,11
+7,Sueter de Rick and Morty C$580,Negro,L,2022,10
+1,Camiseta de Naruto C$240,Blanco,XS,2021,2
+2,Sueter BTS persons C$580 ,Negro,XL,2021,6
+4,Camiseta de Stitch C$240,Negro,XL,2020,6
+5,Sueter Juegos del Calamar C$580,Azul,S,2021,1
+6,CropTop Planeta C$270,Rosado,S,2021,1
+8,Camiseta Anime C$270,Negro,L,2020,1
+7,Sueter de Rick and Morty C$580,Negro,L,2021,5
+1,Camiseta de Naruto C$240,Negro,XL,2022,5
+3,Sueter NASA C$580,Rosado,S,2021,5
+6,CropTop Planeta C$270,Gris,XL,2020,3
+7,Sueter de Rick and Morty C$580,Negro,M,2022,9
+5,Sueter Juegos del Calamar C$580,Negro,M,2021,11
+6,CropTop Planeta C$270,Negro,XL,2022,8
+6,CropTop Planeta C$270,Gris,M,2021,3
+8,Camiseta Anime C$270,Negro,S,2021,4
+5,Sueter Juegos del Calamar C$580,Negro,XS,2020,12
+3,Sueter NASA C$580,Gris,S,2022,3
+1,Camiseta de Naruto C$240,Negro,S,2021,6
+1,Camiseta de Naruto C$240,Azul,S,2020,1
+3,Sueter NASA C$580,Negro,M,2021,9
+3,Sueter NASA C$580,Negro,M,2022,6
+1,Camiseta de Naruto C$240,Negro,L,2021,9
+8,Camiseta Anime C$270,Negro,L,2020,2
+8,Camiseta Anime C$270,Blanco,L,2020,7
+4,Camiseta de Stitch C$240,Rosado,S,2021,9
+5,Sueter Juegos del Calamar C$580,Blanco,M,2021,8
+2,Sueter BTS persons C$580 ,Negro,L,2020,2
+8,Camiseta Anime C$270,Negro,XS,2021,2
+2,Sueter BTS persons C$580 ,Negro,XS,2022,2
+8,Camiseta Anime C$270,Blanco,XL,2020,12
+5,Sueter Juegos del Calamar C$580,Negro,M,2020,12
+2,Sueter BTS persons C$580 ,Blanco,XS,2020,6
+8,Camiseta Anime C$270,Blanco,XL,2022,6
+7,Sueter de Rick and Morty C$580,Blanco,M,2022,7
+3,Sueter NASA C$580,Blanco,XS,2021,11
+4,Camiseta de Stitch C$240,Blanco,M,2022,7
+7,Sueter de Rick and Morty C$580,Blanco,L,2020,4
+4,Camiseta de Stitch C$240,Gris,XL,2020,3
+6,CropTop Planeta C$270,Negro,XL,2021,6
+2,Sueter BTS persons C$580 ,Blanco,M,2020,1
+2,Sueter BTS persons C$580 ,Blanco,M,2022,1
+3,Sueter NASA C$580,Gris,M,2021,3
+4,Camiseta de Stitch C$240,Rosado,M,2021,3
+5,Sueter Juegos del Calamar C$580,Azul,M,2021,4
+5,Sueter Juegos del Calamar C$580,Azul,M,2020,2
+8,Camiseta Anime C$270,Negro,XL,2022,5
+6,CropTop Planeta C$270,Negro,XS,2021,4
+6,CropTop Planeta C$270,Blanco,M,2020,4
+6,CropTop Planeta C$270,Gris,XL,2021,2
+4,Camiseta de Stitch C$240,Rosado,S,2022,4
+2,Sueter BTS persons C$580 ,Blanco,L,2022,4
+7,Sueter de Rick and Morty C$580,Blanco,XS,2021,5
+1,Camiseta de Naruto C$240,Negro,XS,2022,4
+2,Sueter BTS persons C$580 ,Negro,L,2020,7
+1,Camiseta de Naruto C$240,Gris,S,2020,5
+2,Sueter BTS persons C$580 ,Negro,M,2022,2
+7,Sueter de Rick and Morty C$580,Blanco,L,2020,2
+4,Camiseta de Stitch C$240,Azul,XS,2020,4
+1,Camiseta de Naruto C$240,Negro,M,2022,8
+5,Sueter Juegos del Calamar C$580,Negro,XL,2022,1
+3,Sueter NASA C$580,Azul,XL,2021,12
+8,Camiseta Anime C$270,Blanco,XS,2022,7
+1,Camiseta de Naruto C$240,Azul,L,2021,6
+3,Sueter NASA C$580,Blanco,S,2022,3
+1,Camiseta de Naruto C$240,Azul,M,2021,12
+4,Camiseta de Stitch C$240,Gris,S,2021,1
+8,Camiseta Anime C$270,Gris,XL,2020,6
+2,Sueter BTS persons C$580 ,Blanco,M,2022,1
+6,CropTop Planeta C$270,Rosado,XS,2020,2
+7,Sueter de Rick and Morty C$580,Gris,L,2020,6
+7,Sueter de Rick and Morty C$580,Gris,XL,2021,11
+4,Camiseta de Stitch C$240,Negro,S,2021,11
+5,Sueter Juegos del Calamar C$580,Blanco,M,2020,12
+3,Sueter NASA C$580,Blanco,XS,2022,1
+3,Sueter NASA C$580,Blanco,XL,2021,3
+8,Camiseta Anime C$270,Blanco,XS,2022,3
+4,Camiseta de Stitch C$240,Negro,M,2020,2
+5,Sueter Juegos del Calamar C$580,Azul,L,2022,10
+6,CropTop Planeta C$270,Blanco,XS,2021,12
+3,Sueter NASA C$580,Negro,L,2020,8
+2,Sueter BTS persons C$580 ,Rosado,M,2022,10
+5,Sueter Juegos del Calamar C$580,Negro,M,2021,2
+1,Camiseta de Naruto C$240,Gris,XL,2022,8
+2,Sueter BTS persons C$580 ,Gris,M,2021,4
+2,Sueter BTS persons C$580 ,Negro,M,2021,3
+5,Sueter Juegos del Calamar C$580,Gris,M,2020,3
+8,Camiseta Anime C$270,Negro,XL,2020,8
+8,Camiseta Anime C$270,Negro,XS,2022,3
+7,Sueter de Rick and Morty C$580,Negro,M,2021,10
+2,Sueter BTS persons C$580 ,Blanco,S,2021,3
+5,Sueter Juegos del Calamar C$580,Gris,XL,2022,4
+8,Camiseta Anime C$270,Negro,L,2020,3
+3,Sueter NASA C$580,Rosado,S,2021,8
+7,Sueter de Rick and Morty C$580,Negro,M,2021,1
+2,Sueter BTS persons C$580 ,Negro,XS,2021,9
+2,Sueter BTS persons C$580 ,Azul,S,2021,4
+3,Sueter NASA C$580,Negro,XS,2022,4
+2,Sueter BTS persons C$580 ,Negro,XL,2020,4
+6,CropTop Planeta C$270,Negro,S,2021,8
+4,Camiseta de Stitch C$240,Negro,XS,2020,7
+1,Camiseta de Naruto C$240,Gris,S,2020,8
+8,Camiseta Anime C$270,Negro,XL,2020,6
+1,Camiseta de Naruto C$240,Rosado,XS,2020,5
+5,Sueter Juegos del Calamar C$580,Gris,S,2021,1

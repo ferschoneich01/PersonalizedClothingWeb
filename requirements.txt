@@ -38,3 +38,5 @@ Werkzeug
 pandas
 numpy
 scikit-learn 
+statsmodels
+seaborn
