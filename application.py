@@ -180,6 +180,7 @@ def adminOrders():
     else:
         return redirect("/")
 
+
 @app.route("/adminSells", methods=["GET", "POST"])
 @login_required
 def adminSells():
@@ -198,12 +199,14 @@ def adminSells():
                            orders[i][2], orders[i][3], orders[i][4],
                            orders[i][5], orders[i][6], orders[i][7],
                            orders[i][8], orders[i][9], orders[i][10], (i+1)])
-            TotalRecaudado +=  float(orders[i][8])              
+            TotalRecaudado += float(orders[i][8])
             i += 1
-        TotalRecaudado = "{:,}".format(TotalRecaudado).replace(',','~').replace('.',',').replace('~','.')
+        TotalRecaudado = "{:,}".format(TotalRecaudado).replace(
+            ',', '~').replace('.', ',').replace('~', '.')
         return render_template('adminSells.html', username=session["username"], orders=ordenes, Tot=TotalRecaudado, themost=themostrepeat[0][1])
     else:
         return redirect("/")
+
 
 @app.route("/viewOrders/<id>", methods=["GET", "POST"])
 @login_required
