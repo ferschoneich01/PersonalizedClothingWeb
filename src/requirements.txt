@@ -10,7 +10,8 @@ certifi
 charset-normalizer                
 click                             
 distlib                                                       
-filelock                                                                                       
+filelock                          
+Flask-MySQLdb                                                             
 greenlet                          
 gunicorn                          
 idna                              
@@ -29,5 +30,5 @@ SQLAlchemy
 sqlparse                          
 urllib3                           
 virtualenv                        
-Werkzeug     
+Werkzeug  
 python-dotenv

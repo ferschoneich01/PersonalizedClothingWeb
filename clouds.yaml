@@ -1,0 +1,8 @@
+clouds:
+  mordred:
+    region_name: Dallas
+    auth:
+      username: "mordred"
+      password: XXXXXXX
+      project_name: "demo"
+      auth_url: "https://identity.example.com"

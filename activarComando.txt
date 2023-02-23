@@ -1,0 +1,1 @@
+ c:/Users/Fernando/Desktop/PersonalizedClothingWeb/venv/Scripts/Activate.ps1
