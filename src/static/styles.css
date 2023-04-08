@@ -431,6 +431,9 @@ footer {
 .nav-menu-item {
     border-top: var(--border-dark-light);
 }
+.nav-menu-item-user {
+    border-top: var(--border-dark-light);
+}
 
 .nav-menu-link {
     color: var(--dark-light);
@@ -476,7 +479,6 @@ footer {
 
 .nav {
     border-top: var(--border-dark-light);
-    margin-top: 1rem;
     padding-top: 1rem;
     display: flex;
     justify-content: center;
@@ -602,7 +604,6 @@ footer {
         border: 0;
         align-items: center;
         overflow: visible;
-        margin-top: 2.5rem;
     }
 
     .nav-menu-ul {
@@ -618,7 +619,10 @@ footer {
         border-top: 0;
         position: relative;
     }
-
+    .nav-menu-item-user {
+        border-top: 0;
+        position: relative;
+    }
     .nav-menu-link {
         font-weight: bold;
     }
@@ -634,6 +638,11 @@ footer {
         flex-direction: column;
     }
 
+    .sub-menu-ul .nav-menu-item-user {
+        display: flex;
+        flex-direction: column;
+    }
+
     .sub-menu-ul .nav-menu-link {
         padding: 16px;
         font-weight: normal;
@@ -644,13 +653,35 @@ footer {
         max-height: none;
         overflow: visible;
     }
-
+    .container-sub-menu-user {
+        display: none;
+        max-height: none;
+        overflow: visible;
+    }
     .nav-menu-item:hover > .container-sub-menu {
         width: 400px;
         background: var(--dark-lighten);
         padding: 1rem;
         position: absolute;
         top: 56px;
+        display: flex;
+        flex-wrap: wrap;
+        -moz-box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
+        /*FF 3.5+*/
+        -webkit-box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
+        /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+        box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
+        /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+        height: auto;
+    }
+
+    .nav-menu-item:hover > .container-sub-menu-user {
+        width: 200px;
+        background: var(--dark-lighten);
+        padding: 1rem;
+        position: absolute;
+        top: 56px;
+        right: 10px;
         display: flex;
         flex-wrap: wrap;
         -moz-box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
@@ -722,8 +753,21 @@ footer {
     font-size: 9em;
     margin: 0;
     color: var(--dark);
+    margin-top: 260px;
 }
+@media only screen and (max-width : 900px) {
+    .title-cover {
+        font-size: 9em;
+        color: var(--primary) !important;
+        margin-top: 0;
+    }
 
+    .btn-default{
+        color: var(--dark)!important;
+        border: solid 1px var(--dark) !important;
+        box-shadow: 1px 4px 14px rgba(117, 115, 115, 0.5);
+    }
+}
 .banner-cover,
 .banner-second {
     background-position: center top;

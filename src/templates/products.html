@@ -35,7 +35,7 @@
             <h2 class="price is-size-4"><sup>C$</sup>{{item.3}}</h2>
             <p class="has-text-grey"> <strong>Disponibilidad:</strong> En stock</p>
             <p class="text-default">{{item.1}}</p>
-            <form id="addToCarForm" action="/addToCar/{{item.4}}" method="POST" class="form-control">
+            <form id="addToCarForm{{item.4}}" action="/addToCar/{{item.4}}" method="POST" class="form-control">
                 <div class="columns is-multiline">
                     <div class="column is-one-third">
 
@@ -53,7 +53,7 @@
                         <input name="quantity" class="form-control-field" type="number" min="1" value="1">
                     </div>
                     <div class="column is-full is-marginless" style="padding-top: 0px;">
-                        <button onclick="mensaje()" class="btn btn-default btn-outline" type="button"><i
+                        <button onclick="mensaje({{item.4}})" class="btn btn-default btn-outline" type="button"><i
                                 class="zmdi zmdi-shopping-cart"></i>
                             Agregar al carrito</button>
                     </div>
@@ -63,6 +63,33 @@
         </div>
     </div>
 </div>
+<script>
+    function mensaje(idItem) {
+        Swal.fire({
+            title: '¿Desea agregar este articulo al carrito?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Si'
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+
+                Swal.fire({
+                    title: 'Articulo añadido al carrito',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    document.getElementById('addToCarForm' + idItem).submit();
+                })
+
+            } else if (result.isDenied) {
+                Swal.fire('Articulo no agregado', '', 'info')
+            }
+        })
+
+
+    }
+</script>
 {% endfor %}
 
 

@@ -18,67 +18,17 @@
 <body>
     <!-- Barra de navegación -->
     <header>
-        {% if username != 'null' %}
-        <nav class="navbar-top">
-            <ul class="navbar-top-ul">
-                <li class="navbar-top-item">
-                    <a href="/logout" class="navbar-top-links">Salir</a>
-                </li>
-                <li class="navbar-top-item">
-                    <a href="/items" class="navbar-top-links">¡Comprar Ahora!</a>
-                </li>
-
-                <li class="navbar-top-item">
-                    <img class="navbar-top-links" style="width: 20px; transform:translateY(5px);"
-                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/round-account-button-with-user-inside_icon-icons.com_72596_xizpvn.png" />
-                    <a href="userSettings" class="navbar-top-links">
-                        {{username}}
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        {% elif username == 'null' %}
-        <nav class="navbar-top">
-            <ul class="navbar-top-ul">
-                <li class="navbar-top-item">
-                    <a href="/items" class="navbar-top-links">Comprar</a>
-                </li>
-                <li class="navbar-top-item">
-                    <a href="/login" class="navbar-top-links">Iniciar sesion</a>
-                </li>
-                <li class="navbar-top-item">
-                    <a href="/register" class="navbar-top-links">Registrarme</a>
-                </li>
-            </ul>
-        </nav>
-        {% endif %}
         <nav class="navbar">
             <header class="nabvar-mobile is-size-5-mobile">
-                <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi zmdi-menu"
-                        style="color:black;"></i></a>
-                <a class="is-uppercase has-text-weight-bold has-text-black" href="/"
-                    style="margin-left: 0; text-align: center; margin-right: 0%;">Personalized
-                    Clothing</a>
-                {% if username != 'null' %}
-                <a class="navbar-mobile-link has-text-black"
-                    style="margin-left: 0; text-align: center; margin-right: 0%;" href="/userSettings"><i id="menu-btn"
-                        class="zmdi zmdi-account"></i>
-                    {{username}}</a>
-                <a class="navbar-mobile-link has-text-black"
-                    style="margin-left: 0; text-align: center; margin-right: 51%;" href="/logout">
-                    <svg style="width:20px;height:20px; margin-top: 2px;" viewBox="0 0 24 24">
-                        <path fill="black"
-                            d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z" />
-                    </svg>
-                    <span style="margin-bottom: 2px;">Salir</span></a>
-                {% else %}
-                <a class="navbar-mobile-link has-text-black"
-                    style="margin-left: 0; text-align: center; margin-right: 55%;" href="/login"><i id="menu-btn"
-                        class="zmdi zmdi-account"></i>
-                    Login</a>
-                {% endif %}
+                <div class="navbar-mobile-link has-text-black" style="width:100%;">
+                    <a href="#" id="btn-mobile"><i class="zmdi zmdi-menu" style="color:black;"></i></a>
+                    <a class="is-uppercase has-text-weight-bold has-text-black" href="/"
+                        style="margin-left: 8%;">Personalized
+                        Clothing</a>
+                </div>
+
             </header>
-            <nav class="nav-menu" id="mySidenav">
+            <nav class=" nav-menu" id="mySidenav">
                 <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 40%;"
                     href="/">Personalized
                     Clothing</a>
@@ -108,7 +58,8 @@
                                         <i class="zmdi zmdi-chevron-down "></i>
                                     </a>
                                     <ul class="sub-menu-ul">
-                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a>
+                                        </li>
                                         <li class="nav-menu-item"><a class="nav-menu-link"
                                                 href="/items/1/1">Camisetas</a></li>
                                     </ul>
@@ -149,7 +100,8 @@
                                         <i class="zmdi zmdi-chevron-down "></i>
                                     </a>
                                     <ul class="sub-menu-ul">
-                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a></li>
+                                        <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a>
+                                        </li>
                                         <li class="nav-menu-item"><a class="nav-menu-link"
                                                 href="/items/1/2">Camisetas</a></li>
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="/items/4/2">Crop
@@ -186,6 +138,46 @@
                                 src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639441128/admin_user_icon_188317_ix052g.png" />
                             Admin</a></li>
                     {% endif %}
+
+                    <!--OPCION USUARIOS-->
+                    <li class="nav-menu-item" id="userSettings">
+                        <a class="nav-menu-link link-submenu active" href="#">
+                            <!--Nombreusuarios-->
+                            <img style="width: 24px;" src="../static/img/account-circle-outline.svg">
+                        </a>
+                        <div class="container-sub-menu-user">
+                            <ul class="sub-menu-ul">
+                                {% if username != 'null' %}
+                                <li class="nav-menu-item"><a style="color:black; font-weight: 600;"
+                                        class="nav-menu-link">
+                                        {{username}}<div
+                                            style="margin-right:55px; margin-top:10px; width:10px; height:10px; background-color: rgb(71, 235, 71); border-radius:50%;">
+                                        </div></a>
+
+                                </li>
+                                <li class="nav-menu-item">
+                                    <a style="color:black;" href="/userSettings" class="nav-menu-link">
+                                        <img style="width:24px;" src="../static/img/account-settings.svg" alt="">
+                                        Configuracion
+                                    </a>
+                                </li>
+                                <li class="nav-menu-item"><a style="color:black;" href="/logout" class=" nav-menu-link">
+                                        <img src="./static/img/logout-variant-custom.png"
+                                            style="width: 24px; height:24px;" alt="">
+                                        <text style="margin-right:45px;">Logout</text>
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li class="nav-menu-item"><a style="color:black;" href="/login" class="nav-menu-link">
+                                        <i class="zmdi zmdi-account" style="width:24px;"></i>Login</a>
+                                </li>
+
+                                {% endif %}
+
+                            </ul>
+
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </nav>
@@ -195,7 +187,7 @@
     {% endblock %}
     {% block buysList %}
     {% endblock %}
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src=" //cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>

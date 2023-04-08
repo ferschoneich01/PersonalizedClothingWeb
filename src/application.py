@@ -10,6 +10,8 @@ import json
 app = Flask(__name__)
 
 # Check for environment variable
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -17,7 +19,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine('postgresql+psycopg2://root:root@postgres:5432/PCdb')
+engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 carListItems = []
 
@@ -472,7 +474,7 @@ def addToCar(id):
         color = request.form.get("color")
         carListItems.append([items[0][0], float(items[0][1]), float(
             quantity), size, color, items[0][2], len(carListItems), id])
-
+        flash('¡Cuenta creada exitosamente!')
         return redirect("/items/"+id)
 
 
