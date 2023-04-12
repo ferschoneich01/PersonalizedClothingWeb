@@ -19,12 +19,19 @@
     <!-- Barra de navegación -->
     <header>
         <nav class="navbar">
+            <!---->
             <header class="nabvar-mobile is-size-5-mobile">
-                <div class="navbar-mobile-link has-text-black" style="width:100%;">
-                    <a href="#" id="btn-mobile"><i class="zmdi zmdi-menu" style="color:black;"></i></a>
-                    <a class="is-uppercase has-text-weight-bold has-text-black" href="/"
-                        style="margin-left: 8%;">Personalized
-                        Clothing</a>
+                <a href="#" id="btn-mobile" style="position:absolute;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:30px;">
+                        <title>menu</title>
+                        <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+                    </svg>
+                </a>
+                <div class="navbar-mobile-link has-text-black" style="width:100%; display:flex; justify-content:center; 
+                align-items: center;">
+                    <a class="is-uppercase has-text-weight-bold has-text-black" href="/">
+                        Personalized Clothing
+                    </a>
                 </div>
 
             </header>
@@ -67,8 +74,8 @@
                             </ul>
 
                             <div class="ads is-hidden-touch">
-                                <h1 class="ads-h1">Ofertas de Navidad</h1>
-                                <h2 class="ads-h2">Desde el 50% de descuento</h2>
+                                <h1 class="ads-h1">Ofertas de Verano</h1>
+                                <h2 class="ads-h2">Desde el 15% de descuento</h2>
                             </div>
                         </div>
                     </li>
@@ -81,7 +88,6 @@
                                 <li class="nav-menu-item ">
                                     <a class="nav-menu-link" href="#">
                                         <strong>Frio</strong>
-                                        <i class="zmdi zmdi-chevron-down "></i>
                                     </a>
                                     <ul class="sub-menu-ul">
                                         <li class="nav-menu-item"><a class="nav-menu-link"
@@ -97,7 +103,7 @@
                                 <li class="nav-menu-item ">
                                     <a class="nav-menu-link" href="#">
                                         <strong>Casual</strong>
-                                        <i class="zmdi zmdi-chevron-down "></i>
+                                        <!--i class="zmdi zmdi-chevron-down "></i-->
                                     </a>
                                     <ul class="sub-menu-ul">
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a>
@@ -110,35 +116,40 @@
                                 </li>
                             </ul>
                             <div class="ads is-hidden-touch">
-                                <h1 class="ads-h1">Ofertas de Navidad</h1>
-                                <h2 class="ads-h2">Desde el 50% de descuento</h2>
+                                <h1 class="ads-h1">Ofertas de Verano</h1>
+                                <h2 class="ads-h2">Desde el 15% de descuento</h2>
                             </div>
                         </div>
                     </li>
                     <li class="nav-menu-item"><a style="color:black;" href="/personalizar" class="nav-menu-link">
                             <img style="margin-top:1px; width: 18px;"
                                 src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/paintbrush_83820_rycmmh.png" />
-                            Personalizar</a></li>
+                            <span style="margin-right:95%;">Personalizar</span></a></li>
                     <li class="navbar-top-item">
                         <a href="/car" style="color:black;" class="nav-menu-link">
-                            <i style="margin: 6px;" class="zmdi zmdi-shopping-cart"></i>Carrito
+                            <i style="margin-right:6px; margin-top:5px;" class="zmdi zmdi-shopping-cart"></i>
+                            <span style="margin-right:95%;">Carrito</span>
                         </a>
                     </li>
+                    {% if username != 'null' %}
                     <li class="navbar-top-item">
                         <a href="/buys" style="color:black;" class="nav-menu-link">
                             <img style="margin-top:1px; width: 18px;"
                                 src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639807491/353439-basket-buy-cart-ecommerce-online-purse-shop-shopping_107515_behlm9.png" />
-                            Compras
+                            <span style="margin-right:95%;">Compras</span>
                             <!-- <i class="zmdi zmdi-chevron-down"></i> -->
                         </a>
                     </li>
+
+                    {% endif %}
                     {% if session.role_user == 1 %}
                     <li class="navbar-top-item"><a style="color:black;" href="/adminOrders" class="nav-menu-link">
                             <img style="margin-top:1px; width: 25px;"
                                 src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639441128/admin_user_icon_188317_ix052g.png" />
-                            Admin</a></li>
+                            <span style="margin-right:65%;">Admin</span></a></li>
                     {% endif %}
 
+                    {% if username != 'null' %}
                     <!--OPCION USUARIOS-->
                     <li class="nav-menu-item" id="userSettings">
                         <a class="nav-menu-link link-submenu active" href="#">
@@ -147,7 +158,7 @@
                         </a>
                         <div class="container-sub-menu-user">
                             <ul class="sub-menu-ul">
-                                {% if username != 'null' %}
+
                                 <li class="nav-menu-item"><a style="color:black; font-weight: 600;"
                                         class="nav-menu-link">
                                         {{username}}<div
@@ -167,17 +178,19 @@
                                         <text style="margin-right:45px;">Logout</text>
                                     </a>
                                 </li>
-                                {% else %}
-                                <li class="nav-menu-item"><a style="color:black;" href="/login" class="nav-menu-link">
-                                        <i class="zmdi zmdi-account" style="width:24px;"></i>Login</a>
-                                </li>
 
-                                {% endif %}
 
                             </ul>
 
                         </div>
                     </li>
+                    {% else %}
+                    <li class="navbar-top-item">
+                        <a href="/login" class="nav-menu-link active">
+                            Iniciar sesion | Registrarme
+                        </a>
+                    </li>
+                    {% endif %}
                 </ul>
             </nav>
         </nav>
