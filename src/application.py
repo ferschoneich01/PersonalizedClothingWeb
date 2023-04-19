@@ -6,6 +6,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from funciones import *
 from sqlalchemy.sql import text
 import json
+import psycopg2
 
 app = Flask(__name__)
 
