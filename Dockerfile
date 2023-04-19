@@ -9,4 +9,13 @@ COPY . /app
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
+# syntax=docker/dockerfile:1
+FROM ubuntu
+RUN sudo apt install libpq-dev python3-dev
+
+# syntax=docker/dockerfile:1
+FROM python:3
+RUN pip install psycopg2
+
+
 CMD [ "python3", "src/application.py" ]
