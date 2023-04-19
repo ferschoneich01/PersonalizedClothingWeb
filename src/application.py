@@ -10,8 +10,8 @@ import json
 app = Flask(__name__)
 
 # Check for environment variable
-# if not os.getenv("DATABASE_URL"):
-# raise RuntimeError("DATABASE_URL is not set")
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -19,8 +19,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(
-    'postgres://postgres:QOI8fnfVN1fcBQB@personalizedclothingcli-db.flycast:5432')
+engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 carListItems = []
 
@@ -642,4 +641,4 @@ def successPay(det, address):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=4000, debug=True)
+    app.run(debug=True)

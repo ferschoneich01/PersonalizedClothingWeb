@@ -1,6 +1,6 @@
+psycopg2-binary
 Flask
 Flask-Session
-psycopg2-binary
 SQLAlchemy
 asgiref
 backports.entry-points-selectable
@@ -20,7 +20,6 @@ MarkupSafe
 pip
 platformdirs
 protobuf
-psycopg2-binary
 python-engineio
 requests
 setuptools
