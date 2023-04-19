@@ -7,6 +7,8 @@ WORKDIR /app
 
 COPY . /app
 
+RUN sudo apt install libpq-dev python3-dev
+
 RUN pip3 --no-cache-dir install -r requirements.txt
 
 CMD [ "python3", "src/application.py" ]
