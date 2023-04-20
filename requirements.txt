@@ -27,4 +27,4 @@ sqlparse
 urllib3
 virtualenv
 Werkzeug
-python-dotenv
+
