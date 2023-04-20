@@ -1,4 +1,3 @@
-psycopg2-binary 
 Flask
 Flask-Session
 SQLAlchemy
@@ -17,7 +16,6 @@ idna
 itsdangerous
 Jinja2
 MarkupSafe
-pip
 platformdirs
 protobuf
 python-engineio

@@ -1,19 +1,16 @@
-# syntax=docker/dockerfile:1
-FROM ubuntu
-RUN sudo apt install libpq-dev python3-dev
+FROM python:3.7.3-alpine
 
-# syntax=docker/dockerfile:1
-FROM python:3
-RUN pip install psycopg2-binary 
+RUN apk add python-dev && \
+    apk add postgresql-dev 
 
-FROM alpine:3.10
+RUN pip3 install --upgrade pip 
 
-RUN apk add --no-cache python3-dev \
-    && pip3 install --upgrade pip 
 
 WORKDIR /app
 
 COPY . /app
+
+RUN pip3 install psycopg2-binary
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
