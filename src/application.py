@@ -19,8 +19,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(
-    "postgresql+psycopg2://postgres:ijKVpDlkyulsObZ5Ip19@containers-us-west-59.railway.app:7855/PCdb")
+engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 carListItems = []
 
@@ -642,4 +641,4 @@ def successPay(det, address):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="66.241.125.101", port=8080, debug=True)

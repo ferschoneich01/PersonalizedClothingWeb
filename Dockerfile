@@ -1,16 +1,15 @@
-FROM python:3.7.3-alpine
-
-RUN apk add python-dev && \
-    apk add postgresql-dev 
-
-RUN pip3 install --upgrade pip 
-
+FROM python:3-alpine
 
 WORKDIR /app
 
 COPY . /app
 
-RUN pip3 install psycopg2-binary
+RUN apk update \
+    && apk add --virtual build-deps gcc python3-dev musl-dev \
+    && apk add postgresql-dev \
+    && pip install psycopg2 \
+    && apk del build-deps
+
 
 RUN pip3 --no-cache-dir install -r requirements.txt
 
