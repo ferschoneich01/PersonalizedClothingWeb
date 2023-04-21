@@ -399,7 +399,7 @@ footer {
     justify-content: space-between;
     padding: 10px;
     font-size: 1.5em;
-    position: absolute;
+    position: relative;
     min-width: 100%;
     z-index: 200;
     
@@ -770,6 +770,15 @@ footer {
     width: 100%;
 }
 
+.container-car {
+    margin-top: 100px;
+}
+
+.msg-page{
+    margin-top: 130px; 
+    margin-left: 50px;
+}
+
 @media only screen and (max-width : 900px) {
     .title-cover {
         font-size: 9em;
@@ -797,6 +806,15 @@ footer {
         height: auto;  
     }
 
+    .container-car {
+        margin-top: 0;
+    }
+
+    .msg-page{
+        margin-top:0; 
+        margin-left: 5%;
+        font-size: 1.5em;
+    }
 }
 
 .banner-cover,
