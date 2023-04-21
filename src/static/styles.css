@@ -787,6 +787,10 @@ footer {
         filter: none;
     }
 
+    .banner-cover {
+        height: auto;  
+    }
+
 }
 .banner-cover,
 .banner-second {
