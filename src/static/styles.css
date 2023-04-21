@@ -764,6 +764,12 @@ footer {
     color: var(--dark);
     margin-top: 260px;
 }
+.banner-cover {
+    background-color: #ffffff;
+    height: 100vh;
+    width: 100%;
+}
+
 @media only screen and (max-width : 900px) {
     .title-cover {
         font-size: 9em;
@@ -792,16 +798,11 @@ footer {
     }
 
 }
+
 .banner-cover,
 .banner-second {
     background-position: center top;
     background-size: cover;
-}
-
-.banner-cover {
-    background-color: #ffffff;
-    height: 100vh;
-    width: 100%;
 }
 
 .banner-container {
@@ -818,16 +819,6 @@ footer {
     margin: 0;
 }
 
-.banner-cover,
-.banner-second {
-    background-position: center top;
-    background-size: cover;
-}
-
-.banner-cover {
-    background-color: #ffffff;
-    height: 100vh;
-}
 
 .banner-second {
     background-image: url(../static/img/banner-second.png);
@@ -863,13 +854,12 @@ footer {
         right: 60px;
         bottom: 60px;
     }
-}
 
-@media screen and (min-width: 1023px) {
     .banner-cover {
-        background-color: #ffffff;
+        height: auto;  
     }
 }
+
 
 @media (max-width: 544px) {
     .column-full {
