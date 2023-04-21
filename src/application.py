@@ -57,14 +57,14 @@ def login():
             text("SELECT * FROM users WHERE username = '"+str(username)+"'")).fetchall()
 
         # Ensure username exists and password is correct
-        if len(user) != 1 or not check_password_hash(user[0]["password"], password):
+        if len(user) != 1 or not check_password_hash(user[0][2], password):
             flash('Contraseña Incorrecta')
             return redirect("/login")
 
         # Remember which user has logged in
-        session["id_user"] = user[0]["id_user"]
+        session["id_user"] = user[0][0]
         session["username"] = username
-        session["role_user"] = user[0]["role"]
+        session["role_user"] = user[0][5]
         return redirect('/')
     else:
         return render_template("login.html")
@@ -140,7 +140,7 @@ def register():
                 "SELECT * FROM person WHERE cedula = '"+cedula+"'")).fetchall()
             # Query database for users
             db.execute(text("INSERT INTO users (username,password,email,person,role) VALUES ('" +
-                       str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0]["id_person"])+",2)"))
+                       str(username)+"','"+str(password)+"','"+str(email)+"',"+str(user[0][6])+",2)"))
             db.commit()
 
             flash('¡Cuenta creada exitosamente!')
@@ -251,8 +251,8 @@ def items():
 
         for item in items:
             # agregarmos items a la lista
-            listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                              items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
+            listItems.append([items[i][1], items[i][2], items[i][3],
+                              items[i][4], items[i][5], items[i][0]])
             # incremento en 1 del indice
             i += 1
         return render_template('lookbook.html', username=session["username"], items=listItems)
@@ -267,8 +267,8 @@ def items():
 
         for item in items:
             # agregarmos items a la lista
-            listItems.append([items[i]["name"], items[i]["description"], items[i]["image"],
-                              items[i]["price"], items[i]["clasification"], items[i]["id_item"]])
+            listItems.append([items[i][1], items[i][2], items[i][3],
+                              items[i][4], items[i][5], items[i][0]])
             # incremento en 1 del indice
             i += 1
         return render_template('lookbook.html', items=listItems, username='null')
@@ -524,7 +524,7 @@ def car():
         j = 0
         for a in Addres:
             Direcciones.append(
-                [Addres[j]["address"], Addres[j]["city"], Addres[j]["id_address_person"]])
+                [Addres[j][1], Addres[j][3], Addres[j][0]])
             j += 1
         return render_template('car.html', username=session["username"], items=carListItems, direcciones=Direcciones)
 
@@ -600,8 +600,8 @@ def paymenthMethod(dir):
 
     j = 0
     for a in Addres:
-        Direccion = Addres[j]["address"]
-        Departamento = Addres[j]["city"]
+        Direccion = Addres[j][1]
+        Departamento = Addres[j][3]
         j += 1
 
     return render_template("payMethod.html", username=session["username"], total=total, subtotal=subtotal, shippingcost=shippingcost, dir=Direccion, dep=Departamento)
