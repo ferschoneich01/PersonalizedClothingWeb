@@ -1386,7 +1386,12 @@ footer {
 	list-style: none;
 }
 
-.slider-frame img {
+.slider-frame picture {
+	width: 100%;
+    height: 100%;
+}
+
+.slider-frame picture img{
 	width: 100%;
     height: 100%;
 }

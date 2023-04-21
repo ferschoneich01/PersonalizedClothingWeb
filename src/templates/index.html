@@ -14,13 +14,37 @@
     <div class="slider-frame">
         <ul>
             <!--usar etiqueta picture-->
-            <li><img id="img1-sld" srcset="../static/img/back2-main.jpg 700w, ../static/img/back-mob.jpg 500w" alt="">
+            <li>
+                <picture>
+                    <source srcset="../static/img/back2-main.jpg" media="(min-width: 1024px)">
+                    <source srcset="../static/img/back2-main.jpg" media="(min-width: 768px)">
+                    <source srcset="../static/img/back-mob.jpg" media="(min-width: 377px)">
+                    <img src="../static/img/back-mob.jpg" alt="slide"> <!-- imagen principal -->
+                </picture>
             </li>
-            <li><img id="img2-sld" srcset="../static/img/back-main.jpg 700w, ../static/img/back2-mob.jpg 500w" alt="">
+            <li>
+                <picture>
+                    <source srcset="../static/img/back-main.jpg" media="(min-width: 1024px)">
+                    <source srcset="../static/img/back-main.jpg" media="(min-width: 768px)">
+                    <source srcset="../static/img/back2-mob.jpg" media="(min-width: 377px)">
+                    <img src="../static/img/back2-mob.jpg" alt="slide"> <!-- imagen principal -->
+                </picture>
             </li>
-            <li><img id="img3-sld" srcset="../static/img/back3-main.jpg 700w, ../static/img/back3-mob.jpg 500w" alt="">
+            <li>
+                <picture>
+                    <source srcset="../static/img/back3-main.jpg" media="(min-width: 1024px)">
+                    <source srcset="../static/img/back3-main.jpg" media="(min-width: 768px)">
+                    <source srcset="../static/img/back3-mob.jpg" media="(min-width: 377px)">
+                    <img src="../static/img/back3-mob.jpg" alt="slide"> <!-- imagen principal -->
+                </picture>
             </li>
-            <li><img id="img4-sld" srcset="../static/img/back4-main.jpg 700w, ../static/img/back4-mob.jpg 500w" alt="">
+            <li>
+                <picture>
+                    <source srcset="../static/img/back4-main.jpg" media="(min-width: 1024px)">
+                    <source srcset="../static/img/back4-main.jpg" media="(min-width: 768px)">
+                    <source srcset="../static/img/back4-mob.jpg" media="(min-width: 377px)">
+                    <img src="../static/img/back4-mob.jpg" alt="slide"> <!-- imagen principal -->
+                </picture>
             </li>
         </ul>
     </div>
