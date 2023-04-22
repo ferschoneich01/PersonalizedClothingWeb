@@ -243,7 +243,7 @@ def items():
     if 'username' in session:
         # obtenemos todos los items de la base de datos
         items = db.execute(text(
-            "SELECT * FROM items i")).fetchall()
+            "SELECT * FROM items limit 25")).fetchall()
         # lista de items
         listItems = []
         # indice
@@ -297,7 +297,7 @@ def items_selected(item=None, clasification=None, category=None):
                 # incremento en 1 del indice
                 i += 1
 
-            return render_template('products.html', username=session["username"], items=listItems)
+            return render_template('product.html', username=session["username"], items=listItems)
         elif item != None and clasification == None and category == None:
 
             # obtenemos todos los items de la base de datos
@@ -315,7 +315,7 @@ def items_selected(item=None, clasification=None, category=None):
                 # incremento en 1 del indice
                 i += 1
 
-            return render_template('products.html', username=session["username"], items=listItems)
+            return render_template('productDetail.html', username=session["username"], items=listItems)
         elif item == None and clasification == None and category != None:
             # obtenemos todos los items de la base de datos
             items = db.execute(text(
@@ -475,7 +475,7 @@ def addToCar(id):
         carListItems.append([items[0][0], float(items[0][1]), float(
             quantity), size, color, items[0][2], len(carListItems), id])
         flash('¡Cuenta creada exitosamente!')
-        return redirect("/items/"+id)
+        return redirect("/car")
 
 
 @app.route("/addToCar/personalized/<json>", methods=["POST", "GET"])

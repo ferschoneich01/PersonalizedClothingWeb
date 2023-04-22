@@ -9,59 +9,32 @@
     </div>
 </div>
 
-{% for item in items %}
+
 <div class="container">
-    <div class="columns">
-        <div class="column is-two-fifths-desktop">
-            <div class="slider" id="slider">
-                <div class="slider-img-container">
-                    <img src="{{item.2}}" alt="camiseta" class="active slider-item">
+    <div class="wrapper">
+        {% for item in items %}
+        <div class="is-mobile is-multiline">
+            <div class="column is-half-mobile is-one-quarter-desktop" style="width: 100%;">
+                <div class="card">
+                    <span style="color:black" class="price">C${{item.3}}</span>
+                    <img src="{{item.2}}" alt="">
+                    <div class="card-info">
+                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> {{item.0}} </h4>
+                        <div class="module line-clamp">
+                            <p class="has-text-centered">{{item.1}}</p>
+                        </div>
+                        <div class="card-buttons">
+                            <a href="#" class="btn btn--mini-rounded"><i class="zmdi zmdi-shopping-cart"></i></a>
+                            <a href="#" class="btn btn--mini-rounded"><i class="zmdi zmdi-favorite-outline"></i></a>
+                            <a href="/items/{{item.4}}" class="btn btn--mini-rounded"><i class="zmdi zmdi-eye"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="column">
-            <h3 class="is-size-4" style="margin:0;">{{item.0}}</h3>
-            <div class="course-rating-container">
-                <div class="rating-stars" style="--rating: 86%">
-                </div>
-            </div>
-            <p class=""> 3 comentarios | Compartir: <a class="icon-socials" href="#"><i
-                        class="zmdi zmdi-facebook"></i></a>
-                <a class="icon-socials" href="#"><i class="zmdi zmdi-twitter"></i></a>
-                <a class="icon-socials" href="#"><i class="zmdi zmdi-instagram"></i></a>
-                <a class="icon-socials" href="#"><i class="zmdi zmdi-pinterest"></i></a>
-                <a class="icon-socials" href="#"><i class="zmdi zmdi-email"></i></a>
-            </p>
-            <h2 class="price is-size-4"><sup>C$</sup>{{item.3}}</h2>
-            <p class="has-text-grey"> <strong>Disponibilidad:</strong> En stock</p>
-            <p class="text-default">{{item.1}}</p>
-            <form id="addToCarForm{{item.4}}" action="/addToCar/{{item.4}}" method="POST" class="form-control">
-                <div class="columns is-multiline">
-                    <div class="column is-one-third">
-
-                        <label for="size">Tamaño</label>
-                        <select name="size" class="form-control-field" id="size">
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
-                    <div class="column is-one-third">
-                        <label for="quality">Cantidad</label>
-                        <input name="quantity" class="form-control-field" type="number" min="1" value="1">
-                    </div>
-                    <div class="column is-full is-marginless" style="padding-top: 0px;">
-                        <button onclick="mensaje({{item.4}})" class="btn btn-default btn-outline" type="button"><i
-                                class="zmdi zmdi-shopping-cart"></i>
-                            Agregar al carrito</button>
-                    </div>
-
-                </div>
-            </form>
-        </div>
+        {% endfor %}
     </div>
+
 </div>
 <script>
     function mensaje(idItem) {
@@ -90,7 +63,5 @@
 
     }
 </script>
-{% endfor %}
-
 
 {% endblock %}

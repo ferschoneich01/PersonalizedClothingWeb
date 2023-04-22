@@ -49,7 +49,6 @@
                                 <li class="nav-menu-item ">
                                     <a class="nav-menu-link" href="#">
                                         <strong>Frio</strong>
-                                        <i class="zmdi zmdi-chevron-down "></i>
                                     </a>
                                     <ul class="sub-menu-ul">
                                         <li class="nav-menu-item"><a class="nav-menu-link"
@@ -63,7 +62,6 @@
                                 <li class="nav-menu-item ">
                                     <a class="nav-menu-link" href="#">
                                         <strong>Casual</strong>
-                                        <i class="zmdi zmdi-chevron-down "></i>
                                     </a>
                                     <ul class="sub-menu-ul">
                                         <li class="nav-menu-item"><a class="nav-menu-link" href="#">Joggers</a>
@@ -125,58 +123,64 @@
                     <li class="nav-menu-item"><a style="color:black;" href="/personalizar" class="nav-menu-link">
                             <img style="margin-top:1px; width: 18px;"
                                 src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/paintbrush_83820_rycmmh.png" />
-                            <span style="margin-right:95%;">Personalizar</span></a></li>
+                            <span>Personalizar</span></a></li>
                     <li class="navbar-top-item">
                         <a href="/car" style="color:black;" class="nav-menu-link">
-                            <i style="margin-right:6px; margin-top:5px;" class="zmdi zmdi-shopping-cart"></i>
-                            <span style="margin-right:95%;">Carrito</span>
+                            <i style="margin-right:6px; margin-top:5px; font-size: 19px;"
+                                class="zmdi zmdi-shopping-cart"></i>
+                            <span>Carrito</span>
                         </a>
                     </li>
                     {% if username != 'null' %}
                     <li class="navbar-top-item">
                         <a href="/buys" style="color:black;" class="nav-menu-link">
-                            <img style="margin-top:1px; width: 18px;"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639807491/353439-basket-buy-cart-ecommerce-online-purse-shop-shopping_107515_behlm9.png" />
-                            <span style="margin-right:95%;">Compras</span>
+                            <i class="zmdi zmdi-shopping-basket"
+                                style="color:black; font-size: 19px; margin-top: 2px; margin-right: 3px;"></i>
+                            <span>Compras</span>
                             <!-- <i class="zmdi zmdi-chevron-down"></i> -->
                         </a>
                     </li>
 
                     {% endif %}
                     {% if session.role_user == 1 %}
-                    <li class="navbar-top-item"><a style="color:black;" href="/adminOrders" class="nav-menu-link">
-                            <img style="margin-top:1px; width: 25px;"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639441128/admin_user_icon_188317_ix052g.png" />
-                            <span style="margin-right:65%;">Admin</span></a></li>
+                    <li class="navbar-top-item">
+                        <a style="color:black;" href="/adminOrders" class="nav-menu-link">
+                            <i class="zmdi zmdi-shield-security"
+                                style="color:black; font-size: 19px; margin-top: 2px; margin-right: 3px;"></i>
+                            <span>Admin</span>
+                        </a>
+                    </li>
                     {% endif %}
 
                     {% if username != 'null' %}
                     <!--OPCION USUARIOS-->
                     <li class="nav-menu-item" id="userSettings">
-                        <a class="nav-menu-link link-submenu active" href="#">
+                        <a class="nav-menu-link link-submenu" href="#">
                             <!--Nombreusuarios-->
-                            <img style="width: 24px;" src="../static/img/account-circle-outline.svg">
+                            <i class="zmdi zmdi-account-circle"
+                                style="color:black; margin-right:6px; margin-top:-2px; font-size: 30px"></i>
                         </a>
                         <div class="container-sub-menu-user">
                             <ul class="sub-menu-ul">
 
                                 <li class="nav-menu-item"><a style="color:black; font-weight: 600;"
                                         class="nav-menu-link">
-                                        {{username}}<div
-                                            style="margin-right:55px; margin-top:10px; width:10px; height:10px; background-color: rgb(71, 235, 71); border-radius:50%;">
-                                        </div></a>
+                                        <span
+                                            style="margin-left: 20px; margin-right: 8px; text-transform: uppercase;">{{username}}</span>
+                                        <div
+                                            style="margin-top:5px; width:8px; height:8px; background-color: rgb(71, 235, 71); border-radius:50%;">
+                                        </div>
+                                    </a>
 
                                 </li>
                                 <li class="nav-menu-item">
                                     <a style="color:black;" href="/userSettings" class="nav-menu-link">
-                                        <img style="width:24px;" src="../static/img/account-settings.svg" alt="">
-                                        Configuracion
+                                        <span style="margin-left:20px;">Configuracion</span>
                                     </a>
                                 </li>
-                                <li class="nav-menu-item"><a style="color:black;" href="/logout" class=" nav-menu-link">
-                                        <img src="./static/img/logout-variant-custom.png"
-                                            style="width: 24px; height:24px;" alt="">
-                                        <text style="margin-right:45px;">Logout</text>
+                                <li class="nav-menu-item">
+                                    <a style="color:black;" href="/logout" class=" nav-menu-link">
+                                        <span style="color:red; margin-left:20px;">Logout</span>
                                     </a>
                                 </li>
 
@@ -201,11 +205,7 @@
     {% endblock %}
     {% block buysList %}
     {% endblock %}
-    <script src=" //cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script src="../static/js/index.js"></script>
+
     <div class="container container-full">
         <div class="columns is-centered is-multiline">
             <div class="column is-full">
@@ -345,5 +345,10 @@
         <a class="footer-bar-top-links" href="#">© 2023 Copyright: Personalized Clothing</a>
     </div>
 </div>
+<script src=" //cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="{{url_for('static', filename='/js/index.js')}}"></script>
 
 </html>

@@ -1,0 +1,92 @@
+{% extends 'layout.html'%}
+{% block body %}
+<!-- Banner -->
+<div class="banner banner-second">
+    <div class="banner-container ">
+        <h1 style="margin-top: 110px;" class="title-cover"><img
+                style="width: 320px; height: auto; position:relative; filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));"
+                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639170003/1639108673441_sxs4vh.png"></h1>
+    </div>
+</div>
+
+{% for item in items %}
+<div class="container">
+    <div class="columns">
+        <div class="column is-two-fifths-desktop">
+            <div class="slider" id="slider">
+                <div class="slider-img-container">
+                    <img src="{{item.2}}" alt="camiseta" class="active slider-item">
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <h3 class="is-size-4" style="margin:0;">{{item.0}}</h3>
+            <div class="course-rating-container">
+                <div class="rating-stars" style="--rating: 86%">
+                </div>
+            </div>
+            <p class=""> 3 comentarios | Compartir: <a class="icon-socials" href="#">
+                    <i class="zmdi zmdi-facebook"></i></a>
+                <a class="icon-socials" href="#"><i class="zmdi zmdi-twitter"></i></a>
+                <a class="icon-socials" href="#"><i class="zmdi zmdi-instagram"></i></a>
+            </p>
+            <h2 class="price is-size-4"><sup>C$</sup>{{item.3}}</h2>
+            <p class="has-text-grey"> <strong>Disponibilidad:</strong> En stock</p>
+            <p class="text-default">{{item.1}}</p>
+            <form id="addToCarForm{{item.4}}" action="/addToCar/{{item.4}}" method="POST" class="form-control">
+                <div class="columns is-multiline">
+                    <div class="column is-one-third">
+
+                        <label for="size">Talla</label>
+                        <select name="size" class="form-control-field" id="size">
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </div>
+                    <div class="column is-one-third">
+                        <label for="quality">Cantidad</label>
+                        <input name="quantity" class="form-control-field" type="number" min="1" value="1">
+                    </div>
+                    <div class="column is-full is-marginless" style="padding-top: 0px;">
+                        <button onclick="mensaje({{item.4}})" class="btn btn-default btn-outline" type="button">
+                            <i class="zmdi zmdi-shopping-cart"></i>
+                            Agregar al carrito</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function mensaje(idItem) {
+        Swal.fire({
+            title: '¿Desea agregar este articulo al carrito?',
+            showDenyButton: false,
+            showCancelButton: true,
+            confirmButtonText: 'Si'
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+
+                Swal.fire({
+                    title: 'Articulo añadido al carrito',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    document.getElementById('addToCarForm' + idItem).submit();
+                })
+
+            } else if (result.isDenied) {
+                Swal.fire('Articulo no agregado', '', 'info')
+            }
+        })
+
+
+    }
+</script>
+{% endfor %}
+{% endblock %}

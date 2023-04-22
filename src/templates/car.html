@@ -1,37 +1,38 @@
 {% extends 'layout.html'%}
 {% block body %}
 <div class="container container-car">
-    <table class="table">
-        <!-- On rows -->
-        <thead>
-            <tr>
-                <td class="table-primary">Item</td>
-                <td class="table-primary">Precio</td>
-                <td class="table-primary">Cantidad</td>
-                <td class="table-primary">Talla</td>
-                <td class="table-primary">Color</td>
-                <td class="table-primary">Foto</td>
-                <td class="table-primary">Eliminar</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
-            <tr>
-                <td class="table-primary">{{item.0}}</td>
-                <td class="table-primary">C${{item.1}}</td>
-                <td class="table-primary">{{item.2}}</td>
-                <td class="table-primary">{{item.3}}</td>
-                <td class="table-primary">{{item.4}}</td>
-                <td class="table-primary"><a href="{{item.5}}" class="btn btn-dark"
-                        style="background-color: black; color: blanchedalmond; font-size: 14px;">Ver Foto</a></td>
-                <td class="table-primary"><a href="/deleteToCar/{{item.6}}" class="btn btn-danger"
-                        style="background-color: rgb(187, 21, 21); color: blanchedalmond; font-size: 14px;">Eliminar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-
-    </table>
+    <div class="container-controls-car">
+        <table class="table">
+            <!-- On rows -->
+            <thead>
+                <tr>
+                    <td class="table-primary">Item</td>
+                    <td class="table-primary">Precio</td>
+                    <td class="table-primary">Cantidad</td>
+                    <td class="table-primary">Talla</td>
+                    <td class="table-primary">Color</td>
+                    <td class="table-primary">Foto</td>
+                    <td class="table-primary">Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td class="table-primary">{{item.0}}</td>
+                    <td class="table-primary">C${{item.1}}</td>
+                    <td class="table-primary">{{item.2}}</td>
+                    <td class="table-primary">{{item.3}}</td>
+                    <td class="table-primary">{{item.4}}</td>
+                    <td class="table-primary"><a href="{{item.5}}" class="btn btn-dark"
+                            style="background-color: black; color: blanchedalmond; font-size: 14px;">Ver Foto</a></td>
+                    <td class="table-primary"><a href="/deleteToCar/{{item.6}}" class="btn btn-danger"
+                            style="background-color: rgb(187, 21, 21); color: blanchedalmond; font-size: 14px;">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <br>
     <form action="/paymeth"></form>
     <h1>Datos de envio:</h1>

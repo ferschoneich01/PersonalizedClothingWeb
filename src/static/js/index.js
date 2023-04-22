@@ -19,7 +19,7 @@ window.addEventListener('scroll', function () {
     }
 })
 // script del menu responsive effecto accordeon
-var submenu = document.getElementsByClassName('link-submenu')
+var submenu = document.getElementsByClassName('link-submenu');
 
 for (var i = 0; i < submenu.length; i++) {
     submenu[i].onclick = function () {
@@ -34,39 +34,6 @@ for (var i = 0; i < submenu.length; i++) {
     }
 }
 
-// script del slider de producto
-let activeImg = 0
-function slider(n) {
-    let images = document.getElementsByClassName("slider-item")
-
-    for (i = 0; i < images.length; i++) {
-
-        if (images[i].className.includes("active")) {
-            images[i].className = images[i].className.replace("active", "")
-
-            break
-        }
-    }
-
-    activeImg = n
-    images[n].className += " active"
-}
-
-function next() {
-    activeImg++
-    if (activeImg > 2) {
-        activeImg = 0
-    }
-    slider(activeImg)
-}
-
-function previus() {
-    activeImg--
-    if (activeImg < 0) {
-        activeImg = 2
-    }
-    slider(activeImg)
-}
 
 
 // script de la navegacipon por tabs
