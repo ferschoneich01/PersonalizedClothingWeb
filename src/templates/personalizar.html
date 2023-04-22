@@ -3,179 +3,181 @@
 <link rel="stylesheet" href="/static/bootstrap.css">
 <link rel="stylesheet" href="{{url_for('static', filename='personalizar.css')}}">
 <div class="container">
-    <div style="margin-top: 100px;" class="row">
-        <div class="col">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-
+    <div class="section-personalized">
+        <div class="row">
+            <div class="col-sm col-md col-lg">
+                <div class="content-design">
                     <div class="carousel-item active">
                         <img name="product-photo" id="product-photo"
                             src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639815335/WhatsApp_Image_2021-12-18_at_2.14.36_PM_3_slsbs9.jpg"
                             class="d-block w-100" alt="...">
                     </div>
-
-                    <img id="img-preview"
-                        style="width:16%; height: 20%; position: absolute; border-bottom:0; margin-left:43%; margin-top: 40%;">
+                    <img id="img-preview" class="design-selected">
                 </div>
-
             </div>
-        </div>
-        <div class="col">
-            <div class="card-body">
-                <h4>Seleccione una prenda:</h4>
-                <div class="garment">
-                    <div class="row">
-                        <div class="type-item col">
-                            <h5>Sueter</h5>
-                            <img id="Sweater"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665875754/WhatsApp_Image_2022-10-16_at_5.14.37_AM_1_jns5pw.jpg"
-                                class="d-block w-20" alt="sueter">
-                        </div>
-                        <div class="type-item col">
-                            <h5>Sudadera</h5>
-                            <img id="Hoodie"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665875754/WhatsApp_Image_2022-10-16_at_5.14.37_AM_xlz5to.jpg"
-                                class="d-block w-20" alt="sudadera">
-                        </div>
-                        <div class="type-item col">
-                            <h5>Camiseta</h5>
-                            <img id="Shirt"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665875992/WhatsApp_Image_2022-10-16_at_5.19.01_AM_fpagra.jpg"
-                                class="d-block w-20" alt="camiseta">
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <span class="border-0 rounded">
-                        <h5 class="card-header text-center text-light" style="background-color:#000000">Agrega tu
-                            diseño:
-                        </h5>
-
-                        <div class="card-body">
-
-                            <div class="form-group">
-
-                                <input type="file" class="form-control-file" id="img-uploader">
-                                <div id="img-upload-bar" class="spinner-border text-info" role="status">
-                                    <span class="visually-hidden">Loading...</span>
+            <div class="col-sm col-md col-lg">
+                <div class="container-controls">
+                    <div class="card-body">
+                        <h4>Seleccione una prenda:</h4>
+                        <div class="garment">
+                            <div class="row">
+                                <div class="type-item col">
+                                    <h5>Sueter</h5>
+                                    <img id="Sweater"
+                                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665875754/WhatsApp_Image_2022-10-16_at_5.14.37_AM_1_jns5pw.jpg"
+                                        class="d-block w-20" alt="sueter">
                                 </div>
-                                <!--progress id="img-upload-bar" value="0" max="100" style="width: 100%"-->
+                                <div class="type-item col">
+                                    <h5>Sudadera</h5>
+                                    <img id="Hoodie"
+                                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665875754/WhatsApp_Image_2022-10-16_at_5.14.37_AM_xlz5to.jpg"
+                                        class="d-block w-20" alt="sudadera">
+                                </div>
+                                <div class="type-item col">
+                                    <h5>Camiseta</h5>
+                                    <img id="Shirt"
+                                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665875992/WhatsApp_Image_2022-10-16_at_5.19.01_AM_fpagra.jpg"
+                                        class="d-block w-20" alt="camiseta">
+                                </div>
                             </div>
+                        </div>
+                        <div class="card">
+                            <span class="border-0 rounded">
+                                <h5 class="card-header text-center text-light" style="background-color:#000000">Agrega
+                                    tu
+                                    diseño:
+                                </h5>
 
-                        </div>
-                    </span>
-                </div>
-                <input style="margin: 0; width: 0; height: 0; padding: 0; border:0;" type="text" id="photo"
-                    name="photo">
-                <br>
-                <textarea class="form-control" name="indicaciones" id="indicaciones" cols="30" rows="5"
-                    style="border:5px solid rgb(168, 168, 168);"
-                    placeholder="Escribe alguna indicación sobre como quieres que se realice tu diseño sobre la prenda"></textarea>
-                <br>
-                <h4>Escoge un color:</h4>
-                <div class="colors">
+                                <div class="card-body">
 
-                    <div class="row">
-                        <div class="color-item col">
-                            <img id="Black"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639815335/WhatsApp_Image_2021-12-18_at_2.14.36_PM_3_slsbs9.jpg"
-                                class="d-block w-20" alt="...">
+                                    <div class="form-group">
+
+                                        <input type="file" class="form-control-file" id="img-uploader">
+                                        <div id="img-upload-bar" class="spinner-border text-info" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <!--progress id="img-upload-bar" value="0" max="100" style="width: 100%"-->
+                                    </div>
+
+                                </div>
+                            </span>
                         </div>
-                        <div class="color-item col">
-                            <img id="Gray"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639815336/WhatsApp_Image_2021-12-18_at_2.14.36_PM_1_k6rjwm.jpg"
-                                class="d-block w-20" alt="...">
+                        <input style="margin: 0; width: 0; height: 0; padding: 0; border:0;" type="text" id="photo"
+                            name="photo">
+                        <br>
+                        <textarea class="form-control" name="indicaciones" id="indicaciones" cols="30" rows="5"
+                            style="border:5px solid rgb(168, 168, 168);"
+                            placeholder="Escribe alguna indicación sobre como quieres que se realice tu diseño sobre la prenda"></textarea>
+                        <br>
+                        <h4>Escoge un color:</h4>
+                        <div class="colors">
+
+                            <div class="row">
+                                <div class="color-item col">
+                                    <img id="Black"
+                                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639815335/WhatsApp_Image_2021-12-18_at_2.14.36_PM_3_slsbs9.jpg"
+                                        class="d-block w-20" alt="...">
+                                </div>
+                                <div class="color-item col">
+                                    <img id="Gray"
+                                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639815336/WhatsApp_Image_2021-12-18_at_2.14.36_PM_1_k6rjwm.jpg"
+                                        class="d-block w-20" alt="...">
+                                </div>
+
+                                <div class="color-item col">
+                                    <img id="Pink"
+                                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639815335/WhatsApp_Image_2021-12-18_at_2.14.36_PM_2_shwik0.jpg"
+                                        class="d-block w-20" alt="...">
+                                </div>
+                                <div class="color-item col">
+                                    <img id="White"
+                                        src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665870439/28519292_1_vlyacm.jpg"
+                                        class="d-block w-20" alt="...">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <h4>Posición del diseño:</h4>
+                        <div class="card-body" style="font-size: 14px;">
+                            <div class="row">
+                                <div class="col">
+                                    <p>vertical pecho</p>
+                                    <div id="btn-lettersize-v" class="card"
+                                        style="border:1px solid black; width: 55px; height: 80px; margin: auto;">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p>Horizontal pecho</p>
+                                    <div id="btn-lettersize-h" class="card col"
+                                        style="border:1px solid black; width: 80px; height: 55px; margin: auto;">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p>vertical Espalda</p>
+                                    <div id="btn-backsize-v" class="card"
+                                        style="border:1px solid black; width: 55px; height: 80px; margin: auto;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p>Horizontal Espalda</p>
+                                    <div id="btn-backsize-h" class="card col"
+                                        style="border:1px solid black; width: 80px; height: 55px; margin: auto;">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p>Manga derecha <span style="color:red; font-size: 12px;">No diseponible</span></p>
+                                    <div id="btn-manga-d" class="card col"
+                                        style="border:1px solid black; width: 30px; height: 80px; margin: auto;">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <p>Manga izquierda<span style="color:red; font-size: 12px;">No diseponible</span>
+                                    </p>
+                                    <div id="btn-manga-i" class="card col"
+                                        style="border:1px solid black; width: 30px; height: 80px; margin: auto;">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="color-item col">
-                            <img id="Pink"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639815335/WhatsApp_Image_2021-12-18_at_2.14.36_PM_2_shwik0.jpg"
-                                class="d-block w-20" alt="...">
-                        </div>
-                        <div class="color-item col">
-                            <img id="White"
-                                src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1665870439/28519292_1_vlyacm.jpg"
-                                class="d-block w-20" alt="...">
-                        </div>
+                        <form id="addToCarForm" action="/addToCar/personalized/" method="POST" class="form-control"
+                            style="border:5px solid rgb(114, 114, 114); margin-top:15px;">
+                            <div class="columns is-multiline">
+                                <div class="column is-one-third">
+
+                                    <label for="size">Talla</label>
+                                    <select name="size" class="form-control-field" id="size">
+                                        <option value="XS">XS</option>
+                                        <option value="S">S</option>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                    </select>
+                                </div>
+                                <div class="column is-one-third">
+                                    <label for="quality">Cantidad</label>
+                                    <input name="quantity" class="form-control-field" type="number" min="1" value="1">
+                                </div>
+                                <div class="column is-full is-marginless" style="padding-top: 0px;">
+                                    <button onclick="mensaje()" class="btn btn-default btn-outline" type="button"
+                                        style="border: 1px solid black; color: #000000;"><i
+                                            class="zmdi zmdi-shopping-cart"></i>
+                                        Agregar al carrito</button>
+                                </div>
+
+                            </div>
+                        </form>
+
+                        <input class="form-control" style="margin: 0; width: 0; height: 0; padding: 0;" type="text"
+                            id="size-selected" name="size-selected" placeholder="">
                     </div>
                 </div>
-                <br>
-                <h4>Posición del diseño:</h4>
-                <div class="card-body" style="font-size: 14px;">
-                    <div class="row">
-                        <div class="col">
-                            <p>vertical pecho</p>
-                            <div id="btn-lettersize-v" class="card"
-                                style="border:1px solid black; width: 55px; height: 80px; margin: auto;">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <p>Horizontal pecho</p>
-                            <div id="btn-lettersize-h" class="card col"
-                                style="border:1px solid black; width: 80px; height: 55px; margin: auto;">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <p>vertical Espalda</p>
-                            <div id="btn-backsize-v" class="card"
-                                style="border:1px solid black; width: 55px; height: 80px; margin: auto;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <p>Horizontal Espalda</p>
-                            <div id="btn-backsize-h" class="card col"
-                                style="border:1px solid black; width: 80px; height: 55px; margin: auto;">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <p>Manga derecha <span style="color:red; font-size: 12px;">No diseponible</span></p>
-                            <div id="btn-manga-d" class="card col"
-                                style="border:1px solid black; width: 30px; height: 80px; margin: auto;">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <p>Manga izquierda<span style="color:red; font-size: 12px;">No diseponible</span></p>
-                            <div id="btn-manga-i" class="card col"
-                                style="border:1px solid black; width: 30px; height: 80px; margin: auto;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <form id="addToCarForm" action="/addToCar/personalized/" method="POST" class="form-control"
-                    style="border:5px solid rgb(114, 114, 114); margin-top:15px;">
-                    <div class="columns is-multiline">
-                        <div class="column is-one-third">
-
-                            <label for="size">Talla</label>
-                            <select name="size" class="form-control-field" id="size">
-                                <option value="XS">XS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                            </select>
-                        </div>
-                        <div class="column is-one-third">
-                            <label for="quality">Cantidad</label>
-                            <input name="quantity" class="form-control-field" type="number" min="1" value="1">
-                        </div>
-                        <div class="column is-full is-marginless" style="padding-top: 0px;">
-                            <button onclick="mensaje()" class="btn btn-default btn-outline" type="button"
-                                style="border: 1px solid black; color: #000000;"><i class="zmdi zmdi-shopping-cart"></i>
-                                Agregar al carrito</button>
-                        </div>
-
-                    </div>
-                </form>
-
-                <input class="form-control" style="margin: 0; width: 0; height: 0; padding: 0;" type="text"
-                    id="size-selected" name="size-selected" placeholder="">
             </div>
         </div>
     </div>
+
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

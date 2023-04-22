@@ -779,43 +779,31 @@ footer {
     margin-left: 50px;
 }
 
-@media only screen and (max-width : 900px) {
-    .title-cover {
-        font-size: 9em;
-        color: var(--primary) !important;
-        margin-top: 0;
-    }
-
-    .btn-default{
-        color: var(--dark)!important;
-        border: solid 1px var(--dark) !important;
-       
-    }
-
-    .nabvar-mobile{
-        background-color: #ffffff;
-    }
-
-    .img-logo{
-        width: 300px; 
-        height: auto;
-        filter: none;
-    }
-
-    .banner-cover {
-        height: auto;  
-    }
-
-    .container-car {
-        margin-top: 0;
-    }
-
-    .msg-page{
-        margin-top:0; 
-        margin-left: 5%;
-        font-size: 1.5em;
-    }
+.section-personalized{
+    margin-top: 100px !important;
 }
+
+.design-selected{
+    width:16%; 
+    height: 20%; 
+    position: absolute; 
+    border-bottom:0; 
+    margin-left:43%; 
+    margin-top: 40%;
+}
+
+.content-design{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.container-controls{
+    overflow-y: scroll;
+    height: 550px;
+    overflow-x:hidden;
+}
+
 
 .banner-cover,
 .banner-second {
@@ -1420,3 +1408,50 @@ footer {
 	100% {margin-left: -300%;}
 }
 
+@media only screen and (max-width : 900px) {
+    .title-cover {
+        font-size: 9em;
+        color: var(--primary) !important;
+        margin-top: 0;
+    }
+
+    .btn-default{
+        color: var(--dark)!important;
+        border: solid 1px var(--dark) !important;
+       
+    }
+
+    .nabvar-mobile{
+        background-color: #ffffff;
+    }
+
+    .img-logo{
+        width: 300px; 
+        height: auto;
+        filter: none;
+    }
+
+    .banner-cover {
+        height: auto;  
+    }
+
+    .container-car {
+        margin-top: 0;
+    }
+
+    .msg-page{
+        margin-top:0; 
+        margin-left: 5%;
+        font-size: 1.5em;
+    }
+
+    .section-personalized{
+        margin-top:10px !important;
+    }
+
+    .container-controls{
+        overflow-y: scroll;
+        height: 300px;
+        overflow-x:hidden;
+    }
+}
