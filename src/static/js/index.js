@@ -1,10 +1,11 @@
 
 // script del menu responsive Abrir el menu
-var btnMobile = document.getElementById('btn-mobile')
+var btnMobile = document.getElementById('btn-mobile');
+
 btnMobile.addEventListener('click', function (e) {
     e.preventDefault()
     let mySidenav = document.getElementById("mySidenav")
-    mySidenav.classList.toggle("openOffCanvas")
+    mySidenav.classList.toggle("openOffCanvas");
 })
 
 // script del menu responsive sticky menu
@@ -35,19 +36,4 @@ for (var i = 0; i < submenu.length; i++) {
 }
 
 
-
-// script de la navegacipon por tabs
-let tabs = Array.prototype.slice.apply(document.querySelectorAll('.tabs-item'))
-let panels = Array.prototype.slice.apply(document.querySelectorAll('.tab-panel'))
-
-/*document.getElementById('tabs').addEventListener('click', e => {
-    if (e.target.classList.contains('tabs-item')) {
-        let i = tabs.indexOf(e.target)
-        tabs.map(tab => tab.classList.remove('active-tab'))
-        tabs[i].classList.add('active-tab')
-        panels.map(panel => panel.classList.remove('active-panel'))
-        panels[i].classList.add('active-panel')
-    }
-
-})*/
 

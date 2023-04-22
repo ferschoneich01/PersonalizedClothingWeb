@@ -299,7 +299,6 @@ def items_selected(item=None, clasification=None, category=None):
 
             return render_template('product.html', username=session["username"], items=listItems)
         elif item != None and clasification == None and category == None:
-
             # obtenemos todos los items de la base de datos
             items = db.execute(text(
                 "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(item)+"")).fetchall()
@@ -369,7 +368,6 @@ def items_selected(item=None, clasification=None, category=None):
 
             return render_template('products.html', username='null', items=listItems)
         elif item != None and clasification == None and category == None:
-
             # obtenemos todos los items de la base de datos
             items = db.execute(text(
                 "SELECT * FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(item)+"")).fetchall()
@@ -385,7 +383,7 @@ def items_selected(item=None, clasification=None, category=None):
                 # incremento en 1 del indice
                 i += 1
 
-            return render_template('products.html', username='null', items=listItems)
+            return render_template('productDetail.html', username='null', items=listItems)
         elif item == None and clasification == None and category != None:
             # obtenemos todos los items de la base de datos
             items = db.execute(text(
