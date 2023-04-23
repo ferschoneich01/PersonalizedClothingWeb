@@ -6,6 +6,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from funciones import *
 from sqlalchemy.sql import text
 import json
+import uuid
 
 app = Flask(__name__)
 
@@ -464,15 +465,17 @@ def addItem():
 def addToCar(id):
     if request.method == "POST":
         items = db.execute(text(
-            "SELECT i.name,i.price,i.image FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(id)+"")).fetchall()
+            "SELECT i.name,i.price,i.image,i.id_item FROM items i INNER JOIN clasification c ON c.id_clasification = i.clasification WHERE i.id_item = "+str(id)+"")).fetchall()
         # lista de items
 
         quantity = request.form.get("quantity")
         size = request.form.get("size")
         color = request.form.get("color")
+
+        idcaritem = uuid.uuid4()
         carListItems.append([items[0][0], float(items[0][1]), float(
-            quantity), size, color, items[0][2], len(carListItems), id])
-        flash('¡Cuenta creada exitosamente!')
+            quantity), size, color, items[0][2], str(idcaritem)])
+
         return redirect("/car")
 
 
@@ -524,13 +527,25 @@ def car():
             Direcciones.append(
                 [Addres[j][1], Addres[j][3], Addres[j][0]])
             j += 1
+
+        x = 0
+        for i in carListItems:
+            print(i)
+            print(i[6])
+            x += 1
         return render_template('car.html', username=session["username"], items=carListItems, direcciones=Direcciones)
 
 
 @app.route("/deleteToCar/<id>", methods=["POST", "GET"])
 @login_required
 def deleteToCar(id):
-    carListItems.pop(int(id)-1)
+
+    j = 0
+    for i in carListItems:
+        if i[6] == id:
+            carListItems.pop(j)
+        j += 1
+
     return redirect("/car")
 
 
