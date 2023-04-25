@@ -1518,8 +1518,7 @@ footer {
 
 @media only screen and (max-width : 900px) {
     .modal{
-        margin:8px;
-        heigth:120%;
+        margin-right:2%;
     }
 
     .title-ads{
