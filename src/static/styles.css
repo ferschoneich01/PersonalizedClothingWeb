@@ -1656,8 +1656,8 @@ footer {
 .centered {
     position: absolute;
     left: 50%;
-    top: 80%;
-    transform: translate(-50%, -80%);
+    top: 90%;
+    transform: translate(90%, -90%);
   }
 
   .h-button {
