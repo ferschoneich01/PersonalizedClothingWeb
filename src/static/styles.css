@@ -1518,7 +1518,11 @@ footer {
 
 @media only screen and (max-width : 900px) {
     .modal{
-        margin:5px;
+        margin:8px;
+    }
+
+    .title-ads{
+        font-size:20px;
     }
 
     .title-cover {
