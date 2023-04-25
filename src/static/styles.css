@@ -1655,7 +1655,7 @@ footer {
 /*efecto dos*/
 .centered {
     position: absolute;
-    left: 50%;
+    left: 60%;
     top: 90%;
     transform: translate(90%, -90%);
   }
