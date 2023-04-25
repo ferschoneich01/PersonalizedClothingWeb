@@ -1816,7 +1816,7 @@ footer {
     .centered {
         left:50%;
         position: absolute;
-        top: 95%;
+        top: 60%;
         transform: translate(-50%, -80%);
     }
 }
