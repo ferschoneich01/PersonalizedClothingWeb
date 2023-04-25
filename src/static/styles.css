@@ -856,8 +856,6 @@ footer {
 
     .banner .btn {
         position: absolute;
-        right: 60px;
-        bottom: 60px;
     }
 
 }
@@ -1817,8 +1815,7 @@ footer {
 
     .centered {
         position: absolute;
-        left: 90%;
-        top: 90%;
-        transform: translate(-90%, -90%);
+        top: 95%;
+        transform: translate(-30%, -80%);
     }
 }
