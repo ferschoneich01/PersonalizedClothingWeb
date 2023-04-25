@@ -1,14 +1,9 @@
 
 //anuncios
 var modal = document.getElementById("modal");
-var openModal = document.getElementById("openModal");
 var close = document.getElementsByClassName("close")[0];
 
 window.onload = function () {
-    modal.style.display = "block";
-}
-
-openModal.onclick = function () {
     modal.style.display = "block";
 }
 
