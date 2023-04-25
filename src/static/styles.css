@@ -1821,7 +1821,7 @@ footer {
         transform: translate(-50%, -80%);
     }
 
-    .title-cover{
+    .is-mobile-logo{
         transform:translateY(-50%);
     }
 }
