@@ -1819,4 +1819,8 @@ footer {
         top: 60%;
         transform: translate(-50%, -80%);
     }
+
+    .title-cover{
+        transform:translateY(-50%);
+    }
 }
