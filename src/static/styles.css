@@ -603,7 +603,7 @@ footer {
     }
 
     .nav-menu {
-        z-index: 50;
+        z-index: 1;
         transform: translate(0);
         display: flex;
         justify-content: flex-end;
@@ -1455,7 +1455,7 @@ footer {
     position: fixed;
     z-index: 51;
     left: 0;
-    top: 10%;
+    top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
@@ -1463,6 +1463,7 @@ footer {
   }
 
   .modal-content {
+    top:10%;
     background-color: #fff;
     margin: 5% auto;
     padding: 20px;
