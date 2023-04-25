@@ -1,7 +1,7 @@
 
 //anuncios
 var modal = document.getElementById("modal");
-var overlay = document.createElement("aside");
+var overlay = document.createElement("div");
 overlay.className = "overlay";
 document.body.appendChild(overlay);
 var close = document.getElementsByClassName("close")[0];
