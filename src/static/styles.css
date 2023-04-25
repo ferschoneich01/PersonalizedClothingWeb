@@ -352,6 +352,12 @@ template {
     --primary: #00c8c8;
     --dark-lighten: #f8f8f8;
     --border-dark-light: solid 1px rgba(153, 153, 153, 0.29);
+    .#E7484F}
+  .b{color: #F68B1D}
+  .c{color: #FCED00}
+  .d{color: #009E4F}
+  .e{color: #00AAC3}
+  .f{color:  #732982}
     /*Tamaños de tipografía*/
     /*  --titulo-h1: 32px;
     --body-font-size: 13px;
@@ -1569,12 +1575,7 @@ footer {
     }
   }
 
-  .a{color: #E7484F}
-  .b{color: #F68B1D}
-  .c{color: #FCED00}
-  .d{color: #009E4F}
-  .e{color: #00AAC3}
-  .f{color:  #732982}
+
 
   .rainbow{
     background-color: #343A40;
