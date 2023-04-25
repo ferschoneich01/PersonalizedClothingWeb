@@ -1492,6 +1492,16 @@ footer {
     margin: 0 auto 20px;
   }
 
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Aquí puedes ajustar la opacidad */
+    z-index: 999;
+  }
+
 
 @media only screen and (max-width : 900px) {
     .title-cover {
