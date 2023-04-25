@@ -1427,6 +1427,13 @@ footer {
     width:70%;
 }
 
+.btn-gdir{
+    background-color: black;
+    color: aliceblue;
+    border: 0;
+    margin-top: 5px;
+}
+
 @media only screen and (max-width : 900px) {
     .title-cover {
         font-size: 9em;
@@ -1510,5 +1517,10 @@ footer {
 
     .controls-form{
         width:100%;
+    }
+
+    .btn-gdir{
+        width:100%;
+        margin-top: 7px;
     }
 }
