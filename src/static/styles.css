@@ -1517,6 +1517,10 @@ footer {
   }
 
 @media only screen and (max-width : 900px) {
+    .modal{
+        margin:5px;
+    }
+
     .title-cover {
         font-size: 9em;
         color: var(--primary) !important;
