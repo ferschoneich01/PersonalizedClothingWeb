@@ -1661,7 +1661,8 @@ footer {
   }
 
   .h-button {
-    background: white;
+    background: black;
+    color:white !impotant;
     padding: 20px;
     width: 250px;
     text-align: center;
