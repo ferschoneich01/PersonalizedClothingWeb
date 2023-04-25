@@ -1508,7 +1508,7 @@ footer {
   }
 
   .title-ads span{
-    color:;
+    color:var(--primary);
   }
 
   .body-ads{
