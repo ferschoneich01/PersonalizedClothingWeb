@@ -27,7 +27,7 @@ html {
  */
 body {
     margin: 0;
-    
+
 }
 
 /**
@@ -156,7 +156,7 @@ optgroup,
 select,
 textarea {
     font-family: inherit;
-    
+
     font-size: 100%;
     /* 1 */
     line-height: 1.15;
@@ -402,12 +402,12 @@ footer {
     position: relative;
     min-width: 100%;
     z-index: 200;
-    
+
 }
 .img-logo{
-    width: 500px; 
-    height: auto; 
-    position:relative; 
+    width: 500px;
+    height: auto;
+    position:relative;
     filter: drop-shadow(0 2px 5px rgb(245, 240, 240));
 }
 .nabvar-mobile-link {
@@ -415,7 +415,7 @@ footer {
     text-decoration: none;
     width: 100%;
     display: flex;
-    justify-content:center; 
+    justify-content:center;
     align-items: center;
 }
 
@@ -774,7 +774,7 @@ footer {
 }
 
 .msg-page{
-    margin-top: 130px; 
+    margin-top: 130px;
     margin-left: 50px;
 }
 
@@ -783,11 +783,11 @@ footer {
 }
 
 .design-selected{
-    width:16%; 
-    height: 20%; 
-    position: absolute; 
-    border-bottom:0; 
-    margin-left:43%; 
+    width:16%;
+    height: 20%;
+    position: absolute;
+    border-bottom:0;
+    margin-left:43%;
     margin-top: 40%;
 }
 
@@ -1368,11 +1368,11 @@ footer {
     margin: 0 0 1em 0;
     overflow: hidden;
   }
-  
+
   .module p {
     margin: 0;
   }
-  
+
   .line-clamp {
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -1412,15 +1412,19 @@ footer {
 @keyframes slide {
 	0% {margin-left: 0;}
 	20% {margin-left: 0;}
-	
+
 	25% {margin-left: -100%;}
 	45% {margin-left: -100%;}
-	
+
 	50% {margin-left: -200%;}
 	70% {margin-left: -200%;}
-	
+
 	75% {margin-left: -300%;}
 	100% {margin-left: -300%;}
+}
+
+.controls-form{
+    width:70%;
 }
 
 @media only screen and (max-width : 900px) {
@@ -1433,7 +1437,7 @@ footer {
     .btn-default{
         color: var(--dark)!important;
         border: solid 1px var(--dark) !important;
-       
+
     }
 
     .nabvar-mobile{
@@ -1441,13 +1445,13 @@ footer {
     }
 
     .img-logo{
-        width: 300px; 
+        width: 300px;
         height: auto;
         filter: none;
     }
 
     .banner-cover {
-        height: auto;  
+        height: auto;
     }
 
     .container-car {
@@ -1455,7 +1459,7 @@ footer {
     }
 
     .msg-page{
-        margin-top:0; 
+        margin-top:0;
         margin-left: 5%;
         font-size: 1.5em;
     }
@@ -1504,4 +1508,7 @@ footer {
         font-weight: normal;
     }
 
+    .controls-form{
+        width:100%;
+    }
 }
