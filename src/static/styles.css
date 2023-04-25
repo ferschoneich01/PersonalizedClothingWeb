@@ -1434,10 +1434,17 @@ footer {
     margin-top: 5px;
 }
 
+.btnPay{
+    background-color: rgb(30, 197, 8);
+    color:white;
+    border:0;
+    font-size: 25px;
+}
+
 .btnPay svg{
     margin-top:7px;
     width:30px;
-    fill=:white;
+    fill:white;
 }
 @media only screen and (max-width : 900px) {
     .title-cover {
