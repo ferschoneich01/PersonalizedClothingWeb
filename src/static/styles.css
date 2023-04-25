@@ -1503,13 +1503,13 @@ footer {
   }
 
   .title-ads{
-    font-size:15px;
-    align:center;
+    font-size:30px;
+    text-align:center;
   }
 
   .body-ads{
-    font-size:13px;
-    align:center;
+    font-size:18px;
+    text-align:center;
   }
 
 @media only screen and (max-width : 900px) {
