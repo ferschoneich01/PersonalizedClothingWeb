@@ -1434,6 +1434,11 @@ footer {
     margin-top: 5px;
 }
 
+.btnPay svg{
+    margin-top:7px;
+    width:30px;
+    fill=:white;
+}
 @media only screen and (max-width : 900px) {
     .title-cover {
         font-size: 9em;
