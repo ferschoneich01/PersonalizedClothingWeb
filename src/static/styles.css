@@ -1503,8 +1503,12 @@ footer {
   }
 
   .title-ads{
-    font-size:30px;
+    font-size:25px;
     text-align:center;
+  }
+
+  .title-ads p{
+    
   }
 
   .body-ads{
