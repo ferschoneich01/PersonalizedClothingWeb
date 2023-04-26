@@ -14,12 +14,12 @@ import logging
 
 paypalrestsdk.configure({
   "mode": "sandbox", # sandbox or live
-  "client_id": "AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF",
-  "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
+  "client_id": "AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re",
+  "client_secret": "EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x" })
 #Configure through environment variables
 export PAYPAL_MODE=sandbox   # sandbox or live
-export PAYPAL_CLIENT_ID=AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF
-export PAYPAL_CLIENT_SECRET=EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM
+export PAYPAL_CLIENT_ID=AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re
+export PAYPAL_CLIENT_SECRET=EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x
 #Configure through a non-global API object
 my_api = paypalrestsdk.Api({
   'mode': 'sandbox',
