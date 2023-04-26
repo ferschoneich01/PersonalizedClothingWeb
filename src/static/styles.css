@@ -1713,6 +1713,11 @@ footer {
     transition-delay: 0.15s;
   }
 
+.container-paymethod{
+    margin-top:100px;
+}
+
+  /*MOBILE VERSION*/
 @media only screen and (max-width : 900px) {
     .modal{
         margin-right:2%;
@@ -1823,5 +1828,9 @@ footer {
 
     .is-mobile-logo{
         transform:translateY(-50%);
+    }
+
+    .container-paymethod{
+        margin-top:0px;
     }
 }
