@@ -655,7 +655,7 @@ payment = paypalrestsdk.Payment({
     "transactions": [{
         "item_list": {
             "items": [{
-                "name": "item",
+                "name": "PERSONALIZED CLOTHING",
                 "sku": "item",
                 "price": "5.00",
                 "currency": "USD",
