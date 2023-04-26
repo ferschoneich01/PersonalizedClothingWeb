@@ -1721,6 +1721,14 @@ footer {
     z-index:1;
 }
 
+
+.btn-deposito{
+    width:100px;
+    backgroudn-color:yellow;
+    color:black;
+    font-size:25px;
+    padding:5px;
+}
   /*MOBILE VERSION*/
 @media only screen and (max-width : 900px) {
     .modal{

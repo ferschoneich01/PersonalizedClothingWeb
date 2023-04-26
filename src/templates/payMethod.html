@@ -11,49 +11,56 @@
     <h5>Sub Total: C${{subtotal}}</h5>
     <h5 class="cost">Costo de Envio: C${{shippingcost}}</h5>
     <h5>Total a pagar: C${{total}}</h5>
-    <
-    <div id="paypal-button-container"></div>
-    <a class="btn-deposito"></a>
+    < <div id="paypal-button-container">
+</div>
+<a class="btn-deposito">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <title>account-cash</title>
+        <path
+            d="M11 8C11 10.21 9.21 12 7 12C4.79 12 3 10.21 3 8C3 5.79 4.79 4 7 4C9.21 4 11 5.79 11 8M11 14.72V20H0V18C0 15.79 3.13 14 7 14C8.5 14 9.87 14.27 11 14.72M24 20H13V3H24V20M16 11.5C16 10.12 17.12 9 18.5 9C19.88 9 21 10.12 21 11.5C21 12.88 19.88 14 18.5 14C17.12 14 16 12.88 16 11.5M22 7C20.9 7 20 6.11 20 5H17C17 6.11 16.11 7 15 7V16C16.11 16 17 16.9 17 18H20C20 16.9 20.9 16 22 16V7Z" />
+    </svg>
+    <span>Pago con Deposito</span>
+</a>
 
-    <script>
-        let total = parseFloat('{{total}}') / 36;
-        paypal.Buttons({
+<script>
+    let total = parseFloat('{{total}}') / 36;
+    paypal.Buttons({
 
-            createOrder: function (data, actions) {
+        createOrder: function (data, actions) {
 
-                // This function sets up the details of the transaction, including the amount and line item details.
+            // This function sets up the details of the transaction, including the amount and line item details.
 
-                return actions.order.create({
+            return actions.order.create({
 
-                    purchase_units: [{
+                purchase_units: [{
 
-                        amount: {
+                    amount: {
 
-                            value: Math.round(total, -2) + ""
-                        }
+                        value: Math.round(total, -2) + ""
+                    }
 
-                    }]
+                }]
 
-                });
+            });
 
-            },
+        },
 
-            onApprove: function (data, actions) {
-                const dir = "{{dir}}";
-                // This function captures the funds from the transaction.
+        onApprove: function (data, actions) {
+            const dir = "{{dir}}";
+            // This function captures the funds from the transaction.
 
-                return actions.order.capture().then(function (details) {
+            return actions.order.capture().then(function (details) {
 
-                    // This function shows a transaction success message to your buyer.
-                    window.location.href = "/successPay/" + details.payer.name.given_name + "/" + dir;
-                    //alert('Transaction completed by ' + details.payer.name.given_name);
+                // This function shows a transaction success message to your buyer.
+                window.location.href = "/successPay/" + details.payer.name.given_name + "/" + dir;
+                //alert('Transaction completed by ' + details.payer.name.given_name);
 
-                });
+            });
 
-            }
+        }
 
-        }).render('#paypal-button-container');
-    </script>
+    }).render('#paypal-button-container');
+</script>
 </div>
 
 {% endblock %}
