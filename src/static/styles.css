@@ -1731,6 +1731,8 @@ footer {
     heigth:24px;
     border-radius: 4px;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-deposito svg{
