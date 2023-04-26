@@ -1717,6 +1717,10 @@ footer {
     margin-top:100px;
 }
 
+.paypal-buttons{
+    z-index:1;
+}
+
   /*MOBILE VERSION*/
 @media only screen and (max-width : 900px) {
     .modal{
