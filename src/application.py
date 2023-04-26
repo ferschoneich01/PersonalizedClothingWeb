@@ -23,8 +23,8 @@ export PAYPAL_CLIENT_SECRET=EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM
 #Configure through a non-global API object
 my_api = paypalrestsdk.Api({
   'mode': 'sandbox',
-  'client_id': 'AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF',
-  'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'})
+  'client_id': 'AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re',
+  'client_secret': 'EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x'})
 
 payment = paypalrestsdk.Payment({AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF}, api=my_api)
 
