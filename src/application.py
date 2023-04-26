@@ -7,6 +7,14 @@ from funciones import *
 from sqlalchemy.sql import text
 import json
 import uuid
+#PAGOS CON PAYPAL CONFIGURACION
+import paypalrestsdk
+paypalrestsdk.configure({
+  "mode": "sandbox", # sandbox or live
+  "client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
+  "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
+
+
 
 app = Flask(__name__)
 
