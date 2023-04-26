@@ -14,19 +14,19 @@ import logging
 
 paypalrestsdk.configure({
   "mode": "sandbox", # sandbox or live
-  "client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
+  "client_id": "AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF",
   "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
 #Configure through environment variables
 export PAYPAL_MODE=sandbox   # sandbox or live
-export PAYPAL_CLIENT_ID=EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM
+export PAYPAL_CLIENT_ID=AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF
 export PAYPAL_CLIENT_SECRET=EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM
 #Configure through a non-global API object
 my_api = paypalrestsdk.Api({
   'mode': 'sandbox',
-  'client_id': '...',
-  'client_secret': '...'})
+  'client_id': 'AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF',
+  'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'})
 
-payment = paypalrestsdk.Payment({...}, api=my_api)
+payment = paypalrestsdk.Payment({AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF}, api=my_api)
 
 
 app = Flask(__name__)
