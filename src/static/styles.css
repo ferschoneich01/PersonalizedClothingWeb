@@ -1724,10 +1724,15 @@ footer {
 
 .btn-deposito{
     width:100px;
-    backgroudn-color:yellow;
+    background-color:yellow;
     color:black;
     font-size:25px;
-    padding:5px;
+    padding:10px;
+}
+
+.btn-deposito svg{
+    width:18px;
+
 }
   /*MOBILE VERSION*/
 @media only screen and (max-width : 900px) {
@@ -1844,5 +1849,13 @@ footer {
 
     .container-paymethod{
         margin-top:0px;
+    }
+
+    .btn-deposito{
+        width:98%;
+        backgroudn-color:yellow;
+        color:black;
+        font-size:18px;
+        padding:3px;
     }
 }
