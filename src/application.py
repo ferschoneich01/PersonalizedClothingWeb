@@ -8,11 +8,17 @@ from sqlalchemy.sql import text
 import json
 import uuid
 #PAGOS CON PAYPAL CONFIGURACION
+#Register for a developer account and get your client_id and secret at PayPal Developer Portal.
 import paypalrestsdk
 paypalrestsdk.configure({
   "mode": "sandbox", # sandbox or live
   "client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
   "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
+#Configure through environment variables
+export PAYPAL_MODE=sandbox   # sandbox or live
+export PAYPAL_CLIENT_ID=EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM
+export PAYPAL_CLIENT_SECRET=EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM
+#Configure through a non-global API object
 
 
 
