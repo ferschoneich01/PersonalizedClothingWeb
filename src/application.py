@@ -666,7 +666,7 @@ def paymenthMethod(dir):
             "description": "Gracias por comprar en personalized clothing."}]})
 
         if payment.create():
-            
+            redirect("/successPay/Gracias por comprar en personalized clothing/")
         else:
         print(payment.error)
 
