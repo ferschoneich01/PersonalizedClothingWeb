@@ -679,16 +679,16 @@ def successPay(det, address):
 #Create Payment
 paypalrestsdk.configure({
   "mode": "sandbox", # sandbox or live
-  "client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
-  "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
+  "client_id": "AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re",
+  "client_secret": "EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x" })
 
 payment = paypalrestsdk.Payment({
     "intent": "sale",
     "payer": {
         "payment_method": "paypal"},
     "redirect_urls": {
-        "return_url": "http://localhost:3000/payment/execute",
-        "cancel_url": "http://localhost:3000/"},
+        "return_url": "http://0.0.0.0:8080/payment/execute",
+        "cancel_url": "http://0.0.0.0:8080/"},
     "transactions": [{
         "item_list": {
             "items": [{
