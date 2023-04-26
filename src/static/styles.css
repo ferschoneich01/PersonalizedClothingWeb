@@ -1723,15 +1723,18 @@ footer {
 
 
 .btn-deposito{
-    width:100px;
+    width:20%;
     background-color:yellow;
     color:black;
     font-size:25px;
     padding:10px;
+    heigth:24px;
+    border-radius: 4px;
+    text-align: center;
 }
 
 .btn-deposito svg{
-    width:18px;
+    width:30px;
 
 }
   /*MOBILE VERSION*/
