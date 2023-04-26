@@ -638,44 +638,7 @@ def paymenthMethod(dir):
         Departamento = Addres[j][3]
         j += 1
 
-    return render_template("payMethod.html", username=session["username"], total=total, subtotal=subtotal, shippingcost=shippingcost, dir=Direccion, dep=Departamento)
-
-
-@app.route("/successPay/<det>/<address>")
-@login_required
-def successPay(det, address):
-
-    # crear una nueva orden
-    db.execute("INSERT INTO orders(orderdate,paymentmethod,id_user,id_status) VALUES (current_timestamp,1," +
-               str(session["id_user"])+",1)")
-    db.commit()
-
-    # obtener el id de la orden que acabamos de insertar
-    id_order = db.execute(
-        "select id_order from orders o where id_user = "+str(session["id_user"])+" order by orderdate desc limit 1 ").fetchall()
-    print(id_order[0][0])
-    # insertar cada uno de los items comprados
-    for i in carListItems:
-        db.execute("INSERT INTO orderdetails(color,size,item,quantity,id_order) VALUES ('" +
-                   str(i[4])+"','"+str(i[3])+"',"+str(i[7])+","+str(int(i[2]))+","+str(int(id_order[0][0]))+")")
-        db.commit()
-    # obtener el id de la dirección a enviar el producto
-    id_address = db.execute(
-        "select id_address_person from addres_persons where address = '"+str(address)+"'limit 1").fetchall()
-    print(id_address[0][0])
-    # insertamos un nuevo registro de envio
-    db.execute("INSERT INTO shipping(shipdate,cost,id_order,address) VALUES (current_date,70.00," +
-               str(id_order[0][0])+","+str(id_address[0][0])+")")
-    db.commit()
-
-    # Limpieza del carrito
-    carListItems.clear()
-
-    return render_template("successPay.html", username=session["username"], det=det)
-
-
-
-#pagos paypal
+    #pagos paypal
 #Create Payment
 paypalrestsdk.configure({
   "mode": "sandbox", # sandbox or live
@@ -687,8 +650,8 @@ payment = paypalrestsdk.Payment({
     "payer": {
         "payment_method": "paypal"},
     "redirect_urls": {
-        "return_url": "http://0.0.0.0:8080/payment/execute",
-        "cancel_url": "http://0.0.0.0:8080/"},
+        "return_url": "/payment/execute",
+        "cancel_url": "/cancelpay"},
     "transactions": [{
         "item_list": {
             "items": [{
@@ -730,6 +693,43 @@ payment = paypalrestsdk.Payment.find("PAY-57363176S1057143SKE2HO3A")
 # Get List of Payments
 payment_history = paypalrestsdk.Payment.all({"count": 10})
 payment_history.payments
+
+    return render_template("payMethod.html", username=session["username"], total=total, subtotal=subtotal, shippingcost=shippingcost, dir=Direccion, dep=Departamento)
+
+
+@app.route("/successPay/<det>/<address>")
+@login_required
+def successPay(det, address):
+
+    # crear una nueva orden
+    db.execute("INSERT INTO orders(orderdate,paymentmethod,id_user,id_status) VALUES (current_timestamp,1," +
+               str(session["id_user"])+",1)")
+    db.commit()
+
+    # obtener el id de la orden que acabamos de insertar
+    id_order = db.execute(
+        "select id_order from orders o where id_user = "+str(session["id_user"])+" order by orderdate desc limit 1 ").fetchall()
+    print(id_order[0][0])
+    # insertar cada uno de los items comprados
+    for i in carListItems:
+        db.execute("INSERT INTO orderdetails(color,size,item,quantity,id_order) VALUES ('" +
+                   str(i[4])+"','"+str(i[3])+"',"+str(i[7])+","+str(int(i[2]))+","+str(int(id_order[0][0]))+")")
+        db.commit()
+    # obtener el id de la dirección a enviar el producto
+    id_address = db.execute(
+        "select id_address_person from addres_persons where address = '"+str(address)+"'limit 1").fetchall()
+    print(id_address[0][0])
+    # insertamos un nuevo registro de envio
+    db.execute("INSERT INTO shipping(shipdate,cost,id_order,address) VALUES (current_date,70.00," +
+               str(id_order[0][0])+","+str(id_address[0][0])+")")
+    db.commit()
+
+    # Limpieza del carrito
+    carListItems.clear()
+
+    return render_template("successPay.html", username=session["username"], det=det)
+
+
 
 
 if __name__ == "__main__":
