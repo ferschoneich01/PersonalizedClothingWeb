@@ -7,27 +7,6 @@ from funciones import *
 from sqlalchemy.sql import text
 import json
 import uuid
-#PAGOS CON PAYPAL CONFIGURACION
-#Register for a developer account and get your client_id and secret at PayPal Developer Portal.
-import paypalrestsdk
-import logging
-
-paypalrestsdk.configure({
-  "mode": "sandbox", # sandbox or live
-  "client_id": "AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re",
-  "client_secret": "EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x" })
-#Configure through environment variables
-export PAYPAL_MODE=sandbox   # sandbox or live
-export PAYPAL_CLIENT_ID=AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re
-export PAYPAL_CLIENT_SECRET=EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x
-#Configure through a non-global API object
-my_api = paypalrestsdk.Api({
-  'mode': 'sandbox',
-  'client_id': 'AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re',
-  'client_secret': 'EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x'})
-
-payment = paypalrestsdk.Payment({AdNaKOnAyPmqD6cU32JdsSqIWmtGM9b8AzBxfrBCGSEuLDDC_kqwW4Vj95MoBlPDkpMvvFKP24UBHELF}, api=my_api)
-
 
 app = Flask(__name__)
 
@@ -638,62 +617,6 @@ def paymenthMethod(dir):
         Departamento = Addres[j][3]
         j += 1
 
-    #pagos paypal
-    #Create Payment
-    paypalrestsdk.configure({
-    "mode": "sandbox", # sandbox or live
-    "client_id": "AeZSGzHVq24UiTo8drX1ZDDm00qXSqXHThNn08pIjO4kvedwxh-E1VlTArRAKUne-dAJRsnA0sR3n8Re",
-    "client_secret": "EMsEdXaMOGijKhJhe79a115qqjmAOQ6P1epmKUwaKNl-IZv8uHoClmMKRH8WMn65h2JUy4RG5iizCP6x" })
-
-    payment = paypalrestsdk.Payment({
-        "intent": "sale",
-        "payer": {
-            "payment_method": "paypal"},
-        "redirect_urls": {
-            "return_url": "/payment/execute",
-            "cancel_url": "/cancelpay"},
-        "transactions": [{
-            "item_list": {
-                "items": [{
-                    "name": "PERSONALIZED CLOTHING",
-                    "sku": "item",
-                    "price": "5.00",
-                    "currency": "USD",
-                    "quantity": 1}]},
-            "amount": {
-                "total": ""+round(total,2),
-                "currency": "USD"},
-            "description": "Gracias por comprar en personalized clothing."}]})
-
-        if payment.create():
-            redirect("/successPay/Gracias por comprar en personalized clothing/"+Direccion)
-        else:
-            print(payment.error)
-
-        #Authorize Payment
-        """for link in payment.links:
-            if link.rel == "approval_url":
-                # Convert to str to avoid Google App Engine Unicode issue
-                # https://github.com/paypal/rest-api-sdk-python/pull/58
-                approval_url = str(link.href)
-                print("Redirect for approval: %s" % (approval_url))"""
-
-        #Execute Payment
-        payment = paypalrestsdk.Payment.find("PAY-57363176S1057143SKE2HO3A")
-
-        if payment.execute({"payer_id": "DUFRQ8GWYMJXC"}):
-            print("Payment execute successfully")
-        else:
-            print(payment.error) # Error Hash
-
-        #Get Payment details
-        # Fetch Payment
-        payment = paypalrestsdk.Payment.find("PAY-57363176S1057143SKE2HO3A")
-
-        # Get List of Payments
-        payment_history = paypalrestsdk.Payment.all({"count": 10})
-        payment_history.payments
-
     return render_template("payMethod.html", username=session["username"], total=total, subtotal=subtotal, shippingcost=shippingcost, dir=Direccion, dep=Departamento)
 
 
@@ -728,8 +651,6 @@ def successPay(det, address):
     carListItems.clear()
 
     return render_template("successPay.html", username=session["username"], det=det)
-
-
 
 
 if __name__ == "__main__":
