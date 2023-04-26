@@ -28,54 +28,6 @@ my_api = paypalrestsdk.Api({
 
 payment = paypalrestsdk.Payment({...}, api=my_api)
 
-#Create Payment
-paypalrestsdk.configure({
-  "mode": "sandbox", # sandbox or live
-  "client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
-  "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
-
-payment = paypalrestsdk.Payment({
-    "intent": "sale",
-    "payer": {
-        "payment_method": "paypal"},
-    "redirect_urls": {
-        "return_url": "http://localhost:3000/payment/execute",
-        "cancel_url": "http://localhost:3000/"},
-    "transactions": [{
-        "item_list": {
-            "items": [{
-                "name": "item",
-                "sku": "item",
-                "price": "5.00",
-                "currency": "USD",
-                "quantity": 1}]},
-        "amount": {
-            "total": "5.00",
-            "currency": "USD"},
-        "description": "This is the payment transaction description."}]})
-
-if payment.create():
-  print("Payment created successfully")
-else:
-  print(payment.error)
-
-#Authorize Payment
-for link in payment.links:
-    if link.rel == "approval_url":
-        # Convert to str to avoid Google App Engine Unicode issue
-        # https://github.com/paypal/rest-api-sdk-python/pull/58
-        approval_url = str(link.href)
-        print("Redirect for approval: %s" % (approval_url))
-
-#Execute Payment
-payment = paypalrestsdk.Payment.find("PAY-57363176S1057143SKE2HO3A")
-
-if payment.execute({"payer_id": "DUFRQ8GWYMJXC"}):
-  print("Payment execute successfully")
-else:
-  print(payment.error) # Error Hash
-
-
 
 app = Flask(__name__)
 
@@ -721,6 +673,63 @@ def successPay(det, address):
 
     return render_template("successPay.html", username=session["username"], det=det)
 
+
+
+#pagos paypal
+#Create Payment
+paypalrestsdk.configure({
+  "mode": "sandbox", # sandbox or live
+  "client_id": "EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM",
+  "client_secret": "EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM" })
+
+payment = paypalrestsdk.Payment({
+    "intent": "sale",
+    "payer": {
+        "payment_method": "paypal"},
+    "redirect_urls": {
+        "return_url": "http://localhost:3000/payment/execute",
+        "cancel_url": "http://localhost:3000/"},
+    "transactions": [{
+        "item_list": {
+            "items": [{
+                "name": "item",
+                "sku": "item",
+                "price": "5.00",
+                "currency": "USD",
+                "quantity": 1}]},
+        "amount": {
+            "total": "5.00",
+            "currency": "USD"},
+        "description": "This is the payment transaction description."}]})
+
+if payment.create():
+  print("Payment created successfully")
+else:
+  print(payment.error)
+
+#Authorize Payment
+for link in payment.links:
+    if link.rel == "approval_url":
+        # Convert to str to avoid Google App Engine Unicode issue
+        # https://github.com/paypal/rest-api-sdk-python/pull/58
+        approval_url = str(link.href)
+        print("Redirect for approval: %s" % (approval_url))
+
+#Execute Payment
+payment = paypalrestsdk.Payment.find("PAY-57363176S1057143SKE2HO3A")
+
+if payment.execute({"payer_id": "DUFRQ8GWYMJXC"}):
+  print("Payment execute successfully")
+else:
+  print(payment.error) # Error Hash
+
+#Get Payment details
+# Fetch Payment
+payment = paypalrestsdk.Payment.find("PAY-57363176S1057143SKE2HO3A")
+
+# Get List of Payments
+payment_history = paypalrestsdk.Payment.all({"count": 10})
+payment_history.payments
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)
