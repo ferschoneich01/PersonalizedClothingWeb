@@ -666,25 +666,25 @@ def paymenthMethod(dir):
             "description": "Gracias por comprar en personalized clothing."}]})
 
         if payment.create():
-            redirect("/successPay/Gracias por comprar en personalized clothing/")
+            redirect("/successPay/Gracias por comprar en personalized clothing/"+Direccion)
         else:
-        print(payment.error)
+            print(payment.error)
 
         #Authorize Payment
-        for link in payment.links:
+        """for link in payment.links:
             if link.rel == "approval_url":
                 # Convert to str to avoid Google App Engine Unicode issue
                 # https://github.com/paypal/rest-api-sdk-python/pull/58
                 approval_url = str(link.href)
-                print("Redirect for approval: %s" % (approval_url))
+                print("Redirect for approval: %s" % (approval_url))"""
 
         #Execute Payment
         payment = paypalrestsdk.Payment.find("PAY-57363176S1057143SKE2HO3A")
 
         if payment.execute({"payer_id": "DUFRQ8GWYMJXC"}):
-        print("Payment execute successfully")
+            print("Payment execute successfully")
         else:
-        print(payment.error) # Error Hash
+            print(payment.error) # Error Hash
 
         #Get Payment details
         # Fetch Payment
