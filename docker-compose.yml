@@ -9,7 +9,7 @@ services:
       - "5433:5433"
 
     environment:
-      - DATABASE_HOST=https://ferschoneich01-ideal-fishstick-j7g94p5x65vhvw9.github.dev
+      - DATABASE_HOST=127.0.0.1
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=PCdb
