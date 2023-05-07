@@ -1,8 +1,2 @@
-Postgres cluster personalizedclothing-db created
-  Username:    postgres
-  Password:    UdfSI5VJoaLghxB
-  Hostname:    personalizedclothing-db.internal
-  Flycast:     fdaa:1:fd8f:0:1::4
-  Proxy port:  5432
-  Postgres port:  5433
-  Connection string: postgres://postgres:UdfSI5VJoaLghxB@personalizedclothing-db.flycast:5432
+docker-compose up
+//comando para iniciar pgadmin en contenedor de docker en codespace
