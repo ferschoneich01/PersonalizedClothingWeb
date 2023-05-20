@@ -1766,12 +1766,15 @@ footer {
 
     .nabvar-mobile{
         background-color: #ffffff;
+        display: flex;
+        justify-content: center;
     }
 
     .img-logo{
-        width: 300px;
-        height: auto;
+        width: 0px;
+        height: 0;
         filter: none;
+        visibility: hidden;
     }
 
     .banner-cover {
@@ -1858,7 +1861,7 @@ footer {
 
     .btn-deposito{
         width:98%;
-        backgroudn-color:yellow;
+        background-color:yellow;
         color:black;
         font-size:18px;
         padding:3px;
