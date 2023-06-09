@@ -18,6 +18,107 @@
 <body>
   <!-- Barra de navegación -->
   <header>
+    <nav class="navbar">
+      <!---->
+      <header class="nabvar-mobile is-size-5-mobile">
+        <div>
+          <a href="#" id="btn-mobile" style="position:absolute;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:30px;">
+              <title>menu</title>
+              <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="navbar-mobile-link" style="text-align: center; font-weight: 600 !important; width:100%;">
+          <a class="is-uppercase has-text-black" href="/">
+            Personalized Clothing
+          </a>
+        </div>
+        <div class="navbar-mobile-link has-text-black">
+          <a href="/car" class="has-text-black">
+            <i style="font-size: 1em;" class="zmdi zmdi-shopping-cart"></i>
+          </a>
+        </div>
+
+
+      </header>
+      <nav class=" nav-menu" id="mySidenav">
+        <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 40%;"
+          href="/">Personalized
+          Clothing</a>
+        <ul class="nav-menu-ul">
+
+          <li class="nav-menu-item"><a style="color:black;" href="/adminSells" class="nav-menu-link">
+              <span>Ventas</span>
+            </a>
+          </li>
+          <li class="nav-menu-item"><a style="color:black;" href="/adminAddItem" class="nav-menu-link">
+              <span>Nuevo Item</span>
+            </a>
+          </li>
+          <li class="navbar-top-item">
+            <a href="/adminOrders" style="color:black;" class="nav-menu-link">
+              <i style="margin-right:6px; margin-top:5px; font-size: 19px;" class="zmdi zmdi-library"></i>
+              <span>Ver Pedidos</span>
+            </a>
+          </li>
+          {% if username != 'null' %}
+          <li class="navbar-top-item">
+            <a href="/newOrder" style="color:black;" class="nav-menu-link">
+              <i style="margin-right:6px; margin-top:5px; font-size: 19px;" class="zmdi zmdi-border-color"></i>
+              <span>Nuevo Pedido</span>
+              <!-- <i class="zmdi zmdi-chevron-down"></i> -->
+            </a>
+          </li>
+
+          {% endif %}
+          {% if username != 'null' %}
+          <!--OPCION USUARIOS-->
+          <li class="nav-menu-item" id="userSettings">
+            <a class="nav-menu-link link-submenu" href="#">
+              <!--Nombreusuarios-->
+              <i class="zmdi zmdi-account-circle"
+                style="color:black; margin-right:6px; margin-top:-2px; font-size: 30px"></i>
+            </a>
+            <div class="container-sub-menu-user">
+              <ul class="sub-menu-ul">
+
+                <li class="nav-menu-item"><a style="color:black; font-weight: 600;" class="nav-menu-link">
+                    <span style="margin-left: 20px; margin-right: 8px; text-transform: uppercase;">{{username}}</span>
+                    <div
+                      style="margin-top:5px; width:8px; height:8px; background-color: rgb(71, 235, 71); border-radius:50%;">
+                    </div>
+                  </a>
+
+                </li>
+                <li class="nav-menu-item">
+                  <a style="color:black;" href="/userSettings" class="nav-menu-link">
+                    <span style="margin-left:20px;">Configuracion</span>
+                  </a>
+                </li>
+                <li class="nav-menu-item">
+                  <a style="color:black;" href="/logout" class=" nav-menu-link">
+                    <span style="color:red; margin-left:20px;">Logout</span>
+                  </a>
+                </li>
+
+
+              </ul>
+
+            </div>
+          </li>
+          {% else %}
+          <li class="navbar-top-item">
+            <a href="/login" class="nav-menu-link active">
+              Iniciar sesion | Registrarme
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </nav>
+
     <nav class="navbar-top">
       <ul class="navbar-top-ul">
         <li class="navbar-top-item">
@@ -37,36 +138,13 @@
         </li>
       </ul>
     </nav>
-    <nav class="navbar">
-      <header class="nabvar-mobile is-size-5-mobile">
-        <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile"><i class="zmdi zmdi-menu"></i></a>
-        <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-black">Personalized
-          Clothing</a>
-        <a class="navbar-mobile-link has-text-white" href="#"><i class="zmdi zmdi-shopping-cart"></i> Vacio</a>
-      </header>
-      <nav class="nav-menu --nav-dark-light" id="mySidenav">
-
-        <li class="nav-menu-item" style="width: 80%;"><a
-            class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" style="width: 50%;"
-            href="/">Personalized
-            Clothing</a></li>
-
-        <li class="nav-menu-item"><a style="color:black;" href="/adminOrders" class="nav-menu-link">
-            Ordenes</a></li>
-
-        <li class="nav-menu-item"><a style="color:black;" href="/adminAddItem" class="nav-menu-link">
-            Publicar</a></li>
-
-        <li class="nav-menu-item"><a style="color:black;" href="/adminSells" class="nav-menu-link">
-            Ventas</a></li>
-
-        </ul>
-      </nav>
-    </nav>
   </header>
 
-  {% block body %}
-  {% endblock %}
+  <div class="adminContent">
+    {% block body %}
+    {% endblock %}
+  </div>
+
   <!-- Scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

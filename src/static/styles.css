@@ -1739,6 +1739,19 @@ footer {
     width:30px;
 
 }
+
+/*PANEL ADMINISTRADOR*/
+.adminContent{
+    margin-top: 70px;
+}
+
+@media only screen and (max-width : 900px) {
+
+    .adminContent{
+        margin-top: 0px;
+    }
+}
+
   /*MOBILE VERSION*/
 @media only screen and (max-width : 900px) {
     .modal{
