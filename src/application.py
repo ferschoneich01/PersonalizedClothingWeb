@@ -160,6 +160,11 @@ def logout():
     return redirect('/')
 
 
+@app.route("/adminAddOrders", methods=["GET", "POST"])
+@login_required
+def adminAddOrders():
+    return render_template("adminAddOrders.html")
+
 @app.route("/adminOrders", methods=["GET", "POST"])
 @login_required
 def adminOrders():
