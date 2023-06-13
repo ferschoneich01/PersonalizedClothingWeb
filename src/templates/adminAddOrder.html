@@ -4,9 +4,9 @@
 <div class="container">
     <form action="/addOrder" methods="post">
         <label>Buscar item:</label>
-        <input name="items" class="form-input" type="select">
-        <br>
-        <div class="content-controls">
+        <input name="items" class="form-input" type="select" onChange(Console.log("ads"))>
+        <hr>
+        <div class="content-controls" width="50">
             <input type="number" max="12" min="1" />
         </div>
     </form>

@@ -163,7 +163,8 @@ def logout():
 @app.route("/adminAddOrders", methods=["GET", "POST"])
 @login_required
 def adminAddOrders():
-    return render_template("adminAddOrders.html")
+    return render_template("adminAddOrder.html", username=session["username"])
+
 
 @app.route("/adminOrders", methods=["GET", "POST"])
 @login_required
