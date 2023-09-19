@@ -1,0 +1,8 @@
+docker-compose up
+//comando para iniciar pgadmin en contenedor de docker en codespace
+
+//activar env
+ c:/Users/Fernando/Desktop/PersonalizedClothingWeb/venv/Scripts/Activate.ps1
+
+ //actualizar flyctl
+ flyctl.exe version update

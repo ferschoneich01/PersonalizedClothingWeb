@@ -1,15 +1,122 @@
 {% extends 'adminlayout.html'%}
 {% block body %}
-
+<link rel="stylesheet" href="{{url_for('static', filename='adminAddOrder.css')}}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <div class="container">
-    <form action="/addOrder" methods="post">
+    <!--form action="/addOrder" methods="post">
         <label>Buscar item:</label>
         <input name="items" class="form-input" type="select" onchange="Console.log('adds')" />
         <hr>
         <div class="content-controls" width="50">
             <input type="number" max="12" min="1" />
         </div>
-    </form>
+    </form-->
+
+    <div class="form">
+
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Cliente</a></li>
+            <li class="tab"><a href="#login">Articulo</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Información de envio</h1>
+
+                <form action="/" method="post">
+
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                Nombre<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" />
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Celular<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class=" field-wrap">
+                        <input type="text" required autocomplete="off" placeholder="Dirección: BO Hugo Chavez 7..." />
+                    </div>
+
+                    <div class="field-wrap">
+                        <select
+                            style="padding: 5px; width: 100%; background-color: rgb(0, 0, 0); font-size: large; color: aliceblue;">
+                            <option selected disabled>Departamento</option>
+                            <option value="1">Managua</option>
+                            <option value="2">Atlántico Norte</option>
+                            <option value="3">Atlántico Sur</option>
+                            <option value="4">Boaco</option>
+                            <option value="5">Carazo</option>
+                            <option value="6">Chinandega</option>
+                            <option value="7">Chontales</option>
+                            <option value="8">Esteli</option>
+                            <option value="9">Granada</option>
+                            <option value="10">Jinotega</option>
+                            <option value="11">León</option>
+                            <option value="12">Madriz</option>
+                            <option value="13">Managua</option>
+                            <option value="14">Masaya</option>
+                            <option value="15">Matagalpa</option>
+                            <option value="16">Nueva Segovia</option>
+                            <option value="17">Río San Juan</option>
+                            <option value="18">Rivas</option>
+
+                        </select>
+                    </div>
+
+                    <div class="button button-block tab" /><a a href="#login">Siguiente</a>
+            </div>
+
+            </form>
+
+        </div>
+
+        <div id="login">
+            <h1>Informacion articulo</h1>
+
+            <form action="/" method="post">
+
+                <fieldset>
+                    <legend>¿El articulo es personalizado?</legend>
+                    <div>
+                        <label>
+                            <input type="radio" name="selectopc" style="display: inline-block;" />
+                            <span>No</span>
+                        </label>
+
+                        <label>
+                            <input type="radio" name="selectopc" style="display: inline-block;" />
+                            <span>Si</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="field-wrap">
+                            <input type="search" name="search-input" id="" placeholder="Articulo">
+                        </div>
+
+                        <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                        <button type="submit" class="button button-block" />Log In</button>
+                    </div>
+                </fieldset>
+
+
+
+            </form>
+
+        </div>
+
+    </div><!-- tab-content -->
+
+</div> <!-- /form -->
 </div>
+<script src="{{url_for('static', filename='js/adminAddOrders.js')}}"></script>
 
 {% endblock %}

@@ -1461,7 +1461,6 @@ footer {
   }
 
   .modal-content {
-    top:10%;
     background-color: #fff;
     margin: 5% auto;
     padding: 20px;
@@ -1878,5 +1877,9 @@ footer {
         color:black;
         font-size:18px;
         padding:3px;
+    }
+
+    .modal-content {
+        margin: 10% auto;
     }
 }

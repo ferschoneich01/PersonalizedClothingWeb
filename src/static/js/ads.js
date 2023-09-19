@@ -19,7 +19,7 @@ function seHaMostradoHoy() {
 }
 
 /* Mostrar la ventana modal si no se ha mostrado hoy */
-if (!seHaMostradoHoy()) {
+if (seHaMostradoHoy()) {
     window.onload = function () {
         modal.style.display = "block";
         overlay.style.display = "block";
