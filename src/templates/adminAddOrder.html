@@ -1,122 +1,136 @@
 {% extends 'adminlayout.html'%}
 {% block body %}
-<link rel="stylesheet" href="{{url_for('static', filename='adminAddOrder.css')}}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<link rel="stylesheet" href="/src/static/styleForm.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <div class="container">
-    <!--form action="/addOrder" methods="post">
-        <label>Buscar item:</label>
-        <input name="items" class="form-input" type="select" onchange="Console.log('adds')" />
-        <hr>
-        <div class="content-controls" width="50">
-            <input type="number" max="12" min="1" />
+    <header>Registrar Pedido</header>
+    <div class="progress-bar">
+        <div class="step">
+            <p>Paso 1</p>
+            <div class="bullet">
+                <span>1</span>
+            </div>
+            <div class="check fas fa-check"></div>
         </div>
-    </form-->
+        <div class="step">
+            <p>Paso 2</p>
+            <div class="bullet">
+                <span>2</span>
+            </div>
+            <div class="check fas fa-check"></div>
+        </div>
+        <div class="step">
+            <p>Paso 3</p>
+            <div class="bullet">
+                <span>3</span>
+            </div>
+            <div class="check fas fa-check"></div>
+        </div>
+        <div class="step">
+            <p>Fin</p>
+            <div class="bullet">
+                <span>4</span>
+            </div>
+            <div class="check fas fa-check"></div>
+        </div>
+    </div>
 
-    <div class="form">
+    <div class="form-outer">
+        <form action="#">
 
-        <ul class="tab-group">
-            <li class="tab active"><a href="#signup">Cliente</a></li>
-            <li class="tab"><a href="#login">Articulo</a></li>
-        </ul>
+            <!-- Primer slide -->
+            <div class="page slide-page">
 
-        <div class="tab-content">
-            <div id="signup">
-                <h1>Información de envio</h1>
+                <div class="title">Información de Contacto</div>
+                <div class="field">
+                    <div class="label">Nombre Completo</div>
+                    <input type="name" name="name" placeholder="Nombre" required>
+                </div>
+                <div class="field">
+                    <div class="label">Número de Teléfono</div>
+                    <input type="tel" name="phone" placeholder="Número de Teléfono" required>
+                </div>
+                <div class="field">
+                    <button class="firstNext next">Siguiente</button>
+                </div>
 
-                <form action="/" method="post">
-
-                    <div class="top-row">
-                        <div class="field-wrap">
-                            <label>
-                                Nombre<span class="req">*</span>
-                            </label>
-                            <input type="text" required autocomplete="off" />
-                        </div>
-
-                        <div class="field-wrap">
-                            <label>
-                                Celular<span class="req">*</span>
-                            </label>
-                            <input type="text" required autocomplete="off" />
-                        </div>
-                    </div>
-
-                    <div class=" field-wrap">
-                        <input type="text" required autocomplete="off" placeholder="Dirección: BO Hugo Chavez 7..." />
-                    </div>
-
-                    <div class="field-wrap">
-                        <select
-                            style="padding: 5px; width: 100%; background-color: rgb(0, 0, 0); font-size: large; color: aliceblue;">
-                            <option selected disabled>Departamento</option>
-                            <option value="1">Managua</option>
-                            <option value="2">Atlántico Norte</option>
-                            <option value="3">Atlántico Sur</option>
-                            <option value="4">Boaco</option>
-                            <option value="5">Carazo</option>
-                            <option value="6">Chinandega</option>
-                            <option value="7">Chontales</option>
-                            <option value="8">Esteli</option>
-                            <option value="9">Granada</option>
-                            <option value="10">Jinotega</option>
-                            <option value="11">León</option>
-                            <option value="12">Madriz</option>
-                            <option value="13">Managua</option>
-                            <option value="14">Masaya</option>
-                            <option value="15">Matagalpa</option>
-                            <option value="16">Nueva Segovia</option>
-                            <option value="17">Río San Juan</option>
-                            <option value="18">Rivas</option>
-
-                        </select>
-                    </div>
-
-                    <div class="button button-block tab" /><a a href="#login">Siguiente</a>
             </div>
 
-            </form>
+            <!-- Segundo slide -->
+            <div class="page">
 
-        </div>
+                <div class="field">
+                    <div class="label">Dirección</div>
+                    <input type="text" name="Address" placeholder="Dirección de Envío" required>
+                </div>
+                <div class="field">
+                    <div class="label">Edad</div>
+                    <input type="Number" name="Age" placeholder="Edad" required>
+                </div>
+                <div class="field">
+                    <div class="label">Género</div>
+                    <select name="name">
+                        <option>Masculino</option>
+                        <option>Femenino</option>
+                    </select>
+                </div>
+                <div class="field btns">
+                    <button class="prev-1 prev">Atrás</button>
+                    <button class="next-1 next">Siguiente</button>
+                </div>
+            </div>
 
-        <div id="login">
-            <h1>Informacion articulo</h1>
+            <!-- Terccer slide -->
+            <div class="page">
+                <div class="title">Información del Artículo</div>
 
-            <form action="/" method="post">
+                <div class="field">
+                    <div class="label">Artículo</div>
+                    <select>
+                        <option>Sudadera</option>
+                        <option>Sueter</option>
+                        <option>Camiseta</option>
+                        <option>Jogger</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <div class="label">Cantidad</div>
+                    <input type="number" name="Quantity" min="1" placeholder="Cantidad" required>
+                </div>
+                <div class="field btns">
+                    <button class="prev-2 prev">Atrás</button>
+                    <button class="next-2 next">Siguiente</button>
+                </div>
+            </div>
 
-                <fieldset>
-                    <legend>¿El articulo es personalizado?</legend>
-                    <div>
-                        <label>
-                            <input type="radio" name="selectopc" style="display: inline-block;" />
-                            <span>No</span>
-                        </label>
+            <!-- Cuarto slide -->
+            <div class="page">
 
-                        <label>
-                            <input type="radio" name="selectopc" style="display: inline-block;" />
-                            <span>Si</span>
-                        </label>
-                    </div>
-                    <div>
-                        <div class="field-wrap">
-                            <input type="search" name="search-input" id="" placeholder="Articulo">
-                        </div>
+                <div class="field">
+                    <div class="label">Color</div>
+                    <input type="text" name="color" placeholder="Color" required>
+                </div>
+                <div class="field">
+                    <div class="label">Talla</div>
+                    <select>
+                        <option>XS</option>
+                        <option>S</option>
+                        <option>M</option>
+                        <option>L</option>
+                        <option>XL</option>
+                    </select>
+                </div>
+                <div class="field btns">
+                    <button class="prev-3 prev">Atrás</button>
+                    <button class="submit">Enviar</button>
+                </div>
+            </div>
 
-                        <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-                        <button type="submit" class="button button-block" />Log In</button>
-                    </div>
-                </fieldset>
-
-
-
-            </form>
-
-        </div>
-
-    </div><!-- tab-content -->
-
-</div> <!-- /form -->
+        </form>
+    </div>
 </div>
 <script src="{{url_for('static', filename='js/adminAddOrders.js')}}"></script>
+<script src="/src/static/js/scriptForm.js"></script>
 
 {% endblock %}
