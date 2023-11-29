@@ -17,8 +17,15 @@
   color: #fff;
   background: #d43f8d;
 }
+.adminContent{
+  margin-top: 0px;
+}
+
 .container-form{
   width: 400px;
+  max-height: 600px;
+  margin-bottom: 5%;
+  margin-top: 5%;
   background: #fff;
   text-align: center;
   border-radius: 5px;
