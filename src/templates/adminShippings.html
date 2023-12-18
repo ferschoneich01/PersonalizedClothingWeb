@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/static/adminOrders.css">
 <script src="{{url_for('static', filename='js/carMessage.js')}}" type="text/javascript"></script>
 <div class="container">
-    <h1>Nuevos Pedidos</h1>
+    <h1>Envios</h1>
     <div class="container-table">
         <table class="table">
             <!-- On rows -->
@@ -15,13 +15,12 @@
                     <td class="table-primary">Item</td>
                     <td class="table-primary">Color</td>
                     <td class="table-primary">Talla</td>
-                    <td class="table-primary">Metodo de pago</td>
+                    <td class="table-primary">Direccion</td>
                     <td class="table-primary">SubTotal</td>
                     <td class="table-primary">Costo Envio</td>
                     <td class="table-primary">Total</td>
                     <td class="table-primary">Estado</td>
                     <td class="table-primary">Producto</td>
-                    <td class="table-primary">Cancelar</td>
                     <td class="table-primary">Nuevo estado</td>
                 </tr>
             </thead>
@@ -34,7 +33,7 @@
                     <td class="table-primary">{{order.2}}</td>
                     <td class="table-primary">{{order.3}}</td>
                     <td class="table-primary">{{order.4}}</td>
-                    <td class="table-primary">{{order.5}}</td>
+                    <td class="table-primary">{{order.0}}</td>
                     <td class="table-primary">C${{order.6}}</td>
                     <td class="table-primary">C${{order.7}}</td>
                     <td class="table-primary">C${{order.8}}</td>
@@ -43,10 +42,6 @@
                         <a href="{{order.10}}">
                             <img src="{{order.10}}" alt="foto" style="width: 250px; border:1px solid rgb(63, 62, 62) ;">
                         </a>
-                    </td>
-                    <td class="table-primary"><button class="btn btn-dark"
-                            onclick="OrdenCancelada('/changeStatus/{{order.13}}/Cancelado')"
-                            style="background-color:black; width: 80px; font-size: 10px; color:red;">Cancelar</button>
                     </td>
 
                     {% if order.9 == 'En proceso' %}
@@ -61,12 +56,12 @@
                     </td>
                     {% elif order.9 == 'Enviado' %}
                     <td class="table-primary"><button class="btn btn-dark"
-                            onclick="OrdenTerminada('/changeStatus/{{order.13}}/Entregado')"
+                            onclick="OrdenEntregada('/changeStatus/{{order.13}}/Entregado')"
                             style="background-color:black; width: 80px; font-size: 10px; color:rgb(43, 255, 0);">Entregada</button>
                     </td>
                     {% elif order.9 == 'Terminado' %}
                     <td class="table-primary"><button class="btn btn-dark"
-                            onclick="OrdenTerminada('/changeStatus/{{order.13}}/No enviado')"
+                            onclick="OrdenEnviada('/changeStatus/{{order.13}}/Enviado')"
                             style="background-color:black; width: 80px; font-size: 10px; color:rgb(43, 255, 0);">Enviar</button>
                     </td>
                     {% endif %}

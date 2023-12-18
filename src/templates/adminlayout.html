@@ -67,6 +67,12 @@
               <span>Ver Pedidos</span>
             </a>
           </li>
+          <li class="navbar-top-item">
+            <a href="/adminShippings" style="color:black;" class="nav-menu-link">
+              <i style="margin-right:6px; margin-top:5px; font-size: 19px;" class="zmdi zmdi-local-shipping"></i>
+              <span>Ver Envios</span>
+            </a>
+          </li>
           {% if username != 'null' %}
           <li class="navbar-top-item">
             <a href="/adminAddOrders" style="color:black;" class="nav-menu-link">
@@ -150,6 +156,7 @@
   </div>
 
   <!-- Scripts -->
+  <script src=" //cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>

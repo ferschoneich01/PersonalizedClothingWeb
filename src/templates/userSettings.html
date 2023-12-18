@@ -1,7 +1,8 @@
 {% extends 'layout.html'%}
 {% block body %}
 <link rel="stylesheet" href="/static/userSettings.css">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
 <!--USER SETTINGS-->
 
@@ -9,46 +10,43 @@
     <div class="perfil-usuario-header">
         <div class="perfil-usuario-portada">
             <div class="perfil-usuario-avatar">
-                <img src="https://avatars.githubusercontent.com/u/57198318?s=400&u=616707c38c2a975cc1c0eb24d74241dbc2b76c3c&v=4" alt="img-avatar">
+                <img src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1701298654/bthvjf72h2d46qk4nafd.png"
+                    alt="img-avatar">
                 <button type="button" class="boton-avatar">
                     <input class="input-file" type="file" id="file" name="file">
                     <label for="file"> <i class="far fa-image"></i></label>
-                    
+
                 </button>
             </div>
-            <button type="button" class="boton-portada">
-                
-                <input class="input-file" type="file" id="file" name="file">
-                <label for="file"> <i class="far fa-image"></i> Cambiar fondo</label>
-
-            </button>
         </div>
     </div>
     <div class="perfil-usuario-body">
         <div class="perfil-usuario-bio">
-            <h3 class="titulo">Jaysson Marcos Fley González</h3>
-            <p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h3 class="titulo">Mayner Fernando Schoneich Romero</h3>
         </div>
         <div class="perfil-usuario-footer">
+            {% for user in users %}
             <ul class="lista-datos">
-                <li><input name="username" required class="form-control-field" type="text" placeholder="Username"></li>
-                <li><input name="password" required class="form-control-field" type="password" placeholder="Contraseña"></li>
-                <li><input name="name" required  class="form-control-field" type="text" placeholder="Nombre(s)"></li>
-                <li><input name="lastname" required class="form-control-field" type="text" placeholder="Apellido(s) "></li>
-                <li><input name="cedula" required class="form-control-field" type="text" placeholder="Cédula"></li>
+                <li><input name="username" required class="form-control-field" type="text" placeholder="Username"
+                        value="{{user.1}}" disabled></li>
+                <li><input name="password" required class="form-control-field" type="password" placeholder="Contraseña"
+                        value="{{user.2}}">
+                </li>
             </ul>
+
             <ul class="lista-datos">
-                <li><input name="email" required class="form-control-field" type="text" placeholder="Correo@example.com"></li>
-                <li><input name="birthday" required class="form-control-field" type="date" placeholder="Fecha Nacimiento"></li>
+                <li><input name="email" required class="form-control-field" type="text" placeholder="Correo@example.com"
+                        value="{{user.3}}"></li>
+                <li><input name="birthday" required class="form-control-field" type="text"
+                        placeholder="Fecha Nacimiento" disabled></li>
                 <li><input name="phone" required class="form-control-field" type="text" placeholder="Celular"></li>
                 <li><input name="city" required class="form-control-field" type="text" placeholder="Ciudad"></li>
-                <li><input name="postalcode" required class="form-control-field" type="text" placeholder="Codigo postal"></li>
-                
             </ul>
+            {% endfor %}
             <ul>
                 <a class="btn btn-dark">Editar Perfil</a>
-                <a class="btn btn-dark" style="background-color: black; color: blanchedalmond; font-size: 14px;">Guardar</a>
+                <a class="btn btn-dark"
+                    style="background-color: black; color: blanchedalmond; font-size: 14px;">Guardar</a>
             </ul>
         </div>
         <div class="redes-sociales">
@@ -60,4 +58,3 @@
 </section>
 
 {% endblock %}
-

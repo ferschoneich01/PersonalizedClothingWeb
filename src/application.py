@@ -25,7 +25,7 @@ db = scoped_session(sessionmaker(bind=engine))
 carListItems = []
 
 #api url
-# #api_url='http://127.0.0.1:5000/api'
+#api_url='http://127.0.0.1:5000/api'
 api_url='https://personalizedclothingapi.fly.dev/api'
 
 @app.route("/")
@@ -36,10 +36,21 @@ def index():
         return render_template("index.html", username='null')
 
 
-@app.route("/userSettings")
+@app.route("/userSettings", methods=["GET"])
 @login_required
 def userSettings():
-    return render_template("userSettings.html", username=session["username"])
+    users = []
+    #consulta api
+    data = requests.get(api_url+'/users/'+session["username"])
+    if data.status_code == 200:
+        dataJSON=data.json()
+    
+        for i in range(len(dataJSON)):
+            users.append([dataJSON[i]["id_user"],dataJSON[i]["username"],
+                            dataJSON[i]["password"], dataJSON[i]["email"], dataJSON[i]["person"],
+                            dataJSON[i]["role"], dataJSON[i]["status_user"]])
+            i += 1
+    return render_template("userSettings.html", username=session["username"],users=users)
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -167,74 +178,24 @@ def logout():
 def adminAddOrders():
     return render_template("adminAddOrder.html", username=session["username"])
 
-@app.route("/StatusOrder/<id_order>", methods=["POST", "GET"])
-def changeStatusOrder(id_order):
+@app.route("/changeStatus/<id_order>/<status>", methods=["GET"])
+def changeStatusOrder(id_order,status):
     # User reached route via POST (as by submitting a form via POST)
-    if request.method == "POST":
-
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            flash("Ingrese un nombre de usuario")
-            return redirect("/register")
-
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            flash("Ingrese una contraseña")
-            return redirect("/register")
-
-        elif not request.form.get("email"):
-            flash("Ingrese un correo")
-            return redirect("/register")
-
-        elif not request.form.get("cedula"):
-            flash("Ingrese una cedula")
-
-        elif not request.form.get("name"):
-            flash("Ingrese su nombre")
-            return redirect("/register")
-
-        elif not request.form.get("lastname"):
-            flash("Ingrese su apellido")
-            return redirect("/register")
-
-        elif not request.form.get("birthday"):
-            flash("Ingrese su fecha de cumpleaños")
-            return redirect("/register")
-
-        elif not request.form.get("phone"):
-            flash("Ingrese su numero de celular")
-            return redirect("/register")
-
-        elif not request.form.get("city"):
-            flash("Ingrese un departamento")
-            return redirect("/register")
-
-        data = {
-                "username": request.form.get("username"),
-                "password": request.form.get("password"),
-                "email": request.form.get("email"),
-                "cedula":request.form.get("cedula"),
-                "name":request.form.get("name"),
-                "lastname":request.form.get("lastname"),
-                "birthday":request.form.get("birthday"),
-                "phone":request.form.get("phone"),
-                "city":request.form["city"],
-                "sex":request.form["sex"]
-                }
-        
-        #envio de datos a la api
-        res = requests.post(api_url+'/users/add', json=data)
-        
-        if res.status_code != 200:
-            flash("El usuario ingresado ya existe.")
-            return redirect("/register")
-        else:
-            flash('¡Cuenta creada exitosamente!')
-            # Redirect user to login page
-            return redirect("/login")
-
+    data = {
+            "id_order": id_order,
+            "status": status
+            }
+    #envio de datos a la api
+    res = requests.put(api_url+'/orders/changeStatus', json=data)
+    
+    if res.status_code != 200:
+        flash("la orden no ha sido actualizad.")
+        return redirect("/adminOrders")
     else:
-        return render_template('register.html')
+        flash('¡Pedido actualizado!')
+        # Redirect user to login page
+        return redirect("/adminOrders")
+
 
 
 @app.route("/adminDelivery", methods=["GET", "POST"])
@@ -257,11 +218,37 @@ def adminOrders():
                 orders.append([dataJSON[i]["id_item"],dataJSON[i]["username"],
                                 dataJSON[i]["name"], dataJSON[i]["color"], dataJSON[i]["size"],
                                 dataJSON[i]["paymethod"], dataJSON[i]["price"], dataJSON[i]["cost"],
-                                dataJSON[i]["totalAmount"], dataJSON[i]["status"], dataJSON[i]["image"], dataJSON[i]["quantityOrders"], dataJSON[i]["id_status"]])
-                
+                                dataJSON[i]["totalAmount"], dataJSON[i]["status"], dataJSON[i]["image"], dataJSON[i]["quantityOrders"], dataJSON[i]["id_status"],dataJSON[i]["id_order"]])
                 i += 1
 
             return render_template('adminOrders.html', username=session["username"], orders=orders)
+        else:
+            Msg = "¡Hola! "+session["username"] + \
+                "Hemos tenido un error de conexion con los servicios volveremos cuanto antes no te preocupes :D"
+            return render_template("Mensajes.html", Msg=Msg, username=session["username"])
+
+    else:
+        return redirect("/")
+
+@app.route("/adminShippings", methods=["GET", "POST"])
+@login_required
+def adminShippings():
+
+    if session["role_user"] == 1:
+        orders = []
+    #consulta api
+        data = requests.get(api_url+'/orders/shippings')
+        if data.status_code == 200:
+            dataJSON=data.json()
+        
+            for i in range(len(dataJSON)):
+                orders.append([dataJSON[i]["address"],dataJSON[i]["username"],
+                                dataJSON[i]["name"], dataJSON[i]["color"], dataJSON[i]["size"],
+                                dataJSON[i]["paymethod"], dataJSON[i]["price"], dataJSON[i]["cost"],
+                                dataJSON[i]["totalAmount"], dataJSON[i]["status"], dataJSON[i]["image"], dataJSON[i]["quantityOrders"], dataJSON[i]["id_status"],dataJSON[i]["id_order"]])
+                i += 1
+
+            return render_template('adminShippings.html', username=session["username"], orders=orders)
         else:
             Msg = "¡Hola! "+session["username"] + \
                 "Hemos tenido un error de conexion con los servicios volveremos cuanto antes no te preocupes :D"
@@ -667,7 +654,7 @@ def buys():
         dataJSON=data.json()
        
         for i in range(len(dataJSON)):
-            buysList.append([dataJSON[i]["id_item"],dataJSON[i]["addres"], dataJSON[i]["username"],
+            buysList.append([dataJSON[i]["addres"], dataJSON[i]["username"],
                             dataJSON[i]["name"], dataJSON[i]["color"], dataJSON[i]["size"],
                             dataJSON[i]["paymethod"], dataJSON[i]["price"], dataJSON[i]["cost"],
                             dataJSON[i]["totalAmount"], dataJSON[i]["status"], dataJSON[i]["image"],dataJSON[i]["addres"], dataJSON[i]["orderdate"], dataJSON[i]["quantityOrders"]])
