@@ -1,16 +1,35 @@
-FROM python:3-alpine
+# ==============================
+# Stage 1: Build React App
+# ==============================
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
-COPY . /app
+# Copy package files and install dependencies
+COPY react-app/package.json react-app/package-lock.json ./
+RUN npm ci
 
-RUN apk update \
-    && apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add postgresql-dev \
-    && pip install psycopg2 \
-    && apk del build-deps
+# Copy the rest of the source code
+COPY react-app/ ./
 
-RUN pip3 install pip install --upgrade pip
-RUN pip3 --no-cache-dir install -r requirements.txt
+# Build arg for the API URL (default to relative /api for production)
+ARG VITE_API_URL=/api
+ENV VITE_API_URL=$VITE_API_URL
 
-CMD [ "python3", "src/application.py" ]
+# Build the production bundle
+RUN npm run build
+
+# ==============================
+# Stage 2: Serve with Nginx
+# ==============================
+FROM nginx:alpine
+
+# Copy built assets from build stage
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy custom nginx config for SPA routing
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,4 +1,9 @@
-# flyctl launch added from venv\.gitignore
-# created by virtualenv automatically
-venv\**\*
+node_modules
+react-app/node_modules
+react-app/dist
+react-app/.env
+.git
+.vscode
+*.md
 fly.toml
+docker-compose.yml
