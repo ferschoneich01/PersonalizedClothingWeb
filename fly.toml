@@ -4,6 +4,8 @@ app = "personalizedclothing"
 primary_region = "scl"
 
 [build]
+  [build.args]
+    VITE_API_URL = "https://personalizedclothingapi.fly.dev"
 
 [http_service]
   internal_port = 8080
