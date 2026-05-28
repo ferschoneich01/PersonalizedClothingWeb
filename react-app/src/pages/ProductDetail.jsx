@@ -1,136 +1,247 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { getItemById } from '../api/itemsApi'
+import { useParams, Link, useNavigate } from 'react-router-dom'
+import { getItemById, getItemsByCategory } from '../api/itemsApi'
 import { useCart } from '../context/CartContext'
+import ItemCard from '../components/ItemCard'
 import Swal from 'sweetalert2'
 
+const SIZES  = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+const COLORS = [
+  { label: 'Negro',  hex: '#1a1a1a' },
+  { label: 'Blanco', hex: '#f5f5f5' },
+  { label: 'Gris',   hex: '#9e9e9e' },
+  { label: 'Azul',   hex: '#1565c0' },
+  { label: 'Rojo',   hex: '#c62828' },
+  { label: 'Verde',  hex: '#2e7d32' },
+]
+
+function normalizeItem(data) {
+  if (!data) return null
+  const d = Array.isArray(data) ? data[0] : data
+  return {
+    id_item:      d.id_item      ?? d[0],
+    name:         d.name         ?? d[1],
+    description:  d.description  ?? d[2] ?? '100% algodón.',
+    image:        d.image        ?? d[3],
+    price:        d.price        ?? d[4],
+    clasification: d.clasification ?? d[5],
+    category:     d.category     ?? d[6],
+  }
+}
+
 export default function ProductDetail() {
-  const { id } = useParams()
+  const { id }       = useParams()
+  const navigate     = useNavigate()
   const { addToCart } = useCart()
-  const [item, setItem] = useState(null)
+
+  const [item, setItem]       = useState(null)
+  const [related, setRelated] = useState([])
   const [loading, setLoading] = useState(true)
-  
+  const [imgLoaded, setImgLoaded] = useState(false)
+
   const [quantity, setQuantity] = useState(1)
-  const [size, setSize] = useState('S')
-  const [color, setColor] = useState('Negro')
+  const [size, setSize]         = useState('M')
+  const [color, setColor]       = useState('Negro')
 
+  // Carga el producto principal
   useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const res = await getItemById(id)
-        // Ensure it's not array or handle array
-        let data = res.data
-        if (Array.isArray(data)) data = data[0]
-        
-        // Map Flask tuple logic if needed
-        setItem({
-          id_item: data.id_item || data[4] || data[5] || data[0],
-          name: data.name || data[0],
-          price: data.price || data[1],
-          image: data.image || data[3] || data[4] || data[2],
-          description: data.description || '100% cotton.'
-        })
-      } catch (error) {
-        console.error('Error fetching product:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    if (id) fetchItem()
+    if (!id) return
+    setLoading(true)
+    setImgLoaded(false)
+    getItemById(id)
+      .then((res) => {
+        const normalized = normalizeItem(res.data)
+        setItem(normalized)
+        // Carga productos relacionados por misma categoría y clasificación
+        if (normalized?.category && normalized?.clasification) {
+          return getItemsByCategory(normalized.category, normalized.clasification)
+            .then((r) => {
+              const others = r.data.filter(
+                (x) => (x.id_item ?? x[0]) !== normalized.id_item
+              )
+              setRelated(others.slice(0, 4))
+            })
+        }
+      })
+      .catch((err) => console.error('Error fetching product:', err))
+      .finally(() => setLoading(false))
   }, [id])
 
   const handleAddToCart = (e) => {
     e.preventDefault()
-    addToCart({
-      ...item,
-      quantity: Number(quantity),
-      size,
-      color
-    })
+    addToCart({ ...item, quantity: Number(quantity), size, color })
     Swal.fire({
       icon: 'success',
       title: '¡Añadido!',
-      text: 'El artículo ha sido añadido al carrito.',
-      timer: 1500,
-      showConfirmButton: false
+      text: `${item.name} — Talla ${size}, ${color}`,
+      timer: 1600,
+      showConfirmButton: false,
     })
   }
 
-  if (loading) return <p className="has-text-centered" style={{ marginTop: '50px' }}>Cargando producto...</p>
-  if (!item) return <p className="has-text-centered" style={{ marginTop: '50px' }}>Producto no encontrado.</p>
+  // ── Loading ──
+  if (loading) return (
+    <div className="pd-loading">
+      <div className="loading-spinner"></div>
+      <p>Cargando producto...</p>
+    </div>
+  )
+
+  if (!item) return (
+    <div className="pd-loading">
+      <p>Producto no encontrado.</p>
+      <button className="pd-btn-primary" onClick={() => navigate(-1)}>← Volver</button>
+    </div>
+  )
 
   const imgSrc = item.image?.startsWith('http') ? item.image : `/img/${item.image}`
+  const selectedColor = COLORS.find(c => c.label === color) ?? COLORS[0]
 
   return (
-    <div className="container" style={{ marginTop: '50px', marginBottom: '50px' }}>
-      <div className="columns">
-        <div className="column is-half">
-          <img src={imgSrc} alt={item.name} style={{ width: '100%', borderRadius: '8px' }} />
+    <div className="pd-wrapper">
+
+      {/* ── Breadcrumb ── */}
+      <nav className="pd-breadcrumb">
+        <Link to="/">Inicio</Link>
+        <span>/</span>
+        <Link to={`/items/category/${item.category}/${item.clasification}`}>Catálogo</Link>
+        <span>/</span>
+        <span>{item.name}</span>
+      </nav>
+
+      {/* ── Main layout ── */}
+      <div className="pd-main">
+
+        {/* Imagen */}
+        <div className="pd-img-col">
+          <div className="pd-img-wrap">
+            {!imgLoaded && <div className="pd-img-skeleton"></div>}
+            <img
+              src={imgSrc}
+              alt={item.name}
+              className={`pd-img${imgLoaded ? ' pd-img--loaded' : ''}`}
+              onLoad={() => setImgLoaded(true)}
+              onError={(e) => { e.target.src = 'https://via.placeholder.com/600x750?text=Sin+imagen' }}
+            />
+          </div>
         </div>
-        <div className="column is-half" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h1 className="title is-2 has-text-black">{item.name}</h1>
-          <h2 className="subtitle is-3 has-text-black has-text-weight-bold" style={{ marginTop: '10px' }}>
-            C${item.price}
-          </h2>
-          <p style={{ marginBottom: '20px' }}>{item.description}</p>
-          
-          <form onSubmit={handleAddToCart}>
-            <div className="field">
-              <label className="label">Talla</label>
-              <div className="control">
-                <div className="select">
-                  <select value={size} onChange={(e) => setSize(e.target.value)}>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                  </select>
-                </div>
+
+        {/* Info */}
+        <div className="pd-info-col">
+
+          <h1 className="pd-name">{item.name}</h1>
+
+          <div className="pd-price-row">
+            <span className="pd-price">C${item.price}</span>
+            <span className="pd-stock-badge">● En stock</span>
+          </div>
+
+          <p className="pd-description">{item.description}</p>
+
+          <div className="pd-divider"></div>
+
+          <form onSubmit={handleAddToCart} className="pd-form">
+
+            {/* Talla */}
+            <div className="pd-field">
+              <label className="pd-label">
+                Talla <span className="pd-label-selected">{size}</span>
+              </label>
+              <div className="pd-size-grid">
+                {SIZES.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    className={`pd-size-btn${size === s ? ' active' : ''}`}
+                    onClick={() => setSize(s)}
+                  >
+                    {s}
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div className="field">
-              <label className="label">Color</label>
-              <div className="control">
-                <div className="select">
-                  <select value={color} onChange={(e) => setColor(e.target.value)}>
-                    <option value="Negro">Negro</option>
-                    <option value="Blanco">Blanco</option>
-                    <option value="Gris">Gris</option>
-                    <option value="Azul">Azul</option>
-                    <option value="Rojo">Rojo</option>
-                  </select>
-                </div>
+            {/* Color */}
+            <div className="pd-field">
+              <label className="pd-label">
+                Color <span className="pd-label-selected">{color}</span>
+              </label>
+              <div className="pd-color-grid">
+                {COLORS.map((c) => (
+                  <button
+                    key={c.label}
+                    type="button"
+                    title={c.label}
+                    className={`pd-color-btn${color === c.label ? ' active' : ''}`}
+                    style={{ '--swatch': c.hex }}
+                    onClick={() => setColor(c.label)}
+                  >
+                    {color === c.label && <span className="pd-color-check">✓</span>}
+                  </button>
+                ))}
               </div>
             </div>
 
-            <div className="field">
-              <label className="label">Cantidad</label>
-              <div className="control">
-                <input 
-                  className="input" 
-                  type="number" 
-                  min="1" 
-                  max="10" 
-                  value={quantity} 
-                  onChange={(e) => setQuantity(e.target.value)} 
-                  style={{ width: '100px' }}
-                />
+            {/* Cantidad */}
+            <div className="pd-field">
+              <label className="pd-label">Cantidad</label>
+              <div className="pd-qty-row">
+                <button
+                  type="button"
+                  className="pd-qty-btn"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                >−</button>
+                <span className="pd-qty-val">{quantity}</span>
+                <button
+                  type="button"
+                  className="pd-qty-btn"
+                  onClick={() => setQuantity((q) => Math.min(10, q + 1))}
+                >+</button>
               </div>
             </div>
 
-            <div className="field is-grouped" style={{ marginTop: '30px' }}>
-              <div className="control">
-                <button type="submit" className="button is-dark is-medium">Añadir al carrito</button>
-              </div>
-              <div className="control">
-                <Link to="/items" className="button is-light is-medium">Seguir comprando</Link>
-              </div>
+            {/* Botones */}
+            <div className="pd-actions">
+              <button type="submit" className="pd-btn-primary">
+                <i className="zmdi zmdi-shopping-cart"></i> Añadir al carrito
+              </button>
+              <button type="button" className="pd-btn-secondary" onClick={() => navigate(-1)}>
+                ← Volver
+              </button>
             </div>
+
           </form>
+
+          {/* Features */}
+          <ul className="pd-features">
+            <li><i className="zmdi zmdi-truck"></i> Envío gratis en pedidos mayores a C$500</li>
+            <li><i className="zmdi zmdi-refresh"></i> Devoluciones en 30 días</li>
+            <li><i className="zmdi zmdi-lock"></i> Pago 100% seguro</li>
+          </ul>
+
         </div>
       </div>
+
+      {/* ── Productos relacionados ── */}
+      {related.length > 0 && (
+        <section className="pd-related">
+          <div className="pd-related-header">
+            <h2 className="pd-related-title">También te puede gustar</h2>
+            <Link
+              to={`/items/category/${item.category}/${item.clasification}`}
+              className="pd-related-all"
+            >
+              Ver todo →
+            </Link>
+          </div>
+          <div className="pd-related-grid">
+            {related.map((r, i) => (
+              <ItemCard key={r.id_item ?? i} item={r} />
+            ))}
+          </div>
+        </section>
+      )}
+
     </div>
   )
 }

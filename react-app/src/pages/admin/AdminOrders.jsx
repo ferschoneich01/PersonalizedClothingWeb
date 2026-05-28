@@ -35,10 +35,7 @@ export default function AdminOrders() {
   }
 
   const toggleOrder = (id_order) => {
-    setExpandedOrders(prev => ({
-      ...prev,
-      [id_order]: !prev[id_order]
-    }))
+    setExpandedOrders(prev => ({ ...prev, [id_order]: !prev[id_order] }))
   }
 
   const groupedOrders = Object.values(
@@ -49,6 +46,8 @@ export default function AdminOrders() {
           username: buy.username,
           status: buy.status,
           cost: buy.cost,
+          paymethod: buy.paymethod,
+          voucher_url: buy.voucher_url,
           totalAmount: buy.totalAmount,
           items: []
         }
@@ -58,55 +57,49 @@ export default function AdminOrders() {
     }, {})
   )
 
-  // Calculate actual total per order (items cost + shipping)
   groupedOrders.forEach(order => {
     const itemsTotal = order.items.reduce((sum, item) => sum + (item.price * item.quantityOrders), 0)
     order.realTotal = itemsTotal + parseFloat(order.cost)
   })
 
-  // Sort by order ID descending
   groupedOrders.sort((a, b) => b.id_order - a.id_order)
 
-  // FILTER LOGIC
   const filteredOrders = groupedOrders.filter(order => {
     const matchesSearch =
       order.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       order.id_order.toString().includes(searchTerm)
-
     const matchesStatus = statusFilter === 'Todos' || order.status === statusFilter
-
     return matchesSearch && matchesStatus
   })
+
+  const handleApproveDeposit = (id_order) => {
+    Swal.fire({
+      title: '¿Aprobar comprobante?',
+      text: "El estado cambiará a 'En proceso'",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, aprobar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleStatusChange(id_order, 'En proceso')
+      }
+    })
+  }
 
   return (
     <div className="container" style={{ marginTop: '50px', marginBottom: '50px', minHeight: '60vh', padding: '0 15px' }}>
       <h1 className="title is-2 has-text-centered">Administración de Pedidos</h1>
 
-      {/* SEARCH AND FILTER BAR - STICKY */}
-      <div
-        className="box mb-5"
-        style={{
-          position: 'sticky',
-          top: '20px',
-          boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-          borderTop: '4px solid #3273dc'
-        }}
-      >
+      {/* SEARCH AND FILTER */}
+      <div className="box mb-5" style={{ position: 'sticky', top: '20px', zIndex: 10, boxShadow: '0 4px 15px rgba(0,0,0,0.1)', borderTop: '4px solid #1a1a1a' }}>
         <div className="columns is-mobile is-multiline">
           <div className="column is-12-mobile is-8-tablet">
             <div className="field">
               <label className="label is-small">Buscar por Cliente o # Pedido</label>
               <div className="control has-icons-left">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Ej. Fernando01, 328..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <span className="icon is-left">
-                  <i className="zmdi zmdi-search"></i>
-                </span>
+                <input className="input" type="text" placeholder="Ej. Fernando01, 328..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                <span className="icon is-left"><i className="zmdi zmdi-search"></i></span>
               </div>
             </div>
           </div>
@@ -117,6 +110,7 @@ export default function AdminOrders() {
                 <div className="select is-fullwidth">
                   <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                     <option value="Todos">Todos los Estados</option>
+                    <option value="Pendiente">Pendiente (Depósito)</option>
                     <option value="En proceso">En proceso</option>
                     <option value="No enviado">No enviado</option>
                     <option value="Enviado">Enviado</option>
@@ -138,28 +132,24 @@ export default function AdminOrders() {
         <div className="columns is-multiline" style={{ marginTop: '10px' }}>
           {filteredOrders.map((order, i) => (
             <div key={i} className="column is-12">
-              <div className="box" style={{ padding: '10', overflow: 'hidden' }}>
-
-                {/* ORDER HEADER (Always visible) */}
-                <div
-                  className="is-flex is-flex-wrap-wrap is-align-items-center is-justify-content-space-between p-4"
-                  style={{ backgroundColor: '#fdfdfd', borderBottom: expandedOrders[order.id_order] ? '1px solid #eee' : 'none' }}
-                >
-                  <div style={{ minWidth: '200px' }}>
-                    <h3 className="title is-4 mb-1">Pedido #{order.id_order}</h3>
-                    <p className="subtitle is-6 mb-0">Cliente: <strong>{order.username}</strong></p>
+              <div className="box" style={{ padding: '0', overflow: 'hidden', border: order.status === 'Pendiente' ? '2px solid #fbbf24' : '1px solid #eee', borderRadius: '12px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
+                
+                {/* HEADER */}
+                <div className="is-flex is-flex-wrap-wrap is-align-items-center is-justify-content-space-between" style={{ padding: '24px', backgroundColor: '#fcfcfc', borderBottom: expandedOrders[order.id_order] ? '1px solid #eee' : 'none' }}>
+                  <div style={{ minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                      <span style={{ fontSize: '1.3rem', fontWeight: '800', color: '#1a1a1a' }}>Pedido #{order.id_order}</span>
+                      {order.status === 'Pendiente' && <span className="tag is-warning" style={{ fontWeight: 'bold' }}>Pendiente</span>}
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.95rem', color: '#555' }}>Cliente: <strong style={{ color: '#1a1a1a' }}>{order.username}</strong></p>
                   </div>
 
-                  <div className="is-flex is-align-items-center is-flex-wrap-wrap mt-2-mobile" style={{ gap: '15px' }}>
-                    <span className="is-size-5 has-text-weight-bold has-text-success mr-2">
-                      C${order.realTotal}
-                    </span>
+                  <div className="is-flex is-align-items-center is-flex-wrap-wrap mt-3-mobile" style={{ gap: '20px' }}>
+                    <span className="is-size-5 has-text-weight-bold has-text-success">C${order.realTotal}</span>
+                    
                     <div className="select is-small">
-                      <select
-                        value={order.status}
-                        onChange={(e) => handleStatusChange(order.id_order, e.target.value)}
-                        style={{ fontWeight: 'bold' }}
-                      >
+                      <select value={order.status} onChange={(e) => handleStatusChange(order.id_order, e.target.value)} style={{ fontWeight: 'bold', minWidth: '130px' }}>
+                        <option value="Pendiente">Pendiente</option>
                         <option value="En proceso">En proceso</option>
                         <option value="No enviado">No enviado</option>
                         <option value="Enviado">Enviado</option>
@@ -167,64 +157,81 @@ export default function AdminOrders() {
                         <option value="Terminado">Terminado</option>
                       </select>
                     </div>
-                    <button
-                      className={`button is-small ${expandedOrders[order.id_order] ? 'is-light' : 'is-info'}`}
-                      onClick={() => toggleOrder(order.id_order)}
-                    >
+
+                    <button className={`button is-small ${expandedOrders[order.id_order] ? 'is-light' : 'is-dark'}`} onClick={() => toggleOrder(order.id_order)}>
                       <i className={`zmdi zmdi-chevron-${expandedOrders[order.id_order] ? 'up' : 'down'} mr-2`}></i>
                       {expandedOrders[order.id_order] ? 'Ocultar' : 'Ver Detalles'}
                     </button>
                   </div>
                 </div>
 
-                {/* ORDER DETAILS (Collapsible) */}
+                {/* DETAILS */}
                 {expandedOrders[order.id_order] && (
-                  <div className="p-4" style={{ backgroundColor: '#fff' }}>
+                  <div style={{ padding: '24px', backgroundColor: '#fff' }}>
                     <div className="columns is-multiline">
-                      <div className="column is-12-mobile is-8-tablet">
-                        <h5 className="title is-6 mb-3 has-text-grey">Artículos del Pedido:</h5>
+                      
+                      {/* Items Col */}
+                      <div className="column is-12-mobile is-7-tablet" style={{ paddingRight: '24px' }}>
+                        <h5 className="title is-6 has-text-grey" style={{ marginBottom: '20px' }}><i className="zmdi zmdi-shopping-cart-plus mr-2"></i>Artículos del Pedido</h5>
                         {order.items.map((item, idx) => {
-                          const imgSrc = item.custom_image || item.image
-                          const finalImg = imgSrc?.startsWith('http') ? imgSrc : `/img/${imgSrc}`
+                          const finalImg = (item.custom_image || item.image)?.startsWith('http') ? (item.custom_image || item.image) : `/img/${item.custom_image || item.image}`
                           return (
-                            <div key={idx} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px', backgroundColor: '#fafafa', padding: '10px', borderRadius: '8px' }}>
-                              <img
-                                src={finalImg}
-                                alt={item.name}
-                                style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '6px', marginRight: '15px', cursor: 'pointer', border: '1px solid #ddd' }}
-                                onClick={() => Swal.fire({ imageUrl: finalImg, imageAlt: item.name, showConfirmButton: false, showCloseButton: true, width: 'auto', padding: '1em' })}
-                                title="Haz clic para ver completo"
-                              />
+                            <div key={idx} style={{ display: 'flex', alignItems: 'center', marginBottom: '15px', backgroundColor: '#fafafa', padding: '15px', borderRadius: '10px', border: '1px solid #f0f0f0' }}>
+                              <img src={finalImg} alt={item.name} style={{ width: '70px', height: '70px', objectFit: 'cover', borderRadius: '8px', marginRight: '20px', border: '1px solid #ddd' }} />
                               <div style={{ flex: 1 }}>
                                 <p className="has-text-weight-bold mb-1 is-size-6-mobile">{item.name}</p>
-                                <p className="is-size-7 mb-0">Talla: {item.size} | Color: {item.color}</p>
-                                <p className="is-size-7 mb-0">Cantidad: {item.quantityOrders} x C${item.price}</p>
+                                <p className="is-size-7 mb-1" style={{ color: '#666' }}>Talla: <strong>{item.size}</strong> | Color: <strong>{item.color}</strong></p>
+                                <p className="is-size-7 mb-0">Cant: {item.quantityOrders} x C${item.price}</p>
                               </div>
                             </div>
                           )
                         })}
                       </div>
-                      <div className="column is-12-mobile is-4-tablet">
-                        <div className="notification is-light is-small">
-                          <h4 className="title is-6 mb-3 has-text-grey">Resumen Financiero</h4>
-                          <div className="is-flex is-justify-content-space-between mb-1">
-                            <span className="is-size-7">Subtotal Artículos:</span>
-                            <span className="is-size-7">C${order.realTotal - parseFloat(order.cost)}</span>
-                          </div>
-                          <div className="is-flex is-justify-content-space-between mb-1">
-                            <span className="is-size-7">Costo de Envío:</span>
-                            <span className="is-size-7">C${order.cost}</span>
-                          </div>
-                          <div className="is-flex is-justify-content-space-between mt-2 pt-2" style={{ borderTop: '1px solid #ddd' }}>
-                            <span className="is-size-6 has-text-weight-bold">Total a Cobrar:</span>
-                            <span className="is-size-5 has-text-weight-bold has-text-success">C${order.realTotal}</span>
+
+                      {/* Resumen & Comprobante Col */}
+                      <div className="column is-12-mobile is-5-tablet">
+                        <div className="notification is-light is-small mb-4" style={{ padding: '20px', borderRadius: '10px' }}>
+                          <h4 className="title is-6 mb-4 has-text-grey"><i className="zmdi zmdi-receipt mr-2"></i>Resumen Financiero</h4>
+                          <div className="is-flex is-justify-content-space-between mb-2"><span className="is-size-7">Subtotal:</span><span className="is-size-7 has-text-weight-semibold">C${order.realTotal - parseFloat(order.cost)}</span></div>
+                          <div className="is-flex is-justify-content-space-between mb-2"><span className="is-size-7">Envío:</span><span className="is-size-7 has-text-weight-semibold">C${order.cost}</span></div>
+                          <div className="is-flex is-justify-content-space-between mt-3 pt-3" style={{ borderTop: '1px solid #ddd' }}>
+                            <span className="is-size-6 has-text-weight-bold">Total:</span><span className="is-size-5 has-text-weight-bold has-text-success">C${order.realTotal}</span>
                           </div>
                         </div>
+
+                        {/* COMPROBANTE DE PAGO */}
+                        {order.status === 'Pendiente' && (
+                          <div className="box" style={{ backgroundColor: '#fffbeb', border: '1px solid #fcd34d', padding: '20px', borderRadius: '10px' }}>
+                            <h4 className="title is-6 mb-3" style={{ color: '#b45309' }}><i className="zmdi zmdi-money-box mr-2"></i> Verificación de Depósito</h4>
+                            
+                            {order.voucher_url ? (
+                              <div style={{ textAlign: 'center', marginBottom: '15px' }}>
+                                <p className="is-size-7 mb-2">Comprobante subido por el cliente:</p>
+                                <img 
+                                  src={order.voucher_url} 
+                                  alt="Voucher" 
+                                  style={{ width: '100px', height: '140px', objectFit: 'cover', borderRadius: '8px', border: '2px solid #b45309', cursor: 'pointer', transition: 'transform 0.2s' }} 
+                                  onClick={() => Swal.fire({ imageUrl: order.voucher_url, imageAlt: 'Comprobante', showConfirmButton: false, showCloseButton: true, width: 'auto', padding: '1em' })}
+                                  onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                                  onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                                  title="Clic para ampliar"
+                                />
+                              </div>
+                            ) : (
+                              <p className="is-size-7 mb-4" style={{ color: '#92400e' }}>El usuario seleccionó depósito bancario, pero aún <strong>no ha subido el comprobante</strong>.</p>
+                            )}
+                            
+                            <button className="button is-success is-fullwidth is-small" onClick={() => handleApproveDeposit(order.id_order)} disabled={!order.voucher_url}>
+                              <i className="zmdi zmdi-check mr-2"></i> Aprobar y procesar orden
+                            </button>
+                            {!order.voucher_url && <p className="is-size-7 has-text-centered mt-2" style={{color: '#999'}}>Espera a que suban la foto para aprobar.</p>}
+                          </div>
+                        )}
+                        
                       </div>
                     </div>
                   </div>
                 )}
-
               </div>
             </div>
           ))}

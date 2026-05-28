@@ -26,6 +26,12 @@ export function CartProvider({ children }) {
     setCartItems((prev) => prev.filter((i) => i.cartId !== cartId))
   }
 
+  const updateQty = (cartId, newQty) => {
+    setCartItems((prev) =>
+      prev.map((i) => (i.cartId === cartId ? { ...i, quantity: Math.max(1, Math.min(10, newQty)) } : i))
+    )
+  }
+
   const clearCart = () => {
     setCartItems([])
     localStorage.removeItem('pc_cart')
@@ -35,7 +41,7 @@ export function CartProvider({ children }) {
   const cartCount = cartItems.length
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, cartTotal, cartCount }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, updateQty, clearCart, cartTotal, cartCount }}>
       {children}
     </CartContext.Provider>
   )

@@ -2,51 +2,79 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { getItemsByCategory } from '../api/itemsApi'
 import ItemCard from '../components/ItemCard'
+import Pagination from '../components/Pagination'
+import { usePagination } from '../hooks/usePagination'
+
+const CATEGORY_LABELS = {
+  '1': 'Camisetas',
+  '2': 'Sudaderas',
+  '3': 'Crops / Sudaderas',
+  '4': 'Suéteres',
+}
+const CLASS_LABELS = { '1': 'Hombre', '2': 'Mujer' }
 
 export default function Products() {
   const { cat, clas } = useParams()
-  const [items, setItems] = useState([])
+  const [items, setItems]   = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      setLoading(true)
-      try {
-        const res = await getItemsByCategory(cat, clas)
-        setItems(res.data)
-      } catch (error) {
-        console.error('Error fetching category items:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+  const { page, totalPages, paginated, setPage, goNext, goPrev } = usePagination(items, 8)
 
-    if (cat && clas) {
-      fetchItems()
-    }
+  useEffect(() => {
+    if (!cat || !clas) return
+    setLoading(true)
+    setPage(1)
+    getItemsByCategory(cat, clas)
+      .then((res) => setItems(res.data))
+      .catch((err) => console.error('Error fetching items:', err))
+      .finally(() => setLoading(false))
   }, [cat, clas])
 
-  return (
-    <div className="container container-full">
-      <h1 className="is-size-2 has-text-weight-bold has-text-centered has-text-black" style={{ marginTop: '20px' }}>Catálogo</h1>
-      <h2 className="is-size-4 has-text-centered has-text-black">Encuentra tu estilo</h2>
+  const categoryLabel = CATEGORY_LABELS[cat] || 'Catálogo'
+  const classLabel    = CLASS_LABELS[clas]    || ''
 
+  return (
+    <div className="catalog-page">
+      {/* Header */}
+      <div className="catalog-header">
+        <h1 className="catalog-title">{categoryLabel}</h1>
+        {classLabel && <p className="catalog-subtitle">{classLabel}</p>}
+        {!loading && (
+          <p className="catalog-count">{items.length} artículo{items.length !== 1 ? 's' : ''}</p>
+        )}
+      </div>
+
+      {/* Contenido */}
       {loading ? (
-        <p className="has-text-centered" style={{ marginTop: '50px' }}>Cargando artículos...</p>
-      ) : items.length === 0 ? (
-        <p className="has-text-centered" style={{ marginTop: '50px' }}>No hay artículos en esta categoría.</p>
-      ) : (
-        <div className="columns is-multiline" style={{ marginTop: '20px' }}>
-          <div className="column is-full-mobile">
-            <div className="columns is-centered is-mobile is-multiline">
-              {items.map((item, i) => (
-                <div key={i} className="column is-one-quarter-desktop is-half-tablet column-full">
-                  <ItemCard item={item} />
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="catalog-loading">
+          <div className="loading-spinner"></div>
+          <p>Cargando artículos...</p>
         </div>
+      ) : items.length === 0 ? (
+        <div className="catalog-empty">
+          <i className="zmdi zmdi-alert-circle" style={{ fontSize: '48px', color: '#ccc' }}></i>
+          <p>No hay artículos en esta categoría.</p>
+        </div>
+      ) : (
+        <>
+          <div className="items-grid">
+            {paginated.map((item, i) => (
+              <ItemCard key={item.id_item || i} item={item} />
+            ))}
+          </div>
+
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPrev={goPrev}
+            onNext={goNext}
+            onPage={setPage}
+          />
+
+          <p className="catalog-page-info">
+            Página {page} de {totalPages}
+          </p>
+        </>
       )}
     </div>
   )

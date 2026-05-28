@@ -1,48 +1,65 @@
 import { useEffect, useState } from 'react'
 import { getItems } from '../api/itemsApi'
 import ItemCard from '../components/ItemCard'
+import Pagination from '../components/Pagination'
+import { usePagination } from '../hooks/usePagination'
 
 export default function Lookbook() {
-  const [items, setItems] = useState([])
+  const [items, setItems]     = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const res = await getItems()
-        setItems(res.data)
-      } catch (error) {
-        console.error('Error fetching lookbook items:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
+  const { page, totalPages, paginated, setPage, goNext, goPrev } = usePagination(items, 8)
 
-    fetchItems()
+  useEffect(() => {
+    getItems()
+      .then((res) => setItems(res.data))
+      .catch((err) => console.error('Error fetching lookbook items:', err))
+      .finally(() => setLoading(false))
   }, [])
 
   return (
-    <>
-      <div className="container container-full">
-        <h1 className="is-size-2 has-text-weight-bold has-text-centered has-text-black" style={{ marginTop: '20px' }}>Lookbook</h1>
-        <h2 className="is-size-4 has-text-centered has-text-black">Prendas con el mejor estilo</h2>
-
-        {loading ? (
-          <p className="has-text-centered" style={{ marginTop: '50px' }}>Cargando artículos...</p>
-        ) : (
-          <div className="columns is-multiline">
-            <div className="column is-full-mobile">
-              <div className="columns is-centered is-mobile is-multiline">
-                {items.map((item, i) => (
-                  <div key={i} className="column is-one-quarter-desktop is-half-tablet column-full">
-                    <ItemCard item={item} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+    <div className="catalog-page">
+      {/* Header */}
+      <div className="catalog-header">
+        <h1 className="catalog-title">Lookbook</h1>
+        <p className="catalog-subtitle">Prendas con el mejor estilo</p>
+        {!loading && (
+          <p className="catalog-count">{items.length} artículo{items.length !== 1 ? 's' : ''}</p>
         )}
       </div>
-    </>
+
+      {/* Contenido */}
+      {loading ? (
+        <div className="catalog-loading">
+          <div className="loading-spinner"></div>
+          <p>Cargando artículos...</p>
+        </div>
+      ) : items.length === 0 ? (
+        <div className="catalog-empty">
+          <i className="zmdi zmdi-alert-circle" style={{ fontSize: '48px', color: '#ccc' }}></i>
+          <p>No hay artículos disponibles.</p>
+        </div>
+      ) : (
+        <>
+          <div className="items-grid">
+            {paginated.map((item, i) => (
+              <ItemCard key={item.id_item || i} item={item} />
+            ))}
+          </div>
+
+          <Pagination
+            page={page}
+            totalPages={totalPages}
+            onPrev={goPrev}
+            onNext={goNext}
+            onPage={setPage}
+          />
+
+          <p className="catalog-page-info">
+            Página {page} de {totalPages}
+          </p>
+        </>
+      )}
+    </div>
   )
 }

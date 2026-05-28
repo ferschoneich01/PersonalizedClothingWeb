@@ -19,18 +19,8 @@ const MOCKUPS = {
       gray: '/img/crewneck_gray_front.png',
       pink: '/img/crewneck_pink_front.png',
     },
-    back: {
-      black: '/img/hoodie_black_back.png',
-      white: '/img/hoodie_mockup_back.png',
-      gray: '/img/hoodie_gray_back.png',
-      pink: '/img/hoodie_pink_back.png'
-    },
-    sleeve: {
-      black: '/img/tshirt_black_sleeve.png',
-      white: '/img/tshirt_mockup_sleeve.png',
-      gray: '/img/tshirt_gray_sleeve.png',
-      pink: '/img/tshirt_pink_sleeve.png'
-    }
+    back: '/img/crewneck_white_back_1780002231648.png',
+    sleeve: '/img/crewneck_white_sleeve_1780002264451.png'
   },
   sudadera: { 
     front: {
@@ -59,18 +49,8 @@ const MOCKUPS = {
       gray: '/img/tshirt_gray_front_1779693950684.png',
       pink: '/img/tshirt_pink_front_1779693966987.png',
     },
-    back: {
-      black: '/img/tshirt_black_back.png',
-      white: '/img/tshirt_mockup_back.png',
-      gray: '/img/tshirt_gray_back.png',
-      pink: '/img/tshirt_pink_back.png'
-    },
-    sleeve: {
-      black: '/img/tshirt_black_sleeve.png',
-      white: '/img/tshirt_mockup_sleeve.png',
-      gray: '/img/tshirt_gray_sleeve.png',
-      pink: '/img/tshirt_pink_sleeve.png'
-    }
+    back: '/img/tshirt_white_back_1780002161507.png',
+    sleeve: '/img/tshirt_white_sleeve_1780002194574.png'
   }
 }
 
@@ -318,6 +298,8 @@ export default function Personalizar() {
                   bounds="parent"
                   position={{ x: design.x, y: design.y }}
                   size={{ width: design.width, height: design.height }}
+                  onDragStart={() => setSelectedDesignId(design.id)}
+                  onResizeStart={() => setSelectedDesignId(design.id)}
                   onDragStop={(e, d) => updateDesign(design.id, { x: d.x, y: d.y })}
                   onResizeStop={(e, direction, ref, delta, position) => {
                     updateDesign(design.id, {
@@ -326,18 +308,33 @@ export default function Personalizar() {
                       ...position,
                     })
                   }}
-                  onPointerDown={(e) => { e.stopPropagation(); setSelectedDesignId(design.id); }}
+                  enableResizing={selectedDesignId === design.id}
+                  resizeHandleStyles={{
+                    bottomRight: { width: '16px', height: '16px', backgroundColor: '#00d1b2', border: '2px solid white', borderRadius: '50%', right: '-8px', bottom: '-8px' },
+                    bottomLeft:  { width: '16px', height: '16px', backgroundColor: '#00d1b2', border: '2px solid white', borderRadius: '50%', left: '-8px', bottom: '-8px' },
+                    topRight:    { width: '16px', height: '16px', backgroundColor: '#00d1b2', border: '2px solid white', borderRadius: '50%', right: '-8px', top: '-8px' },
+                    topLeft:     { width: '16px', height: '16px', backgroundColor: '#00d1b2', border: '2px solid white', borderRadius: '50%', left: '-8px', top: '-8px' }
+                  }}
                   style={{
                     border: selectedDesignId === design.id ? '2px dashed #00d1b2' : 'none',
-                    zIndex: selectedDesignId === design.id ? 10 : 1
+                    zIndex: selectedDesignId === design.id ? 10 : 1,
+                    cursor: selectedDesignId === design.id ? 'move' : 'pointer'
                   }}
                 >
-                  <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                  <div 
+                    style={{ 
+                      width: '100%', height: '100%', position: 'relative',
+                      transform: `rotate(${design.rotation || 0}deg)`,
+                      transformOrigin: 'center center',
+                      transition: 'transform 0.1s ease-out'
+                    }}
+                    onClick={(e) => { e.stopPropagation(); setSelectedDesignId(design.id); }}
+                  >
                     {design.type === 'image' ? (
                       <img 
                         src={design.url} 
                         crossOrigin="anonymous"
-                        style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                        style={{ width: '100%', height: '100%', objectFit: 'contain', userSelect: 'none', pointerEvents: 'none' }} 
                         draggable={false} 
                       />
                     ) : (
@@ -346,23 +343,26 @@ export default function Personalizar() {
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         color: design.textColor,
                         fontFamily: design.font,
-                        fontSize: '32px', // Scales via resize? Rnd doesn't scale font-size automatically unless we use SVG or container queries. We use viewBox trick or just let it overflow for now. Let's make it fill.
+                        fontSize: `${Math.max(10, Math.min(design.width / (Math.max(design.text.length, 1) * 0.6), design.height * 0.8))}px`,
+                        fontWeight: 'bold',
                         textAlign: 'center',
+                        lineHeight: 1,
                         wordBreak: 'break-word',
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        userSelect: 'none',
+                        WebkitUserSelect: 'none',
+                        MozUserSelect: 'none'
                       }}>
-                        <svg width="100%" height="100%">
-                          <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill={design.textColor} fontFamily={design.font} style={{ fontSize: '100%' }}>
-                            {design.text}
-                          </text>
-                        </svg>
+                        {design.text}
                       </div>
                     )}
                     
                     {selectedDesignId === design.id && (
                       <button 
-                        onPointerDown={(e) => { e.stopPropagation(); deleteDesign(design.id); }}
+                        onMouseDown={(e) => { e.stopPropagation(); deleteDesign(design.id); }}
+                        onTouchStart={(e) => { e.stopPropagation(); deleteDesign(design.id); }}
                         className="delete is-medium" 
+                        title="Borrar elemento"
                         style={{ 
                           position: 'absolute', 
                           top: '-15px', 
@@ -444,32 +444,48 @@ export default function Personalizar() {
                 </div>
               </div>
 
-              {selectedDesign && selectedDesign.type === 'text' && (
+              {selectedDesign && (
                 <div className="notification is-light p-3 mt-2">
-                  <p className="is-size-7 has-text-weight-bold mb-2">Editar Texto Seleccionado:</p>
-                  <input 
-                    type="text" 
-                    className="input is-small mb-2" 
-                    value={selectedDesign.text} 
-                    onChange={(e) => updateDesign(selectedDesign.id, { text: e.target.value })} 
-                  />
-                  <div className="columns is-mobile">
-                    <div className="column is-7">
-                      <div className="select is-small is-fullwidth">
-                        <select value={selectedDesign.font} onChange={(e) => updateDesign(selectedDesign.id, { font: e.target.value })}>
-                          {FONTS.map(f => <option key={f} value={f}>{f}</option>)}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="column is-5">
+                  <p className="is-size-7 has-text-weight-bold mb-2">Editar Diseño Seleccionado:</p>
+                  
+                  {selectedDesign.type === 'text' && (
+                    <>
                       <input 
-                        type="color" 
-                        className="input is-small" 
-                        style={{ padding: '0', height: '100%' }}
-                        value={selectedDesign.textColor} 
-                        onChange={(e) => updateDesign(selectedDesign.id, { textColor: e.target.value })} 
+                        type="text" 
+                        className="input is-small mb-2" 
+                        value={selectedDesign.text} 
+                        onChange={(e) => updateDesign(selectedDesign.id, { text: e.target.value })} 
                       />
-                    </div>
+                      <div className="columns is-mobile mb-2">
+                        <div className="column is-7">
+                          <div className="select is-small is-fullwidth">
+                            <select value={selectedDesign.font} onChange={(e) => updateDesign(selectedDesign.id, { font: e.target.value })}>
+                              {FONTS.map(f => <option key={f} value={f}>{f}</option>)}
+                            </select>
+                          </div>
+                        </div>
+                        <div className="column is-5">
+                          <input 
+                            type="color" 
+                            className="input is-small" 
+                            style={{ padding: '0', height: '100%' }}
+                            value={selectedDesign.textColor} 
+                            onChange={(e) => updateDesign(selectedDesign.id, { textColor: e.target.value })} 
+                          />
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  <div className="mt-2">
+                    <span className="is-size-7 has-text-weight-bold">Rotación ({selectedDesign.rotation || 0}°)</span>
+                    <input 
+                      type="range" 
+                      min="-180" max="180" 
+                      value={selectedDesign.rotation || 0} 
+                      onChange={(e) => updateDesign(selectedDesign.id, { rotation: parseInt(e.target.value, 10) })}
+                      style={{ width: '100%', cursor: 'pointer' }}
+                    />
                   </div>
                 </div>
               )}
