@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { addOrder } from '../api/ordersApi'
 import Swal from 'sweetalert2'
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 
 // Datos de prueba para los bancos (puedes cambiarlos luego)
 const BANKS = [
@@ -20,6 +21,33 @@ export default function PayMethod() {
   const [address, setAddress] = useState('')
   const [paymethod, setPaymethod] = useState('Efectivo') // 'Efectivo' | 'Deposito'
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [markerPos, setMarkerPos] = useState(null)
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ''
+  })
+
+  const mapContainerStyle = { width: '100%', height: '300px', borderRadius: '8px', border: '1px solid #ddd' }
+  const defaultCenter = { lat: 12.1328, lng: -86.2504 } // Managua por defecto
+
+  const handleLocateMe = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setMarkerPos({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          })
+        },
+        () => {
+          Swal.fire('Error', 'No pudimos obtener tu ubicación. Verifica que hayas dado permisos al navegador.', 'error')
+        }
+      )
+    } else {
+      Swal.fire('Error', 'Tu navegador no soporta geolocalización.', 'error')
+    }
+  }
 
   const shippingCost = 70
   const finalTotal = cartTotal + shippingCost
@@ -34,9 +62,14 @@ export default function PayMethod() {
 
     setIsSubmitting(true)
     try {
+      let finalAddress = address.trim()
+      if (markerPos) {
+        finalAddress += ` | Mapa: https://maps.google.com/?q=${markerPos.lat},${markerPos.lng}`
+      }
+
       const orderData = {
         username: user.username,
-        address: address,
+        address: finalAddress,
         paymethod: paymethod, // Enviamos el método de pago al backend
         carListItems: cartItems.map(item => [
           item.name, 
@@ -107,6 +140,36 @@ export default function PayMethod() {
                   rows="3"
                   required
                 />
+              </div>
+
+              <div className="pd-field" style={{ marginTop: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '10px' }}>
+                  <label className="pd-label" style={{ marginBottom: 0 }}>
+                    Ubicación exacta en el mapa <span style={{ color: '#888', fontWeight: 'normal', fontSize: '0.85rem', textTransform: 'none' }}>(Mueve el pin rojo)</span>
+                  </label>
+                  <button type="button" className="button is-small is-info is-light" onClick={handleLocateMe} style={{ fontWeight: 'bold' }}>
+                    <i className="zmdi zmdi-gps-dot" style={{ marginRight: '5px' }}></i> Mi Ubicación
+                  </button>
+                </div>
+                {isLoaded ? (
+                  <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    center={markerPos || defaultCenter}
+                    zoom={14}
+                    onClick={(e) => setMarkerPos({ lat: e.latLng.lat(), lng: e.latLng.lng() })}
+                  >
+                    <Marker 
+                      position={markerPos || defaultCenter} 
+                      draggable={true} 
+                      onDragEnd={(e) => setMarkerPos({ lat: e.latLng.lat(), lng: e.latLng.lng() })}
+                    />
+                  </GoogleMap>
+                ) : (
+                  <div className="notification is-light has-text-centered">Cargando mapa...</div>
+                )}
+                {!import.meta.env.VITE_GOOGLE_MAPS_API_KEY && (
+                  <p className="help is-danger mt-2">Nota para Admin: Falta configurar VITE_GOOGLE_MAPS_API_KEY en el archivo .env</p>
+                )}
               </div>
             </section>
 

@@ -286,7 +286,7 @@ export default function AdminShippings() {
                           </p>
                           <p style={{ fontSize: '0.95rem', marginBottom: '8px' }}>
                             <strong>Dirección Exacta:</strong><br/>
-                            {order.address}
+                            {order.address.split(' | Mapa:')[0]}
                           </p>
                           <p style={{ fontSize: '0.95rem', marginBottom: '0' }}>
                             <strong>Método de Pago:</strong>{' '}
@@ -294,14 +294,26 @@ export default function AdminShippings() {
                           </p>
                         </div>
                         
-                        {/* Google Maps placeholder */}
-                        <button 
-                          className="button is-fullwidth is-link is-light" 
-                          style={{ marginTop: '15px' }}
-                          onClick={() => Swal.fire('Próximamente', 'La integración con Google Maps para ver la ruta está en desarrollo.', 'info')}
-                        >
-                          <i className="zmdi zmdi-map" style={{ marginRight: '8px' }}></i> Ver en Google Maps
-                        </button>
+                        {/* Google Maps Button */}
+                        {order.address.includes(' | Mapa: https://maps') ? (
+                          <a 
+                            href={order.address.match(/\| Mapa: (https:\/\/maps\.google\.com\/\?q=[0-9.-]+,[0-9.-]+)/)?.[1] || '#'}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="button is-fullwidth is-link" 
+                            style={{ marginTop: '15px' }}
+                          >
+                            <i className="zmdi zmdi-map" style={{ marginRight: '8px' }}></i> Ver en Google Maps
+                          </a>
+                        ) : (
+                          <button 
+                            className="button is-fullwidth is-link is-light" 
+                            style={{ marginTop: '15px' }}
+                            onClick={() => Swal.fire('Sin Ubicación Exacta', 'El cliente no marcó su ubicación en el mapa interactivo durante la compra.', 'info')}
+                          >
+                            <i className="zmdi zmdi-map" style={{ marginRight: '8px' }}></i> Ver en Google Maps
+                          </button>
+                        )}
                       </div>
                     </div>
 
