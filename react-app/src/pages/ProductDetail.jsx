@@ -201,13 +201,24 @@ export default function ProductDetail() {
             </div>
 
             {/* Botones */}
-            <div className="pd-actions">
-              <button type="submit" className="pd-btn-primary">
-                <i className="zmdi zmdi-shopping-cart"></i> Añadir al carrito
-              </button>
-              <button type="button" className="pd-btn-secondary" onClick={() => navigate(-1)}>
-                ← Volver
-              </button>
+            <div className="pd-actions" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div style={{ display: 'flex', gap: '10px', width: '100%' }}>
+                <button type="submit" className="pd-btn-primary" style={{ flex: 1 }}>
+                  <i className="zmdi zmdi-shopping-cart"></i> Añadir al carrito
+                </button>
+                <button type="button" className="pd-btn-secondary" onClick={() => navigate(-1)}>
+                  ← Volver
+                </button>
+              </div>
+              <a
+                href={`https://wa.me/50589154885?text=${encodeURIComponent(`Hola, quiero ordenar el artículo ${item.name} con ID ${item.id_item}, talla ${size} y color ${color}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="pd-btn-primary"
+                style={{ backgroundColor: '#25D366', color: '#fff', borderColor: '#25D366', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none', width: '100%' }}
+              >
+                <i className="zmdi zmdi-whatsapp" style={{ fontSize: '20px' }}></i> Solicitar por WhatsApp
+              </a>
             </div>
 
           </form>

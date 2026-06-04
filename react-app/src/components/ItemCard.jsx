@@ -61,6 +61,17 @@ export default function ItemCard({ item }) {
             <i className="zmdi zmdi-shopping-cart"></i>
           </button>
 
+          <a
+            href={`https://wa.me/50589154885?text=${encodeURIComponent(`Hola, quiero ordenar el artículo ${name} con ID ${id_item}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="item-card__btn"
+            title="Solicitar por WhatsApp"
+            style={{ color: '#25D366' }}
+          >
+            <i className="zmdi zmdi-whatsapp"></i>
+          </a>
+
           <button className="item-card__btn" title="Favorito">
             <i className="zmdi zmdi-favorite-outline"></i>
           </button>

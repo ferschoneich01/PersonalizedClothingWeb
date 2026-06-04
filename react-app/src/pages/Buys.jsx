@@ -115,7 +115,7 @@ export default function Buys() {
       ) : (
         <div className="buys-grid">
           {groupedOrders.map((order) => (
-            <div key={order.id_order} className="buy-card" style={{ padding: '5px' }}>
+            <div key={order.id_order} className="buy-card">
 
               {/* Header */}
               <div className="buy-card__header">
