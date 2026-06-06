@@ -38,6 +38,19 @@ export default function AdminOrders() {
     setExpandedOrders(prev => ({ ...prev, [id_order]: !prev[id_order] }))
   }
 
+  const renderChannelBadge = (id_canal) => {
+    switch (id_canal) {
+      case 2:
+        return <span className="tag is-success is-light" style={{ fontWeight: 'bold' }}><i className="zmdi zmdi-whatsapp mr-1"></i> WhatsApp</span>;
+      case 3:
+        return <span className="tag is-link is-light" style={{ fontWeight: 'bold' }}><i className="zmdi zmdi-facebook mr-1"></i> Facebook</span>;
+      case 4:
+        return <span className="tag is-danger is-light" style={{ fontWeight: 'bold' }}><i className="zmdi zmdi-instagram mr-1"></i> Instagram</span>;
+      default:
+        return <span className="tag is-info is-light" style={{ fontWeight: 'bold' }}><i className="zmdi zmdi-globe mr-1"></i> Web</span>;
+    }
+  }
+
   const groupedOrders = Object.values(
     orders.reduce((acc, buy) => {
       if (!acc[buy.id_order]) {
@@ -49,6 +62,10 @@ export default function AdminOrders() {
           paymethod: buy.paymethod,
           voucher_url: buy.voucher_url,
           totalAmount: buy.totalAmount,
+          id_canal_de_ventas: buy.id_canal_de_ventas,
+          pedidoNombre: buy.pedidoNombre,
+          cedula: buy.cedula,
+          pedidoTelefono: buy.pedidoTelefono,
           items: []
         }
       }
@@ -67,6 +84,8 @@ export default function AdminOrders() {
   const filteredOrders = groupedOrders.filter(order => {
     const matchesSearch =
       order.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (order.pedidoNombre && order.pedidoNombre.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (order.pedidoTelefono && order.pedidoTelefono.includes(searchTerm)) ||
       order.id_order.toString().includes(searchTerm)
     const matchesStatus = statusFilter === 'Todos' || order.status === statusFilter
     return matchesSearch && matchesStatus
@@ -139,9 +158,14 @@ export default function AdminOrders() {
                   <div style={{ minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                       <span style={{ fontSize: '1.3rem', fontWeight: '800', color: '#1a1a1a' }}>Pedido #{order.id_order}</span>
+                      {renderChannelBadge(order.id_canal_de_ventas)}
                       {order.status === 'Pendiente' && <span className="tag is-warning" style={{ fontWeight: 'bold' }}>Pendiente</span>}
                     </div>
-                    <p style={{ margin: 0, fontSize: '0.95rem', color: '#555' }}>Cliente: <strong style={{ color: '#1a1a1a' }}>{order.username}</strong></p>
+                    <p style={{ margin: 0, fontSize: '0.95rem', color: '#555' }}>
+                      Cliente: <strong style={{ color: '#1a1a1a' }}>{order.pedidoNombre || order.username}</strong>
+                      {order.pedidoTelefono && <span style={{ marginLeft: '15px' }}>Tel: <strong style={{ color: '#1a1a1a' }}>{order.pedidoTelefono}</strong></span>}
+                      {order.cedula && <span style={{ marginLeft: '15px' }}>Cédula: <strong style={{ color: '#1a1a1a' }}>{order.cedula}</strong></span>}
+                    </p>
                   </div>
 
                   <div className="is-flex is-align-items-center is-flex-wrap-wrap mt-3-mobile" style={{ gap: '20px' }}>
