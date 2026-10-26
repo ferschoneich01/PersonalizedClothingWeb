@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react'
 import { getShippings, changeOrderStatus } from '../../api/ordersApi'
 import Swal from 'sweetalert2'
+import { parseCustomization, getItemPreviewImage, showViewsGalleryModal } from '../../utils/customizationHelper'
 
 export default function AdminShippings() {
   const [shippings, setShippings] = useState([])
@@ -326,8 +327,9 @@ export default function AdminShippings() {
                         </h5>
                         
                         {order.items.map((item, idx) => {
-                          const imgSrc = item.custom_image || item.image
-                          const finalImg = imgSrc?.startsWith('http') ? imgSrc : `/img/${imgSrc}`
+                          const customData = parseCustomization(item.custom_image || item.image)
+                          const finalImg = getItemPreviewImage(item)
+                          const hasMultiViews = customData?.views && customData.views.length > 1
                           return (
                             <div 
                               key={idx} 
@@ -345,18 +347,63 @@ export default function AdminShippings() {
                                 src={finalImg}
                                 alt={item.name}
                                 style={{ width: '70px', height: '70px', objectFit: 'cover', borderRadius: '6px', marginRight: '18px', cursor: 'pointer', border: '1px solid #ddd' }}
-                                onClick={() => Swal.fire({ imageUrl: finalImg, imageAlt: item.name, showConfirmButton: false, showCloseButton: true, width: 'auto', padding: '1em' })}
-                                title="Haz clic para ver completo"
+                                onClick={() => {
+                                  if (hasMultiViews) {
+                                    showViewsGalleryModal(customData.views, item.name)
+                                  } else {
+                                    Swal.fire({ imageUrl: finalImg, imageAlt: item.name, showConfirmButton: false, showCloseButton: true, width: 'auto', padding: '1em' })
+                                  }
+                                }}
+                                title={hasMultiViews ? "Ver todas las vistas 3D" : "Haz clic para ver completo"}
                               />
                               <div style={{ flex: 1 }}>
-                                <p className="has-text-weight-bold" style={{ marginBottom: '4px' }}>{item.name}</p>
+                                <p className="has-text-weight-bold" style={{ marginBottom: '4px' }}>
+                                  {item.name}
+                                  {customData && (
+                                    <span style={{
+                                      marginLeft: '8px',
+                                      fontSize: '0.75rem',
+                                      fontWeight: '700',
+                                      color: '#047857',
+                                      backgroundColor: '#d1fae5',
+                                      padding: '2px 6px',
+                                      borderRadius: '4px'
+                                    }}>
+                                      3D
+                                    </span>
+                                  )}
+                                </p>
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', fontSize: '0.85rem', color: '#666' }}>
                                   <span><strong>Talla:</strong> {item.size}</span>
                                   <span><strong>Color:</strong> {item.color}</span>
+                                  <span><strong>Cantidad:</strong> {item.quantityOrders}</span>
                                 </div>
-                                <p style={{ fontSize: '0.85rem', marginTop: '4px', color: '#888' }}>
-                                  {item.quantityOrders} unidad(es) × C${item.price}
-                                </p>
+                                {hasMultiViews && (
+                                  <button
+                                    type="button"
+                                    onClick={() => showViewsGalleryModal(customData.views, item.name)}
+                                    style={{
+                                      marginTop: '6px',
+                                      padding: '4px 9px',
+                                      fontSize: '11px',
+                                      fontWeight: '600',
+                                      background: '#f1f5f9',
+                                      border: '1px solid #cbd5e1',
+                                      borderRadius: '4px',
+                                      cursor: 'pointer',
+                                      color: '#0f172a',
+                                      display: 'inline-flex',
+                                      alignItems: 'center',
+                                      gap: '5px'
+                                    }}
+                                  >
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                      <circle cx="12" cy="12" r="3" />
+                                    </svg>
+                                    <span>Ver vistas 3D ({customData.views.length})</span>
+                                  </button>
+                                )}
                               </div>
                             </div>
                           )

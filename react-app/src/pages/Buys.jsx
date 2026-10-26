@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getOrdersByUser, uploadVoucher } from '../api/ordersApi'
 import { useAuth } from '../context/AuthContext'
 import Swal from 'sweetalert2'
+import { parseCustomization, getItemPreviewImage, showViewsGalleryModal } from '../utils/customizationHelper'
 
 // Cloudinary config
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dzlbg8ni6/image/upload'
@@ -136,20 +137,70 @@ export default function Buys() {
                 {/* Items */}
                 <div className="column is-7 buy-card__items">
                   {order.items.map((item, idx) => {
-                    const finalImg = (item.custom_image || item.image)?.startsWith('http') ? (item.custom_image || item.image) : `/img/${item.custom_image || item.image}`
+                    const customData = parseCustomization(item.custom_image || item.image)
+                    const finalImg = getItemPreviewImage(item)
+                    const hasMultiViews = customData?.views && customData.views.length > 1
                     return (
                       <div key={idx} className="buy-item">
                         <img
                           src={finalImg}
                           alt={item.name}
                           className="buy-item__img"
-                          onClick={() => handleViewImage(finalImg, item.name)}
-                          title="Ver imagen"
+                          onClick={() => {
+                            if (hasMultiViews) {
+                              showViewsGalleryModal(customData.views, item.name)
+                            } else {
+                              handleViewImage(finalImg, item.name)
+                            }
+                          }}
+                          title={hasMultiViews ? "Ver todas las vistas 3D" : "Ver imagen"}
                         />
                         <div className="buy-item__info">
-                          <p className="buy-item__name">{item.name}</p>
+                          <p className="buy-item__name">
+                            {item.name}
+                            {customData && (
+                              <span style={{
+                                marginLeft: '6px',
+                                fontSize: '10.5px',
+                                fontWeight: '700',
+                                color: '#047857',
+                                backgroundColor: '#d1fae5',
+                                padding: '2px 6px',
+                                borderRadius: '4px',
+                                verticalAlign: 'middle'
+                              }}>
+                                3D
+                              </span>
+                            )}
+                          </p>
                           <p className="buy-item__meta">Talla: {item.size} | Color: {item.color}</p>
                           <p className="buy-item__meta">Cant: {item.quantityOrders} × C${item.price}</p>
+                          {hasMultiViews && (
+                            <button
+                              type="button"
+                              onClick={() => showViewsGalleryModal(customData.views, item.name)}
+                              style={{
+                                marginTop: '4px',
+                                padding: '3px 8px',
+                                fontSize: '11px',
+                                fontWeight: '600',
+                                background: '#f8fafc',
+                                border: '1px solid #cbd5e1',
+                                borderRadius: '4px',
+                                cursor: 'pointer',
+                                color: '#0f172a',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '5px'
+                              }}
+                            >
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                              </svg>
+                              <span>Ver vistas 3D ({customData.views.length})</span>
+                            </button>
+                          )}
                         </div>
                       </div>
                     )

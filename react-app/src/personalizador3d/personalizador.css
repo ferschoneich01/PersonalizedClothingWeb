@@ -1,0 +1,495 @@
+/* Estilos profesionales para el Personalizador 3D */
+
+.personalizador-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.personalizador-header {
+  background: #111827;
+  color: #ffffff;
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.personalizador-section {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.personalizador-section:last-child {
+  border-bottom: none;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Selector de productos */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.product-btn {
+  padding: 8px 6px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  color: #334155;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+}
+
+.product-btn:hover:not(:disabled) {
+  border-color: #00d1b2;
+  color: #00d1b2;
+}
+
+.product-btn.active {
+  border-color: #00d1b2;
+  background: #f0fdfa;
+  color: #0d9488;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 209, 178, 0.15);
+}
+
+.product-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f8fafc;
+}
+
+/* Paleta de colores */
+.color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.color-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px #cbd5e1;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.color-dot:hover {
+  transform: scale(1.1);
+}
+
+.color-dot.active {
+  box-shadow: 0 0 0 2.5px #00d1b2;
+  transform: scale(1.15);
+}
+
+.color-dot.active::after {
+  content: '✓';
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Blanco necesita checkmark oscuro */
+.color-dot.active[data-color="blanco"]::after {
+  color: #1e293b;
+  text-shadow: none;
+}
+
+/* Botones principales de acción */
+.action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn-add-img {
+  background: #1e293b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  width: 100%;
+}
+
+.btn-add-img:hover:not(:disabled) {
+  background: #0f172a;
+}
+
+.btn-add-img:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-add-text {
+  background: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  width: 100%;
+}
+
+.btn-add-text:hover {
+  background: #0369a1;
+}
+
+/* Capas activas */
+.layers-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 0 6px 0;
+  margin-top: 8px;
+}
+
+.layer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 11px;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.layer-chip:hover {
+  background: #e2e8f0;
+}
+
+.layer-chip.active {
+  background: #00d1b2;
+  color: #ffffff;
+  border-color: #00d1b2;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 209, 178, 0.25);
+}
+
+/* Tarjeta del inspector de elemento seleccionado */
+.inspector-card {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.inspector-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Control de tamaño de texto con slider y botones */
+.stepper-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepper-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+}
+
+.stepper-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+/* Colores de texto rápidos */
+.text-color-palette {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.text-color-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.text-color-dot:hover {
+  transform: scale(1.15);
+}
+
+.text-color-dot.active {
+  border: 2px solid #00d1b2;
+  transform: scale(1.2);
+}
+
+/* Barra de precio */
+.price-banner {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.price-amount {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* Botón principal finalizar */
+.btn-checkout {
+  background: #111827;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-checkout:hover:not(:disabled) {
+  background: #000000;
+  transform: translateY(-1px);
+}
+
+.btn-checkout:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================================ */
+/* OPTIMIZACIÓN DE TIPOGRAFÍA SUPERIOR PARA PC / ESCRITORIO     */
+/* ============================================================ */
+/* Corrección de flujo para que el contenido nunca quede oculto debajo del navbar */
+@media screen and (min-width: 1023px) {
+  .nav-menu {
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    height: auto !important;
+    min-height: 68px !important;
+    background: #ffffff !important;
+    padding: 0 1.5rem !important;
+  }
+}
+
+.studio-page-header {
+  margin-top: 10px;
+  margin-bottom: 16px;
+  padding: 0 12px;
+}
+
+.studio-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.studio-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.studio-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 0 2.5px rgba(16, 185, 129, 0.25);
+  display: inline-block;
+}
+
+.studio-eyebrow-desc {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.studio-main-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin-bottom: 3px;
+  line-height: 1.25;
+}
+
+.studio-main-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+@media (min-width: 769px) {
+  .studio-page-header {
+    margin-top: 2px;
+    margin-bottom: 12px;
+  }
+  .studio-main-title {
+    font-size: 26px;
+    letter-spacing: -0.6px;
+  }
+  .studio-main-subtitle {
+    font-size: 13.5px;
+    max-width: 740px;
+  }
+}
+
+/* Botones de alineación estilo Printify */
+.align-tool-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 6px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.align-tool-btn:hover {
+  background: #f1f5f9;
+  border-color: #10b981;
+  color: #10b981;
+}
+
+/* Tarjeta de capa estilo Printify */
+.printify-layer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 6px;
+}
+
+.printify-layer-row:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+.printify-layer-row.active {
+  border-color: #10b981;
+  background: #f0fdf4;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+  .personalizador-header {
+    padding: 12px 14px;
+  }
+  .personalizador-section {
+    padding: 12px 14px;
+  }
+}

@@ -77,7 +77,7 @@ export default function PayMethod() {
           item.quantity, 
           item.size, 
           item.color, 
-          item.image, 
+          item.customization ? (typeof item.customization === 'string' ? item.customization : JSON.stringify(item.customization)) : item.image, 
           item.cartId,
           item.id_item
         ])

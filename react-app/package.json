@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "bake:zonas": "node scripts/bake-zonas.js"
   },
   "dependencies": {
+    "@google/model-viewer": "^4.4.0",
     "@react-google-maps/api": "^2.20.8",
     "axios": "^1.16.1",
     "html2canvas": "^1.4.1",

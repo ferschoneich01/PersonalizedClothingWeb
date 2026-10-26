@@ -7,6 +7,7 @@ export default function Navbar() {
   const { user, isAuthenticated, isAdmin, logout } = useAuth()
   const { cartCount } = useCart()
   const location = useLocation()
+  const isPersonalizar = location.pathname === '/personalizar'
 
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [openSection, setOpenSection] = useState(null) // 'men' | 'women' | 'admin' | 'user'
@@ -36,8 +37,8 @@ export default function Navbar() {
   }
 
   return (
-    <header>
-      <nav className="navbar">
+    <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: '#ffffff', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>
+      <nav className="navbar" style={{ backgroundColor: '#ffffff', minHeight: '65px' }}>
 
         {/* ── Barra móvil (visible solo en móvil) ── */}
         <header className="nabvar-mobile is-size-5-mobile">
@@ -62,9 +63,36 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="navbar-mobile-link" style={{ textAlign: 'center', fontWeight: '600', width: '100%' }}>
-            <Link className="is-uppercase has-text-black" to="/">
-              Personalized Clothing
+          <div className="navbar-mobile-link" style={{ textAlign: 'center', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Link
+              to="/"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                textDecoration: 'none',
+              }}
+            >
+              <div
+                style={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '6px',
+                  background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.15)',
+                  flexShrink: 0,
+                }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
+                </svg>
+              </div>
+              <span style={{ fontWeight: '800', letterSpacing: '0.6px', fontSize: '13px', color: '#0f172a' }}>
+                PERSONALIZED <span style={{ color: '#10b981' }}>CLOTHING</span>
+              </span>
             </Link>
           </div>
 
@@ -122,33 +150,59 @@ export default function Navbar() {
               background: 'none',
               border: 'none',
               cursor: 'pointer',
-              fontSize: '24px',
-              lineHeight: 1,
-              color: '#333',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '6px',
+              color: '#334155',
             }}
           >
-            ✕
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
           </button>
 
-          {/* Logo (solo escritorio) */}
+          {/* Logo con Emblema (solo escritorio) */}
           <Link
-            className="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark"
-            style={{ width: '40%' }}
+            className="is-hidden-mobile brand"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '9px', textDecoration: 'none', flexShrink: 0 }}
             to="/"
           >
-            Personalized Clothing
+            <div
+              style={{
+                width: '28px',
+                height: '28px',
+                borderRadius: '7px',
+                background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 2px 5px rgba(0,0,0,0.15)',
+                flexShrink: 0,
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
+              </svg>
+            </div>
+            <span style={{ fontWeight: '800', letterSpacing: '0.8px', fontSize: '15px', color: '#0f172a' }}>
+              PERSONALIZED <span style={{ color: '#10b981' }}>CLOTHING</span>
+            </span>
           </Link>
 
-          <ul className="nav-menu-ul">
+          <ul className="nav-menu-ul" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
 
             {/* ── Hombre ── */}
-            <li className="nav-menu-item" id="men">
+            <li className={`nav-menu-item${openSection === 'men' ? ' is-open' : ''}`} id="men">
               <a
                 className={`nav-menu-link link-submenu${openSection === 'men' ? ' active' : ''}`}
                 href="#"
+                style={{ color: '#0f172a', fontWeight: '600', fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '6px 10px' }}
                 onClick={(e) => { e.preventDefault(); toggleSection('men') }}
               >
-                Hombre <i className={`zmdi zmdi-chevron-${openSection === 'men' ? 'up' : 'down'}`}></i>
+                <span>Hombre</span>
+                <i className={`zmdi zmdi-chevron-${openSection === 'men' ? 'up' : 'down'}`} style={{ fontSize: '13px', opacity: 0.7 }}></i>
               </a>
               <div className="container-sub-menu" style={openSection === 'men' ? { maxHeight: '500px' } : {}}>
                 <ul className="sub-menu-ul">
@@ -185,14 +239,15 @@ export default function Navbar() {
             </li>
 
             {/* ── Mujer ── */}
-            <li className="nav-menu-item" id="women">
+            <li className={`nav-menu-item${openSection === 'women' ? ' is-open' : ''}`} id="women">
               <a
-                style={{ color: 'black' }}
                 href="#"
                 className={`nav-menu-link link-submenu${openSection === 'women' ? ' active' : ''}`}
+                style={{ color: '#0f172a', fontWeight: '600', fontSize: '14px', display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '6px 10px' }}
                 onClick={(e) => { e.preventDefault(); toggleSection('women') }}
               >
-                Mujer <i className={`zmdi zmdi-chevron-${openSection === 'women' ? 'up' : 'down'}`}></i>
+                <span>Mujer</span>
+                <i className={`zmdi zmdi-chevron-${openSection === 'women' ? 'up' : 'down'}`} style={{ fontSize: '13px', opacity: 0.7 }}></i>
               </a>
               <div className="container-sub-menu" style={openSection === 'women' ? { maxHeight: '500px' } : {}}>
                 <ul className="sub-menu-ul">
@@ -236,20 +291,49 @@ export default function Navbar() {
 
             {/* ── Personalizar ── */}
             <li className="nav-menu-item">
-              <Link style={{ color: 'black' }} to="/personalizar" className="nav-menu-link">
-                <img
-                  style={{ marginTop: '1px', width: '18px' }}
-                  src="https://res.cloudinary.com/dzlbg8ni6/image/upload/v1639114295/paintbrush_83820_rycmmh.png"
-                  alt="paintbrush"
-                />
+              <Link
+                to="/personalizar"
+                className="nav-menu-link"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '14px',
+                  fontWeight: isPersonalizar ? '700' : '600',
+                  color: isPersonalizar ? '#047857' : '#0f172a',
+                  backgroundColor: isPersonalizar ? '#f0fdf4' : 'transparent',
+                  border: isPersonalizar ? '1.5px solid #a7f3d0' : '1.5px solid transparent',
+                  borderRadius: '20px',
+                  padding: '5px 12px',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke={isPersonalizar ? '#059669' : '#0f172a'} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                  <path d="M2 2l7.586 7.586"/>
+                  <circle cx="11" cy="11" r="2"/>
+                </svg>
                 <span>Personalizar</span>
               </Link>
             </li>
 
             {/* ── Carrito ── */}
             <li className="navbar-top-item">
-              <Link to="/cart" style={{ color: 'black' }} className="nav-menu-link">
-                <i style={{ marginRight: '6px', marginTop: '5px', fontSize: '19px' }} className="zmdi zmdi-shopping-cart"></i>
+              <Link
+                to="/cart"
+                className="nav-menu-link"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  color: '#0f172a',
+                  padding: '6px 10px',
+                }}
+              >
+                <i className="zmdi zmdi-shopping-cart" style={{ fontSize: '18px', color: '#0f172a' }}></i>
                 <span>Carrito ({cartCount})</span>
               </Link>
             </li>
@@ -257,8 +341,20 @@ export default function Navbar() {
             {/* ── Compras (solo autenticado) ── */}
             {isAuthenticated && (
               <li className="navbar-top-item">
-                <Link to="/buys" style={{ color: 'black' }} className="nav-menu-link">
-                  <i className="zmdi zmdi-shopping-basket" style={{ color: 'black', fontSize: '19px', marginTop: '2px', marginRight: '3px' }}></i>
+                <Link
+                  to="/buys"
+                  className="nav-menu-link"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#0f172a',
+                    padding: '6px 10px',
+                  }}
+                >
+                  <i className="zmdi zmdi-shopping-basket" style={{ fontSize: '17px', color: '#0f172a' }}></i>
                   <span>Compras</span>
                 </Link>
               </li>
@@ -266,15 +362,24 @@ export default function Navbar() {
 
             {/* ── Admin (solo admin) ── */}
             {isAdmin && (
-              <li className="nav-menu-item" id="adminSettings">
+              <li className={`nav-menu-item${openSection === 'admin' ? ' is-open' : ''}`} id="adminSettings">
                 <a
                   className={`nav-menu-link link-submenu${openSection === 'admin' ? ' active' : ''}`}
                   href="#"
-                  style={{ color: 'black' }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color: '#0f172a',
+                    padding: '6px 10px',
+                  }}
                   onClick={(e) => { e.preventDefault(); toggleSection('admin') }}
                 >
-                  <i className="zmdi zmdi-shield-security" style={{ color: 'black', fontSize: '19px', marginTop: '2px', marginRight: '3px' }}></i>
-                  <span>Admin <i className={`zmdi zmdi-chevron-${openSection === 'admin' ? 'up' : 'down'}`}></i></span>
+                  <i className="zmdi zmdi-shield-security" style={{ fontSize: '17px', color: '#0f172a' }}></i>
+                  <span>Admin</span>
+                  <i className={`zmdi zmdi-chevron-${openSection === 'admin' ? 'up' : 'down'}`} style={{ fontSize: '13px', opacity: 0.7 }}></i>
                 </a>
                 <div className="container-sub-menu" style={{ minWidth: '150px', ...(openSection === 'admin' ? { maxHeight: '300px' } : {}) }}>
                   <ul className="sub-menu-ul">
@@ -300,14 +405,21 @@ export default function Navbar() {
 
             {/* ── Usuario / Login ── */}
             {isAuthenticated ? (
-              <li className="nav-menu-item" id="userSettings">
+              <li className={`nav-menu-item${openSection === 'user' ? ' is-open' : ''}`} id="userSettings">
                 <a
                   className={`nav-menu-link link-submenu${openSection === 'user' ? ' active' : ''}`}
                   href="#"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    padding: '4px 8px',
+                    color: '#0f172a',
+                  }}
                   onClick={(e) => { e.preventDefault(); toggleSection('user') }}
                 >
-                  <i className="zmdi zmdi-account-circle" style={{ color: 'black', marginRight: '6px', marginTop: '-2px', fontSize: '30px' }}></i>
-                  <i className={`zmdi zmdi-chevron-${openSection === 'user' ? 'up' : 'down'}`}></i>
+                  <i className="zmdi zmdi-account-circle" style={{ fontSize: '24px', color: '#0f172a' }}></i>
+                  <i className={`zmdi zmdi-chevron-${openSection === 'user' ? 'up' : 'down'}`} style={{ fontSize: '13px', opacity: 0.7 }}></i>
                 </a>
                 <div className="container-sub-menu-user" style={openSection === 'user' ? { display: 'block', maxHeight: '300px' } : {}}>
                   <ul className="sub-menu-ul">

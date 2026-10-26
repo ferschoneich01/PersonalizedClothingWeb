@@ -603,13 +603,17 @@ footer {
     }
 
     .nav-menu {
+        position: relative;
+        top: auto;
+        bottom: auto;
         z-index: 1;
         transform: translate(0);
         display: flex;
         justify-content: flex-end;
         background: transparent;
         width: 100%;
-        height: 100px;
+        height: auto;
+        min-height: 65px;
         padding-top: 0;
         border: 0;
         align-items: center;
@@ -667,38 +671,60 @@ footer {
         max-height: none;
         overflow: visible;
     }
-    .nav-menu-item:hover > .container-sub-menu { z-index: 1000;
-        width: 400px;
-        background: var(--dark-lighten);
-        padding: 1rem;
+
+    /* Puente invisible para evitar que el submenu se cierre al mover el cursor hacia abajo */
+    .container-sub-menu::before,
+    .container-sub-menu-user::before {
+        content: '';
         position: absolute;
-        top: 56px;
-        display: flex;
+        top: -24px;
+        left: -15px;
+        right: -15px;
+        height: 28px;
+        background: transparent;
+        pointer-events: auto;
+    }
+
+    .nav-menu-item:hover > .container-sub-menu,
+    .nav-menu-item.is-open > .container-sub-menu,
+    .container-sub-menu:hover {
+        z-index: 1000;
+        width: 400px;
+        background: #ffffff;
+        padding: 1.25rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: flex !important;
         flex-wrap: wrap;
-        -moz-box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
-        /*FF 3.5+*/
-        -webkit-box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
-        /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-        box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
-        /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+        border-radius: 8px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.08);
         height: auto;
     }
 
-    .nav-menu-item:hover > .container-sub-menu-user { z-index: 1000;
+    #adminSettings > .container-sub-menu,
+    #admin > .container-sub-menu {
+        width: 190px !important;
+        min-width: 190px !important;
+    }
+
+    .nav-menu-item:hover > .container-sub-menu-user,
+    .nav-menu-item.is-open > .container-sub-menu-user,
+    .container-sub-menu-user:hover {
+        z-index: 1000;
         width: 200px;
-        background: var(--dark-lighten);
+        background: #ffffff;
         padding: 1rem;
         position: absolute;
-        top: 56px;
-        right: 10px;
-        display: flex;
+        top: 100%;
+        right: 0;
+        left: auto;
+        display: flex !important;
         flex-wrap: wrap;
-        -moz-box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
-        /*FF 3.5+*/
-        -webkit-box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
-        /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-        box-shadow: 1px 6px 18px rgba(94, 94, 94, 0.5);
-        /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+        border-radius: 8px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.08);
         height: auto;
     }
 
