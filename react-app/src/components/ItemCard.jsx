@@ -8,7 +8,7 @@ export default function ItemCard({ item }) {
   // Normaliza tanto si Flask devuelve array como objeto
   const name    = item.name        || item[1] || item[0]
   const price   = item.price       || item[4] || item[1] || 0
-  const image   = item.image       || item[3] || item[2]
+  const image   = (Array.isArray(item.images) && item.images[0]) || item.image || item[3] || item[2]
   const id_item = item.id_item     || item[0] || item[4]
 
   const imgSrc = image?.startsWith('http') ? image : `/img/${image}`

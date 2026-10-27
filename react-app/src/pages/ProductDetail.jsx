@@ -18,11 +18,22 @@ const COLORS = [
 function normalizeItem(data) {
   if (!data) return null
   const d = Array.isArray(data) ? data[0] : data
+
+  let images = []
+  if (Array.isArray(d.images) && d.images.length > 0) {
+    images = d.images
+  } else if (d.image) {
+    images = [d.image]
+  } else if (d[3]) {
+    images = [d[3]]
+  }
+
   return {
     id_item:      d.id_item      ?? d[0],
     name:         d.name         ?? d[1],
     description:  d.description  ?? d[2] ?? '100% algodón.',
-    image:        d.image        ?? d[3],
+    image:        images[0]      ?? d.image ?? d[3],
+    images:       images,
     price:        d.price        ?? d[4],
     clasification: d.clasification ?? d[5],
     category:     d.category     ?? d[6],
@@ -34,10 +45,11 @@ export default function ProductDetail() {
   const navigate     = useNavigate()
   const { addToCart } = useCart()
 
-  const [item, setItem]       = useState(null)
-  const [related, setRelated] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [imgLoaded, setImgLoaded] = useState(false)
+  const [item, setItem]             = useState(null)
+  const [related, setRelated]       = useState([])
+  const [loading, setLoading]       = useState(true)
+  const [imgLoaded, setImgLoaded]   = useState(false)
+  const [activeImgIndex, setActiveImgIndex] = useState(0)
 
   const [quantity, setQuantity] = useState(1)
   const [size, setSize]         = useState('M')
@@ -48,6 +60,7 @@ export default function ProductDetail() {
     if (!id) return
     setLoading(true)
     setImgLoaded(false)
+    setActiveImgIndex(0)
     getItemById(id)
       .then((res) => {
         const normalized = normalizeItem(res.data)
@@ -94,11 +107,143 @@ export default function ProductDetail() {
     </div>
   )
 
-  const imgSrc = item.image?.startsWith('http') ? item.image : `/img/${item.image}`
+  const imagesList = item.images && item.images.length > 0 ? item.images : (item.image ? [item.image] : [])
+  const currentImgRaw = imagesList[activeImgIndex] || imagesList[0] || item.image
+  const imgSrc = currentImgRaw?.startsWith('http') ? currentImgRaw : `/img/${currentImgRaw}`
   const selectedColor = COLORS.find(c => c.label === color) ?? COLORS[0]
+
+  const handlePrevImage = (e) => {
+    e.stopPropagation()
+    setImgLoaded(false)
+    setActiveImgIndex(prev => (prev === 0 ? imagesList.length - 1 : prev - 1))
+  }
+
+  const handleNextImage = (e) => {
+    e.stopPropagation()
+    setImgLoaded(false)
+    setActiveImgIndex(prev => (prev === imagesList.length - 1 ? 0 : prev + 1))
+  }
+
+  const openZoomModal = () => {
+    Swal.fire({
+      imageUrl: imgSrc,
+      imageAlt: item.name,
+      showConfirmButton: false,
+      showCloseButton: true,
+      width: 'auto',
+      padding: '0.8em',
+      background: '#0f172a',
+      customClass: {
+        popup: 'pd-swal-zoom',
+      }
+    })
+  }
 
   return (
     <div className="pd-wrapper">
+      <style>{`
+        /* Galería de imágenes múltiples en Detalle de Producto */
+        .pd-img-wrap {
+          position: relative;
+          cursor: zoom-in;
+        }
+        .pd-img-nav-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(4px);
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          color: #0f172a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          line-height: 1;
+          cursor: pointer;
+          transition: all 0.15s ease;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+          z-index: 5;
+        }
+        .pd-img-nav-btn:hover {
+          background: #ffffff;
+          transform: translateY(-50%) scale(1.08);
+          box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+        .pd-img-nav-btn--prev { left: 12px; }
+        .pd-img-nav-btn--next { right: 12px; }
+
+        .pd-img-counter {
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          background: rgba(15, 23, 42, 0.75);
+          backdrop-filter: blur(4px);
+          color: #ffffff;
+          font-size: 11.5px;
+          font-weight: 700;
+          padding: 3px 9px;
+          border-radius: 12px;
+          letter-spacing: 0.5px;
+          z-index: 5;
+        }
+
+        .pd-thumbs-strip {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 14px;
+          overflow-x: auto;
+          scrollbar-width: thin;
+          padding-bottom: 4px;
+        }
+        .pd-thumb-btn {
+          position: relative;
+          width: 68px;
+          height: 68px;
+          flex-shrink: 0;
+          border-radius: 10px;
+          border: 2px solid #e2e8f0;
+          padding: 0;
+          background: #f8fafc;
+          overflow: hidden;
+          cursor: pointer;
+          transition: all 0.18s ease;
+        }
+        .pd-thumb-btn:hover {
+          border-color: #94a3b8;
+          transform: translateY(-2px);
+        }
+        .pd-thumb-btn.is-active {
+          border-color: #10b981;
+          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+          transform: translateY(-2px);
+        }
+        .pd-thumb-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        .pd-thumb-main-badge {
+          position: absolute;
+          bottom: 2px;
+          left: 2px;
+          right: 2px;
+          background: rgba(15, 23, 42, 0.85);
+          color: #10b981;
+          font-size: 9px;
+          font-weight: 800;
+          text-align: center;
+          padding: 1px 0;
+          border-radius: 4px;
+          text-transform: uppercase;
+          letter-spacing: 0.4px;
+        }
+      `}</style>
 
       {/* ── Breadcrumb ── */}
       <nav className="pd-breadcrumb">
@@ -112,9 +257,9 @@ export default function ProductDetail() {
       {/* ── Main layout ── */}
       <div className="pd-main">
 
-        {/* Imagen */}
+        {/* Imagen y Galería de hasta 5 fotos */}
         <div className="pd-img-col">
-          <div className="pd-img-wrap">
+          <div className="pd-img-wrap" onClick={openZoomModal} title="Clic para ampliar en alta resolución">
             {!imgLoaded && <div className="pd-img-skeleton"></div>}
             <img
               src={imgSrc}
@@ -123,7 +268,64 @@ export default function ProductDetail() {
               onLoad={() => setImgLoaded(true)}
               onError={(e) => { e.target.src = 'https://via.placeholder.com/600x750?text=Sin+imagen' }}
             />
+
+            {/* Flechas de navegación rápida si hay más de 1 imagen */}
+            {imagesList.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className="pd-img-nav-btn pd-img-nav-btn--prev"
+                  onClick={handlePrevImage}
+                  aria-label="Foto anterior"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  className="pd-img-nav-btn pd-img-nav-btn--next"
+                  onClick={handleNextImage}
+                  aria-label="Foto siguiente"
+                >
+                  ›
+                </button>
+                <span className="pd-img-counter">
+                  {activeImgIndex + 1} / {imagesList.length}
+                </span>
+              </>
+            )}
           </div>
+
+          {/* Carrusel / Tira de Miniaturas */}
+          {imagesList.length > 1 && (
+            <div className="pd-thumbs-strip" aria-label="Galería de imágenes">
+              {imagesList.map((img, idx) => {
+                const thumbUrl = img?.startsWith('http') ? img : `/img/${img}`
+                const isActive = activeImgIndex === idx
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={`pd-thumb-btn${isActive ? ' is-active' : ''}`}
+                    onClick={() => {
+                      setImgLoaded(false)
+                      setActiveImgIndex(idx)
+                    }}
+                    title={`Ver imagen ${idx + 1}${idx === 0 ? ' (Principal)' : ''}`}
+                  >
+                    <img
+                      src={thumbUrl}
+                      alt={`${item.name} miniatura ${idx + 1}`}
+                      className="pd-thumb-img"
+                      onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=Prenda' }}
+                    />
+                    {idx === 0 && (
+                      <span className="pd-thumb-main-badge">Principal</span>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+          )}
         </div>
 
         {/* Info */}

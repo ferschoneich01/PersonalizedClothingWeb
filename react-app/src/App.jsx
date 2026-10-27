@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/CartContext'
 
@@ -23,6 +23,8 @@ import Personalizar from './pages/Personalizar'
 import AdminOrders from './pages/admin/AdminOrders'
 import AdminShippings from './pages/admin/AdminShippings'
 import AdminAddItem from './pages/admin/AdminAddItem'
+import AdminCategories from './pages/admin/AdminCategories'
+import AdminReports from './pages/admin/AdminReports'
 
 function AppLayout() {
   const location = useLocation()
@@ -38,6 +40,7 @@ function AppLayout() {
         <Route path="/items" element={<Lookbook />} />
         <Route path="/items/:id" element={<ProductDetail />} />
         <Route path="/items/category/:cat/:clas" element={<Products />} />
+        <Route path="/items/category/:cat" element={<Products />} />
         <Route path="/items/clasification/:clas" element={<Products />} />
         
         {/* Rutas Protegidas (Solo Usuarios Logueados) */}
@@ -52,9 +55,12 @@ function AppLayout() {
 
         {/* Rutas Admin (Solo Administradores) */}
         <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<Navigate to="/admin/orders" replace />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/shippings" element={<AdminShippings />} />
           <Route path="/admin/addItem" element={<AdminAddItem />} />
+          <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/reports" element={<AdminReports />} />
         </Route>
       </Routes>
       {!hideNavAndFooter && <Footer />}
