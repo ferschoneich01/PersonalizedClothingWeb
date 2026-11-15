@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   getItemsByCategory,
   getItemsByCategoryOnly,
   getItemsByClasificationOnly,
   getCategories,
 } from '../api/itemsApi'
-import ItemCard from '../components/ItemCard'
-import Pagination from '../components/Pagination'
-import { usePagination } from '../hooks/usePagination'
+import CatalogView from '../components/CatalogView'
 
 const DEFAULT_CATEGORIES = {
   '1': 'Camisetas',
@@ -28,8 +26,6 @@ export default function Products() {
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [categoriesMap, setCategoriesMap] = useState(DEFAULT_CATEGORIES)
-
-  const { page, totalPages, paginated, setPage, goNext, goPrev } = usePagination(items, 8)
 
   // Carga las categorías dinámicas de la base de datos
   useEffect(() => {
@@ -61,7 +57,6 @@ export default function Products() {
   // Determinar títulos y cargar artículos según los parámetros recibidos
   useEffect(() => {
     setLoading(true)
-    setPage(1)
 
     // Caso 1: Ambos parámetros presentes (ej. /items/category/:gender/:garment o /category/:cat/:clas)
     if (cat && clas) {
@@ -169,54 +164,25 @@ export default function Products() {
     }
   }
 
+  const hasGenderParam =
+    (cat && ['1', '2', '3'].includes(String(cat))) ||
+    (clas && ['1', '2', '3'].includes(String(clas)))
+
   return (
-    <div className="catalog-page">
-      {/* Header */}
-      <div className="catalog-header">
-        <h1 className="catalog-title">{title}</h1>
-        {subtitle && <p className="catalog-subtitle">{subtitle}</p>}
-        {!loading && (
-          <p className="catalog-count">{items.length} artículo{items.length !== 1 ? 's' : ''}</p>
-        )}
-      </div>
-
-      {/* Contenido */}
-      {loading ? (
-        <div className="catalog-loading">
-          <div className="loading-spinner"></div>
-          <p>Cargando artículos...</p>
-        </div>
-      ) : items.length === 0 ? (
-        <div className="catalog-empty">
-          <i className="zmdi zmdi-alert-circle" style={{ fontSize: '48px', color: '#ccc' }}></i>
-          <p>No hay artículos en esta categoría actualmente.</p>
-          <div style={{ marginTop: '16px' }}>
-            <Link to="/items" className="btn btn-default is-size-7" style={{ textDecoration: 'none' }}>
-              Explorar todo el catálogo
-            </Link>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="items-grid">
-            {paginated.map((item, i) => (
-              <ItemCard key={item.id_item || i} item={item} />
-            ))}
-          </div>
-
-          <Pagination
-            page={page}
-            totalPages={totalPages}
-            onPrev={goPrev}
-            onNext={goNext}
-            onPage={setPage}
-          />
-
-          <p className="catalog-page-info">
-            Página {page} de {totalPages}
-          </p>
-        </>
-      )}
-    </div>
+    <CatalogView
+      items={items}
+      loading={loading}
+      title={title}
+      subtitle={
+        subtitle
+          ? `${subtitle} — prendas esenciales listas para personalizar en DTF, sublimación y bordado.`
+          : 'Prendas esenciales de gramaje alto personalizadas mediante DTF, sublimación y bordado de precisión.'
+      }
+      breadcrumbLabel={title}
+      categoriesMap={categoriesMap}
+      hideCollectionFilter={Boolean(hasGenderParam)}
+      emptyActionLink="/items"
+      emptyActionLabel="Explorar todo el catálogo"
+    />
   )
 }

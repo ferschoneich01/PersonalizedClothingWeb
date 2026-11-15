@@ -72,11 +72,11 @@ export default function Navbar() {
 
           <div className="navbar-mobile-brand">
             <Link to="/" className="mobile-brand-link">
-              <div className="brand-emblem brand-emblem--sm">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
-                </svg>
-              </div>
+              <img
+                src="/img/logo_emblema.png"
+                alt="Personalized Clothing"
+                style={{ width: '28px', height: '28px', borderRadius: '7px', objectFit: 'cover', flexShrink: 0 }}
+              />
               <span className="brand-title brand-title--sm">
                 PERSONALIZED <span className="brand-accent">CLOTHING</span>
               </span>
@@ -110,11 +110,11 @@ export default function Navbar() {
           {/* Cabecera del drawer (solo visible en móvil/tablet < 1023px) */}
           <div className="drawer-header">
             <Link to="/" className="mobile-brand-link" onClick={closeDrawer}>
-              <div className="brand-emblem brand-emblem--sm">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
-                </svg>
-              </div>
+              <img
+                src="/img/logo_emblema.png"
+                alt="Personalized Clothing"
+                style={{ width: '28px', height: '28px', borderRadius: '7px', objectFit: 'cover', flexShrink: 0 }}
+              />
               <span className="brand-title brand-title--sm">
                 PERSONALIZED <span className="brand-accent">CLOTHING</span>
               </span>
@@ -137,11 +137,11 @@ export default function Navbar() {
             className="brand"
             to="/"
           >
-            <div className="brand-emblem">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/>
-              </svg>
-            </div>
+            <img
+              src="/img/logo_emblema.png"
+              alt="Personalized Clothing"
+              style={{ width: '32px', height: '32px', borderRadius: '8px', objectFit: 'cover', flexShrink: 0 }}
+            />
             <span className="brand-title">
               PERSONALIZED <span className="brand-accent">CLOTHING</span>
             </span>
